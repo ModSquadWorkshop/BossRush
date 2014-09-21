@@ -13,13 +13,14 @@ sealed public class PlayerMovement : MonoBehaviour
 
 	private float _speed;
 
-	void Start () 
+	void Start() 
 	{
 		_speed = baseSpeed * speedMultiplier;
 	}
 
-	void Update () 
+	void Update() 
 	{
+		// cardinal movement
 		Vector3 position = this.transform.position;
 
 		position.x = transform.position.x + Input.GetAxis( "Horizontal" ) * Time.deltaTime * _speed * speedMultiplier;

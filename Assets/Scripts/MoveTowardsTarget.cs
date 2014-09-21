@@ -4,9 +4,9 @@ using System.Collections;
 sealed public class MoveTowardsTarget : MonoBehaviour 
 {
 	public GameObject target;
-	public float speed = 10.0f;
+	public float speed = 50.0f;
 	
-	void Update () 
+	void Update() 
 	{
 		this.transform.position = Vector3.MoveTowards( this.transform.position, target.transform.position, Time.deltaTime * speed );
 	}

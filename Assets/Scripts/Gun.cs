@@ -3,70 +3,36 @@ using System.Collections;
 
 public class Gun : Weapon 
 {
-	public const string NAME = "gun";
-	public const float COOLDOWN = 0.15f;
-	public const float DAMAGE = 25.0f;
+	public GameObject projectile;
 
-	public static Weapon Instantiate () 
+	public override void PerformPrimaryAttack() 
 	{
-		return (Weapon)new Gun();
-	}
-
-	public override Weapon Clone () 
-	{
-		Gun weapon = new Gun();
-		weapon.parent = parent;
-		weapon.damage = damage;
-		return (Weapon)weapon;
-	}
-
-	public override void PerformPrimaryAttack () 
-	{
-		if ( !_cooldownTimer.IsComplete() ) 
-		{
-			return;
-		}
-
 		// instantiate and initialize a bullet
-		GameObject bullet = (GameObject)WeaponSystem.Instantiate( Resources.Load( "bullet" ) );
-		InitializeBullet( bullet );
+		InitializeBullet( (GameObject)Instantiate( projectile) );
 
+		// reset and start the gun cooldown
 		_cooldownTimer.Reset( true );
 	}
 
-	private void InitializeBullet ( GameObject bullet ) 
+	private void InitializeBullet( GameObject bullet ) 
 	{
-		DamageSystem bulletDamage = (DamageSystem)bullet.GetComponent( typeof(DamageSystem) );
+		DamageSystem bulletDamage = (DamageSystem)bullet.GetComponent( typeof( DamageSystem ) );
 		if ( bulletDamage == null ) 
 		{
-			bulletDamage = (DamageSystem)bullet.AddComponent( typeof(DamageSystem) );
+			bulletDamage = (DamageSystem)bullet.AddComponent( typeof( DamageSystem ) );
 		}
 
-		if ( parent != null ) 
+		DamageSystem weaponDamage = (DamageSystem)GetComponent( typeof( DamageSystem ) );
+		if ( weaponDamage != null) 
 		{
-			bullet.transform.position = parent.transform.position;
-			bullet.transform.rotation = parent.transform.rotation;
-
-			DamageSystem parentDamage = (DamageSystem)parent.GetComponent( typeof(DamageSystem) );
-			if ( parentDamage != null) 
-			{
-				// the bullet inherits the damage properties from its parent 
-				// which is the object that created it (e.g. the player or perhaps an enemy)
-				bulletDamage.Inherit( parentDamage );
-			}
+			// the bullet inherits the damage properties from the gun that fired it 
+			bulletDamage.Inherit( weaponDamage );
 		}
 
 		bulletDamage.destroyAfterDamage = true;
-		bulletDamage.baseDamage = GetDamage();
-	}
 
-	protected override float GetDamage () 
-	{
-		return DAMAGE;
-	}
-
-	protected override float GetCooldownTime () 
-	{
-		return COOLDOWN;
+		// set the bullet to spawn as a child of the gun
+		bullet.transform.position = this.transform.position;
+		bullet.transform.rotation = this.transform.rotation;
 	}
 }

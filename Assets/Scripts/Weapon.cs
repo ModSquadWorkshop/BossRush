@@ -1,71 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Weapon 
+public class Weapon : MonoBehaviour 
 {
-	public const string NAME = "weapon";
-	public const float COOLDOWN = 1.0f;
-	public const float DAMAGE = 0.0f;
-
-	public GameObject parent;
-	public float damage;
-
+	public float cooldown;
 	protected Timer _cooldownTimer;
 
-	public Weapon () 
+	void Update() 
 	{
-		_cooldownTimer = new Timer( GetCooldownTime(), 1 );
-		_cooldownTimer.Start();
-
-		damage = GetDamage();
-
-		Start();
-	}
-
-	public static Weapon Instantiate () 
-	{
-		// override
-		return new Weapon();
-	}
-
-	public virtual Weapon Clone () 
-	{
-		// override
-		Weapon weapon = new Weapon();
-		weapon.parent = parent;
-		weapon.damage = damage;
-		return weapon;
-	}
-
-	public virtual void Update () 
-	{
-		// override, if necessary
-		
 		_cooldownTimer.Update();
 	}
 
-	protected virtual void Start () 
+	public void Init() 
 	{
-		// override, if necessary
+		_cooldownTimer = new Timer( cooldown, 1 );
+
+		// the timer has to be started now because we need it to be in a "complete" state
+		// until it is in a "complete" state, the gun won't fire since it is considered on cooldown
+		_cooldownTimer.Start();
 	}
 
-	public virtual void PerformPrimaryAttack () 
+	public virtual void PerformPrimaryAttack() 
 	{
 		// override
 	}
 
-	public virtual void PerformSecondaryAttack () 
+	public virtual void PerformSecondaryAttack() 
 	{
 		// override
 	}
 
-	protected virtual float GetDamage () 
+	public bool IsOnCooldown() 
 	{
-		return DAMAGE;
-	}
-
-	protected virtual float GetCooldownTime () 
-	{
-		return COOLDOWN;
+		return !_cooldownTimer.IsComplete();
 	}
 }
