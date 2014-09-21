@@ -7,6 +7,8 @@ using System.Collections;
 
 public class Level : MonoBehaviour 
 {
+	public GameObject minion;
+
 	public string[] enemyTypes;
 	public float enemySpawnInterval = 1.0f;
 	public int enemiesPerSpawn = 1;
@@ -16,6 +18,7 @@ public class Level : MonoBehaviour
 	void Start () 
 	{
 		_enemyManager = new EnemyManager( enemyTypes, enemySpawnInterval, enemiesPerSpawn );
+		_enemyManager.minion = minion;
 		_enemyManager.StartSpawning();
 	}
 

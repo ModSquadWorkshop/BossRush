@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f69c42ddf73e73642aa74a569dc299f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minion: {fileID: 1743403877}
   enemyTypes:
   - minion
   enemySpawnInterval: 1
@@ -383,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 0
+  baseDamage: 25
   damageMultiplier: 1
   destroyAfterDamage: 0
   targets:
@@ -1016,6 +1017,18 @@ Prefab:
     - target: {fileID: 100000, guid: 29e3809d3eae60d499db32210dbbcd56, type: 2}
       propertyPath: m_Name
       value: Bullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 29e3809d3eae60d499db32210dbbcd56, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 29e3809d3eae60d499db32210dbbcd56, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 29e3809d3eae60d499db32210dbbcd56, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29e3809d3eae60d499db32210dbbcd56, type: 2}

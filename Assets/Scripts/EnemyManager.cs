@@ -3,6 +3,8 @@ using System.Collections;
 
 sealed public class EnemyManager 
 {
+	public GameObject minion;
+
 	public int _amountPerSpawn;
 
 	private string[] _enemyTypes;
@@ -97,6 +99,6 @@ sealed public class EnemyManager
 	private GameObject GetEnemyBasedOnSpawnChance () 
 	{
 		// TO DO
-		return (GameObject)Level.Instantiate( Resources.Load( "minion" ) );
+		return (GameObject)Level.Instantiate( minion );
 	}
 }

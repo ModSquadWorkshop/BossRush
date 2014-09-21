@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-sealed public class CardinalMovement : MonoBehaviour 
+sealed public class PlayerMovement : MonoBehaviour 
 {
 	public float baseSpeed = 200.0f;
 	public float speedMultiplier = 1.0f;

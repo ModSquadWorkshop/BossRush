@@ -28,7 +28,7 @@ public class Gun : Weapon
 		}
 
 		// instantiate and initialize a bullet
-		GameObject bullet = (GameObject)WeaponManager.Instantiate( Resources.Load( "bullet" ) );
+		GameObject bullet = (GameObject)WeaponSystem.Instantiate( Resources.Load( "bullet" ) );
 		InitializeBullet( bullet );
 
 		_cooldownTimer.Reset( true );

@@ -7,7 +7,7 @@ public class DamageSystem : MonoBehaviour
 	public float damageMultiplier = 1.0f;
 	public bool destroyAfterDamage = false;
 	public string[] targets;
-	
+
 	private Hashtable _targets;
 
 	void Start () 

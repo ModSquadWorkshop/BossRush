@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-sealed public class WeaponManager : MonoBehaviour 
+sealed public class WeaponSystem : MonoBehaviour 
 {
 	public string[] weaponsAvailable;
 	public int defaultWeaponID = 0;
@@ -10,7 +10,7 @@ sealed public class WeaponManager : MonoBehaviour
 	private Weapon _currentWeapon;
 	private Weapon _defaultWeapon;
 
-	void Start () 
+	void Start()
 	{
 		/*
 		// initialize the weapons
