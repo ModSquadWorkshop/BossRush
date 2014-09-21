@@ -11,12 +11,11 @@ GameObject:
   - 33: {fileID: 3300000}
   - 65: {fileID: 6500000}
   - 23: {fileID: 2300000}
-  - 114: {fileID: 11400002}
-  - 54: {fileID: 5400000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
   m_Layer: 0
-  m_Name: minion
-  m_TagString: Enemy
+  m_Name: AssaultRifle
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,8 +27,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: 50}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalPosition: {x: .300000012, y: 0, z: 1.29999995}
+  m_LocalScale: {x: .100000001, y: .100000001, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -45,7 +44,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 7ad3fe6d80ba579428ba36b108454344, type: 2}
+  - {fileID: 2100000, guid: 296b46fea8f079b4f8f8aef27ebe8e6e, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -60,21 +59,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &5400000
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: .0500000007
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!65 &6500000
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -82,7 +66,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -95,15 +79,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d857f201bdb5b5c499a61a1b301189c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 58170baa63ed6b949bc5bb273cbe6cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  immune: 0
-  destroyOnNoLives: 1
-  startingLives: 1
-  maxLives: 1
-  startingHealth: 25
-  maxHealth: 25
+  cooldown: .100000001
+  projectile: {fileID: 100000, guid: 29e3809d3eae60d499db32210dbbcd56, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -112,11 +92,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 279090449e4b6944390b1cb3b3fd9dad, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  speed: 35
+  baseDamage: 34
+  damageMultiplier: 1
+  destroyAfterDamage: 0
+  targets:
+  - Enemy
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

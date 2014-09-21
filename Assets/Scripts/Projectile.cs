@@ -3,23 +3,14 @@ using System.Collections;
 
 public class Projectile : MonoBehaviour 
 {
-	public string targetTag = "Enemy";
 	public float speed = 150.0f; 			// in world units
 	public float maxDistance = 500.0f;		// in world units
 	public float maxTime = 8.0f; 			// in seconds
-	public float baseDamage = 1.0f;
-	public float damageMultiplier = 1.0f;
-	
-	private float _damage;
+
 	private float _distanceTraveled;
 	private float _elapsedTime; 
-
-	void Start () 
-	{
-		_damage = baseDamage * damageMultiplier;
-	}
 	
-	void Update () 
+	void Update() 
 	{
 		float deltaSpeed = Time.deltaTime * speed;
 
@@ -41,11 +32,5 @@ public class Projectile : MonoBehaviour
 		{
 			Destroy( this.gameObject );
 		}
-	}
-	
-	public float damage 
-	{
-		get { return _damage * damageMultiplier; }
-		set { _damage = value; }
 	}
 }

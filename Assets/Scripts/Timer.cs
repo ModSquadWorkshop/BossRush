@@ -13,7 +13,7 @@ public class Timer
 	private bool _ticked;
 	private bool _complete;
 
-	public Timer ( float intervalDelay, int totalIntervals = 0 ) 
+	public Timer( float intervalDelay, int totalIntervals = 0 ) 
 	{
 		_intervalDelay = intervalDelay;
 		_totalIntervals = totalIntervals;
@@ -26,7 +26,7 @@ public class Timer
 		_complete = false;
 	}
 
-	public virtual void Update () 
+	public void Update() 
 	{
 		if ( !_running ) 
 		{
@@ -51,7 +51,7 @@ public class Timer
 		}
 	}
 
-	public void Start () 
+	public void Start() 
 	{
 		if ( _running ) 
 		{
@@ -68,7 +68,7 @@ public class Timer
 		// do other stuff...
 	}
 
-	public void Stop () 
+	public void Stop() 
 	{
 		if ( !_running ) 
 		{
@@ -80,7 +80,7 @@ public class Timer
 		// do other stuff...
 	}
 
-	public void Reset ( bool startAfterReset = false ) 
+	public void Reset( bool startAfterReset = false ) 
 	{
 		_deltaTime = 0.0f;
 		_currentInterval = 0;
@@ -94,17 +94,17 @@ public class Timer
 		}
 	}
 
-	public bool IsRunning () 
+	public bool IsRunning() 
 	{
 		return _running;
 	}
 
-	public bool IsTicked () 
+	public bool IsTicked() 
 	{
 		return _ticked;
 	}
 
-	public bool IsComplete () 
+	public bool IsComplete() 
 	{
 		return _complete;
 	}

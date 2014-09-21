@@ -1,22 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DamageSystem : MonoBehaviour 
+sealed public class DamageSystem : MonoBehaviour 
 {
 	public float baseDamage = 0.0f;
 	public float damageMultiplier = 1.0f;
 	public bool destroyAfterDamage = false;
 	public string[] targets;
-	
+
 	private Hashtable _targets;
 
-	void Start () 
+	void Start() 
 	{
 		// a list of targets should be added to the object prior to initilization
 		InitTargets();
 	}
 
-	void OnTriggerEnter ( Collider other ) 
+	void OnTriggerEnter( Collider other ) 
 	{
 		// check to see if the colliding object is marked as a target
 		// if it is, we can proceed with dealing damage
@@ -25,7 +25,7 @@ public class DamageSystem : MonoBehaviour
 			// check to see if the colliding object has a health system
 			// if it does, we perform damage to the health
 			// if it doesnt, nothing happens
-			HealthSystem healthSystem = (HealthSystem)other.GetComponent( typeof(HealthSystem) );
+			HealthSystem healthSystem = (HealthSystem)other.GetComponent( typeof( HealthSystem ) );
 			if ( healthSystem != null ) 
 			{
 				healthSystem.Damage( CalculateDamage() );
@@ -40,7 +40,7 @@ public class DamageSystem : MonoBehaviour
 		}
 	}
 
-	public float CalculateDamage () 
+	public float CalculateDamage() 
 	{
 		// as of now, damage is calculated as baseDamage * damageMultiplier
 		// in the future, more complex damage calculations can be added
@@ -48,7 +48,7 @@ public class DamageSystem : MonoBehaviour
 		return baseDamage * damageMultiplier;
 	}
 
-	public void Inherit ( DamageSystem other ) 
+	public void Inherit( DamageSystem other ) 
 	{
 		baseDamage = other.baseDamage;
 		damageMultiplier = other.damageMultiplier;
@@ -57,7 +57,7 @@ public class DamageSystem : MonoBehaviour
 		InitTargets();
 	}
 
-	private void InitTargets () 
+	private void InitTargets() 
 	{
 		if ( _targets == null ) 
 		{
@@ -68,14 +68,17 @@ public class DamageSystem : MonoBehaviour
 			_targets.Clear();
 		}
 
-		// only the specified targets are affected by collision
-		for ( int i = 0; i < targets.Length; i++ ) 
+		if ( targets != null ) 
 		{
-			_targets[targets[i]] = true;
+			// only the specified targets are affected by collision
+			for ( int i = 0; i < targets.Length; i++ ) 
+			{
+				_targets[targets[i]] = true;
+			}
 		}
 	}
 
-	private bool IsTarget ( string tag ) 
+	private bool IsTarget( string tag ) 
 	{
 		return _targets[tag] != null;
 	}

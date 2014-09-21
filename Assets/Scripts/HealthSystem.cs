@@ -15,12 +15,12 @@ sealed public class HealthSystem : MonoBehaviour
 	private int _lives;
 	private float _health;
 
-	void Start () 
+	void Start() 
 	{
 		_health = Mathf.Clamp( startingHealth, 0.0f, maxHealth );
 	}
 
-	public float Damage ( float n ) 
+	public float Damage( float n ) 
 	{
 		// if the object is immune, it cannot be damaged
 		if ( immune ) 
@@ -44,7 +44,7 @@ sealed public class HealthSystem : MonoBehaviour
 		return _health;
 	}
 	
-	public float Heal ( float n ) 
+	public float Heal( float n ) 
 	{
 		// if the heal amount is negative, its the same as damaging the object
 		if ( n < 0.0f ) 
@@ -57,7 +57,7 @@ sealed public class HealthSystem : MonoBehaviour
 		return _health;
 	}
 	
-	public void Kill () 
+	public void Kill() 
 	{
 		_lives--;
 		
@@ -90,5 +90,10 @@ sealed public class HealthSystem : MonoBehaviour
 	public string GetHealthPercentAsString() 
 	{
 		return GetHealthPercent().ToString() + "%";
+	}
+
+	public string GetHealthRatioAsString() 
+	{
+		return _health.ToString() + " / " + maxHealth.ToString();
 	}
 }
