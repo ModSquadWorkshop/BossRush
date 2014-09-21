@@ -7,6 +7,8 @@ public class WeaponSystem : MonoBehaviour
 	public int defaultWeaponID = 0;
 	public KeyCode switchWeaponKeybind;
 
+	public Transform weaponAnchor; //< The location where the player's weapon should float.
+
 	private int _currentWeaponID;
 	private Weapon _currentWeapon;
 	private Weapon _defaultWeapon;
@@ -86,15 +88,7 @@ public class WeaponSystem : MonoBehaviour
 		weapon.Init();
 		weapon.enabled = false;
 		weapon.gameObject.SetActive( false );
-		weapon.gameObject.transform.parent = this.transform;
-
-		// when adding the weapon as a child of this object, the scaling gets messed up. 
-		// the following code fixes it by re-multiplying the parent scale to the weapons scale and position
-		Vector3 scale = this.transform.localScale;
-		Vector3 v = weapon.gameObject.transform.localScale;
-		weapon.gameObject.transform.localScale = new Vector3( scale.x * v.x, scale.y * v.y, scale.z * v.z );
-		v = weapon.gameObject.transform.position;
-		weapon.gameObject.transform.position = new Vector3( scale.x * v.x, scale.y * v.y, scale.z * v.z );
+		weapon.gameObject.transform.parent = weaponAnchor;
 		
 		return weapon;
 	}
