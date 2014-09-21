@@ -21,25 +21,30 @@ sealed public class PlayerMovement : MonoBehaviour
 	void Update() 
 	{
 		// cardinal movement
-		Vector3 position = this.transform.position;
-
-		position.x = transform.position.x + Input.GetAxis( "Horizontal" ) * Time.deltaTime * _speed * speedMultiplier;
-		position.z = transform.position.z + Input.GetAxis( "Vertical" )   * Time.deltaTime * _speed * speedMultiplier;
+		transform.Translate( new Vector3( Input.GetAxis( "Horizontal" ) * Time.deltaTime * _speed * speedMultiplier,
+		                                  0.0f,
+		                                  Input.GetAxis( "Vertical" )   * Time.deltaTime * _speed * speedMultiplier ) );
 
 		// handle mouse input
 		lookTarget.Translate( new Vector3( Input.GetAxis( "Mouse X" ), 0.0f, Input.GetAxis( "Mouse Y" ) ) * lookSpeed );
 
-		// handle joystick input
-		// TODO
+		// handle game pad look
+		float lookX = Input.GetAxis( "Look Horizontal" );
+		float lookY = Input.GetAxis( "Look Vertical" );
+		if ( lookX != 0.0f || lookY != 0.0f )
+		{
+			// hide look target
+			//lookTarget.renderer.enabled = false;
 
-		transform.position = position;
+			lookTarget.localPosition = new Vector3( lookX, lookTarget.localPosition.y, lookY );
+		}
 
 		// don't actually rotate the root Player object,
 		// rotate the model.
 		playerModel.transform.LookAt( lookTarget );
 	}
 
-	public float speed 
+	public float speed
 	{
 		get { return _speed * speedMultiplier; }
 		set { _speed = value; }
