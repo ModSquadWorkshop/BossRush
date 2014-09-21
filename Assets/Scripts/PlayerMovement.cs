@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-sealed public class PlayerMovement : MonoBehaviour 
+sealed public class PlayerMovement : MonoBehaviour
 {
 	public Transform lookTarget;
 	public Transform playerModel;
@@ -13,30 +13,31 @@ sealed public class PlayerMovement : MonoBehaviour
 
 	private float _speed;
 
-	void Start() 
+	void Start()
 	{
 		_speed = baseSpeed * speedMultiplier;
 	}
 
-	void Update() 
+	void Update()
 	{
 		// cardinal movement
-		transform.Translate( new Vector3( Input.GetAxis( "Horizontal" ) * Time.deltaTime * _speed * speedMultiplier,
-		                                  0.0f,
-		                                  Input.GetAxis( "Vertical" )   * Time.deltaTime * _speed * speedMultiplier ) );
+		transform.Translate( Input.GetAxis( "Horizontal" ) * Time.deltaTime * _speed * speedMultiplier,
+		                     0.0f,
+		                     Input.GetAxis( "Vertical" )   * Time.deltaTime * _speed * speedMultiplier );
 
 		// handle mouse input
 		lookTarget.Translate( new Vector3( Input.GetAxis( "Mouse X" ), 0.0f, Input.GetAxis( "Mouse Y" ) ) * lookSpeed );
 
 		// handle game pad look
-		float lookX = Input.GetAxis( "Look Horizontal" );
-		float lookY = Input.GetAxis( "Look Vertical" );
-		if ( lookX != 0.0f || lookY != 0.0f )
+		Vector3 gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ),
+		                                   0.0f,
+		                                   Input.GetAxis( "Look Vertical" ) );
+		if ( gamePadLook.sqrMagnitude > 0.0f )
 		{
 			// hide look target
 			//lookTarget.renderer.enabled = false;
 
-			lookTarget.localPosition = new Vector3( lookX, lookTarget.localPosition.y, lookY );
+			lookTarget.localPosition = gamePadLook;
 		}
 
 		// don't actually rotate the root Player object,
