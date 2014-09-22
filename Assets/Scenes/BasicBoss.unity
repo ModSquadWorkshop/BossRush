@@ -144,6 +144,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11400002, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: targets.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -174,12 +178,20 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
       propertyPath: player
       value: 
       objectReference: {fileID: 1363035870}
+    - target: {fileID: 11400002, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: targets.Array.data[1]
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: targets.Array.data[0]
+      value: Scenery
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
   m_RootGameObject: {fileID: 1470767332}
@@ -597,6 +609,75 @@ Transform:
   - {fileID: 943654249}
   - {fileID: 1942585077}
   m_Father: {fileID: 0}
+  m_RootOrder: 3
+--- !u!1 &1451090626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1451090630}
+  - 33: {fileID: 1451090629}
+  - 65: {fileID: 1451090628}
+  - 23: {fileID: 1451090627}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Scenery
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!23 &1451090627
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1451090626}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!65 &1451090628
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1451090626}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &1451090629
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1451090626}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1451090630
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1451090626}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -.5, z: 0}
+  m_LocalScale: {x: 100, y: 1, z: 100}
+  m_Children: []
+  m_Father: {fileID: 0}
   m_RootOrder: 2
 --- !u!1 &1470767332
 GameObject:
@@ -672,7 +753,7 @@ Transform:
   m_Children:
   - {fileID: 2095580708}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!114 &1470767337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -744,7 +825,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: c547150bab057b34982e046263a7cf68, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: c547150bab057b34982e046263a7cf68, type: 2}
       propertyPath: m_TagString
@@ -820,6 +901,7 @@ MonoBehaviour:
   damageMultiplier: 1
   destroyAfterDamage: 0
   targets:
+  - Scenery
   - Player
 --- !u!114 &2095580704
 MonoBehaviour:

@@ -25,6 +25,10 @@ public class WeaponSystem : MonoBehaviour
 			// when switching weapons, we need to get the Weapon component of the correct object (the clone)
 			weapons[i] = ( GameObject )Instantiate( weapons[i] );
 			InitializeWeapon( GetWeapon( i ) );
+
+			// the weapon prefabs don't default to hitting enemies (only scenery),
+			// so add it to their list of targets.
+			weapons[i].GetComponent<DamageSystem>().targets.Add( "Enemy" );
 		}
 
 		/*
