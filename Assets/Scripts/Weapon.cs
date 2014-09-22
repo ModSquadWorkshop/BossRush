@@ -1,17 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Weapon : MonoBehaviour 
+public class Weapon : MonoBehaviour
 {
 	public float cooldown;
 	protected Timer _cooldownTimer;
 
-	void Update() 
-	{
-		_cooldownTimer.Update();
-	}
-
-	public void Init() 
+	void Start()
 	{
 		_cooldownTimer = new Timer( cooldown, 1 );
 
@@ -20,18 +15,20 @@ public class Weapon : MonoBehaviour
 		_cooldownTimer.Start();
 	}
 
-	public virtual void PerformPrimaryAttack() 
+	void Update()
 	{
-		// override
+		_cooldownTimer.Update();
 	}
 
-	public virtual void PerformSecondaryAttack() 
-	{
-		// override
-	}
+	public virtual void PerformPrimaryAttack() { }
 
-	public bool IsOnCooldown() 
+	public virtual void PerformSecondaryAttack() { }
+
+	public bool IsOnCooldown
 	{
-		return !_cooldownTimer.IsComplete();
+		get
+		{
+			return !_cooldownTimer.IsComplete();
+		}
 	}
 }
