@@ -23,7 +23,7 @@ public class WeaponSystem : MonoBehaviour
 		{
 			// re-assigning the GameObject is import because Instantiate() creates a clone
 			// when switching weapons, we need to get the Weapon component of the correct object (the clone)
-			weapons[i] = (GameObject)Instantiate( weapons[i] );
+			weapons[i] = ( GameObject )Instantiate( weapons[i] );
 			InitializeWeapon( GetWeapon( i ) );
 		}
 
@@ -40,7 +40,7 @@ public class WeaponSystem : MonoBehaviour
 			GameObject weaponObject = new GameObject();
 			weaponObject.SetActive( false );
 
-			Weapon weapon = (Weapon)weaponObject.AddComponent( typeof( Weapon ) );
+			Weapon weapon = ( Weapon )weaponObject.AddComponent( typeof( Weapon ) );
 			_defaultWeapon = InitializeWeapon( weapon );
 		}
 
@@ -89,6 +89,7 @@ public class WeaponSystem : MonoBehaviour
 		weapon.enabled = false;
 		weapon.gameObject.SetActive( false );
 		weapon.gameObject.transform.parent = weaponAnchor;
+		weapon.gameObject.transform.localPosition = Vector3.zero;
 
 		return weapon;
 	}
@@ -131,7 +132,7 @@ public class WeaponSystem : MonoBehaviour
 
 	public Weapon GetWeapon( int weaponID )
 	{
-		return (Weapon)weapons[weaponID].GetComponent( typeof( Weapon ) );
+		return ( Weapon )weapons[weaponID].GetComponent( typeof( Weapon ) );
 	}
 
 	private int GetNextWeaponID()
