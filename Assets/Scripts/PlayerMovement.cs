@@ -1,47 +1,51 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-sealed public class PlayerMovement : MonoBehaviour 
+sealed public class PlayerMovement : MonoBehaviour
 {
+	public Transform lookTarget;
+	public Transform playerModel;
+
 	public float baseSpeed = 200.0f;
 	public float speedMultiplier = 1.0f;
 
+	public float lookSpeed = 10.0f;
+
 	private float _speed;
 
-	void Start() 
+	void Start()
 	{
 		_speed = baseSpeed * speedMultiplier;
 	}
 
-	void Update() 
+	void Update()
 	{
 		// cardinal movement
+		transform.Translate( Input.GetAxis( "Horizontal" ) * Time.deltaTime * _speed * speedMultiplier,
+		                     0.0f,
+		                     Input.GetAxis( "Vertical" )   * Time.deltaTime * _speed * speedMultiplier );
 
-		Vector3 position = this.transform.position;
+		// handle mouse input
+		lookTarget.Translate( new Vector3( Input.GetAxis( "Mouse X" ), 0.0f, Input.GetAxis( "Mouse Y" ) ) * lookSpeed );
 
-		position.x = this.transform.position.x + Input.GetAxis( "Horizontal" ) * Time.deltaTime * _speed * speedMultiplier;
-		position.z = this.transform.position.z + Input.GetAxis( "Vertical" )   * Time.deltaTime * _speed * speedMultiplier;
-
-		this.transform.position = position;
-
-		// Look at mouse
-
-		Plane plane = new Plane( Vector3.up, this.transform.position );
-		Ray ray = Camera.main.ScreenPointToRay( Input.mousePosition );
-		
-		float hitDistance = 0.0f;
-		
-		if ( plane.Raycast( ray, out hitDistance ) ) 
+		// handle game pad look
+		Vector3 gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ),
+		                                   0.0f,
+		                                   Input.GetAxis( "Look Vertical" ) );
+		if ( gamePadLook.sqrMagnitude > 0.0f )
 		{
-			Vector3 targetPoint = ray.GetPoint( hitDistance );
-			Quaternion targetRotation = Quaternion.LookRotation( targetPoint - this.transform.position );
-			
-			//this.transform.rotation = Quaternion.Slerp( this.transform.rotation, targetRotation, Time.deltaTime * speed );
-			this.transform.rotation = targetRotation;
+			// hide look target
+			//lookTarget.renderer.enabled = false;
+
+			lookTarget.localPosition = gamePadLook;
 		}
+
+		// don't actually rotate the root Player object,
+		// rotate the model.
+		playerModel.transform.LookAt( lookTarget );
 	}
 
-	public float speed 
+	public float speed
 	{
 		get { return _speed * speedMultiplier; }
 		set { _speed = value; }
