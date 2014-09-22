@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WeaponSystem : MonoBehaviour 
+public class WeaponSystem : MonoBehaviour
 {
 	public GameObject[] weapons;
 	public int defaultWeaponID = 0;
@@ -15,15 +15,15 @@ public class WeaponSystem : MonoBehaviour
 
 	void Start()
 	{
-		/* 
-		// initialize the weapons 
+		/*
+		// initialize the weapons
 		*/
 
 		for ( int i = 0; i < weapons.Length; ++i )
 		{
 			// re-assigning the GameObject is import because Instantiate() creates a clone
 			// when switching weapons, we need to get the Weapon component of the correct object (the clone)
-			weapons[i] = (GameObject)Instantiate( weapons[i] );
+			weapons[i] = ( GameObject )Instantiate( weapons[i] );
 			InitializeWeapon( GetWeapon( i ) );
 		}
 
@@ -35,19 +35,19 @@ public class WeaponSystem : MonoBehaviour
 
 		// we must insure the deafult weapon is not null
 		// if it is, we create a blank weapon to prevent future errors
-		if ( _defaultWeapon == null ) 
+		if ( _defaultWeapon == null )
 		{
 			GameObject weaponObject = new GameObject();
 			weaponObject.SetActive( false );
 
-			Weapon weapon = (Weapon)weaponObject.AddComponent( typeof( Weapon ) );
+			Weapon weapon = ( Weapon )weaponObject.AddComponent( typeof( Weapon ) );
 			_defaultWeapon = InitializeWeapon( weapon );
 		}
-		
+
 		/*
 		// set the current weapon
 		*/
-		
+
 		SwitchWeapon( defaultWeaponID );
 	}
 
@@ -58,14 +58,14 @@ public class WeaponSystem : MonoBehaviour
 		if ( Input.GetButton( "Fire1" ) || gamePadLook.sqrMagnitude > 0.9f )
 		{
 			// if the weapon is still on cooldown, it cannot perform an attack
-			if ( _currentWeapon.IsOnCooldown() ) 
+			if ( _currentWeapon.IsOnCooldown() )
 			{
 				return;
 			}
 
 			_currentWeapon.PerformPrimaryAttack();
 		}
-		
+
 		// secondary weapon attack
 		if ( Input.GetButton( "Fire2" ) )
 		{
@@ -78,7 +78,7 @@ public class WeaponSystem : MonoBehaviour
 			_currentWeapon.PerformSecondaryAttack();
 		}
 
-		if ( Input.GetKeyDown( switchWeaponKeybind ) ) 
+		if ( Input.GetKeyDown( switchWeaponKeybind ) )
 		{
 			NextWeapon();
 		}
@@ -90,14 +90,15 @@ public class WeaponSystem : MonoBehaviour
 		weapon.enabled = false;
 		weapon.gameObject.SetActive( false );
 		weapon.gameObject.transform.parent = weaponAnchor;
-		
+		weapon.gameObject.transform.localPosition = Vector3.zero;
+
 		return weapon;
 	}
 
 	public void SwitchWeapon( int weaponID )
 	{
 		// deactivate the previous weapon
-		if (_currentWeapon != null) 
+		if ( _currentWeapon != null )
 		{
 			_currentWeapon.enabled = false;
 			_currentWeapon.gameObject.SetActive( false );
@@ -125,34 +126,34 @@ public class WeaponSystem : MonoBehaviour
 		SwitchWeapon( GetNextWeaponID() );
 	}
 
-	public void PreviousWeapon() 
+	public void PreviousWeapon()
 	{
 		SwitchWeapon( GetPreviousWeaponID() );
 	}
 
-	public Weapon GetWeapon( int weaponID ) 
+	public Weapon GetWeapon( int weaponID )
 	{
-		return (Weapon)weapons[weaponID].GetComponent( typeof( Weapon ) );
+		return ( Weapon )weapons[weaponID].GetComponent( typeof( Weapon ) );
 	}
 
-	private int GetNextWeaponID() 
+	private int GetNextWeaponID()
 	{
-		return NormalizeWeaponID(_currentWeaponID + 1);
+		return NormalizeWeaponID( _currentWeaponID + 1 );
 	}
 
-	private int GetPreviousWeaponID() 
+	private int GetPreviousWeaponID()
 	{
-		return NormalizeWeaponID(_currentWeaponID - 1);
+		return NormalizeWeaponID( _currentWeaponID - 1 );
 	}
 
-	private int NormalizeWeaponID( int weaponID ) 
+	private int NormalizeWeaponID( int weaponID )
 	{
-		if ( weaponID >= weapons.Length ) 
+		if ( weaponID >= weapons.Length )
 		{
 			weaponID = 0;
 		}
 
-		if ( weaponID < 0 ) 
+		if ( weaponID < 0 )
 		{
 			weaponID = weapons.Length - 1;
 		}
@@ -160,8 +161,11 @@ public class WeaponSystem : MonoBehaviour
 		return weaponID;
 	}
 
-	public Weapon currentWeapon 
+	public Weapon currentWeapon
 	{
-		get { return _currentWeapon; }
+		get
+		{
+			return _currentWeapon;
+		}
 	}
 }
