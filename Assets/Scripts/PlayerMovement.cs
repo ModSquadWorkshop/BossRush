@@ -21,9 +21,10 @@ sealed public class PlayerMovement : MonoBehaviour
 	void Update()
 	{
 		// cardinal movement
-		transform.Translate( Input.GetAxis( "Horizontal" ) * Time.deltaTime * _speed * speedMultiplier,
-		                     0.0f,
-		                     Input.GetAxis( "Vertical" )   * Time.deltaTime * _speed * speedMultiplier );
+		Vector3 movement = new Vector3( Input.GetAxis( "Horizontal" ) * Time.deltaTime * _speed * speedMultiplier,
+		                                0.0f,
+		                                Input.GetAxis( "Vertical" )   * Time.deltaTime * _speed * speedMultiplier );
+		rigidbody.AddForce( movement * 750.0f );
 
 		// handle mouse input
 		lookTarget.Translate( new Vector3( Input.GetAxis( "Mouse X" ), 0.0f, Input.GetAxis( "Mouse Y" ) ) * lookSpeed );
@@ -47,7 +48,13 @@ sealed public class PlayerMovement : MonoBehaviour
 
 	public float speed
 	{
-		get { return _speed * speedMultiplier; }
-		set { _speed = value; }
+		get
+		{
+			return _speed * speedMultiplier;
+		}
+		set
+		{
+			_speed = value;
+		}
 	}
 }

@@ -25,6 +25,10 @@ public class WeaponSystem : MonoBehaviour
 			// when switching weapons, we need to get the Weapon component of the correct object (the clone)
 			weapons[i] = ( GameObject )Instantiate( weapons[i] );
 			InitializeWeapon( GetWeapon( i ) );
+
+			// the weapon prefabs don't default to hitting enemies (only scenery),
+			// so add it to their list of targets.
+			weapons[i].GetComponent<DamageSystem>().targets.Add( "Enemy" );
 		}
 
 		/*
@@ -58,7 +62,7 @@ public class WeaponSystem : MonoBehaviour
 		if ( Input.GetButton( "Fire1" ) || gamePadLook.sqrMagnitude > 0.9f )
 		{
 			// if the weapon is still on cooldown, it cannot perform an attack
-			if ( _currentWeapon.IsOnCooldown() )
+			if ( _currentWeapon.IsOnCooldown )
 			{
 				return;
 			}
@@ -70,7 +74,7 @@ public class WeaponSystem : MonoBehaviour
 		if ( Input.GetButton( "Fire2" ) )
 		{
 			// if the weapon is still on cooldown, it cannot perform an attack
-			if ( _currentWeapon.IsOnCooldown() )
+			if ( _currentWeapon.IsOnCooldown )
 			{
 				return;
 			}
@@ -86,7 +90,6 @@ public class WeaponSystem : MonoBehaviour
 
 	private Weapon InitializeWeapon( Weapon weapon )
 	{
-		weapon.Init();
 		weapon.enabled = false;
 		weapon.gameObject.SetActive( false );
 		weapon.gameObject.transform.parent = weaponAnchor;
