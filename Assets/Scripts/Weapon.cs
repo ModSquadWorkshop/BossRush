@@ -6,7 +6,7 @@ public class Weapon : MonoBehaviour
 	public float cooldown;
 	protected Timer _cooldownTimer;
 
-	void Start()
+	public virtual void Start()
 	{
 		_cooldownTimer = new Timer( cooldown, 1 );
 

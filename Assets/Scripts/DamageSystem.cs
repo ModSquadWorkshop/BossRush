@@ -17,16 +17,16 @@ sealed public class DamageSystem : MonoBehaviour
 		InitTargets();
 	}
 
-	void OnTriggerEnter( Collider other )
+	void OnCollisionEnter( Collision collision )
 	{
 		// check to see if the colliding object is marked as a target
 		// if it is, we can proceed with dealing damage
-		if ( IsTarget( other.gameObject.tag ) )
+		if ( IsTarget( collision.gameObject.tag ) )
 		{
 			// check to see if the colliding object has a health system
 			// if it does, we perform damage to the health
 			// if it doesnt, nothing happens
-			HealthSystem healthSystem = ( HealthSystem )other.GetComponent( typeof( HealthSystem ) );
+			HealthSystem healthSystem = collision.gameObject.GetComponent<HealthSystem>();
 			if ( healthSystem != null )
 			{
 				healthSystem.Damage( CalculateDamage() );
@@ -36,6 +36,13 @@ sealed public class DamageSystem : MonoBehaviour
 			// this is useful for objects such as bullets or suicide bombers
 			if ( destroyAfterDamage )
 			{
+				// if we're on a projectile, explode that projectile
+				Projectile projectile = GetComponent<Projectile>();
+				if ( projectile != null )
+				{
+					projectile.Explode( collision );
+				}
+
 				Destroy( this.gameObject );
 			}
 		}

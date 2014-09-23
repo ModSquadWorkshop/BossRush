@@ -1,36 +1,48 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Projectile : MonoBehaviour 
+public class Projectile : MonoBehaviour
 {
-	public float speed = 150.0f; 			// in world units
-	public float maxDistance = 500.0f;		// in world units
-	public float maxTime = 8.0f; 			// in seconds
+	public float speed = 150.0f;            // in world units
+	public float maxDistance = 500.0f;      // in world units
+	public float maxTime = 8.0f;            // in seconds
 
-	private float _distanceTraveled;
-	private float _elapsedTime; 
-	
-	void Update() 
+	public GameObject shrapnel;
+
+	private Vector3 _startPoint;
+	private float _maxDistanceSquared;
+	private float _elapsedTime;
+
+	void Start()
 	{
-		float deltaSpeed = Time.deltaTime * speed;
+		rigidbody.velocity = transform.forward * speed;
+		_startPoint = transform.position;
+		_maxDistanceSquared = maxDistance * maxDistance;
+		_elapsedTime = 0.0f;
+	}
 
-		// move the projectile forward according to its rotation
-		this.transform.Translate( Vector3.forward * deltaSpeed );
-
-		// update properties to check if the projectile should be destroyed
-		_distanceTraveled += deltaSpeed;
+	void Update()
+	{
 		_elapsedTime += Time.deltaTime;
 
 		// if the projectile has traveled farther than its max distance, it is destroyed
-		if ( _distanceTraveled > maxDistance ) 
+		if ( ( transform.position - _startPoint ).sqrMagnitude > _maxDistanceSquared | _elapsedTime > maxTime )
 		{
 			Destroy( this.gameObject );
 		}
+	}
 
-		// if the projectile has lasted longer the its max life time, it is destroyed
-		if ( _elapsedTime > maxTime ) 
+	/**
+	 * \brief Called by the DamageSystem when it destroys the particle.
+	 */
+	public void Explode( Collision collision )
+	{
+		// create shrapnel
+		if ( shrapnel != null )
 		{
-			Destroy( this.gameObject );
+			shrapnel = Instantiate( shrapnel,
+			                        collision.contacts[0].point,
+			                        Quaternion.FromToRotation( Vector3.up, collision.contacts[0].normal ) ) as GameObject;
 		}
 	}
 }
