@@ -196,6 +196,30 @@ Prefab:
       propertyPath: cooldown
       value: .0500000007
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: shrapnel
+      value: 
+      objectReference: {fileID: 100002, guid: 7eddcbcc30a372345af69f9f059416eb, type: 2}
+    - target: {fileID: 100002, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 2.00000001e-15
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: .411210001
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
   m_RootGameObject: {fileID: 1470767332}
@@ -495,7 +519,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!1 &1363035864
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,10 +606,10 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 10
   m_AngularDrag: .0500000007
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!65 &1363035869
 BoxCollider:
@@ -682,7 +706,7 @@ Transform:
   m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!1 &1470767332
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,6 +718,7 @@ GameObject:
   - 33: {fileID: 1470767335}
   - 23: {fileID: 1470767333}
   - 65: {fileID: 1470767334}
+  - 54: {fileID: 1470767339}
   - 114: {fileID: 1470767337}
   - 114: {fileID: 1470767338}
   m_Layer: 0
@@ -792,6 +817,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1363035870}
   mainCannon: {fileID: 2095580704}
+--- !u!54 &1470767339
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1470767332}
+  serializedVersion: 2
+  m_Mass: 100
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1806001855
 Prefab:
   m_ObjectHideFlags: 0
@@ -837,11 +877,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 5400000, guid: c547150bab057b34982e046263a7cf68, type: 2}
       propertyPath: m_UseGravity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: c547150bab057b34982e046263a7cf68, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: c547150bab057b34982e046263a7cf68, type: 2}
+      propertyPath: m_Constraints
+      value: 116
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c547150bab057b34982e046263a7cf68, type: 2}
@@ -890,7 +934,7 @@ GameObject:
   - 23: {fileID: 2095580705}
   - 114: {fileID: 2095580704}
   - 114: {fileID: 2095580703}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AssaultRifle
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -978,7 +1022,7 @@ Transform:
   m_PrefabInternal: {fileID: 83437644}
   m_GameObject: {fileID: 2095580702}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .722130001, z: 0}
+  m_LocalPosition: {x: 2.00000001e-15, y: .722130001, z: .411210001}
   m_LocalScale: {x: .100000001, y: .100000001, z: 1}
   m_Children: []
   m_Father: {fileID: 1470767336}
