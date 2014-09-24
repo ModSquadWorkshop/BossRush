@@ -214,6 +214,7 @@ MonoBehaviour:
   destroyAfterDamage: 0
   targets:
   - Scenery
+  - Player
 --- !u!114 &186959742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,6 +423,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11400002, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: targets.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -474,6 +479,14 @@ Prefab:
       propertyPath: mainCannon
       value: 
       objectReference: {fileID: 186959742}
+    - target: {fileID: 11400002, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: targets.Array.data[1]
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: turretSpeed
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
   m_RootGameObject: {fileID: 1470767332}
@@ -516,7 +529,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5ff318d6ce113cb4c9f92f8199a3fd98, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 5ff318d6ce113cb4c9f92f8199a3fd98, type: 2}
       propertyPath: followTarget
@@ -831,6 +844,7 @@ GameObject:
   - 65: {fileID: 1470767334}
   - 114: {fileID: 1470767337}
   - 114: {fileID: 1470767338}
+  - 114: {fileID: 1470767339}
   m_Layer: 0
   m_Name: Spider Tank
   m_TagString: Enemy
@@ -927,6 +941,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1363035870}
   mainCannon: {fileID: 186959742}
+  turretSpeed: 10
+--- !u!114 &1470767339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1470767332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23eef0c7e1c23864eb720e3d5817a2f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyTypes:
+  - {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
+  enemySpawnChances: []
+  spawns:
+  - {x: 0, y: 0, z: 20}
+  spawnPriorities: []
+  amountPerSpawn: 1
+  spawnInterval: 1
+  spawnOnStart: 1
 --- !u!1001 &1806001855
 Prefab:
   m_ObjectHideFlags: 0
