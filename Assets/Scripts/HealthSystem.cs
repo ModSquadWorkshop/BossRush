@@ -74,7 +74,7 @@ sealed public class HealthSystem : MonoBehaviour
 
 		if ( _lives <= 0 )
 		{
-			// call back listenersex
+			// call back listeners
 			if ( _deathCallback != null )
 			{
 				_deathCallback( this );
@@ -82,7 +82,13 @@ sealed public class HealthSystem : MonoBehaviour
 
 			if ( destroyOnNoLives )
 			{
-				Destroy( this.gameObject );
+				Destroy( gameObject );
+			}
+			else
+			{
+				// clear death callbacks to prevent them
+				// from being called twice.
+				_deathCallback = null;
 			}
 		}
 	}
