@@ -7,8 +7,8 @@ sealed public class DamageSystem : MonoBehaviour
 	public float baseDamage = 0.0f;
 	public float damageMultiplier = 1.0f;
 	public bool destroyAfterDamage = false;
-	public List<string> targets;
 
+	public List<string> targets;
 	private Hashtable _targets;
 
 	void Start()

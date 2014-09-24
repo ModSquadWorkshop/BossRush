@@ -16,6 +16,7 @@ public class Projectile : MonoBehaviour
 	void Start()
 	{
 		rigidbody.velocity = transform.forward * speed;
+
 		_startPoint = transform.position;
 		_maxDistanceSquared = maxDistance * maxDistance;
 		_elapsedTime = 0.0f;

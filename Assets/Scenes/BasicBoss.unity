@@ -230,6 +230,12 @@ MonoBehaviour:
   projectile: {fileID: 100000, guid: 29e3809d3eae60d499db32210dbbcd56, type: 2}
   casingAnchor: {fileID: 97101912}
   casingEmitter: {fileID: 100000, guid: b425d3dd3171cdf4cbf686d9fad193e4, type: 2}
+  infiniteAmmo: 1
+  ammoPerClip: 0
+  amountOfClips: 0
+  reloadSpeed: 0
+  _clips: 0
+  _clipAmmo: 0
 --- !u!23 &186959743
 Renderer:
   m_ObjectHideFlags: 0
@@ -981,6 +987,10 @@ Prefab:
     - target: {fileID: 5400000, guid: c547150bab057b34982e046263a7cf68, type: 2}
       propertyPath: m_Constraints
       value: 116
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: c547150bab057b34982e046263a7cf68, type: 2}
+      propertyPath: _lives
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c547150bab057b34982e046263a7cf68, type: 2}

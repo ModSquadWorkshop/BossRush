@@ -6,7 +6,7 @@ sealed public class EnemySpawner : MonoBehaviour
 	public GameObject[] enemyTypes;
 	public float[] enemySpawnChances;
 
-	public Vector3[] spawns;
+	public Transform[] spawns;
 	public float[] spawnPriorities;
 
 	public int amountPerSpawn = 1;
@@ -53,7 +53,7 @@ sealed public class EnemySpawner : MonoBehaviour
 			GameObject enemy = GetEnemyBasedOnSpawnChance();
 			int spawnIndex = Random.Range( 0, spawns.Length );
 
-			enemy.transform.position = (Vector3)spawns[spawnIndex];
+			enemy.transform.position = spawns[spawnIndex].position;
 
 			InitializeEnemyComponents( enemy );
 		}
@@ -75,7 +75,7 @@ sealed public class EnemySpawner : MonoBehaviour
 			GameObject enemy = (GameObject)Instantiate( Resources.Load( type ) );
 			int spawnIndex = Random.Range( 0, spawns.Length );
 
-			enemy.transform.position = (Vector3)spawns[spawnIndex];
+			enemy.transform.position = spawns[spawnIndex].position;
 
 			InitializeEnemyComponents( enemy );
 		}
@@ -84,7 +84,7 @@ sealed public class EnemySpawner : MonoBehaviour
 	private void InitializeEnemyComponents( GameObject enemy ) 
 	{
 		// if the enemy uses a MoveTowardsTarget script, the target needs to be set
-		MoveTowardsTarget moveTowards = (MoveTowardsTarget)enemy.GetComponent( typeof( MoveTowardsTarget ) );
+		MoveTowardsTarget moveTowards = enemy.GetComponent<MoveTowardsTarget>();
 		if ( moveTowards != null ) 
 		{
 			moveTowards.target = GameObject.FindGameObjectWithTag( "Player" );
@@ -104,6 +104,6 @@ sealed public class EnemySpawner : MonoBehaviour
 	private Vector3 GetSpawnBasedOnPriority() 
 	{
 		// TO DO
-		return (Vector3)spawns[0];
+		return spawns[0].position;
 	}
 }

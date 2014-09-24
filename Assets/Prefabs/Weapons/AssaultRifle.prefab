@@ -114,6 +114,12 @@ MonoBehaviour:
   projectile: {fileID: 100000, guid: 29e3809d3eae60d499db32210dbbcd56, type: 2}
   casingAnchor: {fileID: 400002}
   casingEmitter: {fileID: 100000, guid: b425d3dd3171cdf4cbf686d9fad193e4, type: 2}
+  infiniteAmmo: 1
+  ammoPerClip: 30
+  amountOfClips: 5
+  reloadSpeed: 1.5
+  _clips: 0
+  _clipAmmo: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
