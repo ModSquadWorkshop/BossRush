@@ -1,23 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-sealed public class MoveTowardsTarget : MonoBehaviour
+public class MoveTowardsTarget : MonoBehaviour
 {
-	public GameObject target;
+	public Transform target;
 	public float speed = 50.0f;
 
-	void Start()
+	public virtual void Start()
 	{
-		HealthSystem targetHealth = target.GetComponent<HealthSystem>();
+		HealthSystem targetHealth = target.gameObject.GetComponent<HealthSystem>();
 		if ( targetHealth != null )
 		{
 			targetHealth.RegisterDeathCallback( new HealthSystem.DeathCallback( TargetDeath ) );
 		}
 	}
 
-	void Update()
+	public virtual void Update()
 	{
-		this.transform.position = Vector3.MoveTowards( this.transform.position, target.transform.position, Time.deltaTime * speed );
+		transform.position = Vector3.MoveTowards( transform.position, target.position, Time.deltaTime * speed );
 	}
 
 	public void TargetDeath( HealthSystem targetHealth )
