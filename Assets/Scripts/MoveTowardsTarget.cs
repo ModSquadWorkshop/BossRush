@@ -6,7 +6,7 @@ sealed public class MoveTowardsTarget : MonoBehaviour
 	public GameObject target;
 	public float speed = 50.0f;
 
-	void Start()
+	public void Start()
 	{
 		HealthSystem targetHealth = target.GetComponent<HealthSystem>();
 		if ( targetHealth != null )
