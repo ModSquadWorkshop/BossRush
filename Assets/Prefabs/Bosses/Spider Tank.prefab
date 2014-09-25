@@ -28,6 +28,7 @@ GameObject:
   - 65: {fileID: 6500002}
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400008}
   m_Layer: 0
   m_Name: Spider Tank
   m_TagString: Enemy
@@ -87,7 +88,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.99999991e-15, y: .68927002, z: .479290009}
   m_LocalScale: {x: .100000001, y: .100000001, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -183,7 +184,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  mainCannon: {fileID: 0}
+  mainCannon: {fileID: 11400004}
+  turretSpeed: 10
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -200,6 +202,7 @@ MonoBehaviour:
   destroyAfterDamage: 0
   targets:
   - Scenery
+  - Player
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -232,8 +235,29 @@ MonoBehaviour:
   maxLives: 1
   startingHealth: 1000
   maxHealth: 1000
+  componentsToDestroy: []
   _lives: 0
   _health: 0
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23eef0c7e1c23864eb720e3d5817a2f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyTypes:
+  - {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
+  enemySpawnChances: []
+  spawns:
+  - {x: 0, y: 0, z: 20}
+  spawnPriorities: []
+  amountPerSpawn: 1
+  spawnInterval: 1
+  spawnOnStart: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

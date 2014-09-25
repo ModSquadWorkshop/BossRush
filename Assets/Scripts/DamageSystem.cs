@@ -43,7 +43,7 @@ sealed public class DamageSystem : MonoBehaviour
 					projectile.Explode( collision );
 				}
 
-				Destroy( this.gameObject );
+				Destroy( gameObject );
 			}
 		}
 	}

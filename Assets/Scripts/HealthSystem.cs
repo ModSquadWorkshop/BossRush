@@ -3,6 +3,8 @@ using System.Collections;
 
 sealed public class HealthSystem : MonoBehaviour
 {
+	public delegate void DeathCallback( HealthSystem self );
+
 	public bool immune = false;
 	public bool destroyOnNoLives = true;
 
@@ -15,9 +17,18 @@ sealed public class HealthSystem : MonoBehaviour
 	[SerializeField] private int _lives;
 	[SerializeField] private float _health;
 
+	private DeathCallback _deathCallback;
+
 	void Start()
 	{
 		_health = Mathf.Clamp( startingHealth, 0.0f, maxHealth );
+	}
+
+	public void RegisterDeathCallback( DeathCallback callback )
+	{
+		// by the power of delegate composition,
+		// I combine thee!
+		_deathCallback += callback;
 	}
 
 	public float Damage( float n )
@@ -63,9 +74,21 @@ sealed public class HealthSystem : MonoBehaviour
 
 		if ( _lives <= 0 )
 		{
+			// call back listeners
+			if ( _deathCallback != null )
+			{
+				_deathCallback( this );
+			}
+
 			if ( destroyOnNoLives )
 			{
-				Destroy( this.gameObject );
+				Destroy( gameObject );
+			}
+			else
+			{
+				// clear death callbacks to prevent them
+				// from being called twice.
+				_deathCallback = null;
 			}
 		}
 	}
