@@ -386,6 +386,10 @@ Prefab:
       propertyPath: m_LocalPosition.x
       value: -1.88374706e-15
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: turretSpeed
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400008, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}

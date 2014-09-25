@@ -87,7 +87,7 @@ public class EnemySpawner : MonoBehaviour
 		MoveTowardsTarget moveTowards = ( MoveTowardsTarget )enemy.GetComponent( typeof( MoveTowardsTarget ) );
 		if ( moveTowards != null )
 		{
-			moveTowards.target = GameObject.FindGameObjectWithTag( "Player" );
+			moveTowards.target = GameObject.FindGameObjectWithTag( "Player" ).transform;
 		}
 
 

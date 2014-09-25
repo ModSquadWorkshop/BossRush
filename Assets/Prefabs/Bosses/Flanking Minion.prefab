@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 10
+  baseDamage: 25
   damageMultiplier: 1
   destroyAfterDamage: 1
   targets:
@@ -135,9 +135,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  controlPoint: {fileID: 0}
+  controlPoint: {x: 0, y: 0, z: 0}
   weight: .5
-  moveSpeed: 20
+  moveSpeed: 25
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

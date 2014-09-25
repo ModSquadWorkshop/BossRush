@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MoveTowardsTargetFlanking : MonoBehaviour
+public class MoveTowardsTargetFlanking : MoveTowardsTarget
 {
-	public Transform target;
 	public Vector3 controlPoint;
 
 	[Range( 0.0f, 1.0f )]
@@ -14,13 +13,15 @@ public class MoveTowardsTargetFlanking : MonoBehaviour
 	private float _weightDecay;
 	private float _weight;
 
-	void Start()
+	public override void Start()
 	{
+		base.Start();
+
 		_weightDecay = 1.0f - weight;
 		_weight = 1.0f;
 	}
 
-	void Update()
+	public override void Update()
 	{
 		// calcluate movement vector
 		Vector3 dirToTarget = Vector3.Normalize( target.position - transform.position );
