@@ -231,11 +231,11 @@ MonoBehaviour:
   casingAnchor: {fileID: 97101912}
   casingEmitter: {fileID: 100000, guid: b425d3dd3171cdf4cbf686d9fad193e4, type: 2}
   infiniteAmmo: 1
-  ammoPerClip: 0
-  amountOfClips: 0
+  ammoPerMagazine: 0
+  amountOfMagazines: 0
   reloadSpeed: 0
-  _clips: 0
-  _clipAmmo: 0
+  _magazines: 0
+  _magazineAmmo: 0
 --- !u!23 &186959743
 Renderer:
   m_ObjectHideFlags: 0

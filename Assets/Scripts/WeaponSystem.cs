@@ -15,13 +15,13 @@ public class WeaponSystem : MonoBehaviour
 
 	public const float JOYSTICK_THRESHOLD = 0.9f;
 
-	void Start()
+	void Start() 
 	{
 		/*
 		// initialize the weapons
 		*/
 
-		for ( int i = 0; i < weapons.Length; ++i )
+		for ( int i = 0; i < weapons.Length; ++i ) 
 		{
 			// re-assigning the GameObject is import because Instantiate() creates a clone
 			// when switching weapons, we need to get the Weapon component of the correct object (the clone)
@@ -41,7 +41,7 @@ public class WeaponSystem : MonoBehaviour
 
 		// we must insure the deafult weapon is not null
 		// if it is, we create a blank weapon to prevent future errors
-		if ( _defaultWeapon == null )
+		if ( _defaultWeapon == null ) 
 		{
 			GameObject weaponObject = new GameObject();
 			weaponObject.SetActive( false );
@@ -57,7 +57,7 @@ public class WeaponSystem : MonoBehaviour
 		SwitchWeapon( defaultWeaponID );
 	}
 
-	void Update()
+	void Update() 
 	{
 		Vector3 gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ), 0.0f, Input.GetAxis( "Look Vertical" ) );
 
@@ -83,13 +83,13 @@ public class WeaponSystem : MonoBehaviour
 		}
 		*/
 
-		if ( Input.GetKeyDown( switchWeaponKeybind ) )
+		if ( Input.GetKeyDown( switchWeaponKeybind ) ) 
 		{
 			NextWeapon();
 		}
 	}
 
-	private Weapon InitializeWeapon( Weapon weapon )
+	private Weapon InitializeWeapon( Weapon weapon ) 
 	{
 		weapon.enabled = false;
 		weapon.gameObject.SetActive( false );
@@ -99,7 +99,7 @@ public class WeaponSystem : MonoBehaviour
 		return weapon;
 	}
 
-	public void SwitchWeapon( int weaponID )
+	public void SwitchWeapon( int weaponID ) 
 	{
 		// deactivate the previous weapon
 		if ( _currentWeapon != null )
@@ -114,7 +114,7 @@ public class WeaponSystem : MonoBehaviour
 
 		// if an invalid weaponID is passed,
 		// the currentWeapon will be set to the deaultWeapon to prevent errors
-		if ( _currentWeapon == null )
+		if ( _currentWeapon == null ) 
 		{
 			_currentWeapon = _defaultWeapon;
 			_currentWeaponID = defaultWeaponID;
@@ -125,32 +125,32 @@ public class WeaponSystem : MonoBehaviour
 		_currentWeapon.gameObject.SetActive( true );
 	}
 
-	public void NextWeapon()
+	public void NextWeapon() 
 	{
 		SwitchWeapon( GetNextWeaponID() );
 	}
 
-	public void PreviousWeapon()
+	public void PreviousWeapon() 
 	{
 		SwitchWeapon( GetPreviousWeaponID() );
 	}
 
-	public Weapon GetWeapon( int weaponID )
+	public Weapon GetWeapon( int weaponID ) 
 	{
-		return ( Weapon )weapons[weaponID].GetComponent( typeof( Weapon ) );
+        return weapons[weaponID].GetComponent<Weapon>();
 	}
 
-	private int GetNextWeaponID()
+	private int GetNextWeaponID() 
 	{
 		return NormalizeWeaponID( _currentWeaponID + 1 );
 	}
 
-	private int GetPreviousWeaponID()
+	private int GetPreviousWeaponID() 
 	{
 		return NormalizeWeaponID( _currentWeaponID - 1 );
 	}
 
-	private int NormalizeWeaponID( int weaponID )
+	private int NormalizeWeaponID( int weaponID ) 
 	{
 		if ( weaponID >= weapons.Length )
 		{
@@ -165,9 +165,9 @@ public class WeaponSystem : MonoBehaviour
 		return weaponID;
 	}
 
-	public Weapon currentWeapon
+	public Weapon currentWeapon 
 	{
-		get
+		get 
 		{
 			return _currentWeapon;
 		}
