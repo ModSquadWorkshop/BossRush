@@ -99,9 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 0
+  baseDamage: 10
   damageMultiplier: 1
-  destroyAfterDamage: 0
+  destroyAfterDamage: 1
   targets:
   - Player
 --- !u!114 &11400002
@@ -121,6 +121,7 @@ MonoBehaviour:
   maxLives: 1
   startingHealth: 100
   maxHealth: 100
+  componentsToDestroy: []
   _lives: 0
   _health: 0
 --- !u!114 &11400004

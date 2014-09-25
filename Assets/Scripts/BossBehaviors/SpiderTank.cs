@@ -4,10 +4,13 @@ using System.Collections;
 public class SpiderTank : MonoBehaviour
 {
 	public Transform player;
-
 	public Gun mainCannon;
-
 	public float turretSpeed;
+
+	void Start()
+	{
+		player.gameObject.GetComponent<HealthSystem>().RegisterDeathCallback( PlayerDeath );
+	}
 
 	void Update()
 	{
@@ -19,5 +22,11 @@ public class SpiderTank : MonoBehaviour
 		{
 			mainCannon.PerformPrimaryAttack();
 		}
+	}
+
+	void PlayerDeath( HealthSystem playerHealth )
+	{
+		Destroy( GetComponent<EnemySpawner>() );
+		Destroy( this );
 	}
 }
