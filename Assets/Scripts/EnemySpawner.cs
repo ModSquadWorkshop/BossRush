@@ -84,8 +84,8 @@ public class EnemySpawner : MonoBehaviour
 	protected virtual void InitializeEnemyComponents( GameObject enemy )
 	{
 		// if the enemy uses a MoveTowardsTarget script, the target needs to be set
-		MoveTowardsTarget moveTowards = ( MoveTowardsTarget )enemy.GetComponent( typeof( MoveTowardsTarget ) );
-		if ( moveTowards != null )
+		MoveTowardsTarget moveTowards = enemy.GetComponent<MoveTowardsTarget>();
+		if ( moveTowards != null ) 
 		{
 			moveTowards.target = GameObject.FindGameObjectWithTag( "Player" ).transform;
 		}
