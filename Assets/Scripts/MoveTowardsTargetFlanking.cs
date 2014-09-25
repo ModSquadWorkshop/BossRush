@@ -4,7 +4,7 @@ using System.Collections;
 public class MoveTowardsTargetFlanking : MonoBehaviour
 {
 	public Transform target;
-	public Transform controlPoint;
+	public Vector3 controlPoint;
 
 	[Range( 0.0f, 1.0f )]
 	public float weight;
@@ -24,7 +24,7 @@ public class MoveTowardsTargetFlanking : MonoBehaviour
 	{
 		// calcluate movement vector
 		Vector3 dirToTarget = Vector3.Normalize( target.position - transform.position );
-		Vector3 dirToControlPoint = Vector3.Normalize( controlPoint.position - transform.position );
+		Vector3 dirToControlPoint = Vector3.Normalize( controlPoint - transform.position );
 		Vector3 moveDir = _weight * dirToControlPoint + ( 1.0f - _weight ) * dirToTarget;
 		rigidbody.AddForce( Vector3.Normalize( moveDir ) * moveSpeed * Time.deltaTime * 750.0f );
 

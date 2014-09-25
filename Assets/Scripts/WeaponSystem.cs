@@ -59,7 +59,7 @@ public class WeaponSystem : MonoBehaviour
 	{
 		// primary weapon attack
 		Vector3 gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ), 0.0f, Input.GetAxis( "Look Vertical" ) );
-		if ( Input.GetButton( "Fire1" ) || gamePadLook.sqrMagnitude > 0.9f )
+		if ( Input.GetButton( "Fire1" ) || gamePadLook.sqrMagnitude > 0.75f )
 		{
 			// if the weapon is still on cooldown, it cannot perform an attack
 			if ( _currentWeapon.IsOnCooldown )
