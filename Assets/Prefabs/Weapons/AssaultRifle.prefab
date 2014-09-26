@@ -119,6 +119,7 @@ MonoBehaviour:
   amountOfMagazines: 5
   reloadSpeed: 1.5
   sprayAngle: 10
+  circleSpray: 0
   _magazines: 0
   _magazineAmmo: 0
 --- !u!114 &11400002
@@ -132,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 34
+  baseDamage: 35
   damageMultiplier: 1
   destroyAfterDamage: 0
   targets:
