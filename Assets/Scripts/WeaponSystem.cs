@@ -13,9 +13,9 @@ public class WeaponSystem : MonoBehaviour
 	private Weapon _currentWeapon;
 	private Weapon _defaultWeapon;
 
-	public const float JOYSTICK_THRESHOLD = 0.9f;
+	public const float JOYSTICK_THRESHOLD = 0.75f;
 
-	void Start()
+	void Start() 
 	{
 		/*
 		// initialize the weapons
@@ -46,7 +46,7 @@ public class WeaponSystem : MonoBehaviour
 			GameObject weaponObject = new GameObject();
 			weaponObject.SetActive( false );
 
-			Weapon weapon = weaponObject.AddComponent<Weapon>();
+			Weapon weapon = ( Weapon )weaponObject.AddComponent( typeof( Weapon ) );
 			_defaultWeapon = InitializeWeapon( weapon );
 		}
 
@@ -59,29 +59,30 @@ public class WeaponSystem : MonoBehaviour
 
 	void Update()
 	{
-		Vector3 gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ), 0.0f, Input.GetAxis( "Look Vertical" ) );
-
 		// primary weapon attack
-		if ( Input.GetButton( "Fire1" ) || gamePadLook.sqrMagnitude > JOYSTICK_THRESHOLD ) 
+		Vector3 gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ), 0.0f, Input.GetAxis( "Look Vertical" ) );
+		if ( Input.GetButton( "Fire1" ) || gamePadLook.sqrMagnitude > JOYSTICK_THRESHOLD )
 		{
 			// if the weapon is still on cooldown, it cannot perform an attack
-			if ( !_currentWeapon.IsOnCooldown )
+			if ( _currentWeapon.IsOnCooldown )
 			{
-				_currentWeapon.PerformPrimaryAttack();
+				return;
 			}
+
+			_currentWeapon.PerformPrimaryAttack();
 		}
 
-		/*
 		// secondary weapon attack
 		if ( Input.GetButton( "Fire2" ) )
 		{
 			// if the weapon is still on cooldown, it cannot perform an attack
-			if ( !_currentWeapon.IsOnCooldown )
+			if ( _currentWeapon.IsOnCooldown )
 			{
-				_currentWeapon.PerformSecondaryAttack();
+				return;
 			}
+
+			_currentWeapon.PerformSecondaryAttack();
 		}
-		*/
 
 		if ( Input.GetKeyDown( switchWeaponKeybind ) )
 		{

@@ -9,17 +9,17 @@ public class Gun : Weapon
 	public GameObject casingEmitter;
 
 	public bool infiniteAmmo = true;
-	public int ammoPerClip = 0;
-	public int amountOfClips = 0;
+	public int ammoPerMagazine = 0;
+	public int amountOfMagazines = 0;
 	public float reloadSpeed = 0.0f;
 
-	[SerializeField] private int _clips;
-	[SerializeField] private int _clipAmmo;
+	[SerializeField] private int _magazines;
+	[SerializeField] private int _magazineAmmo;
 
 	private bool _reloading;
 	private Timer _reloadTimer;
 
-	public override void Start()
+	public override void Start() 
 	{
 		// we still need to call Weapon.Start() to initialize the timer and whatnot.
 		base.Start();
@@ -35,9 +35,9 @@ public class Gun : Weapon
 		casingEmitter.transform.localRotation = Quaternion.Euler( 0.0f, 0.0f, 0.0f );
 
 		// initialize ammunition and reloading
-		_clips = amountOfClips;
-		_clipAmmo = ( _clips > 0 ) ? ammoPerClip : 0;
-		_clipAmmo = ( infiniteAmmo ) ? Mathf.Max( _clipAmmo, 1 ) : _clipAmmo;
+		_magazines = amountOfMagazines;
+		_magazineAmmo = ( _magazines > 0 ) ? ammoPerMagazine : 0;
+		_magazineAmmo = ( infiniteAmmo ) ? Mathf.Max( _magazineAmmo, 1 ) : _magazineAmmo; // this line just insures you have atleast 1 ammo available
 		_reloading = false;
 		_reloadTimer = new Timer( reloadSpeed, 1 );
 	}
@@ -54,17 +54,17 @@ public class Gun : Weapon
 				_reloading = false;
 
 				// update ammo
-				_clips--;
-				_clipAmmo = ammoPerClip;
+				_magazines--;
+				_magazineAmmo = ammoPerMagazine;
 			}
 		}
 
 		base.Update();
 	}
 
-	public override void PerformPrimaryAttack()
+	public override void PerformPrimaryAttack() 
 	{
-		if ( _reloading || _clipAmmo <= 0 ) 
+		if ( _reloading || _magazineAmmo <= 0 ) 
 		{
 			return;
 		}
@@ -75,9 +75,9 @@ public class Gun : Weapon
 		// update ammunition data
 		if ( !infiniteAmmo ) 
 		{
-			_clipAmmo--;
+			_magazineAmmo--;
 
-			if ( _clipAmmo <= 0 ) 
+			if ( _magazineAmmo <= 0 ) 
 			{
 				Reload();
 			}
@@ -93,21 +93,13 @@ public class Gun : Weapon
 	public void Reload() 
 	{
 		// if already reloading, don't reload again
-		if ( !_reloading ) 
+        // and, reloading is only possible if another ammo clip is available
+		if ( !_reloading && _magazines > 0 ) 
 		{
-			// reloading is only possible if another ammo clip is available
-			if ( _clips > 0 ) 
-			{
-				// start reloading
-				_reloading = true;
-				_reloadTimer.Reset( true );
-			}
+			// start reloading
+			_reloading = true;
+			_reloadTimer.Reset( true );
 		}
-	}
-
-	public bool IsReloading() 
-	{
-		return _reloading;
 	}
 
 	public bool IsOutOfAmmo() 
@@ -117,10 +109,18 @@ public class Gun : Weapon
 
 	public int GetTotalAmmo() 
 	{
-		return (_clips * ammoPerClip) + _clipAmmo;
+		return (_magazines * ammoPerMagazine) + _magazineAmmo;
 	}
 
-	private void InitializeBullet( GameObject bullet )
+    public bool reloading 
+    {
+        get 
+        {
+            return _reloading;
+        }
+    }
+
+	private void InitializeBullet( GameObject bullet ) 
 	{
 		DamageSystem bulletDamage = bullet.GetComponent<DamageSystem>();
 		if ( bulletDamage == null )
