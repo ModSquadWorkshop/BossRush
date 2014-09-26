@@ -379,7 +379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 25
+  baseDamage: 100
   damageMultiplier: 1
   destroyAfterDamage: 0
   targets:
@@ -400,6 +400,14 @@ MonoBehaviour:
   projectile: {fileID: 100000, guid: 29e3809d3eae60d499db32210dbbcd56, type: 2}
   casingAnchor: {fileID: 144203669}
   casingEmitter: {fileID: 100000, guid: b425d3dd3171cdf4cbf686d9fad193e4, type: 2}
+  infiniteAmmo: 1
+  ammoPerMagazine: 7
+  amountOfMagazines: 11
+  reloadSpeed: 1
+  sprayAngle: 10
+  circleSpray: 0
+  _magazines: 0
+  _magazineAmmo: 0
 --- !u!23 &710719973
 Renderer:
   m_ObjectHideFlags: 0
@@ -632,6 +640,14 @@ MonoBehaviour:
   projectile: {fileID: 100000, guid: 29e3809d3eae60d499db32210dbbcd56, type: 2}
   casingAnchor: {fileID: 1773886951}
   casingEmitter: {fileID: 100000, guid: b425d3dd3171cdf4cbf686d9fad193e4, type: 2}
+  infiniteAmmo: 1
+  ammoPerMagazine: 30
+  amountOfMagazines: 5
+  reloadSpeed: 1.5
+  sprayAngle: 10
+  circleSpray: 0
+  _magazines: 0
+  _magazineAmmo: 0
 --- !u!23 &1446047759
 Renderer:
   m_ObjectHideFlags: 0

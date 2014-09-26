@@ -42,7 +42,8 @@ public class Projectile : MonoBehaviour
 		if ( shrapnel != null )
 		{
 			shrapnel = Instantiate( shrapnel ) as GameObject;
-			shrapnel.transform.position = collision.contacts[0].point;
+			shrapnel.transform.position = collision.contacts[0].point + Vector3.up;
+			shrapnel.transform.rotation = Quaternion.LookRotation( -Vector3.Reflect( -transform.forward, Vector3.up ) );
 		}
 	}
 }

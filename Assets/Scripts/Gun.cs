@@ -15,6 +15,9 @@ public class Gun : Weapon
 
 	[Range( 0.0f, 180.0f )]
 	public float sprayAngle;
+	public bool circleSpray;
+
+	private float _halfSpray;
 
 	[SerializeField] private int _magazines;
 	[SerializeField] private int _magazineAmmo;
@@ -43,6 +46,8 @@ public class Gun : Weapon
 		_magazineAmmo = ( infiniteAmmo ) ? Mathf.Max( _magazineAmmo, 1 ) : _magazineAmmo; // this line just insures you have atleast 1 ammo available
 		_reloading = false;
 		_reloadTimer = new Timer( reloadSpeed, 1 );
+
+		_halfSpray = 0.5f * sprayAngle;
 	}
 
 	public override void Update()
@@ -142,6 +147,16 @@ public class Gun : Weapon
 
 		// set the bullet to spawn as a child of the gun
 		bullet.transform.position = transform.position;
-		bullet.transform.rotation = transform.rotation;
+		if ( circleSpray )
+		{
+			// create circular spray by rotating by _halfSpray to the side and then spinning it a random amount.
+			bullet.transform.rotation = transform.rotation * Quaternion.Euler( Random.Range( 0.0f, _halfSpray ), 0.0f, Random.Range( 0.0f, 360.0f ) );
+		}
+		else
+		{
+			// flat spray (good for the player, since a circle spray makes them shoot the ground).
+			// pick a random rotation between -_halfSpray and _halfSpray.
+			bullet.transform.rotation = transform.rotation * Quaternion.Euler( 0.0f, Random.Range( -_halfSpray, _halfSpray ), 0.0f );
+		}
 	}
 }
