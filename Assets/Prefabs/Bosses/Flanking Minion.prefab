@@ -119,8 +119,8 @@ MonoBehaviour:
   destroyOnNoLives: 1
   startingLives: 1
   maxLives: 1
-  startingHealth: 100
-  maxHealth: 100
+  startingHealth: 75
+  maxHealth: 75
   _lives: 0
   _health: 0
 --- !u!114 &11400004
@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  speed: 50
   controlPoint: {x: 0, y: 0, z: 0}
   weight: .5
   moveSpeed: 25

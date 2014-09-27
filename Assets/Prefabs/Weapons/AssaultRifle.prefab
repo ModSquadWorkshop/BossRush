@@ -110,14 +110,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58170baa63ed6b949bc5bb273cbe6cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: .100000001
+  cooldown: .0500000007
   projectile: {fileID: 100000, guid: 29e3809d3eae60d499db32210dbbcd56, type: 2}
   casingAnchor: {fileID: 400002}
   casingEmitter: {fileID: 100000, guid: b425d3dd3171cdf4cbf686d9fad193e4, type: 2}
-  infiniteAmmo: 0
+  infiniteAmmo: 1
   ammoPerMagazine: 30
   amountOfMagazines: 5
   reloadSpeed: 1.5
+  sprayAngle: 10
+  circleSpray: 0
   _magazines: 0
   _magazineAmmo: 0
 --- !u!114 &11400002
@@ -131,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 34
+  baseDamage: 35
   damageMultiplier: 1
   destroyAfterDamage: 0
   targets:
