@@ -79,6 +79,7 @@ public class Gun : Weapon
 
 		// instantiate and initialize a bullet
 		InitializeBullet( Instantiate( projectile ) as GameObject );
+		audio.Play();
 
 		// update ammunition data
 		if ( !infiniteAmmo )
