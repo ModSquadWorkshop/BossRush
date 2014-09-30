@@ -426,6 +426,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11400002, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: primaryAttackSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -466,6 +470,22 @@ Prefab:
       propertyPath: target
       value: 
       objectReference: {fileID: 1363035870}
+    - target: {fileID: 8200002, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: primaryAttackSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: e27a6147926503844a422f8cd682d595, type: 3}
+    - target: {fileID: 8200002, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: m_Pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: cooldown
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
   m_RootGameObject: {fileID: 1470767332}
@@ -593,8 +613,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58170baa63ed6b949bc5bb273cbe6cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 1
-  primaryAttackSounds: []
+  cooldown: 2
+  primaryAttackSounds:
+  - {fileID: 8300000, guid: e27a6147926503844a422f8cd682d595, type: 3}
   projectile: {fileID: 100000, guid: 9c3d1817e90518540a890a9ba1957aed, type: 2}
   casingAnchor: {fileID: 1856531126}
   casingEmitter: {fileID: 100000, guid: 2dd7017bbf6943045bb258b40f536fb8, type: 2}
@@ -615,7 +636,7 @@ AudioSource:
   m_GameObject: {fileID: 954872692}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 1f0213a9de621514cac4d7f8a8452419, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1542,7 +1563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1363035864}
   boss: {fileID: 1470767332}
-  levelOverDelay: 5
+  levelOverDelay: 2
 --- !u!4 &1591145411
 Transform:
   m_ObjectHideFlags: 0
