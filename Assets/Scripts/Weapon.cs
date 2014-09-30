@@ -5,6 +5,8 @@ public class Weapon : MonoBehaviour
 {
 	public float cooldown;
 
+	public AudioClip[] primaryAttackSounds;
+
 	protected Timer _cooldownTimer;
 
 	public virtual void Start()
@@ -24,6 +26,15 @@ public class Weapon : MonoBehaviour
 	public virtual void PerformPrimaryAttack() { }
 
 	public virtual void PerformSecondaryAttack() { }
+
+	public void PlayPrimarySound()
+	{
+		if ( primaryAttackSounds.Length > 0 )
+		{
+			audio.clip = primaryAttackSounds[Random.Range( 0, primaryAttackSounds.Length )];
+			audio.Play();
+		}
+	}
 
 	public bool IsOnCooldown
 	{

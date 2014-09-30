@@ -15,7 +15,7 @@ public class WeaponSystem : MonoBehaviour
 
 	public const float JOYSTICK_THRESHOLD = 0.75f;
 
-	void Start() 
+	void Start()
 	{
 		/*
 		// initialize the weapons
