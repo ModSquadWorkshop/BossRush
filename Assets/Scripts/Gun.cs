@@ -13,6 +13,9 @@ public class Gun : Weapon
 	public int amountOfMagazines;
 	public float reloadSpeed;
 
+    public float shakeForce;
+    public float shakeTime;
+
 	[Range( 0.0f, 180.0f )]
 	public float sprayAngle;
 	public bool circleSpray;
@@ -158,5 +161,11 @@ public class Gun : Weapon
 			// pick a random rotation between -_halfSpray and _halfSpray.
 			bullet.transform.rotation = transform.rotation * Quaternion.Euler( 0.0f, Random.Range( -_halfSpray, _halfSpray ), 0.0f );
 		}
+
+        //shake camera slightly upon firing if gun is meant to add shake effect.
+        if (shakeForce != 0)
+        {
+            iTween.ShakePosition(Camera.main.gameObject, Vector3.left * shakeForce, shakeTime);
+        }
 	}
 }

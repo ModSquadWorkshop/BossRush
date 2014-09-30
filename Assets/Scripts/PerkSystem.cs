@@ -1,46 +1,106 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PerkSystem : MonoBehaviour 
+public class PerkSystem : MonoBehaviour
 {
-	//bools to determine what is being modified by a perk object
-	public bool immunity;
+    public static int perkLimit = 20;
 
-	//ammount to change various stats by
-	public float speedMod;
-	public float fireRateMod; //make a negative value
-	public float maxHealthMod;
-	public float damageMod;
+    PerkTime curr;
+    Perk[] actives = new Perk[perkLimit];
 
-	//time a perk lasts (if using a timer);
-	public float length;
-	
-	void OnCollisionEnter( Collision other )
-	{
-		//Debug.Log ( "HIT" );
-		if( other.gameObject.tag == "Player" )
-		{
-			other.gameObject.GetComponent<PlayerMovement>().speedMultiplier += speedMod;
+    public void AddPerk( Perk a )
+    {
+        for ( int i = 0; i < perkLimit; i++ )
+        {
+            if ( actives[i] == null || !actives[i].isActive )
+            {
+                actives[i] = a;
+                a.isActive = true;
+                a.perkInd = i;
+                Debug.Log(a.perkInd);
+                break;
+            }
+        }
+        SetPerk( a );
+        CreateTimer( a );
+    }
 
-			other.gameObject.GetComponent<HealthSystem>().maxHealth += maxHealthMod; //heal to new max once picked up?
+    public void SetPerk( Perk s )
+    {
+        //check type of perk and apply modifier
+        if ( s.speed )
+        {
+            this.gameObject.GetComponent<PlayerMovement>().speedMultiplier += s.mod;
+        }
+        else if ( s.maxHealth )
+        {
+            this.gameObject.GetComponent<HealthSystem>().maxHealth += s.mod;
+        }
+        else if ( s.damage )
+        {
+            this.gameObject.GetComponent<WeaponSystem>().currentWeapon.GetComponent<DamageSystem>().damageMultiplier += s.mod;
+        }
+        else if ( s.fireRate )
+        {
+            this.gameObject.GetComponent<WeaponSystem>().currentWeapon.GetComponent<Gun>().cooldown += s.mod;
+        }
+        else if ( s.immunity )
+        {
+            this.gameObject.GetComponent<HealthSystem>().immune = true;
+        }
+        else if ( s.health )
+        {
+            this.gameObject.GetComponent<HealthSystem>().health += s.mod;
+        }
+        else if ( s.ammo )
+        {
+            //this.gameObject.GetComponent<WeaponSystem>().currentWeapon.GetComponent<Gun>().(ammovar) += s.mod;
+        }
+    }
 
-			//only effect currently held gun right now
-			other.gameObject.GetComponent<WeaponSystem>().currentWeapon.GetComponent<DamageSystem>().damageMultiplier += damageMod;
-			other.gameObject.GetComponent<WeaponSystem>().currentWeapon.GetComponent<Gun>().cooldown += fireRateMod;
+    public void CreateTimer( Perk c )
+    {
+        if ( c.length > 0 )
+        {
+            curr = this.gameObject.AddComponent<PerkTime>();
+            curr.perkNumber = c.perkIndex;
+            curr.perkLength = c.length;
+            curr.BeginPerk();
+        }
+    }
 
-			if( immunity )
-			{
-				other.gameObject.GetComponent<PerkTime>().perkLength = length;
-				other.gameObject.GetComponent<PerkTime>().BeginPerk();
-				other.gameObject.GetComponent<HealthSystem>().immune = true;
-			}
-			Destroy(this.gameObject);
-		}
-	}
+    public void ResetPerk( Perk reset )
+    {
+        //finds the perk in actives and removes the modifier based on type
+        if ( reset.speed )
+        {
+            this.gameObject.GetComponent<PlayerMovement>().speedMultiplier -= reset.mod;
+        }
+        else if ( reset.maxHealth )
+        {
+            this.gameObject.GetComponent<HealthSystem>().maxHealth -= reset.mod;
+        }
+        else if ( reset.damage )
+        {
+            this.gameObject.GetComponent<WeaponSystem>().currentWeapon.GetComponent<DamageSystem>().damageMultiplier -= reset.mod;
+        }
+        else if ( reset.fireRate )
+        {
+            this.gameObject.GetComponent<WeaponSystem>().currentWeapon.GetComponent<Gun>().cooldown -= reset.mod;
+        }
+        else if ( reset.immunity )
+        {
+            this.gameObject.GetComponent<HealthSystem>().immune = false;
+        }
+
+    }
+
+    public void RemovePerk( int n )
+    {
+        Perk r = actives[n];
+        ResetPerk( r );
+        actives[n].isActive = false;
+        actives[n] = null;
+    }
+
 }
-/*
-Questions for designers
-_______________________
-Should a max health boost also heal the player?
-Should a fire rate/ammo/damage boost effect all guns held or just the one currently held? (GetComponentInChildren)
-*/
