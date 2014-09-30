@@ -186,7 +186,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: -4.37113883e-08, z: 0, w: 1}
-  m_LocalPosition: {x: 20, y: 0, z: 0}
+  m_LocalPosition: {x: 30, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
@@ -222,7 +222,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20, y: 0, z: -7.15334636e-08}
+  m_LocalPosition: {x: -30, y: 0, z: -7.15334636e-08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
@@ -481,6 +481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  primaryAttackSounds: []
   projectile: {fileID: 100000, guid: 9c3d1817e90518540a890a9ba1957aed, type: 2}
   casingAnchor: {fileID: 400004}
   casingEmitter: {fileID: 100000, guid: 2dd7017bbf6943045bb258b40f536fb8, type: 2}
@@ -546,8 +547,8 @@ MonoBehaviour:
   - {fileID: 400008}
   - {fileID: 400010}
   spawnPriorities: []
-  amountPerSpawn: 1
-  spawnInterval: 1
+  amountPerWave: 4
+  waveInterval: 3
   spawnOnStart: 1
   controlPoints:
   - {fileID: 400012}
