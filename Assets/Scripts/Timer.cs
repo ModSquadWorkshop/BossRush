@@ -46,7 +46,7 @@ public class Timer
 			if ( _currentInterval >= _totalIntervals && _totalIntervals > 0 ) 
 			{
 				_complete = true;
-				Stop ();
+				Stop();
 			}
 		}
 	}

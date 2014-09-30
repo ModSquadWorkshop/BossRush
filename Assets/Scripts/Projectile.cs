@@ -16,6 +16,7 @@ public class Projectile : MonoBehaviour
 	void Start()
 	{
 		rigidbody.velocity = transform.forward * speed;
+
 		_startPoint = transform.position;
 		_maxDistanceSquared = maxDistance * maxDistance;
 		_elapsedTime = 0.0f;
@@ -41,8 +42,8 @@ public class Projectile : MonoBehaviour
 		if ( shrapnel != null )
 		{
 			shrapnel = Instantiate( shrapnel,
-			                        collision.contacts[0].point,
-			                        Quaternion.FromToRotation( Vector3.up, collision.contacts[0].normal ) ) as GameObject;
+			                        collision.contacts[0].point + collision.contacts[0].normal,
+			                        Quaternion.LookRotation( -Vector3.Reflect( -transform.forward, Vector3.up ) ) ) as GameObject;
 		}
 	}
 }
