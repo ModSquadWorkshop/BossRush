@@ -186,7 +186,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: -4.37113883e-08, z: 0, w: 1}
-  m_LocalPosition: {x: 20, y: 0, z: 0}
+  m_LocalPosition: {x: 30, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
@@ -222,7 +222,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20, y: 0, z: -7.15334636e-08}
+  m_LocalPosition: {x: -30, y: 0, z: -7.15334636e-08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
@@ -308,12 +308,12 @@ Rigidbody:
   m_GameObject: {fileID: 100002}
   serializedVersion: 2
   m_Mass: 200
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: .0500000007
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!65 &6500000
 BoxCollider:
@@ -333,7 +333,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c283ff3c0f801ff439fb91639d835129, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -481,6 +481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  primaryAttackSounds: []
   projectile: {fileID: 100000, guid: 9c3d1817e90518540a890a9ba1957aed, type: 2}
   casingAnchor: {fileID: 400004}
   casingEmitter: {fileID: 100000, guid: 2dd7017bbf6943045bb258b40f536fb8, type: 2}
@@ -546,8 +547,8 @@ MonoBehaviour:
   - {fileID: 400008}
   - {fileID: 400010}
   spawnPriorities: []
-  amountPerSpawn: 1
-  spawnInterval: 1
+  amountPerWave: 4
+  waveInterval: 3
   spawnOnStart: 1
   controlPoints:
   - {fileID: 400012}
@@ -562,11 +563,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 279090449e4b6944390b1cb3b3fd9dad, type: 3}
+  m_Script: {fileID: 11500000, guid: 8fcc12b2f7a56614b8910bf484971a40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpeed: 10
+  acceleration: 100
   target: {fileID: 0}
-  speed: 3
+  distance: 50
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
