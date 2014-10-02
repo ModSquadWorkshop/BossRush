@@ -5,37 +5,29 @@ public class PerkTime : MonoBehaviour
 {
     //time a perk lasts (if using a timer);
     public float perkLength;
-    public Timer perkTimer;
+    private Timer perkTimer;
     //index of perk within the system
-    public int perkNumber;
-
-    public bool started = false;
-
-    public void BeginPerk()
-    {
-        perkTimer = new Timer( perkLength, 1 );
-        perkTimer.Start();
-        started = true;
-    }
+    public Perk perk;
 
     // Update is called once per frame
     void Update()
     {
-        if ( started )
+        perkTimer.Update();
+        if (perkTimer.IsComplete())
         {
-            perkTimer.Update();
-
-            if ( perkTimer.IsComplete() )
-            {
-                started = false;
-                EndPerk();
-            }
+            End();
         }
     }
 
-    public void EndPerk()
+    public void Begin()
     {
-        this.gameObject.GetComponent<PerkSystem>().RemovePerk( perkNumber );
+        perkTimer = new Timer( perkLength, 1 );
+        perkTimer.Start();
+    }
+
+    public void End()
+    {
+        this.gameObject.GetComponent<PerkSystem>().RemovePerk( perk );
         Destroy( this );
     }
 }

@@ -8,6 +8,8 @@ sealed public class DamageSystem : MonoBehaviour
 	public float damageMultiplier = 1.0f;
 	public bool destroyAfterDamage = false;
 
+    public float shakeForce;
+
 	public List<string> targets;
 	private Hashtable _targets;
 
@@ -30,6 +32,10 @@ sealed public class DamageSystem : MonoBehaviour
 			if ( healthSystem != null )
 			{
 				healthSystem.Damage( CalculateDamage() );
+                if ( collision.gameObject.tag == "Player" )
+                {
+                    iTween.ShakePosition( Camera.main.gameObject, Vector3.left * shakeForce, 0f );
+                }
 			}
 
 			// optionally, this object can be destroyed after dealing damage
@@ -61,6 +67,7 @@ sealed public class DamageSystem : MonoBehaviour
 		baseDamage = other.baseDamage;
 		damageMultiplier = other.damageMultiplier;
 		targets = other.targets;
+        shakeForce = other.shakeForce;
 
 		InitTargets();
 	}

@@ -5,20 +5,26 @@ public class Perk : MonoBehaviour
 {
     //bools to determine what is being modified by a perk object
     public bool immunity;
-    public bool speed;
-    public bool fireRate;
-    public bool maxHealth;
-    public bool health;
-    public bool damage;
-    public bool ammo;
-
-    public bool isActive;
+    public bool infiniteAmmo;
 
     //ammount to change various stats by
-    public float mod;
+    public float speedMod;
+    public float fireRateMod;
+    public float maxHealthMod;
+    public float healthMod;
+    public float damageMod;
+    public float reloadMod;
+    public int magazinesMod;
 
     //time a perk lasts (if using a timer);
     public float length;
 
-    public int perkInd;
+    void OnCollisionEnter(Collision other)
+    {
+        if ( other.gameObject.tag == "Player" )
+        {
+            other.gameObject.GetComponent<PerkSystem>().AddPerk( this );
+            Destroy( this.gameObject );
+        }
+    }
 }

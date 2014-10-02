@@ -13,8 +13,7 @@ public class Gun : Weapon
 	public int amountOfMagazines;
 	public float reloadSpeed;
 
-    public float shakeForce;
-    public float shakeTime;
+    public float shake;
 
 	[Range( 0.0f, 180.0f )]
 	public float sprayAngle;
@@ -146,6 +145,7 @@ public class Gun : Weapon
 			bulletDamage.Inherit( weaponDamage );
 		}
 
+        bulletDamage.shakeForce = shake;
 		bulletDamage.destroyAfterDamage = true;
 
 		// set the bullet to spawn as a child of the gun
@@ -162,10 +162,6 @@ public class Gun : Weapon
 			bullet.transform.rotation = transform.rotation * Quaternion.Euler( 0.0f, Random.Range( -_halfSpray, _halfSpray ), 0.0f );
 		}
 
-        //shake camera slightly upon firing if gun is meant to add shake effect.
-        if (shakeForce != 0)
-        {
-            iTween.ShakePosition(Camera.main.gameObject, Vector3.left * shakeForce, shakeTime);
-        }
+        
 	}
 }

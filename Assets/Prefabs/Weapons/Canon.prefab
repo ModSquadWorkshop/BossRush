@@ -113,6 +113,8 @@ MonoBehaviour:
   baseDamage: 34
   damageMultiplier: 1
   destroyAfterDamage: 0
+  shakeForce: 0
+  shakeTime: 0
   targets:
   - Scenery
   - Player
@@ -135,6 +137,7 @@ MonoBehaviour:
   ammoPerMagazine: 0
   amountOfMagazines: 0
   reloadSpeed: 0
+  shake: 0
   sprayAngle: 10
   circleSpray: 1
   _magazines: 0

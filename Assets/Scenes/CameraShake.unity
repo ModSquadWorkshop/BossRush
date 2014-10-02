@@ -281,6 +281,8 @@ MonoBehaviour:
   baseDamage: 34
   damageMultiplier: 1
   destroyAfterDamage: 0
+  shakeForce: 0
+  shakeTime: 0
   targets:
   - Scenery
   - Player
@@ -304,8 +306,7 @@ MonoBehaviour:
   ammoPerMagazine: 0
   amountOfMagazines: 0
   reloadSpeed: 0
-  shakeForce: 0
-  shakeTime: 0
+  shake: 2
   sprayAngle: 0
   circleSpray: 0
   _magazines: 0
@@ -612,6 +613,14 @@ Prefab:
       propertyPath: target
       value: 
       objectReference: {fileID: 1363035870}
+    - target: {fileID: 11400002, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: shakeForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: shake
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
   m_RootGameObject: {fileID: 1470767332}
