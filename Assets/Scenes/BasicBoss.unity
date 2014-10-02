@@ -153,7 +153,7 @@ GameObject:
   m_TagString: Scenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &95820304
 Transform:
@@ -222,7 +222,7 @@ GameObject:
   m_TagString: Scenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &271124759
 Transform:
@@ -833,7 +833,7 @@ GameObject:
   m_TagString: Scenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!23 &1136832439
 Renderer:
@@ -902,7 +902,7 @@ GameObject:
   m_TagString: Scenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1204269221
 Transform:
@@ -1161,7 +1161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d857f201bdb5b5c499a61a1b301189c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  immune: 1
+  immune: 0
   destroyOnNoLives: 1
   startingLives: 1
   maxLives: 1
@@ -1183,7 +1183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookTarget: {fileID: 943654249}
   playerModel: {fileID: 1942585077}
-  baseSpeed: 20
+  baseSpeed: 50
   speedMultiplier: 1
   lookSpeed: 1
 --- !u!54 &1363035868
@@ -1643,7 +1643,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: c547150bab057b34982e046263a7cf68, type: 2}
       propertyPath: immune
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: c547150bab057b34982e046263a7cf68, type: 2}
       propertyPath: weapons.Array.data[0]
