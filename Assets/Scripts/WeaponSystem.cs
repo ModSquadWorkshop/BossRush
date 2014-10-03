@@ -59,6 +59,12 @@ public class WeaponSystem : MonoBehaviour
 
 	void Update()
 	{
+        if ( Input.GetButtonDown( "Switch" ) )
+        {
+            NextWeapon();
+            return;
+        }
+
 		// primary weapon attack
 		Vector3 gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ), 0.0f, Input.GetAxis( "Look Vertical" ) );
 		if ( Input.GetButton( "Fire1" ) || gamePadLook.sqrMagnitude > JOYSTICK_THRESHOLD )
@@ -82,11 +88,6 @@ public class WeaponSystem : MonoBehaviour
 			}
 
 			_currentWeapon.PerformSecondaryAttack();
-		}
-
-		if ( Input.GetKeyDown( switchWeaponKeybind ) )
-		{
-			NextWeapon();
 		}
 	}
 

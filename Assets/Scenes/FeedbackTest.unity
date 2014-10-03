@@ -282,7 +282,6 @@ MonoBehaviour:
   damageMultiplier: 1
   destroyAfterDamage: 0
   shakeForce: 0
-  shakeTime: 0
   targets:
   - Scenery
   - Player
@@ -1076,6 +1075,7 @@ GameObject:
   - 114: {fileID: 1363035867}
   - 114: {fileID: 1363035866}
   - 114: {fileID: 1363035865}
+  - 114: {fileID: 1363035871}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1181,6 +1181,21 @@ Transform:
   - {fileID: 1942585077}
   m_Father: {fileID: 0}
   m_RootOrder: 4
+--- !u!114 &1363035871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1363035864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c47d63d22934b84085cd775d64f0e89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rumble: 0
+  leftForce: .100000001
+  rightForce: .100000001
+  rumbleTime: .100000001
 --- !u!1 &1451090626
 GameObject:
   m_ObjectHideFlags: 0

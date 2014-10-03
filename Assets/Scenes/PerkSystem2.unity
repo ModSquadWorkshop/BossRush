@@ -482,15 +482,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   immunity: 0
-  speed: 0
-  fireRate: 0
-  maxHealth: 1
-  health: 0
-  damage: 0
-  magazines: 0
-  reload: 0
   infiniteAmmo: 0
-  mod: 50
+  speedMod: 1
+  fireRateMod: 0
+  maxHealthMod: 0
+  healthMod: 0
+  damageMod: 0
+  reloadMod: 0
+  magazinesMod: 0
   length: 5
 --- !u!23 &1067909745
 Renderer:
@@ -1158,6 +1157,10 @@ Prefab:
       propertyPath: maxHealth
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 4217a17f193fd8546a104bd6101bd23a, type: 2}
+      propertyPath: speedMod
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400002, guid: 4217a17f193fd8546a104bd6101bd23a, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4217a17f193fd8546a104bd6101bd23a, type: 2}
@@ -1315,6 +1318,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e9624c40340a76c49bc8185b36862403, type: 2}
+    - target: {fileID: 11400000, guid: 4217a17f193fd8546a104bd6101bd23a, type: 2}
+      propertyPath: speedMod
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400002, guid: 4217a17f193fd8546a104bd6101bd23a, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4217a17f193fd8546a104bd6101bd23a, type: 2}
@@ -1382,15 +1389,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   immunity: 0
-  speed: 1
-  fireRate: 0
-  maxHealth: 0
-  health: 0
-  damage: 0
-  magazines: 0
-  reload: 0
   infiniteAmmo: 0
-  mod: 1
+  speedMod: 1
+  fireRateMod: 0
+  maxHealthMod: 0
+  healthMod: 0
+  damageMod: 0
+  reloadMod: 0
+  magazinesMod: 0
   length: 10
 --- !u!23 &1957837246
 Renderer:

@@ -35,6 +35,12 @@ sealed public class DamageSystem : MonoBehaviour
                 if ( collision.gameObject.tag == "Player" )
                 {
                     iTween.ShakePosition( Camera.main.gameObject, Vector3.left * shakeForce, 0f );
+					//controller rumble implementation
+					if( !collision.gameObject.GetComponent<RumbleManager>().rumble )
+					{
+						collision.gameObject.GetComponent<RumbleManager>().rumble = true;
+						collision.gameObject.GetComponent<RumbleManager>().Rumble();
+					}
                 }
 			}
 
@@ -50,6 +56,7 @@ sealed public class DamageSystem : MonoBehaviour
 				}
 
 				Destroy( gameObject );
+
 			}
 		}
 	}
