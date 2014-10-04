@@ -173,9 +173,9 @@ MonoBehaviour:
   cooldown: 0
   primaryAttackSounds: []
   repeatDamage: 1
-  maxRange: 100
   beam: {fileID: 12000000}
   beamWidth: 1
+  maxRange: 100
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -220,7 +220,7 @@ LineRenderer:
     endWidth: 1
     m_StartColor:
       serializedVersion: 2
-      rgba: 4278190335
+      rgba: 4279177209
     m_EndColor:
       serializedVersion: 2
       rgba: 4278190335

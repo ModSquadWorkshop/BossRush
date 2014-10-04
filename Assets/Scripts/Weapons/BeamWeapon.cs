@@ -5,21 +5,22 @@ public class BeamWeapon : Weapon
 {
     public bool repeatDamage = true;
 
-    public float maxRange = 20.0f;
     public LineRenderer beam;
-    public float beamWidth = 0.5f;
+    public float beamWidth;
+    public float maxRange;
 
     private Ray _ray;
     private RaycastHit _hit;
     private Timer _beamTimer;
 
-	void Start() 
+	public override void Start() 
     {
         beam = GetComponent<LineRenderer>();
         beam.SetVertexCount( 2 );
         beam.SetWidth( beamWidth, beamWidth );
 
         _beamTimer = new Timer( 0.1f, 1 );
+        _ray = new Ray();
 
         base.Start();
 	}
@@ -28,10 +29,11 @@ public class BeamWeapon : Weapon
     {
         if ( _beamTimer.IsRunning() )
         {
-            _ray = Camera.main.ScreenPointToRay( Input.mousePosition );
+            _ray.origin = this.transform.position;
+            _ray.direction = this.transform.forward * maxRange;
 
             beam.SetPosition( 0, this.transform.position );
-
+           
             if ( Physics.Raycast( _ray, out _hit, maxRange ) )
             {
                 beam.SetPosition( 1, _hit.point + _hit.normal );
