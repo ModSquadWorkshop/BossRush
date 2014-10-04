@@ -46,7 +46,7 @@ public class WeaponSystem : MonoBehaviour
 			GameObject weaponObject = new GameObject();
 			weaponObject.SetActive( false );
 
-			Weapon weapon = ( Weapon )weaponObject.AddComponent( typeof( Weapon ) );
+			Weapon weapon = weaponObject.AddComponent<Weapon>();
 			_defaultWeapon = InitializeWeapon( weapon );
 		}
 
@@ -138,7 +138,7 @@ public class WeaponSystem : MonoBehaviour
 
 	public Weapon GetWeapon( int weaponID )
 	{
-		return ( Weapon )weapons[weaponID].GetComponent( typeof( Weapon ) );
+		return weapons[weaponID].GetComponent<Weapon>();
 	}
 
 	private int GetNextWeaponID()
