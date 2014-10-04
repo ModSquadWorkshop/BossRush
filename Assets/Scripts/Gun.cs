@@ -13,8 +13,6 @@ public class Gun : Weapon
 	public int amountOfMagazines;
 	public float reloadSpeed;
 
-    public float shake;
-
 	[Range( 0.0f, 180.0f )]
 	public float sprayAngle;
 	public bool circleSpray;
@@ -145,7 +143,6 @@ public class Gun : Weapon
 			bulletDamage.Inherit( weaponDamage );
 		}
 
-        bulletDamage.shakeForce = shake;
 		bulletDamage.destroyAfterDamage = true;
 
 		// set the bullet to spawn as a child of the gun
@@ -161,7 +158,5 @@ public class Gun : Weapon
 			// pick a random rotation between -_halfSpray and _halfSpray.
 			bullet.transform.rotation = transform.rotation * Quaternion.Euler( 0.0f, Random.Range( -_halfSpray, _halfSpray ), 0.0f );
 		}
-
-        
 	}
 }
