@@ -1064,10 +1064,10 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1363035870}
-    - target: {fileID: 11400008, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 11400012, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: referenceTarget
+      value: 
+      objectReference: {fileID: 1363035870}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
   m_RootGameObject: {fileID: 1470767332}
@@ -2535,8 +2535,9 @@ MonoBehaviour:
   - {fileID: 459653221}
   - {fileID: 384359382}
   - {fileID: 635132879}
-  movement: 1
-  referenceTarget: {fileID: 0}
+  movement: 3
+  referenceTarget: {fileID: 1363035870}
+  resetInterval: 1
 --- !u!1 &1545456118
 GameObject:
   m_ObjectHideFlags: 0

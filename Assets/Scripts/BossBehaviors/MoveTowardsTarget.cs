@@ -12,8 +12,17 @@ public class MoveTowardsTarget : PhysicsMovement
 
 	public void TargetDeath( HealthSystem targetHealth )
 	{
-		// destroy follow script without destroying object
-		Destroy( this );
+		// There are cases where the death callback
+		// might be called after the object has been destroyed.
+		// In theory we could just de-register when we die,
+		// but that has its own issues. So instead we have
+		// to check if this object still exists.
+		if ( this != null )
+		{
+			// destroy follow script without destroying object
+			CancelInvoke();
+			Destroy( this );
+		}
 	}
 
 	public Transform target
@@ -27,7 +36,7 @@ public class MoveTowardsTarget : PhysicsMovement
 		{
 			_target = value;
 
-			// re-register for death callback
+			// register for death callback
 			HealthSystem targetHealth = _target.gameObject.GetComponent<HealthSystem>();
 			if ( targetHealth != null )
 			{

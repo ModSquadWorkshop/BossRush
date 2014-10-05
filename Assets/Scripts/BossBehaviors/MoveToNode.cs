@@ -15,6 +15,17 @@ public class MoveToNode : MoveTowardsTarget
 	public NodeMovementTypes movement;
 	public Transform referenceTarget;
 
+	public float resetInterval;
+
+	void Start()
+	{
+		HealthSystem referenceTargetHealth = referenceTarget.gameObject.GetComponent<HealthSystem>();
+		if ( referenceTargetHealth != null )
+		{
+			referenceTargetHealth.RegisterDeathCallback( new HealthSystem.DeathCallback( TargetDeath ) );
+		}
+	}
+
 	public void OnEnable()
 	{
 		Transform tempTarget = nodes[0];
@@ -61,5 +72,10 @@ public class MoveToNode : MoveTowardsTarget
 		}
 
 		target = tempTarget;
+
+		if ( resetInterval > 0.0f )
+		{
+			Invoke( "OnEnable", resetInterval );
+		}
 	}
 }
