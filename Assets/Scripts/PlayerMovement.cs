@@ -6,25 +6,18 @@ sealed public class PlayerMovement : MonoBehaviour
 	public Transform lookTarget;
 	public Transform playerModel;
 
-	public float baseSpeed = 200.0f;
-	public float speedMultiplier = 1.0f;
+	public float baseSpeed;
+	public float speedMultiplier;
 
-	public float lookSpeed = 10.0f;
-
-	private float _speed;
-
-	void Start()
-	{
-		_speed = baseSpeed * speedMultiplier;
-	}
+	public float lookSpeed;
 
 	void Update()
 	{
 		// cardinal movement
-		Vector3 movement = new Vector3( Input.GetAxis( "Horizontal" ) * Time.deltaTime * _speed * speedMultiplier,
+		Vector3 movement = new Vector3( Input.GetAxis( "Horizontal" ),
 		                                0.0f,
-		                                Input.GetAxis( "Vertical" )   * Time.deltaTime * _speed * speedMultiplier );
-		rigidbody.AddForce( movement * 750.0f );
+		                                Input.GetAxis( "Vertical" ) );
+		rigidbody.velocity = movement * baseSpeed * speedMultiplier;
 
 		// handle mouse input
 		lookTarget.Translate( new Vector3( Input.GetAxis( "Mouse X" ), 0.0f, Input.GetAxis( "Mouse Y" ) ) * lookSpeed );
@@ -50,11 +43,7 @@ sealed public class PlayerMovement : MonoBehaviour
 	{
 		get
 		{
-			return _speed * speedMultiplier;
-		}
-		set
-		{
-			_speed = value;
+			return baseSpeed * speedMultiplier;
 		}
 	}
 }

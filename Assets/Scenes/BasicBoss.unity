@@ -153,7 +153,7 @@ GameObject:
   m_TagString: Scenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &95623908
 Transform:
@@ -291,7 +291,7 @@ GameObject:
   m_TagString: Scenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &158307788
 Transform:
@@ -483,7 +483,7 @@ GameObject:
   m_TagString: Scenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &349361812
 Transform:
@@ -544,7 +544,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 380309953}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Right Control
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -598,13 +598,13 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 384359381}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fc1a4d7a40d41d545b6d510012fe2fbf, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -654,13 +654,13 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 459653220}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fc1a4d7a40d41d545b6d510012fe2fbf, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -737,13 +737,13 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 635132878}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fc1a4d7a40d41d545b6d510012fe2fbf, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -793,13 +793,13 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 698786622}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fc1a4d7a40d41d545b6d510012fe2fbf, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -830,7 +830,7 @@ GameObject:
   m_TagString: Scenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &701242458
 Transform:
@@ -1064,6 +1064,10 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1363035870}
+    - target: {fileID: 11400008, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
   m_RootGameObject: {fileID: 1470767332}
@@ -1104,13 +1108,13 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 888779067}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fc1a4d7a40d41d545b6d510012fe2fbf, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1192,7 +1196,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 954872693}
   - 33: {fileID: 954872699}
-  - 65: {fileID: 954872698}
   - 23: {fileID: 954872697}
   - 82: {fileID: 954872696}
   - 114: {fileID: 954872695}
@@ -1341,19 +1344,6 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!65 &954872698
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6500000, guid: e69da1848d5a6aa45ad03e2051a43667,
-    type: 2}
-  m_PrefabInternal: {fileID: 757914076}
-  m_GameObject: {fileID: 954872692}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &954872699
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1372,7 +1362,7 @@ GameObject:
   - 4: {fileID: 1081013407}
   - 33: {fileID: 1081013406}
   - 23: {fileID: 1081013404}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Model
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1428,7 +1418,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1088510076}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Left Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1672,13 +1662,13 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1270597821}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fc1a4d7a40d41d545b6d510012fe2fbf, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1709,7 +1699,7 @@ GameObject:
   m_TagString: Scenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!23 &1286021836
 Renderer:
@@ -1797,13 +1787,13 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1345302360}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fc1a4d7a40d41d545b6d510012fe2fbf, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1834,7 +1824,7 @@ GameObject:
   m_TagString: Scenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1351590882
 Transform:
@@ -2004,7 +1994,7 @@ GameObject:
   - 114: {fileID: 1363035867}
   - 114: {fileID: 1363035866}
   - 114: {fileID: 1363035865}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2041,7 +2031,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d857f201bdb5b5c499a61a1b301189c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  immune: 1
+  immune: 0
   destroyOnNoLives: 1
   startingLives: 1
   maxLives: 1
@@ -2079,7 +2069,7 @@ Rigidbody:
   m_AngularDrag: .0500000007
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 2
   m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &1363035869
@@ -2125,7 +2115,7 @@ GameObject:
   m_TagString: Scenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1382781298
 Transform:
@@ -2213,13 +2203,13 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1396455863}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fc1a4d7a40d41d545b6d510012fe2fbf, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -2320,7 +2310,7 @@ GameObject:
   - 114: {fileID: 1470767339}
   - 114: {fileID: 1470767340}
   - 114: {fileID: 1470767342}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spider Tank
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -2424,7 +2414,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 757914076}
   m_GameObject: {fileID: 1470767332}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ba311a52b1c7d24c98128f8e9ab66fb, type: 3}
   m_Name: 
@@ -2546,7 +2536,7 @@ MonoBehaviour:
   - {fileID: 384359382}
   - {fileID: 635132879}
   movement: 1
-  target: {fileID: 1363035870}
+  referenceTarget: {fileID: 0}
 --- !u!1 &1545456118
 GameObject:
   m_ObjectHideFlags: 0
@@ -2555,7 +2545,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1545456119}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Right Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2651,13 +2641,13 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1679815170}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fc1a4d7a40d41d545b6d510012fe2fbf, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -2707,13 +2697,13 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1684039771}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fc1a4d7a40d41d545b6d510012fe2fbf, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -2744,7 +2734,7 @@ GameObject:
   m_TagString: Scenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1775202550
 Transform:
@@ -2838,7 +2828,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 5400000, guid: c547150bab057b34982e046263a7cf68, type: 2}
       propertyPath: m_Interpolate
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5400000, guid: c547150bab057b34982e046263a7cf68, type: 2}
       propertyPath: m_UseGravity
@@ -2858,7 +2848,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: c547150bab057b34982e046263a7cf68, type: 2}
       propertyPath: immune
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: c547150bab057b34982e046263a7cf68, type: 2}
       propertyPath: weapons.Array.data[0]
@@ -2884,6 +2874,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: c547150bab057b34982e046263a7cf68, type: 2}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c547150bab057b34982e046263a7cf68, type: 2}
   m_RootGameObject: {fileID: 1363035864}
@@ -2897,7 +2891,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1840927554}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Left Control
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2988,7 +2982,7 @@ GameObject:
   m_TagString: Scenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2000569023
 Transform:
@@ -3057,7 +3051,7 @@ GameObject:
   m_TagString: Scenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2042103846
 Transform:
@@ -3126,7 +3120,7 @@ GameObject:
   m_TagString: Scenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2091602416
 Transform:
@@ -3214,13 +3208,13 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2120763214}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fc1a4d7a40d41d545b6d510012fe2fbf, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0

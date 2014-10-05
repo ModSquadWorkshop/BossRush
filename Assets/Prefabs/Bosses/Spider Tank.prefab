@@ -32,7 +32,7 @@ GameObject:
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400012}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spider Tank
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -48,7 +48,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 33: {fileID: 3300000}
-  - 65: {fileID: 6500000}
   - 23: {fileID: 2300000}
   - 82: {fileID: 8200002}
   - 114: {fileID: 11400002}
@@ -68,7 +67,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400006}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Right Control
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,7 +82,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400008}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Left Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +97,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400010}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Right Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +112,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400012}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Left Control
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +129,7 @@ GameObject:
   - 4: {fileID: 400014}
   - 33: {fileID: 3300004}
   - 23: {fileID: 2300002}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Model
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -316,18 +315,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!65 &6500000
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100004}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6500002
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -586,7 +573,7 @@ MonoBehaviour:
   acceleration: 100
   nodes: []
   movement: 1
-  target: {fileID: 0}
+  referenceTarget: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
