@@ -31,7 +31,8 @@ public class Weapon : MonoBehaviour
 	{
 		if ( primaryAttackSounds.Length > 0 )
 		{
-			audio.PlayOneShot( primaryAttackSounds[Random.Range( 0, primaryAttackSounds.Length )] );
+			audio.clip = primaryAttackSounds[Random.Range( 0, primaryAttackSounds.Length )];
+			audio.Play();
 		}
 	}
 
