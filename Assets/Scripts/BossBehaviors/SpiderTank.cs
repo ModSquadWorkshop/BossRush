@@ -4,7 +4,7 @@ using System.Collections;
 public class SpiderTank : MonoBehaviour
 {
 	public Transform player;
-	public Gun mainCannon;
+	public Gun[] guns;
 	public float turretSpeed;
 
 	void Start()
@@ -15,12 +15,15 @@ public class SpiderTank : MonoBehaviour
 	void Update()
 	{
 		// have main cannon track player with delay
-		Quaternion look = Quaternion.LookRotation( player.position - mainCannon.transform.position );
-		mainCannon.transform.rotation = Quaternion.Lerp( mainCannon.transform.rotation, look, turretSpeed * Time.deltaTime );
-
-		if ( !mainCannon.IsOnCooldown )
+		foreach ( Gun gun in guns )
 		{
-			mainCannon.PerformPrimaryAttack();
+			Quaternion look = Quaternion.LookRotation( player.position - gun.transform.position );
+			gun.transform.rotation = Quaternion.Lerp( gun.transform.rotation, look, turretSpeed * Time.deltaTime );
+
+			if ( !gun.IsOnCooldown )
+			{
+				gun.PerformPrimaryAttack();
+			}
 		}
 	}
 
