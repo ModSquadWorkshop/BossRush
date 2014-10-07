@@ -5,9 +5,10 @@ public class SpiderTank : MonoBehaviour
 {
 	public Transform player;
 	public Gun mainCannon;
-	public float turretSpeed;
 
 	public SpiderTankState initialState;
+
+	public float timeToCrazy;
 
 	private SpiderTankState[] _states;
 	private int _currentState = 0;
@@ -32,6 +33,8 @@ public class SpiderTank : MonoBehaviour
 
 		// enable initial state
 		_states[_currentState].enabled = true;
+
+		Invoke( "NextState", timeToCrazy );
 	}
 
 	void PlayerDeath( HealthSystem playerHealth )

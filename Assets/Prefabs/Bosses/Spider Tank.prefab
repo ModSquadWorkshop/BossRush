@@ -29,11 +29,11 @@ GameObject:
   - 82: {fileID: 8200000}
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400014}
+  - 114: {fileID: 11400016}
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400012}
-  - 114: {fileID: 11400014}
-  - 114: {fileID: 11400016}
   m_Layer: 10
   m_Name: Spider Tank
   m_TagString: Enemy
@@ -458,7 +458,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   mainCannon: {fileID: 11400002}
-  turretSpeed: 20
+  initialState: {fileID: 11400014}
+  timeToCrazy: 30
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -470,8 +471,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58170baa63ed6b949bc5bb273cbe6cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 1
-  primaryAttackSounds: []
+  cooldown: 2
+  primaryAttackSounds:
+  - {fileID: 8300000, guid: e27a6147926503844a422f8cd682d595, type: 3}
   projectile: {fileID: 100000, guid: 9c3d1817e90518540a890a9ba1957aed, type: 2}
   casingAnchor: {fileID: 400004}
   casingEmitter: {fileID: 100000, guid: 2dd7017bbf6943045bb258b40f536fb8, type: 2}
@@ -551,7 +553,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fcc12b2f7a56614b8910bf484971a40, type: 3}
   m_Name: 
@@ -588,7 +590,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fba2eb2f60f8214c927b5c976359d8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spiderTank: {fileID: 0}
+  turretSpeed: 20
+  canonDelay: 2
+  amountPerWave: 4
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -600,7 +604,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d304b450b33b55b489dadf590505e37b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spiderTank: {fileID: 0}
+  turretSpeed: 50
+  canonDelay: .300000012
+  amountPerWave: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
