@@ -2310,6 +2310,8 @@ GameObject:
   - 114: {fileID: 1470767339}
   - 114: {fileID: 1470767340}
   - 114: {fileID: 1470767342}
+  - 114: {fileID: 1470767344}
+  - 114: {fileID: 1470767343}
   m_Layer: 10
   m_Name: Spider Tank
   m_TagString: Enemy
@@ -2407,6 +2409,7 @@ MonoBehaviour:
   player: {fileID: 1363035870}
   mainCannon: {fileID: 954872695}
   turretSpeed: 20
+  initialState: {fileID: 0}
 --- !u!114 &1470767339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2414,7 +2417,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 757914076}
   m_GameObject: {fileID: 1470767332}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ba311a52b1c7d24c98128f8e9ab66fb, type: 3}
   m_Name: 
@@ -2516,7 +2519,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 757914076}
   m_GameObject: {fileID: 1470767332}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a7d5c4f6f052614bb21dcf3b1f54898, type: 3}
   m_Name: 
@@ -2538,6 +2541,30 @@ MonoBehaviour:
   movement: 3
   referenceTarget: {fileID: 1363035870}
   resetInterval: 1
+--- !u!114 &1470767343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400016, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 1470767332}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d304b450b33b55b489dadf590505e37b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1470767344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400014, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 1470767332}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fba2eb2f60f8214c927b5c976359d8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1545456118
 GameObject:
   m_ObjectHideFlags: 0

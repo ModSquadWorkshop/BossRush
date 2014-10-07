@@ -7,26 +7,48 @@ public class SpiderTank : MonoBehaviour
 	public Gun mainCannon;
 	public float turretSpeed;
 
+	public SpiderTankState initialState;
+
+	private SpiderTankState[] _states;
+	private int _currentState = 0;
+
 	void Start()
 	{
 		player.gameObject.GetComponent<HealthSystem>().RegisterDeathCallback( PlayerDeath );
-	}
 
-	void Update()
-	{
-		// have main cannon track player with delay
-		Quaternion look = Quaternion.LookRotation( player.position + Vector3.up * 2 - mainCannon.transform.position );
-		mainCannon.transform.rotation = Quaternion.Lerp( mainCannon.transform.rotation, look, turretSpeed * Time.deltaTime );
-
-		if ( !mainCannon.IsOnCooldown )
+		// get states
+		_states = gameObject.GetComponents<SpiderTankState>();
+		for ( int index = 0; index < _states.Length; index++ )
 		{
-			mainCannon.PerformPrimaryAttack();
+			_states[index].spiderTank = this;
+			_states[index].enabled = false;
+
+			// check starting state
+			if ( _states[index] == initialState )
+			{
+				_currentState = index;
+			}
 		}
+
+		// enable initial state
+		_states[_currentState].enabled = true;
 	}
 
 	void PlayerDeath( HealthSystem playerHealth )
 	{
+		// gut all scripts to avoid null references
 		Destroy( GetComponent<EnemySpawner>() );
+		foreach ( SpiderTankState state in _states )
+		{
+			Destroy( state );
+		}
 		Destroy( this );
+	}
+
+	private void NextState()
+	{
+		_states[_currentState].enabled = false;
+		_currentState = ++_currentState % _states.Length;
+		_states[_currentState].enabled = true;
 	}
 }
