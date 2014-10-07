@@ -176,6 +176,7 @@ MonoBehaviour:
   beam: {fileID: 12000000}
   beamWidth: 1
   maxRange: 100
+  damageInterval: .0500000007
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -187,11 +188,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 5
+  baseDamage: 20
   damageMultiplier: 1
   destroyAfterDamage: 0
-  targets:
-  - Scenery
+  targets: []
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1
