@@ -23,32 +23,15 @@ sealed public class DamageSystem : MonoBehaviour
 		// if it is, we can proceed with dealing damage
 		if ( IsTarget( collision.gameObject.tag ) )
 		{
-			// check to see if the colliding object has a health system
-			// if it does, we perform damage to the health
-			// if it doesnt, nothing happens
-			HealthSystem healthSystem = collision.gameObject.GetComponent<HealthSystem>();
-			if ( healthSystem != null )
-			{
-				healthSystem.Damage( CalculateDamage() );
-
-				if (collision.gameObject.tag == "Player")
-				{
-					//controller rumble implementation
-					if( !collision.gameObject.GetComponent<RumbleManager>().rumble )
-					{
-						collision.gameObject.GetComponent<RumbleManager>().rumble = true;
-						collision.gameObject.GetComponent<RumbleManager>().Rumble();
-					}
-				}
-
-			}
+			// try to damage the colliding object
+			DamageObject( collision.gameObject );
 
 			// optionally, this object can be destroyed after dealing damage
 			// this is useful for objects such as bullets or suicide bombers
 			if ( destroyAfterDamage )
 			{
 				// if we're on a projectile, explode that projectile
-				Projectile projectile = GetComponent<Projectile>();
+				Projectile projectile = this.gameObject.GetComponent<Projectile>();
 				if ( projectile != null )
 				{
 					projectile.Explode( collision );
@@ -57,6 +40,37 @@ sealed public class DamageSystem : MonoBehaviour
 				Destroy( gameObject );
 
 			}
+		}
+	}
+
+	public void DamageObject( GameObject target )
+	{
+		// check to see if the colliding object has a health system
+		// if it does, we perform damage to the health
+		// if it doesnt, nothing happens
+		HealthSystem healthSystem = target.GetComponent<HealthSystem>();
+		if ( healthSystem != null )
+		{
+			healthSystem.Damage( CalculateDamage() );
+
+			if ( target.tag == "Player" )
+				{
+					//controller rumble implementation
+					RumbleManager targetRumble = target.GetComponent<RumbleManager>();
+					if( targetRumble != null )
+					{
+						targetRumble.rumble = true;
+						targetRumble.Rumble();
+					}
+				}
+		}
+	}
+
+	public void DamageObjectIfTarget( GameObject target )
+	{
+		if ( IsTarget( target.tag ) )
+		{
+			DamageObject( target );
 		}
 	}
 
@@ -77,6 +91,11 @@ sealed public class DamageSystem : MonoBehaviour
 		InitTargets();
 	}
 
+    public bool IsTarget( string tag )
+    {
+        return _targets[tag] != null;
+    }
+
 	private void InitTargets()
 	{
 		if ( _targets == null )
@@ -96,10 +115,5 @@ sealed public class DamageSystem : MonoBehaviour
 				_targets[targets[i]] = true;
 			}
 		}
-	}
-
-	private bool IsTarget( string tag )
-	{
-		return _targets[tag] != null;
 	}
 }

@@ -15,6 +15,9 @@ sealed public class HealthSystem : MonoBehaviour
 	public float startingHealth = 100.0f;
 	public float maxHealth = 100.0f;
 
+	public AudioClip[] damageSounds;
+	public AudioClip[] deathSounds;
+
 	[SerializeField] private int _lives;
 	[SerializeField] private float _health;
 
@@ -52,6 +55,11 @@ sealed public class HealthSystem : MonoBehaviour
 			return Heal( damage );
 		}
 
+		if ( damageSounds.Length > 0 )
+		{
+			audio.PlayOneShot( damageSounds[Random.Range( 0, damageSounds.Length )] );
+		}
+
 		_health -= damage;
 
 		_damageCallback( this, damage );
@@ -80,6 +88,11 @@ sealed public class HealthSystem : MonoBehaviour
 	public void Kill()
 	{
 		_lives--;
+
+		if ( deathSounds.Length > 0 )
+		{
+			audio.PlayOneShot( deathSounds[Random.Range( 0, deathSounds.Length )] );
+		}
 
 		if ( _lives <= 0 )
 		{
