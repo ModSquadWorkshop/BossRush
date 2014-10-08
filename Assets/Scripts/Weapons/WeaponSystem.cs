@@ -59,6 +59,11 @@ public class WeaponSystem : MonoBehaviour
 
 	void Update()
 	{
+		if ( Input.GetButtonDown( "Switch" ) )
+		{
+			NextWeapon();
+		}
+
 		/*
 		// primary weapon attack
 		*/
@@ -88,15 +93,6 @@ public class WeaponSystem : MonoBehaviour
 			}
 
 			_currentWeapon.PerformSecondaryAttack();
-		}
-
-		/*
-		// weapon switching
-		*/
-
-		if ( Input.GetKeyDown( switchWeaponKeybind ) )
-		{
-			NextWeapon();
 		}
 	}
 

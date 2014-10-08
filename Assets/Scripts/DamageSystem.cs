@@ -38,6 +38,7 @@ sealed public class DamageSystem : MonoBehaviour
 				}
 
 				Destroy( gameObject );
+
 			}
 		}
 	}
@@ -51,6 +52,17 @@ sealed public class DamageSystem : MonoBehaviour
 		if ( healthSystem != null )
 		{
 			healthSystem.Damage( CalculateDamage() );
+
+			if ( target.tag == "Player" )
+				{
+					//controller rumble implementation
+					RumbleManager targetRumble = target.GetComponent<RumbleManager>();
+					if( targetRumble != null )
+					{
+						targetRumble.rumble = true;
+						targetRumble.Rumble();
+					}
+				}
 		}
 	}
 
