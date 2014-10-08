@@ -3,7 +3,7 @@ using System.Collections;
 using XInputDotNetPure; //Might have trouble with visual studio
 
 
-public class RumbleManager : MonoBehaviour 
+public class RumbleManager : MonoBehaviour
 {
 	public bool rumble;
 
@@ -15,7 +15,7 @@ public class RumbleManager : MonoBehaviour
 	public float rumbleTime;
 
 	// Use this for initialization
-	void Start() 
+	void Start()
 	{
 		rumble = false;
 	}
@@ -26,12 +26,12 @@ public class RumbleManager : MonoBehaviour
 		//Debug.Log( "VIBRATION BEGIN" );
 		yield return new WaitForSeconds( rumbleTime );
 		//Debug.Log( "VIBRATION END" );
-		GamePad.SetVibration( 0,0f,0f );
+		GamePad.SetVibration( 0, 0f, 0f );
 	}
 
 	public void Rumble()
 	{
-		if(rumble)
+		if( rumble )
 		{
 			//Debug.Log( rumble );
 			StartCoroutine( "Vibrate" );
@@ -47,5 +47,14 @@ public class RumbleManager : MonoBehaviour
 	public void Kill()
 	{
 		GamePad.SetVibration( 0, 0f, 0f );
+	}
+
+
+	// NOTE: SUPER HACKY FIX
+	// Westin please remove this when you put together a proper
+	// global rumble manager.
+	void OnDestroy()
+	{
+		Kill();
 	}
 }
