@@ -9,15 +9,15 @@ public class EnemySpawner : MonoBehaviour
 	public Transform[] spawns;
 	public float[] spawnPriorities;
 
-	public int amountPerSpawn = 1;
-	public float spawnInterval;
-	public bool spawnOnStart = false;
+	public int amountPerWave;
+	public float waveInterval;
+	public bool spawnOnStart;
 
 	private Timer _spawnTimer;
 
 	public virtual void Start()
 	{
-		_spawnTimer = new Timer( spawnInterval );
+		_spawnTimer = new Timer( waveInterval );
 
 		if ( spawnOnStart )
 		{
@@ -46,50 +46,45 @@ public class EnemySpawner : MonoBehaviour
 	}
 
 	// automatic spawn
-	public virtual void Spawn()
+	public void Spawn()
 	{
-		for ( int i = 0; i < amountPerSpawn; i++ )
+		for ( int i = 0; i < amountPerWave; i++ )
 		{
 			GameObject enemy = GetEnemyBasedOnSpawnChance();
-			int spawnIndex = Random.Range( 0, spawns.Length );
-
-			enemy.transform.position = spawns[spawnIndex].position;
-
 			InitializeEnemyComponents( enemy );
 		}
 	}
 
 	// manual spawn
-	public void Spawn( string type, int amount = -1 )
+	public void Spawn( GameObject type, int? amount = null )
 	{
 		// it's optional to provide the amount you want spawned
 		// if you haven't provided an actual amount (e.g. anything greater 0),
 		// then the EnemyManager spawns its normal amount (amountPerSpawn)
-		if ( amount <= 0 )
+		if ( amount == null )
 		{
-			amount = amountPerSpawn;
+			amount = amountPerWave;
 		}
 
 		for ( int i = 0; i < amount; i++ )
 		{
-			GameObject enemy = ( GameObject )Instantiate( Resources.Load( type ) );
-			int spawnIndex = Random.Range( 0, spawns.Length );
-
-			enemy.transform.position = spawns[spawnIndex].position;
-
+			GameObject enemy = Instantiate( type ) as GameObject;
 			InitializeEnemyComponents( enemy );
 		}
 	}
 
 	protected virtual void InitializeEnemyComponents( GameObject enemy )
 	{
+		// set spawn point
+		int spawnIndex = Random.Range( 0, spawns.Length );
+		enemy.transform.position = spawns[spawnIndex].position;
+
 		// if the enemy uses a MoveTowardsTarget script, the target needs to be set
 		MoveTowardsTarget moveTowards = enemy.GetComponent<MoveTowardsTarget>();
-		if ( moveTowards != null ) 
+		if ( moveTowards != null )
 		{
 			moveTowards.target = GameObject.FindGameObjectWithTag( "Player" ).transform;
 		}
-
 
 		// likely more components to come later
 		// ...
