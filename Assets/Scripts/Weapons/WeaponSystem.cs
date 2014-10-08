@@ -46,7 +46,7 @@ public class WeaponSystem : MonoBehaviour
 			GameObject weaponObject = new GameObject();
 			weaponObject.SetActive( false );
 
-			Weapon weapon = ( Weapon )weaponObject.AddComponent( typeof( Weapon ) );
+			Weapon weapon = weaponObject.AddComponent<Weapon>();
 			_defaultWeapon = InitializeWeapon( weapon );
 		}
 
@@ -59,7 +59,10 @@ public class WeaponSystem : MonoBehaviour
 
 	void Update()
 	{
+		/*
 		// primary weapon attack
+		*/
+
 		Vector3 gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ), 0.0f, Input.GetAxis( "Look Vertical" ) );
 		if ( Input.GetButton( "Fire1" ) || gamePadLook.sqrMagnitude > JOYSTICK_THRESHOLD )
 		{
@@ -72,7 +75,10 @@ public class WeaponSystem : MonoBehaviour
 			_currentWeapon.PerformPrimaryAttack();
 		}
 
+		/*
 		// secondary weapon attack
+		*/
+
 		if ( Input.GetButton( "Fire2" ) )
 		{
 			// if the weapon is still on cooldown, it cannot perform an attack
@@ -83,6 +89,10 @@ public class WeaponSystem : MonoBehaviour
 
 			_currentWeapon.PerformSecondaryAttack();
 		}
+
+		/*
+		// weapon switching
+		*/
 
 		if ( Input.GetKeyDown( switchWeaponKeybind ) )
 		{
@@ -138,7 +148,7 @@ public class WeaponSystem : MonoBehaviour
 
 	public Weapon GetWeapon( int weaponID )
 	{
-		return ( Weapon )weapons[weaponID].GetComponent( typeof( Weapon ) );
+		return weapons[weaponID].GetComponent<Weapon>();
 	}
 
 	private int GetNextWeaponID()
