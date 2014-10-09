@@ -30,17 +30,6 @@ sealed public class DamageSystem : MonoBehaviour
 			if ( healthSystem != null )
 			{
 				healthSystem.Damage( CalculateDamage() );
-
-				if (collision.gameObject.tag == "Player")
-				{
-					//controller rumble implementation
-					if( !collision.gameObject.GetComponent<RumbleManager>().rumble )
-					{
-						collision.gameObject.GetComponent<RumbleManager>().rumble = true;
-						collision.gameObject.GetComponent<RumbleManager>().Rumble();
-					}
-				}
-
 			}
 
 			// optionally, this object can be destroyed after dealing damage

@@ -281,7 +281,6 @@ MonoBehaviour:
   baseDamage: 34
   damageMultiplier: 1
   destroyAfterDamage: 0
-  shakeForce: 0
   targets:
   - Scenery
   - Player
@@ -305,7 +304,6 @@ MonoBehaviour:
   ammoPerMagazine: 0
   amountOfMagazines: 0
   reloadSpeed: 0
-  shake: 2
   sprayAngle: 0
   circleSpray: 0
   _magazines: 0
@@ -953,6 +951,14 @@ Prefab:
       propertyPath: offset
       value: 75
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5ff318d6ce113cb4c9f92f8199a3fd98, type: 2}
+      propertyPath: shakeForce
+      value: .200000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5ff318d6ce113cb4c9f92f8199a3fd98, type: 2}
+      propertyPath: shakePerDamage
+      value: .0500000007
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ff318d6ce113cb4c9f92f8199a3fd98, type: 2}
   m_RootGameObject: {fileID: 1357048502}
@@ -971,6 +977,7 @@ GameObject:
   - 124: {fileID: 1357048505}
   - 81: {fileID: 1357048504}
   - 114: {fileID: 1357048503}
+  - 114: {fileID: 1357048509}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -993,6 +1000,8 @@ MonoBehaviour:
   followTarget: {fileID: 1363035870}
   offset: 75
   followSpeed: 2
+  shakeForce: .200000003
+  shakePerDamage: .0500000007
 --- !u!81 &1357048504
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1062,6 +1071,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &1357048509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1357048502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c47d63d22934b84085cd775d64f0e89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rumble: 0
+  leftForce: .100000001
+  rightForce: .100000001
+  rumbleTime: .100000001
 --- !u!1 &1363035864
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,7 +1099,6 @@ GameObject:
   - 114: {fileID: 1363035867}
   - 114: {fileID: 1363035866}
   - 114: {fileID: 1363035865}
-  - 114: {fileID: 1363035871}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1113,12 +1136,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d857f201bdb5b5c499a61a1b301189c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  immune: 1
+  immune: 0
   destroyOnNoLives: 1
   startingLives: 1
   maxLives: 1
-  startingHealth: 100
-  maxHealth: 100
+  startingHealth: 1e+09
+  maxHealth: 1e+09
   _lives: 0
   _health: 0
 --- !u!114 &1363035867
@@ -1138,6 +1161,8 @@ MonoBehaviour:
   baseSpeed: 20
   speedMultiplier: 1
   lookSpeed: 1
+  dashDistance: 20
+  dashTime: .400000006
 --- !u!54 &1363035868
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1181,21 +1206,6 @@ Transform:
   - {fileID: 1942585077}
   m_Father: {fileID: 0}
   m_RootOrder: 4
---- !u!114 &1363035871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1363035864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c47d63d22934b84085cd775d64f0e89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rumble: 0
-  leftForce: .5
-  rightForce: .5
-  rumbleTime: .5
 --- !u!1 &1451090626
 GameObject:
   m_ObjectHideFlags: 0
@@ -1548,7 +1558,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: c547150bab057b34982e046263a7cf68, type: 2}
       propertyPath: immune
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: c547150bab057b34982e046263a7cf68, type: 2}
       propertyPath: weapons.Array.data[0]
@@ -1565,6 +1575,22 @@ Prefab:
     - target: {fileID: 400008, guid: c547150bab057b34982e046263a7cf68, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: c547150bab057b34982e046263a7cf68, type: 2}
+      propertyPath: maxHealth
+      value: 1e+09
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: c547150bab057b34982e046263a7cf68, type: 2}
+      propertyPath: startingHealth
+      value: 1e+09
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: c547150bab057b34982e046263a7cf68, type: 2}
+      propertyPath: dashDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: c547150bab057b34982e046263a7cf68, type: 2}
+      propertyPath: dashTime
+      value: .400000006
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c547150bab057b34982e046263a7cf68, type: 2}

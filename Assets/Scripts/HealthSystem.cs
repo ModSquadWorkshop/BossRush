@@ -54,7 +54,10 @@ sealed public class HealthSystem : MonoBehaviour
 
 		_health -= damage;
 
-		_damageCallback( this, damage );
+		if ( _damageCallback != null )
+		{
+			_damageCallback( this, damage );
+		}
 
 		if ( _health < 0.0f )
 		{
