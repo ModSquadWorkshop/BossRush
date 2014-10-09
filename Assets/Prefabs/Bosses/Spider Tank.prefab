@@ -31,8 +31,10 @@ GameObject:
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400020}
   - 114: {fileID: 11400022}
+  - 114: {fileID: 11400026}
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400010}
+  - 114: {fileID: 11400024}
   m_Layer: 10
   m_Name: Spider Tank
   m_TagString: Enemy
@@ -779,7 +781,10 @@ MonoBehaviour:
   - {fileID: 11400018}
   - {fileID: 11400012}
   initialState: {fileID: 11400020}
-  timeToCrazy: 30
+  stateChangeInterval: 10
+  states:
+  - {fileID: 11400020}
+  - {fileID: 11400022}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -874,7 +879,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fcc12b2f7a56614b8910bf484971a40, type: 3}
   m_Name: 
@@ -905,7 +910,7 @@ MonoBehaviour:
   amountOfMagazines: 0
   reloadSpeed: 0
   sprayAngle: 5
-  circleSpray: 0
+  circleSpray: 1
   _magazines: 0
   _magazineAmmo: 0
 --- !u!114 &11400014
@@ -964,7 +969,7 @@ MonoBehaviour:
   amountOfMagazines: 0
   reloadSpeed: 0
   sprayAngle: 5
-  circleSpray: 0
+  circleSpray: 1
   _magazines: 0
   _magazineAmmo: 0
 --- !u!114 &11400020
@@ -978,23 +983,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fba2eb2f60f8214c927b5c976359d8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spiderTank: {fileID: 0}
   turretSpeed: 10
   canonDelay: 2
-  amountPerWave: 2
+  amountPerWave: 0
+  minRushInterval: 1
+  maxRushInterval: 5
+  defaultMovement: {fileID: 11400010}
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d304b450b33b55b489dadf590505e37b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spiderTank: {fileID: 0}
   turretSpeed: 50
   canonDelay: .5
   amountPerWave: 5
+--- !u!114 &11400024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13f2b25f1d9169c4c8b315907ca6a85d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 500
+  acceleration: 1000
+  moveDistance: 20
+  attackDamage: 10
+  target: {fileID: 0}
+--- !u!114 &11400026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 145cab610876f9649a637d947280f136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spiderTank: {fileID: 0}
+  returnState: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
