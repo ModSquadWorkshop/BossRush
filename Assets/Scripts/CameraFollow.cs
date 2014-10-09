@@ -15,7 +15,6 @@ public class CameraFollow : MonoBehaviour
 		if ( targetHealth != null )
 		{
 			targetHealth.RegisterDeathCallback( TargetDeathCallback );
-			targetHealth.RegisterDamageCallback( TargetDamageCallback );
 		}
 	}
 
@@ -29,8 +28,8 @@ public class CameraFollow : MonoBehaviour
 		Destroy( this );
 	}
 
-	void TargetDamageCallback( HealthSystem targetHealth, float damage )
+	public void Shake( float ammount )
 	{
-		iTween.ShakePosition( Camera.main.gameObject, Vector3.left * ( shakeForce + ( damage * shakePerDamage ) ), 0f );
+		iTween.ShakePosition( Camera.main.gameObject, Vector3.left * ( shakeForce + ( ammount * shakePerDamage ) ), 0f );
 	}
 }
