@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Timer 
+public class Timer
 {
-	private float _deltaTime;		// in seconds
-	private float _intervalDelay;	// in seconds
+	private float _deltaTime;       // in seconds
+	private float _intervalDelay;   // in seconds
 
 	private int _currentInterval;
 	private int _totalIntervals;
@@ -13,7 +13,7 @@ public class Timer
 	private bool _ticked;
 	private bool _complete;
 
-	public Timer( float intervalDelay, int totalIntervals = 0 ) 
+	public Timer( float intervalDelay, int totalIntervals = 0 )
 	{
 		_intervalDelay = intervalDelay;
 		_totalIntervals = totalIntervals;
@@ -26,9 +26,9 @@ public class Timer
 		_complete = false;
 	}
 
-	public void Update() 
+	public void Update()
 	{
-		if ( !_running ) 
+		if ( !_running )
 		{
 			return;
 		}
@@ -36,14 +36,14 @@ public class Timer
 		_ticked = false;
 		_deltaTime += Time.deltaTime;
 
-		if ( _deltaTime >= _intervalDelay ) 
+		if ( _deltaTime >= _intervalDelay )
 		{
 			_currentInterval++;
 			_deltaTime = 0.0f;
 
 			_ticked = true;
 
-			if ( _currentInterval >= _totalIntervals && _totalIntervals > 0 ) 
+			if ( _currentInterval >= _totalIntervals && _totalIntervals > 0 )
 			{
 				_complete = true;
 				Stop();
@@ -51,36 +51,32 @@ public class Timer
 		}
 	}
 
-	public void Start() 
+	public void Start()
 	{
-		if ( _running ) 
+		if ( _running )
 		{
 			return;
 		}
 
-		if ( _currentInterval >= _totalIntervals && _totalIntervals > 0 ) 
+		if ( _currentInterval >= _totalIntervals && _totalIntervals > 0 )
 		{
 			return;
 		}
 
 		_running = true;
-
-		// do other stuff...
 	}
 
-	public void Stop() 
+	public void Stop()
 	{
-		if ( !_running ) 
+		if ( !_running )
 		{
 			return;
 		}
 
 		_running = false;
-
-		// do other stuff...
 	}
 
-	public void Reset( bool startAfterReset = false ) 
+	public void Reset( bool startAfterReset = false )
 	{
 		_deltaTime = 0.0f;
 		_currentInterval = 0;
@@ -88,23 +84,23 @@ public class Timer
 		_ticked = false;
 		_complete = false;
 
-		if ( startAfterReset ) 
+		if ( startAfterReset )
 		{
 			Start();
 		}
 	}
 
-	public bool IsRunning() 
+	public bool IsRunning()
 	{
 		return _running;
 	}
 
-	public bool IsTicked() 
+	public bool IsTicked()
 	{
 		return _ticked;
 	}
 
-	public bool IsComplete() 
+	public bool IsComplete()
 	{
 		return _complete;
 	}

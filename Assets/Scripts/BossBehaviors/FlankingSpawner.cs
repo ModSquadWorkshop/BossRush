@@ -5,18 +5,10 @@ public class FlankingSpawner : EnemySpawner
 {
 	public Transform[] controlPoints;
 
+	[Range( 0.0f, 1.0f )]
 	public float weight;
 
 	public int _currentControlPoint = 0;
-
-	public override void Spawn()
-	{
-		for ( int i = 0; i < amountPerSpawn; i++ )
-		{
-			GameObject enemy = GetEnemyBasedOnSpawnChance();
-			InitializeEnemyComponents( enemy );
-		}
-	}
 
 	protected override void InitializeEnemyComponents( GameObject enemy )
 	{

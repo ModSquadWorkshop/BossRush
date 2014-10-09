@@ -6,23 +6,19 @@ sealed public class PlayerMovement : MonoBehaviour
 	public Transform lookTarget;
 	public Transform playerModel;
 
-	public float baseSpeed = 200.0f;
-	public float speedMultiplier = 1.0f;
+	public float baseSpeed;
+	public float speedMultiplier;
 
 	public float lookSpeed = 10.0f;
 	public float dashDistance;
 	public float dashTime;
 
-	private float _speed;
-
 	HealthSystem playerHealth;
 	CameraFollow camShake;
 	RumbleManager rumbler;
 
-
 	void Start()
 	{
-		_speed = baseSpeed * speedMultiplier;
 		//register for damage callback (rumble and shake)
 		playerHealth = this.GetComponent<HealthSystem>();
 		playerHealth.RegisterDamageCallback( TargetDamageCallback );
@@ -35,14 +31,13 @@ sealed public class PlayerMovement : MonoBehaviour
 		float horizontalAxis = Input.GetAxis( "Horizontal" );
 		float verticalAxis = Input.GetAxis( "Vertical" );
 		// cardinal movement
-		Vector3 movement = new Vector3( horizontalAxis * Time.deltaTime * _speed * speedMultiplier,
+		Vector3 movement = new Vector3( Input.GetAxis( "Horizontal" ),
 		                                0.0f,
-		                                verticalAxis   * Time.deltaTime * _speed * speedMultiplier );
-		rigidbody.AddForce( movement * 750.0f );
+		                                Input.GetAxis( "Vertical" ) );
+		rigidbody.velocity = movement * baseSpeed * speedMultiplier;
 
 		//Direction the player is moving in, used for dashing
 		Vector3 forwardDash = new Vector3( horizontalAxis, 0.0f, verticalAxis );
-
 		// handle mouse input
 		lookTarget.Translate( new Vector3( Input.GetAxis( "Mouse X" ), 0.0f, Input.GetAxis( "Mouse Y" ) ) * lookSpeed );
 
@@ -75,11 +70,7 @@ sealed public class PlayerMovement : MonoBehaviour
 	{
 		get
 		{
-			return _speed * speedMultiplier;
-		}
-		set
-		{
-			_speed = value;
+			return baseSpeed * speedMultiplier;
 		}
 	}
 

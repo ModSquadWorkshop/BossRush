@@ -47,7 +47,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400004}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookTarget: {fileID: 400000}
   playerModel: {fileID: 400006}
-  baseSpeed: 20
+  baseSpeed: 50
   speedMultiplier: 1
   lookSpeed: 1
 --- !u!114 &11400004

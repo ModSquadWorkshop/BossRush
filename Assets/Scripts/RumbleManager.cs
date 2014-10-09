@@ -31,7 +31,7 @@ public class RumbleManager : MonoBehaviour
 
 	public void Rumble()
 	{
-		if ( rumble )
+		if( rumble )
 		{
 			//Debug.Log( rumble );
 			StartCoroutine( "Vibrate" );
@@ -48,7 +48,7 @@ public class RumbleManager : MonoBehaviour
 	{
 		GamePad.SetVibration( 0, 0f, 0f );
 	}
-	
+
 	void OnDestroy()
 	{
 		Kill();

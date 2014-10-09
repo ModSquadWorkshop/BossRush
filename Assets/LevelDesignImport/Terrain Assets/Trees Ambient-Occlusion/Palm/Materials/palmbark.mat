@@ -29,11 +29,15 @@ Material:
         first:
           name: _AO
         second: 10
+      data:
+        first:
+          name: _SquashAmount
+        second: 1
     m_Colors:
       data:
         first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: .946855962, g: 1, b: .0367646813, a: 1}
       data:
         first:
           name: _MainTex_ST

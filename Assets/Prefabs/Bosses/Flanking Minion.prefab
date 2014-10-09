@@ -15,7 +15,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400004}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flanking Minion
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -134,11 +134,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc9bb5f4d9bba3f4e875deeed240fc53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  speed: 50
+  maxSpeed: 60
+  acceleration: 500
   controlPoint: {x: 0, y: 0, z: 0}
   weight: .5
-  moveSpeed: 25
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
