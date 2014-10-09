@@ -48,21 +48,11 @@ sealed public class DamageSystem : MonoBehaviour
 		// check to see if the colliding object has a health system
 		// if it does, we perform damage to the health
 		// if it doesnt, nothing happens
+		// check to see if the colliding object has a health system
 		HealthSystem healthSystem = target.GetComponent<HealthSystem>();
 		if ( healthSystem != null )
 		{
 			healthSystem.Damage( CalculateDamage() );
-
-			if ( target.tag == "Player" )
-				{
-					//controller rumble implementation
-					RumbleManager targetRumble = target.GetComponent<RumbleManager>();
-					if( targetRumble != null )
-					{
-						targetRumble.rumble = true;
-						targetRumble.Rumble();
-					}
-				}
 		}
 	}
 

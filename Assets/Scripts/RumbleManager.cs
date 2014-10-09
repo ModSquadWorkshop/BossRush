@@ -49,12 +49,9 @@ public class RumbleManager : MonoBehaviour
 		GamePad.SetVibration( 0, 0f, 0f );
 	}
 
-
-	// NOTE: SUPER HACKY FIX
-	// Westin please remove this when you put together a proper
-	// global rumble manager.
 	void OnDestroy()
 	{
 		Kill();
 	}
+	 
 }

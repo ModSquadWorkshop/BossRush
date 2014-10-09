@@ -9,16 +9,35 @@ sealed public class PlayerMovement : MonoBehaviour
 	public float baseSpeed;
 	public float speedMultiplier;
 
-	public float lookSpeed;
+	public float lookSpeed = 10.0f;
+	public float dashDistance;
+	public float dashTime;
+
+	HealthSystem playerHealth;
+	CameraFollow camShake;
+	RumbleManager rumbler;
+
+	void Start()
+	{
+		//register for damage callback (rumble and shake)
+		playerHealth = this.GetComponent<HealthSystem>();
+		playerHealth.RegisterDamageCallback( TargetDamageCallback );
+		camShake = Camera.main.gameObject.GetComponent<CameraFollow>();
+		rumbler = Camera.main.gameObject.GetComponent<RumbleManager>();
+	}
 
 	void Update()
 	{
+		float horizontalAxis = Input.GetAxis( "Horizontal" );
+		float verticalAxis = Input.GetAxis( "Vertical" );
 		// cardinal movement
 		Vector3 movement = new Vector3( Input.GetAxis( "Horizontal" ),
 		                                0.0f,
 		                                Input.GetAxis( "Vertical" ) );
 		rigidbody.velocity = movement * baseSpeed * speedMultiplier;
 
+		//Direction the player is moving in, used for dashing
+		Vector3 forwardDash = new Vector3( horizontalAxis, 0.0f, verticalAxis );
 		// handle mouse input
 		lookTarget.Translate( new Vector3( Input.GetAxis( "Mouse X" ), 0.0f, Input.GetAxis( "Mouse Y" ) ) * lookSpeed );
 
@@ -34,6 +53,14 @@ sealed public class PlayerMovement : MonoBehaviour
 			lookTarget.localPosition = gamePadLook;
 		}
 
+		//Dash implementation using iTween
+		if ( Input.GetButtonDown( "Dash" ) )
+		{
+			iTween.MoveTo( this.gameObject, this.gameObject.transform.position + (forwardDash * dashDistance) , dashTime );
+			//Debug.Log( forwardDash );
+		}
+
+
 		// don't actually rotate the root Player object,
 		// rotate the model.
 		playerModel.transform.LookAt( lookTarget );
@@ -46,4 +73,21 @@ sealed public class PlayerMovement : MonoBehaviour
 			return baseSpeed * speedMultiplier;
 		}
 	}
+
+	void TargetDamageCallback( HealthSystem playerHealth, float damage )
+	{
+		camShake.Shake( damage );
+		rumbler.rumble = true;
+		rumbler.Rumble();
+	}
+	/*
+	void OnCollisionEnter( Collision other )
+	{
+		if ( other.gameObject.tag == "Scenery" )
+		{
+			iTween.Stop( this.gameObject );
+		}
+	}
+	 */
+
 }
