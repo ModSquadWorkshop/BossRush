@@ -17,21 +17,15 @@ public class SpiderTankBasicState : SpiderTankState
 	void OnEnable()
 	{
 		Debug.Log( "setting canon cooldown to: " + canonDelay );
-		spiderTank.mainCannon.SetCooldown( canonDelay );
+		spiderTank.mainCanon.SetCooldown( canonDelay );
 		_spawner.enabled = true;
 		_spawner.amountPerWave = amountPerWave;
 	}
 
 	void Update()
 	{
-		// have main cannon track player with delay
-		Quaternion look = Quaternion.LookRotation( spiderTank.player.position + Vector3.up * 2 - spiderTank.mainCannon.transform.position );
-		spiderTank.mainCannon.transform.rotation = Quaternion.Lerp( spiderTank.mainCannon.transform.rotation, look, turretSpeed * Time.deltaTime );
-
-		if ( !spiderTank.mainCannon.IsOnCooldown )
-		{
-			spiderTank.mainCannon.PerformPrimaryAttack();
-		}
+		spiderTank.LookMainCanon( turretSpeed );
+		spiderTank.FireMainCanon();
 	}
 
 	void OnDisable()

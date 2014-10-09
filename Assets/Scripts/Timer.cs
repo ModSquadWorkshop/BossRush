@@ -64,8 +64,6 @@ public class Timer
 		}
 
 		_running = true;
-
-		// do other stuff...
 	}
 
 	public void Stop()
@@ -76,8 +74,6 @@ public class Timer
 		}
 
 		_running = false;
-
-		// do other stuff...
 	}
 
 	public void Reset( bool startAfterReset = false )

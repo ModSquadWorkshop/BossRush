@@ -4,7 +4,9 @@ using System.Collections;
 public class SpiderTank : MonoBehaviour
 {
 	public Transform player;
-	public Gun mainCannon;
+
+	public Gun mainCanon;
+	public Gun[] otherGuns;
 
 	public SpiderTankState initialState;
 
@@ -53,5 +55,51 @@ public class SpiderTank : MonoBehaviour
 		_states[_currentState].enabled = false;
 		_currentState = ++_currentState % _states.Length;
 		_states[_currentState].enabled = true;
+	}
+
+	public void LookMainCanon( float lookSpeed )
+	{
+		Quaternion look = Quaternion.LookRotation( player.position - mainCanon.transform.position );
+		mainCanon.transform.rotation = Quaternion.Lerp( mainCanon.transform.rotation, look, lookSpeed * Time.deltaTime );
+	}
+
+	public void FireMainCanon()
+	{
+		if ( !mainCanon.IsOnCooldown )
+		{
+			mainCanon.PerformPrimaryAttack();
+		}
+	}
+
+	public void LookOtherGuns( float lookSpeed )
+	{
+		foreach ( Gun gun in otherGuns )
+		{
+			Quaternion look = Quaternion.LookRotation( player.position - gun.transform.position );
+			gun.transform.rotation = Quaternion.Lerp( gun.transform.rotation, look, lookSpeed * Time.deltaTime );
+		}
+	}
+
+	public void FireOtherGuns()
+	{
+		foreach ( Gun gun in otherGuns )
+		{
+			if ( !gun.IsOnCooldown )
+			{
+				gun.PerformPrimaryAttack();
+			}
+		}
+	}
+
+	public void LookAllGuns( float lookSpeed )
+	{
+		LookMainCanon( lookSpeed );
+		LookOtherGuns( lookSpeed );
+	}
+
+	public void FireAllGuns()
+	{
+		FireMainCanon();
+		FireOtherGuns();
 	}
 }
