@@ -177,6 +177,7 @@ MonoBehaviour:
   beamWidth: 1
   maxRange: 100
   damageInterval: .0500000007
+  piercingsAmount: 1
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -188,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 20
+  baseDamage: 25
   damageMultiplier: 1
   destroyAfterDamage: 0
   targets: []
