@@ -3,8 +3,6 @@ using System.Collections;
 
 public class SpiderTankRushState : SpiderTankState
 {
-	[HideInInspector] public SpiderTankState returnState;
-
 	private RushAttack _rushAttack;
 	private DamageSystem _damageSystem;
 
@@ -27,7 +25,8 @@ public class SpiderTankRushState : SpiderTankState
 	void EndRush()
 	{
 		enabled = false;
-		returnState.enabled = true;
 		_damageSystem.enabled = false;
+
+		spiderTank.EnterCurrentState();
 	}
 }

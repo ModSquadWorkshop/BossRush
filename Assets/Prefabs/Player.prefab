@@ -215,7 +215,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 112
+  m_Constraints: 36
   m_CollisionDetection: 0
 --- !u!65 &6500000
 BoxCollider:
@@ -246,6 +246,8 @@ MonoBehaviour:
   maxLives: 1
   startingHealth: 100
   maxHealth: 100
+  damageSounds: []
+  deathSounds: []
   _lives: 0
   _health: 0
 --- !u!114 &11400002
@@ -264,6 +266,8 @@ MonoBehaviour:
   baseSpeed: 50
   speedMultiplier: 1
   lookSpeed: 1
+  dashDistance: 0
+  dashTime: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
