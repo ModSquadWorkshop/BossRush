@@ -3,18 +3,10 @@ using System.Collections;
 
 public class SpiderTankState : MonoBehaviour
 {
-	private SpiderTank _spiderTank;
-
-	public SpiderTank spiderTank
+	public virtual void Awake()
 	{
-		get
-		{
-			return _spiderTank;
-		}
-
-		set
-		{
-			_spiderTank = value;
-		}
+		spiderTank = GetComponent<SpiderTank>();
 	}
+
+	[HideInInspector] public SpiderTank spiderTank;
 }

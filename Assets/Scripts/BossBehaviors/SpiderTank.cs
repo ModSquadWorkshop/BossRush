@@ -8,53 +8,49 @@ public class SpiderTank : MonoBehaviour
 	public Gun mainCanon;
 	public Gun[] otherGuns;
 
-	public SpiderTankState initialState;
+	public float stateChangeInterval;
 
-	public float timeToCrazy;
-
-	private SpiderTankState[] _states;
+	public SpiderTankState[] states;
 	private int _currentState = 0;
 
-	void Start()
+	void Awake()
 	{
 		player.gameObject.GetComponent<HealthSystem>().RegisterDeathCallback( PlayerDeath );
 
-		// get states
-		_states = gameObject.GetComponents<SpiderTankState>();
-		for ( int index = 0; index < _states.Length; index++ )
-		{
-			_states[index].spiderTank = this;
-			_states[index].enabled = false;
-
-			// check starting state
-			if ( _states[index] == initialState )
-			{
-				_currentState = index;
-			}
-		}
-
 		// enable initial state
-		_states[_currentState].enabled = true;
+		states[_currentState].enabled = true;
 
-		Invoke( "NextState", timeToCrazy );
+		Invoke( "NextState", stateChangeInterval );
 	}
 
 	void PlayerDeath( HealthSystem playerHealth )
 	{
-		// gut all scripts to avoid null references
-		Destroy( GetComponent<EnemySpawner>() );
-		foreach ( SpiderTankState state in _states )
+		// okay
+		// this is going to sound crazy, but...
+		// if the player dies after the boss dies,
+		// this callback still gets called, and then this is null
+		// and the call to GetComponent<>() fails because of a null
+		// reference error. So we check to see if this is null before
+		// trying to destroy the spider tank.
+		if ( this != null )
 		{
-			Destroy( state );
+			// gut all scripts to keep the boss in the scene but have it stop moving.
+			Destroy( GetComponent<EnemySpawner>() );
+			foreach ( SpiderTankState state in states )
+			{
+				Destroy( state );
+			}
+			Destroy( this );
 		}
-		Destroy( this );
 	}
 
 	private void NextState()
 	{
-		_states[_currentState].enabled = false;
-		_currentState = ++_currentState % _states.Length;
-		_states[_currentState].enabled = true;
+		states[_currentState].enabled = false;
+		_currentState = ++_currentState % states.Length;
+		states[_currentState].enabled = true;
+
+		Invoke( "NextState", stateChangeInterval );
 	}
 
 	public void LookMainCanon( float lookSpeed )

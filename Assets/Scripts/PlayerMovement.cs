@@ -56,7 +56,7 @@ sealed public class PlayerMovement : MonoBehaviour
 		//Dash implementation using iTween
 		if ( Input.GetButtonDown( "Dash" ) )
 		{
-			iTween.MoveTo( this.gameObject, this.gameObject.transform.position + (forwardDash * dashDistance) , dashTime );
+			iTween.MoveTo( this.gameObject, this.gameObject.transform.position + ( forwardDash * dashDistance ) , dashTime );
 			//Debug.Log( forwardDash );
 		}
 
@@ -80,14 +80,5 @@ sealed public class PlayerMovement : MonoBehaviour
 		rumbler.rumble = true;
 		rumbler.Rumble();
 	}
-	/*
-	void OnCollisionEnter( Collision other )
-	{
-		if ( other.gameObject.tag == "Scenery" )
-		{
-			iTween.Stop( this.gameObject );
-		}
-	}
-	 */
 
 }
