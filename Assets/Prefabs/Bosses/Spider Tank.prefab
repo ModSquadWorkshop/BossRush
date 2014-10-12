@@ -57,6 +57,7 @@ GameObject:
   - 82: {fileID: 8200002}
   - 114: {fileID: 11400030}
   - 114: {fileID: 11400004}
+  - 120: {fileID: 12000000}
   m_Layer: 10
   m_Name: Laser Canon
   m_TagString: Weapon
@@ -1211,9 +1212,9 @@ MonoBehaviour:
   cooldown: 0
   primaryAttackSounds: []
   repeatDamage: 1
-  beam: {fileID: 0}
+  beam: {fileID: 12000000}
   beamWidth: 1
-  maxRange: 100
+  maxRange: 1000
   damageInterval: .100000001
   piercingsAmount: 100
 --- !u!114 &11400032
@@ -1247,6 +1248,39 @@ MonoBehaviour:
   spiderTank: {fileID: 0}
   rotation: 1
   spawnMinions: 1
+--- !u!120 &12000000
+LineRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    startWidth: 1
+    endWidth: 1
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 4278190335
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 4286085375
+  m_UseWorldSpace: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

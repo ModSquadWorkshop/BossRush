@@ -1319,6 +1319,7 @@ GameObject:
   - 82: {fileID: 926981978}
   - 114: {fileID: 926981977}
   - 114: {fileID: 926981976}
+  - 120: {fileID: 926981981}
   m_Layer: 10
   m_Name: Laser Canon
   m_TagString: Weapon
@@ -1371,9 +1372,9 @@ MonoBehaviour:
   cooldown: 0
   primaryAttackSounds: []
   repeatDamage: 1
-  beam: {fileID: 0}
+  beam: {fileID: 926981981}
   beamWidth: 1
-  maxRange: 100
+  maxRange: 1000
   damageInterval: .100000001
   piercingsAmount: 100
 --- !u!82 &926981978
@@ -1464,6 +1465,40 @@ MeshFilter:
   m_PrefabInternal: {fileID: 2099759256}
   m_GameObject: {fileID: 926981974}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!120 &926981981
+LineRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 12000000, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 2099759256}
+  m_GameObject: {fileID: 926981974}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    startWidth: 1
+    endWidth: 1
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 4278190335
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 4286085375
+  m_UseWorldSpace: 1
 --- !u!1 &943654248
 GameObject:
   m_ObjectHideFlags: 0
@@ -2086,11 +2121,11 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 10
-  m_AngularDrag: .0500000007
-  m_UseGravity: 1
+  m_AngularDrag: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!65 &1363035869
 BoxCollider:
@@ -2796,21 +2831,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 5400000, guid: c547150bab057b34982e046263a7cf68, type: 2}
-      propertyPath: m_Interpolate
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5400000, guid: c547150bab057b34982e046263a7cf68, type: 2}
-      propertyPath: m_UseGravity
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: c547150bab057b34982e046263a7cf68, type: 2}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5400000, guid: c547150bab057b34982e046263a7cf68, type: 2}
-      propertyPath: m_Constraints
-      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: c547150bab057b34982e046263a7cf68, type: 2}
       propertyPath: destroyOnNoLives
@@ -2856,6 +2879,10 @@ Prefab:
       propertyPath: weapons.Array.data[2]
       value: 
       objectReference: {fileID: 100000, guid: 8d9767fadad9723499315d03b95ffd8c, type: 2}
+    - target: {fileID: 5400000, guid: c547150bab057b34982e046263a7cf68, type: 2}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c547150bab057b34982e046263a7cf68, type: 2}
   m_RootGameObject: {fileID: 1363035864}

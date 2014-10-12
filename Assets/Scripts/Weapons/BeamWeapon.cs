@@ -18,8 +18,10 @@ public class BeamWeapon : Weapon
 	private Timer _damageTimer;
 	private bool _damageDealt;
 
-	public override void Start()
+	public override void Awake()
 	{
+		base.Awake();
+
 		if ( beam == null )
 		{
 			beam = this.gameObject.AddComponent<LineRenderer>();
@@ -44,11 +46,9 @@ public class BeamWeapon : Weapon
 		{
 			_damageSystem = this.gameObject.AddComponent<DamageSystem>();
 		}
-
-		base.Start();
 	}
 
-	public override void Update() 
+	public override void Update()
 	{
 		if ( beam.enabled )
 		{
@@ -74,7 +74,7 @@ public class BeamWeapon : Weapon
 			int len = Mathf.Min( hits.Length, piercingsAmount + 1 );
 			for ( int i = 0; i < len; i++ )
 			{
-				RaycastHit hit = hits[hits.Length-i-1];
+				RaycastHit hit = hits[hits.Length - i - 1];
 
 				// make sure the colliding object is one of the defined targets
 				if ( _damageSystem.IsTarget( hit.collider.gameObject.tag ) )
