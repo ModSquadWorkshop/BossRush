@@ -1521,7 +1521,7 @@ MonoBehaviour:
   rumble: 1
   leftForce: 1
   rightForce: 1
-  rumbleTime: .100000001
+  rumbleTime: .150000006
 --- !u!1 &1363035864
 GameObject:
   m_ObjectHideFlags: 0
@@ -1734,6 +1734,7 @@ GameObject:
   - 114: {fileID: 1470767339}
   - 114: {fileID: 1470767340}
   - 114: {fileID: 1470767344}
+  - 114: {fileID: 1470767346}
   m_Layer: 10
   m_Name: Spider Tank
   m_TagString: Enemy
@@ -1837,7 +1838,6 @@ MonoBehaviour:
   otherGuns:
   - {fileID: 497961831}
   - {fileID: 333394151}
-  initialState: {fileID: 1470767342}
   stateChangeInterval: 10
   states:
   - {fileID: 1470767342}
@@ -2010,6 +2010,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spiderTank: {fileID: 0}
   returnState: {fileID: 0}
+--- !u!114 &1470767346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400028, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 920950894}
+  m_GameObject: {fileID: 1470767332}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 10
+  damageMultiplier: 1
+  destroyAfterDamage: 0
+  targets:
+  - Player
 --- !u!1 &1486925989
 GameObject:
   m_ObjectHideFlags: 0
