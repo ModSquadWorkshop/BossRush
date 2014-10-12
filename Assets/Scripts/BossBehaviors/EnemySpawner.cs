@@ -93,7 +93,7 @@ public class EnemySpawner : MonoBehaviour
 	protected GameObject GetEnemyBasedOnSpawnChance()
 	{
 		// TO DO
-		return ( GameObject )Instantiate( enemyTypes[0] );
+		return Instantiate( enemyTypes[0] ) as GameObject;
 	}
 
 	protected Vector3 GetSpawnBasedOnPriority()
