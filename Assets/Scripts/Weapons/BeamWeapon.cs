@@ -9,9 +9,9 @@ public class BeamWeapon : Weapon
 	public float beamWidth;
 	public float maxRange;
 	public float damageInterval;
+	public int piercingsAmount;
 
 	private Ray _ray;
-	private RaycastHit _rayHit;
 	private Timer _beamTimer;
 
 	private DamageSystem _damageSystem;
@@ -61,13 +61,23 @@ public class BeamWeapon : Weapon
 			_ray.direction = this.transform.forward;
 
 			// set the starting vertex of the beam to the weapon/player position
-			beam.SetPosition( 0, this.transform.position );
+			beam.SetPosition( 0, _ray.origin );
 
-			// cast a ray to check for collision detection
-			if ( Physics.Raycast( _ray, out _rayHit, maxRange ) )
+			// by default, the end vertex of the ray is the max forward distance from its origin
+			Vector3 endVertex = _ray.origin + ( _ray.direction * maxRange );
+
+			// cast a ray and collect data on all of the objects it hits
+			RaycastHit[] hits;
+			hits = Physics.RaycastAll( _ray, maxRange );
+
+			// loop through the hit targets and attempt to deal damage
+			int len = Mathf.Min( hits.Length, piercingsAmount + 1 );
+			for ( int i = 0; i < len; i++ )
 			{
+				RaycastHit hit = hits[hits.Length-i-1];
+
 				// make sure the colliding object is one of the defined targets
-				if ( _damageSystem.IsTarget( _rayHit.collider.gameObject.tag ) )
+				if ( _damageSystem.IsTarget( hit.collider.gameObject.tag ) )
 				{
 					// check to see if damage can be dealt according to the repeat flag
 					if ( repeatDamage || !_damageDealt )
@@ -75,20 +85,17 @@ public class BeamWeapon : Weapon
 						if ( _damageTimer.IsTicked() )
 						{
 							// deal damage to the target
-							_damageSystem.DamageObject( _rayHit.collider.gameObject );
+							_damageSystem.DamageObject( hit.collider.gameObject );
 							_damageDealt = true;
 						}
 					}
+				}
 
-					// set the end vertex of the beam to the target position
-					beam.SetPosition( 1, _rayHit.point + _rayHit.normal );
-				}
-				else
-				{
-					// set the end vertex of the beam to the maxRange from the starting vertex
-					beam.SetPosition( 1, this.transform.position + ( _ray.direction * maxRange ) );
-				}
+				endVertex = hit.point + hit.normal;
 			}
+
+			// set the end vertex of the beam according to raycast collisions and amount of piercings
+			beam.SetPosition( 1, endVertex );
 
 			// the beam has a really short timer that automatically disables it when complete
 			// the beam will quickly be stopped after the player stops "attacking"
