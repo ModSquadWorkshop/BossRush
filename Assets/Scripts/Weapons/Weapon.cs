@@ -9,7 +9,7 @@ public class Weapon : MonoBehaviour
 
 	protected Timer _cooldownTimer;
 
-	public virtual void Start()
+	public virtual void Awake()
 	{
 		SetCooldown( cooldown );
 	}

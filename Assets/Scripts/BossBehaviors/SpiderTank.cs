@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class SpiderTank : MonoBehaviour
 {
 	public Transform player;
 
 	public Gun mainCanon;
+	public BeamWeapon laserCanon;
 	public Gun[] otherGuns;
 
 	public float stateChangeInterval;
@@ -17,8 +17,14 @@ public class SpiderTank : MonoBehaviour
 	{
 		player.gameObject.GetComponent<HealthSystem>().RegisterDeathCallback( PlayerDeath );
 
-		// enable initial state
-		states[_currentState].enabled = true;
+		// find current state
+		for ( int index = 0; index < states.Length; index++ )
+		{
+			if ( states[index].enabled )
+			{
+				_currentState = index;
+			}
+		}
 
 		Invoke( "NextState", stateChangeInterval );
 	}
@@ -97,5 +103,10 @@ public class SpiderTank : MonoBehaviour
 	{
 		FireMainCanon();
 		FireOtherGuns();
+	}
+
+	public void EnterCurrentState()
+	{
+		states[_currentState].enabled = true;
 	}
 }

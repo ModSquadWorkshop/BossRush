@@ -25,10 +25,10 @@ public class Gun : Weapon
 	private bool _reloading;
 	private Timer _reloadTimer;
 
-	public override void Start()
+	public override void Awake()
 	{
 		// we still need to call Weapon.Start() to initialize the timer and whatnot.
-		base.Start();
+		base.Awake();
 
 		// instantiate casing emitter
 		casingEmitter = Instantiate( casingEmitter ) as GameObject;

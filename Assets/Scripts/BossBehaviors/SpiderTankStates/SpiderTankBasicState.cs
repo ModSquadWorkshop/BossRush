@@ -31,7 +31,6 @@ public class SpiderTankBasicState : SpiderTankState
 		// set initial states of movement scripts
 		defaultMovement.enabled = true;
 		_rushState.enabled = false;
-		_rushState.returnState = this;
 
 		// queue up first rush attack
 		Invoke( "StartRush", Random.Range( minRushInterval, maxRushInterval ) );
