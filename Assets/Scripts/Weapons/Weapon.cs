@@ -9,7 +9,7 @@ public class Weapon : MonoBehaviour
 
 	protected Timer _cooldownTimer;
 
-	public virtual void Start()
+	public virtual void Awake()
 	{
 		SetCooldown( cooldown );
 	}
@@ -42,6 +42,7 @@ public class Weapon : MonoBehaviour
 
 	public void SetCooldown( float newCooldown )
 	{
+		cooldown = newCooldown;
 		_cooldownTimer = new Timer( newCooldown, 1 );
 
 		// the timer has to be started now because we need it to be in a "complete" state

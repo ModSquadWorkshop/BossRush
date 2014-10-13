@@ -7,19 +7,33 @@ public class SpiderTankBasicState : SpiderTankState
 	public float canonDelay;
 	public int amountPerWave;
 
+	public float minRushInterval, maxRushInterval;
+
+	public PhysicsMovement defaultMovement;
+
+	private SpiderTankRushState _rushState;
 	private FlankingSpawner _spawner;
 
-	void Awake()
+	public override void Awake()
 	{
+		base.Awake();
+
 		_spawner = GetComponent<FlankingSpawner>();
+		_rushState = GetComponent<SpiderTankRushState>();
 	}
 
 	void OnEnable()
 	{
-		Debug.Log( "setting canon cooldown to: " + canonDelay );
 		spiderTank.mainCanon.SetCooldown( canonDelay );
 		_spawner.enabled = true;
 		_spawner.amountPerWave = amountPerWave;
+
+		// set initial states of movement scripts
+		defaultMovement.enabled = true;
+		_rushState.enabled = false;
+
+		// queue up first rush attack
+		Invoke( "StartRush", Random.Range( minRushInterval, maxRushInterval ) );
 	}
 
 	void Update()
@@ -30,6 +44,14 @@ public class SpiderTankBasicState : SpiderTankState
 
 	void OnDisable()
 	{
+		// make sure pending Invokes aren't called while we're disabled
+		CancelInvoke();
+	}
 
+	void StartRush()
+	{
+		defaultMovement.enabled = false;
+		enabled = false;
+		_rushState.enabled = true;
 	}
 }

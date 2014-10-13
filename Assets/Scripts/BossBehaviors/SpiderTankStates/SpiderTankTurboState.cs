@@ -9,8 +9,10 @@ public class SpiderTankTurboState : SpiderTankState
 
 	private FlankingSpawner _spawner;
 
-	void Awake()
+	public override void Awake()
 	{
+		base.Awake();
+
 		_spawner = GetComponent<FlankingSpawner>();
 	}
 

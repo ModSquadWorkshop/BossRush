@@ -11,7 +11,7 @@ sealed public class DamageSystem : MonoBehaviour
 	public List<string> targets;
 	private Hashtable _targets;
 
-	void Start()
+	void Awake()
 	{
 		// a list of targets should be added to the object prior to initilization
 		InitTargets();
@@ -81,10 +81,10 @@ sealed public class DamageSystem : MonoBehaviour
 		InitTargets();
 	}
 
-    public bool IsTarget( string tag )
-    {
-        return _targets[tag] != null;
-    }
+	public bool IsTarget( string tag )
+	{
+		return _targets[tag] != null;
+	}
 
 	private void InitTargets()
 	{
