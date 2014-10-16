@@ -159,15 +159,13 @@ MonoBehaviour:
   cooldown: .270000011
   primaryAttackSounds:
   - {fileID: 8300000, guid: 0ebf751fd3acf564abc3cdf44ec3a906, type: 3}
-  projectile: {fileID: 100000, guid: 29e3809d3eae60d499db32210dbbcd56, type: 2}
+  projectile: {fileID: 100000, guid: 34b1559824f53114fb6ee392b43fb6a6, type: 2}
   casingAnchor: {fileID: 400002}
   casingEmitter: {fileID: 100000, guid: b425d3dd3171cdf4cbf686d9fad193e4, type: 2}
   infiniteAmmo: 1
   ammoPerMagazine: 7
   amountOfMagazines: 11
   reloadSpeed: 1
-  shakeForce: 1
-  shakeTime: 0
   sprayAngle: 10
   circleSpray: 0
   _magazines: 0
