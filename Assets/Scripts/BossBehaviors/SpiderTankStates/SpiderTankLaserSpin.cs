@@ -4,8 +4,9 @@ using System.Collections;
 public class SpiderTankLaserSpin : SpiderTankState
 {
 	public float rotation;
-
 	public bool spawnMinions;
+
+	[HideInInspector] public SpiderTankState returnState;
 
 	private FlankingSpawner _spawner;
 
@@ -36,6 +37,6 @@ public class SpiderTankLaserSpin : SpiderTankState
 	void Exit()
 	{
 		enabled = false;
-		spiderTank.EnterCurrentState();
+		returnState.enabled = true;
 	}
 }

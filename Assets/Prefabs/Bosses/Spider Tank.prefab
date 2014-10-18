@@ -34,6 +34,7 @@ GameObject:
   - 114: {fileID: 11400026}
   - 114: {fileID: 11400034}
   - 114: {fileID: 11400008}
+  - 114: {fileID: 11400036}
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400024}
   - 114: {fileID: 11400028}
@@ -1176,6 +1177,23 @@ MonoBehaviour:
   spiderTank: {fileID: 0}
   rotation: 1
   spawnMinions: 1
+--- !u!114 &11400036
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c57db56693d1f5047ab35ce7cc184942, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 20
+  acceleration: 200
+  nodes:
+  - {fileID: 0}
+  - {fileID: 0}
+  traverseBackwards: 0
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1

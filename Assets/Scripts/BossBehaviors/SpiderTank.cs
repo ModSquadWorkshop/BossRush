@@ -10,23 +10,29 @@ public class SpiderTank : MonoBehaviour
 
 	public float stateChangeInterval;
 
-	public SpiderTankState[] states;
-	private int _currentState = 0;
+	[HideInInspector] public SpiderTankBasicState basicState;
+	[HideInInspector] public SpiderTankFleeState fleeState;
+	[HideInInspector] public SpiderTankHealState healState;
+	[HideInInspector] public SpiderTankLaserSpin laserSpin;
+	[HideInInspector] public SpiderTankRushState rushState;
+	[HideInInspector] public SpiderTankTurboState turboState;
+
+	[HideInInspector] public EnemySpawner spawner;
 
 	void Awake()
 	{
+		// retrieve all states
+		basicState = GetComponent<SpiderTankBasicState>();
+		fleeState = GetComponent<SpiderTankFleeState>();
+		healState = GetComponent<SpiderTankHealState>();
+		laserSpin = GetComponent<SpiderTankLaserSpin>();
+		rushState = GetComponent<SpiderTankRushState>();
+		turboState = GetComponent<SpiderTankTurboState>();
+
+		spawner = GetComponent<EnemySpawner>();
+
+		// register for player death callback
 		player.gameObject.GetComponent<HealthSystem>().RegisterDeathCallback( PlayerDeath );
-
-		// find current state
-		for ( int index = 0; index < states.Length; index++ )
-		{
-			if ( states[index].enabled )
-			{
-				_currentState = index;
-			}
-		}
-
-		Invoke( "NextState", stateChangeInterval );
 	}
 
 	void PlayerDeath( HealthSystem playerHealth )
@@ -42,7 +48,7 @@ public class SpiderTank : MonoBehaviour
 		{
 			// gut all scripts to keep the boss in the scene but have it stop moving.
 			Destroy( GetComponent<EnemySpawner>() );
-			foreach ( SpiderTankState state in states )
+			foreach ( SpiderTankState state in GetComponents<SpiderTankState>() )
 			{
 				Destroy( state );
 			}
@@ -50,21 +56,18 @@ public class SpiderTank : MonoBehaviour
 		}
 	}
 
-	private void NextState()
-	{
-		states[_currentState].enabled = false;
-		_currentState = ++_currentState % states.Length;
-		states[_currentState].enabled = true;
-
-		Invoke( "NextState", stateChangeInterval );
-	}
-
+	/**
+	 * \brief Have the main canon look at the player gradually.
+	 */
 	public void LookMainCanon( float lookSpeed )
 	{
 		Quaternion look = Quaternion.LookRotation( player.position - mainCanon.transform.position );
 		mainCanon.transform.rotation = Quaternion.Lerp( mainCanon.transform.rotation, look, lookSpeed * Time.deltaTime );
 	}
 
+	/**
+	 * \brief Fire the main canon.
+	 */
 	public void FireMainCanon()
 	{
 		if ( !mainCanon.IsOnCooldown )
@@ -73,6 +76,9 @@ public class SpiderTank : MonoBehaviour
 		}
 	}
 
+	/**
+	 * \brief Have all other guns look at the player gradually.
+	 */
 	public void LookOtherGuns( float lookSpeed )
 	{
 		foreach ( Gun gun in otherGuns )
@@ -82,6 +88,9 @@ public class SpiderTank : MonoBehaviour
 		}
 	}
 
+	/**
+	 * \brief Have all other guns fire.
+	 */
 	public void FireOtherGuns()
 	{
 		foreach ( Gun gun in otherGuns )
@@ -93,20 +102,22 @@ public class SpiderTank : MonoBehaviour
 		}
 	}
 
+
+	/**
+	 * \brief Have the main canon and other guns look at the player gradually.
+	 */
 	public void LookAllGuns( float lookSpeed )
 	{
 		LookMainCanon( lookSpeed );
 		LookOtherGuns( lookSpeed );
 	}
 
+	/**
+	 * \brief Have the main canon and other guns fire.
+	 */
 	public void FireAllGuns()
 	{
 		FireMainCanon();
 		FireOtherGuns();
-	}
-
-	public void EnterCurrentState()
-	{
-		states[_currentState].enabled = true;
 	}
 }

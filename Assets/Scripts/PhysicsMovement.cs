@@ -7,6 +7,16 @@ public abstract class PhysicsMovement : MonoBehaviour
 	public float acceleration;
 
 	/**
+	 * \brief Hides the default MonoBehavior.rigidbody property for performance reasons.
+	 *
+	 * \details The default MonoBehavior.rigidbody property uses GetComponent() in the background,
+	 * making it inefficient in cases where the rigidbody needs to be accessed every frame.
+	 * This variable hides the original member property with a reference to the rigidbody
+	 * that is retrieved once in the Awake() method.
+	 */
+	private new Rigidbody rigidbody;
+
+	/**
 	 * \brief The movement vector for the PhysicsMovement object.
 	 *
 	 * \details Set the value of this variable in Update() to control
@@ -16,6 +26,11 @@ public abstract class PhysicsMovement : MonoBehaviour
 	 * to be moving, set it to Vector3.zero.
 	 */
 	protected Vector3 _movement;
+
+	public virtual void Awake()
+	{
+		rigidbody = GetComponent<Rigidbody>();
+	}
 
 	public void FixedUpdate()
 	{
