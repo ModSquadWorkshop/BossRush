@@ -14,7 +14,8 @@ public abstract class PhysicsMovement : MonoBehaviour
 	 * This variable hides the original member property with a reference to the rigidbody
 	 * that is retrieved once in the Awake() method.
 	 */
-	private new Rigidbody rigidbody;
+	protected new Rigidbody rigidbody;
+	protected new Transform transform;
 
 	/**
 	 * \brief The movement vector for the PhysicsMovement object.
@@ -30,6 +31,7 @@ public abstract class PhysicsMovement : MonoBehaviour
 	public virtual void Awake()
 	{
 		rigidbody = GetComponent<Rigidbody>();
+		transform = GetComponent<Transform>();
 	}
 
 	public void FixedUpdate()

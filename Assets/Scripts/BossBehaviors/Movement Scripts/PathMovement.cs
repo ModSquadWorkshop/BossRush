@@ -3,10 +3,13 @@ using System.Collections;
 
 public class PathMovement : MoveTowardsTarget
 {
+	public delegate void DesinationReached( PathMovement movement );
+
 	public Transform[] nodes;
 	public bool traverseBackwards;
 
 	private int _currentNode;
+	private DesinationReached _destinationReachedCallback = delegate( PathMovement movement ) { };
 
 	void OnEnable()
 	{
@@ -23,17 +26,17 @@ public class PathMovement : MoveTowardsTarget
 			_currentNode = ( traverseBackwards ? _currentNode - 1 : _currentNode + 1 );
 			if ( _currentNode < 0 || _currentNode >= nodes.Length )
 			{
-				enabled = false;
-
-				// each time the boss traverses the path it will then
-				// have to walk it the other way, so reverse the
-				// direction each time.
-				traverseBackwards = !traverseBackwards;
+				_destinationReachedCallback( this );
 			}
 			else
 			{
 				target = nodes[_currentNode];
 			}
 		}
+	}
+
+	public void RegisterDestinationReachedCallback( DesinationReached callback )
+	{
+		_destinationReachedCallback += callback;
 	}
 }
