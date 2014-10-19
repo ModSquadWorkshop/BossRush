@@ -20,12 +20,12 @@ public class LevelManager : MonoBehaviour
 
 		// register with health systems
 		HealthSystem playerHealth = player.GetComponent<HealthSystem>();
-		playerHealth.RegisterDamageCallback( new HealthSystem.DamageCallback( PlayerDamaged ) );
+		playerHealth.RegisterHealthCallback( PlayerDamaged );
 		playerText.text = "Player Health: " + playerHealth.health;
 		player.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerDied );
 
 		HealthSystem bossHealth = boss.GetComponent<HealthSystem>();
-		bossHealth.RegisterDamageCallback( new HealthSystem.DamageCallback( this.BossDamaged ) );
+		bossHealth.RegisterHealthCallback( BossDamaged );
 		bossText.text = "Boss Health: " + bossHealth.health;
 		boss.GetComponent<DeathSystem>().RegisterDeathCallback( BossDied );
 	}

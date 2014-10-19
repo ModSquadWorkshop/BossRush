@@ -4,7 +4,7 @@ using System.Collections;
 public class SpiderTankInitialState : SpiderTankState
 {
 	public EnemySpawner spawner;
-	public int initialMininionCount;
+	public int mininionCount;
 
 	public override void Awake()
 	{
@@ -16,7 +16,7 @@ public class SpiderTankInitialState : SpiderTankState
 	void OnEnable()
 	{
 		spawner.enabled = true;
-		spawner.Spawn( initialMininionCount );
+		spawner.Spawn( mininionCount );
 	}
 
 	public void MinionCountChange( int count )

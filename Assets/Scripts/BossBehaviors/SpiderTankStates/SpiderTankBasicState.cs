@@ -53,8 +53,8 @@ public class SpiderTankBasicState : SpiderTankState
 	{
 		// make sure pending Invokes aren't called while we're disabled
 		CancelInvoke();
-
 		spiderTank.DeregisterHealthTriggerCallback( HealthTriggerCallback );
+		defaultMovement.enabled = false;
 	}
 
 	void StartRush()
@@ -67,6 +67,7 @@ public class SpiderTankBasicState : SpiderTankState
 	void HealthTriggerCallback( HealthSystem health )
 	{
 		enabled = false;
+		spiderTank.fleeState.returnState = spiderTank.healState;
 		spiderTank.fleeState.enabled = true;
 	}
 }

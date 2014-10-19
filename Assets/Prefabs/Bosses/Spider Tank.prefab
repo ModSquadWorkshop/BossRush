@@ -23,7 +23,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400002}
-  - 33: {fileID: 3300002}
   - 65: {fileID: 6500002}
   - 54: {fileID: 5400000}
   - 82: {fileID: 8200000}
@@ -35,6 +34,7 @@ GameObject:
   - 114: {fileID: 11400026}
   - 114: {fileID: 11400034}
   - 114: {fileID: 11400038}
+  - 114: {fileID: 11400044}
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400036}
   - 114: {fileID: 11400010}
@@ -494,13 +494,6 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &3300002
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &3300004
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -850,7 +843,7 @@ MonoBehaviour:
   - {fileID: 11400018}
   - {fileID: 11400012}
   defaultCanonLookSpeed: 20
-  healthTriggerInterval: 100
+  healthTriggerInterval: 1000
   basicState: {fileID: 0}
   fleeState: {fileID: 0}
   healState: {fileID: 0}
@@ -956,8 +949,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fcc12b2f7a56614b8910bf484971a40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 10
-  acceleration: 100
+  maxSpeed: 20
+  acceleration: 200
   target: {fileID: 0}
   distance: 50
 --- !u!114 &11400012
@@ -1186,10 +1179,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 20
   acceleration: 200
-  nodes:
-  - {fileID: 0}
-  - {fileID: 0}
-  traverseBackwards: 1
+  nodes: []
+  traverseBackwards: 0
 --- !u!114 &11400038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1217,7 +1208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spiderTank: {fileID: 0}
   spawner: {fileID: 0}
-  initialMininionCount: 20
+  mininionCount: 20
 --- !u!114 &11400042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1229,6 +1220,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54890f060999baa459796158b8ac5d9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11400044
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 265b0c87905103e4a9867ecbca21f184, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spiderTank: {fileID: 0}
+  spawner: {fileID: 0}
+  mininionCount: 20
+  healRate: 25
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1

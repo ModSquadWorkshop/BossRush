@@ -3,7 +3,7 @@ using System.Collections;
 
 sealed public class HealthSystem : MonoBehaviour
 {
-	public delegate void DamageCallback( HealthSystem self, float damage );
+	public delegate void HealthCallback( HealthSystem self, float change );
 
 	public bool immune = false;
 	public bool destroyOnNoLives = true;
@@ -20,16 +20,16 @@ sealed public class HealthSystem : MonoBehaviour
 	[SerializeField] private int _lives;
 	[SerializeField] private float _health;
 
-	private DamageCallback _damageCallback;
+	private HealthCallback _healthCallback = delegate( HealthSystem self, float change ) { };
 
 	void Awake()
 	{
 		_health = Mathf.Clamp( startingHealth, 0.0f, maxHealth );
 	}
 
-	public void RegisterDamageCallback( DamageCallback callback )
+	public void RegisterHealthCallback( HealthCallback callback )
 	{
-		_damageCallback += callback;
+		_healthCallback += callback;
 	}
 
 	public float Damage( float damage )
@@ -43,7 +43,7 @@ sealed public class HealthSystem : MonoBehaviour
 		// if the damage amount is negative, its the same as healing the object
 		if ( damage < 0.0f )
 		{
-			return Heal( damage );
+			return Heal( -damage );
 		}
 
 		if ( damageSounds.Length > 0 )
@@ -52,11 +52,7 @@ sealed public class HealthSystem : MonoBehaviour
 		}
 
 		_health -= damage;
-
-		if ( _damageCallback != null )
-		{
-			_damageCallback( this, damage );
-		}
+		_healthCallback( this, -damage );
 
 		if ( _health < 0.0f )
 		{
@@ -71,10 +67,11 @@ sealed public class HealthSystem : MonoBehaviour
 		// if the heal amount is negative, its the same as damaging the object
 		if ( n < 0.0f )
 		{
-			return Damage( n );
+			return Damage( -n );
 		}
 
 		_health = Mathf.Clamp( _health + n, 0.0f, maxHealth );
+		_healthCallback( this, n );
 
 		return _health;
 	}
@@ -122,6 +119,14 @@ sealed public class HealthSystem : MonoBehaviour
 		set
 		{
 			_health = Mathf.Clamp( value, 0.0f, maxHealth );
+		}
+	}
+
+	public bool atMaxHealth
+	{
+		get
+		{
+			return _health >= maxHealth;
 		}
 	}
 

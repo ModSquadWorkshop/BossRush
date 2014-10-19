@@ -45,7 +45,7 @@ public class SpiderTank : MonoBehaviour
 		player.gameObject.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerDeathCallback );
 
 		// register for damage callbacks
-		health.RegisterDamageCallback( SpiderDamageCallback );
+		health.RegisterHealthCallback( SpiderDamageCallback );
 		SetDamageBase();
 	}
 
