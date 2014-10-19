@@ -2,11 +2,17 @@
 
 public class SpiderTank : MonoBehaviour
 {
+	public delegate void HealthTrigger( HealthSystem health );
+
 	public Transform player;
 
 	public Gun mainCanon;
 	public BeamWeapon laserCanon;
 	public Gun[] otherGuns;
+
+	public float defaultCanonLookSpeed;
+
+	public float healthTriggerInterval;
 
 	[HideInInspector] public SpiderTankBasicState basicState;
 	[HideInInspector] public SpiderTankFleeState fleeState;
@@ -15,7 +21,11 @@ public class SpiderTank : MonoBehaviour
 	[HideInInspector] public SpiderTankRushState rushState;
 	[HideInInspector] public SpiderTankTurboState turboState;
 
+	[HideInInspector] public HealthSystem health;
 	[HideInInspector] public EnemySpawner spawner;
+
+	private HealthTrigger _healthTriggerCallback = delegate( HealthSystem health ) { };
+	private float _healthTrigger;
 
 	void Awake()
 	{
@@ -27,10 +37,16 @@ public class SpiderTank : MonoBehaviour
 		rushState = GetComponent<SpiderTankRushState>();
 		turboState = GetComponent<SpiderTankTurboState>();
 
+		// retrieve other componenets
+		health = GetComponent<HealthSystem>();
 		spawner = GetComponent<EnemySpawner>();
 
 		// register for player death callback
 		player.gameObject.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerDeathCallback );
+
+		// register for damage callbacks
+		health.RegisterDamageCallback( SpiderDamageCallback );
+		SetDamageBase();
 	}
 
 	void PlayerDeathCallback( GameObject gameObject )
@@ -44,23 +60,39 @@ public class SpiderTank : MonoBehaviour
 		// trying to destroy the spider tank.
 		if ( this != null )
 		{
-			// gut all scripts to keep the boss in the scene but have it stop moving.
-			Destroy( GetComponent<EnemySpawner>() );
-			foreach ( SpiderTankState state in GetComponents<SpiderTankState>() )
-			{
-				Destroy( state );
-			}
-			Destroy( this );
+			GetComponent<DeathSystem>().Gut();
 		}
+	}
+
+	void SpiderDamageCallback( HealthSystem health, float damage )
+	{
+		if ( health.health < _healthTrigger )
+		{
+			_healthTriggerCallback( health );
+		}
+	}
+
+	/**
+	 * \brief Sets the current amount of health as the anchor point for the health trigger.
+	 *
+	 * \details The health trigger is activated when a certain portion of the boss's health
+	 * has been lost, but the actual point should be a moving target based on an anchor, that is,
+	 * the trigger is actived once a given percent of health has been lost relative to the anchor,
+	 * rathar than relative to max health. This method set's the value of that anchor to the
+	 * Spider Tank's current health.
+	 */
+	public void SetDamageBase()
+	{
+		_healthTrigger = health.health - healthTriggerInterval;
 	}
 
 	/**
 	 * \brief Have the main canon look at the player gradually.
 	 */
-	public void LookMainCanon( float lookSpeed )
+	public void LookMainCanon( float? lookSpeed = null )
 	{
 		Quaternion look = Quaternion.LookRotation( player.position - mainCanon.transform.position );
-		mainCanon.transform.rotation = Quaternion.Lerp( mainCanon.transform.rotation, look, lookSpeed * Time.deltaTime );
+		mainCanon.transform.rotation = Quaternion.Lerp( mainCanon.transform.rotation, look, ( lookSpeed ?? defaultCanonLookSpeed ) * Time.deltaTime );
 	}
 
 	/**
@@ -77,12 +109,12 @@ public class SpiderTank : MonoBehaviour
 	/**
 	 * \brief Have all other guns look at the player gradually.
 	 */
-	public void LookOtherGuns( float lookSpeed )
+	public void LookOtherGuns( float? lookSpeed = null )
 	{
 		foreach ( Gun gun in otherGuns )
 		{
 			Quaternion look = Quaternion.LookRotation( player.position - gun.transform.position );
-			gun.transform.rotation = Quaternion.Lerp( gun.transform.rotation, look, lookSpeed * Time.deltaTime );
+			gun.transform.rotation = Quaternion.Lerp( gun.transform.rotation, look, ( lookSpeed ?? defaultCanonLookSpeed ) * Time.deltaTime );
 		}
 	}
 
@@ -117,5 +149,15 @@ public class SpiderTank : MonoBehaviour
 	{
 		FireMainCanon();
 		FireOtherGuns();
+	}
+
+	public void RegisterHealthTriggerCallback( HealthTrigger callback )
+	{
+		_healthTriggerCallback += callback;
+	}
+
+	public void DeregisterHealthTriggerCallback( HealthTrigger callback )
+	{
+		_healthTriggerCallback -= callback;
 	}
 }

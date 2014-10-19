@@ -121,7 +121,7 @@ Transform:
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 400006}
   m_RootOrder: 0
@@ -132,7 +132,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 63.6565552, y: 1.68539524, z: 50.6679573}
+  m_LocalPosition: {x: 40, y: 1, z: -40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -161,7 +161,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400006}
@@ -242,7 +242,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 10
   m_AngularDrag: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 116
@@ -331,8 +331,8 @@ MonoBehaviour:
   baseSpeed: 50
   speedMultiplier: 1
   lookSpeed: 1
-  dashDistance: 0
-  dashTime: 0
+  dashDistance: 20
+  dashTime: .400000006
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -345,8 +345,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapons:
-  - {fileID: 100000, guid: d63f5b9b77d9d514ab0359efa4ae504f, type: 2}
   - {fileID: 100000, guid: 4be7c3b028769d9418dd2959e6095ba9, type: 2}
+  - {fileID: 100000, guid: d63f5b9b77d9d514ab0359efa4ae504f, type: 2}
+  - {fileID: 100000, guid: 8d9767fadad9723499315d03b95ffd8c, type: 2}
   defaultWeaponID: 0
   switchWeaponKeybind: 9
   weaponAnchor: {fileID: 400008}

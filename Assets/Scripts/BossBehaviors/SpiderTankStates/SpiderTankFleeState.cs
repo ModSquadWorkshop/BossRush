@@ -17,6 +17,12 @@ public class SpiderTankFleeState : SpiderTankState
 		pathMovement.RegisterDestinationReachedCallback( new PathMovement.DesinationReached( DestinationReached ) );
 	}
 
+	public void Update()
+	{
+		spiderTank.LookMainCanon();
+		spiderTank.FireMainCanon();
+	}
+
 	public void OnEnable()
 	{
 		// make sure the boss can walk in/out of the arena.

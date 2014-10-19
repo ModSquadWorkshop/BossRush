@@ -849,12 +849,15 @@ MonoBehaviour:
   otherGuns:
   - {fileID: 11400018}
   - {fileID: 11400012}
+  defaultCanonLookSpeed: 20
+  healthTriggerInterval: 100
   basicState: {fileID: 0}
   fleeState: {fileID: 0}
   healState: {fileID: 0}
   laserSpin: {fileID: 0}
   rushState: {fileID: 0}
   turboState: {fileID: 0}
+  health: {fileID: 0}
   spawner: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
@@ -867,7 +870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58170baa63ed6b949bc5bb273cbe6cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0
+  cooldown: 1
   primaryAttackSounds: []
   projectile: {fileID: 100000, guid: 9c3d1817e90518540a890a9ba1957aed, type: 2}
   casingAnchor: {fileID: 400026}

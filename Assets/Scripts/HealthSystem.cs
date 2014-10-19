@@ -22,7 +22,7 @@ sealed public class HealthSystem : MonoBehaviour
 
 	private DamageCallback _damageCallback;
 
-	void Start()
+	void Awake()
 	{
 		_health = Mathf.Clamp( startingHealth, 0.0f, maxHealth );
 	}

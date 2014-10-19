@@ -35,6 +35,9 @@ public class SpiderTankBasicState : SpiderTankState
 
 		// queue up first rush attack
 		Invoke( "StartRush", Random.Range( minRushInterval, maxRushInterval ) );
+
+		// register for health trigger callbacks
+		spiderTank.RegisterHealthTriggerCallback( HealthTriggerCallback );
 	}
 
 	void Update()
@@ -50,6 +53,8 @@ public class SpiderTankBasicState : SpiderTankState
 	{
 		// make sure pending Invokes aren't called while we're disabled
 		CancelInvoke();
+
+		spiderTank.DeregisterHealthTriggerCallback( HealthTriggerCallback );
 	}
 
 	void StartRush()
@@ -57,5 +62,11 @@ public class SpiderTankBasicState : SpiderTankState
 		defaultMovement.enabled = false;
 		enabled = false;
 		_rushState.enabled = true;
+	}
+
+	void HealthTriggerCallback( HealthSystem health )
+	{
+		enabled = false;
+		spiderTank.fleeState.enabled = true;
 	}
 }
