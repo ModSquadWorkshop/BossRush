@@ -15,8 +15,8 @@ GameObject:
   - 195: {fileID: 19500000}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
-  - 114: {fileID: 11400006}
   - 114: {fileID: 11400008}
+  - 114: {fileID: 11400006}
   - 114: {fileID: 11400004}
   m_Layer: 10
   m_Name: Minion
@@ -146,12 +146,19 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36a0b6f0ac441db49883cd5c3ca638ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathTime: 15
+  deathTime: 0
+  exploding: 1
+  dropping: 1
+  healthDrop: {fileID: 100000, guid: be9500392faf11e44811eea59134f552, type: 2}
+  dropChance: .125
+  explosionRadius: 4
+  explosionDamage: 10
+  explosionMat: {fileID: 2100000, guid: 25bf033dc78c38d4ca949790b20afd02, type: 2}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
