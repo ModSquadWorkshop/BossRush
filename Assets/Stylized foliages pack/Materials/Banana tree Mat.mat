@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: lambert1
-  m_Shader: {fileID: 4, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: Banana tree Mat
+  m_Shader: {fileID: 31, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -17,19 +17,12 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 15, y: 10}
+          m_Texture: {fileID: 2800000, guid: 49937fa8c61dc4940ab682f1f9ff7ba8, type: 3}
+          m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _BumpMap
-        second:
-          m_Texture: {fileID: 2800000, guid: 7a6f2bd98e2c2a347a46d434d356e86a, type: 3}
-          m_Scale: {x: 10, y: 10}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _Cube
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -37,18 +30,30 @@ Material:
     m_Floats:
       data:
         first:
-          name: _Shininess
-        second: .078125
+          name: _Cutoff
+        second: .535714269
+      data:
+        first:
+          name: _BaseLight
+        second: .349999994
+      data:
+        first:
+          name: _AO
+        second: 2.4000001
+      data:
+        first:
+          name: _SquashAmount
+        second: 1
+      data:
+        first:
+          name: _Occlusion
+        second: 7.5
     m_Colors:
       data:
         first:
           name: _Color
-        second: {r: .796741843, g: .807843149, b: .700130701, a: 1}
-      data:
-        first:
-          name: _SpecColor
         second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
-          name: _ReflectColor
-        second: {r: 1, g: 1, b: 1, a: .5}
+          name: _Scale
+        second: {r: 1, g: 1, b: 1, a: 1}
