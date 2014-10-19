@@ -104,10 +104,10 @@ public class EnemySpawner : MonoBehaviour
 		}
 
 		// register for death notification
-		HealthSystem enemyHealth = enemy.GetComponent<HealthSystem>();
-		if ( enemyHealth != null )
+		DeathSystem enemyDeath = enemy.GetComponent<DeathSystem>();
+		if ( enemyDeath != null )
 		{
-			enemyHealth.RegisterDeathCallback( new HealthSystem.DeathCallback( EnemyDied ) );
+			enemyDeath.RegisterDeathCallback( EnemyDeathCallback );
 		}
 
 		// increment live enemy count
@@ -126,7 +126,7 @@ public class EnemySpawner : MonoBehaviour
 		return spawns[0].position;
 	}
 
-	public void EnemyDied( HealthSystem enemyHealth )
+	public void EnemyDeathCallback( GameObject enemy )
 	{
 		// decrement live enemy count
 		enemyCount--;
@@ -143,7 +143,6 @@ public class EnemySpawner : MonoBehaviour
 		{
 			_enemyCount = value;
 			_enemyCountCallback( _enemyCount );
-			Debug.Log( "Enemy Count: " + enemyCount );
 		}
 	}
 

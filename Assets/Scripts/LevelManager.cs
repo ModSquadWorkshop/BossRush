@@ -20,14 +20,14 @@ public class LevelManager : MonoBehaviour
 
 		// register with health systems
 		HealthSystem playerHealth = player.GetComponent<HealthSystem>();
-		playerHealth.RegisterDamageCallback( new HealthSystem.DamageCallback( this.PlayerDamaged ) );
-		playerHealth.RegisterDeathCallback( new HealthSystem.DeathCallback( this.PlayerDied ) );
+		playerHealth.RegisterDamageCallback( new HealthSystem.DamageCallback( PlayerDamaged ) );
 		playerText.text = "Player Health: " + playerHealth.health;
+		player.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerDied );
 
 		HealthSystem bossHealth = boss.GetComponent<HealthSystem>();
 		bossHealth.RegisterDamageCallback( new HealthSystem.DamageCallback( this.BossDamaged ) );
-		bossHealth.RegisterDeathCallback( new HealthSystem.DeathCallback( this.BossDied ) );
 		bossText.text = "Boss Health: " + bossHealth.health;
+		boss.GetComponent<DeathSystem>().RegisterDeathCallback( BossDied );
 	}
 
 	public void PlayerDamaged( HealthSystem playerHealth, float damage )
@@ -35,10 +35,8 @@ public class LevelManager : MonoBehaviour
 		playerText.text = "Player Health: " + playerHealth.health;
 	}
 
-	public void PlayerDied( HealthSystem playerHealth )
+	public void PlayerDied( GameObject gameObjectz )
 	{
-		// TODO say that the player loses
-
 		if ( !_levelOver )
 		{
 			_levelOver = true;
@@ -51,10 +49,8 @@ public class LevelManager : MonoBehaviour
 		bossText.text = "Boss Health: " + bossHealth.health;
 	}
 
-	public void BossDied( HealthSystem bossHealth )
+	public void BossDied( GameObject gameObject )
 	{
-		// TODO say that player wins
-
 		if ( !_levelOver )
 		{
 			_levelOver = true;

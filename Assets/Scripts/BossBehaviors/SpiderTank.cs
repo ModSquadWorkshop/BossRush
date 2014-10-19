@@ -30,10 +30,10 @@ public class SpiderTank : MonoBehaviour
 		spawner = GetComponent<EnemySpawner>();
 
 		// register for player death callback
-		player.gameObject.GetComponent<HealthSystem>().RegisterDeathCallback( PlayerDeath );
+		player.gameObject.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerDeathCallback );
 	}
 
-	void PlayerDeath( HealthSystem playerHealth )
+	void PlayerDeathCallback( GameObject gameObject )
 	{
 		// okay
 		// this is going to sound crazy, but...

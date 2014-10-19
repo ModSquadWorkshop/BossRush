@@ -2372,6 +2372,7 @@ GameObject:
   - 114: {fileID: 1363035867}
   - 114: {fileID: 1363035866}
   - 114: {fileID: 1363035865}
+  - 114: {fileID: 1363035871}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -2483,6 +2484,18 @@ Transform:
   - {fileID: 2136326868}
   m_Father: {fileID: 0}
   m_RootOrder: 4
+--- !u!114 &1363035871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400006, guid: c547150bab057b34982e046263a7cf68,
+    type: 2}
+  m_PrefabInternal: {fileID: 1806001855}
+  m_GameObject: {fileID: 1363035864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54890f060999baa459796158b8ac5d9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1367144347
 GameObject:
   m_ObjectHideFlags: 0
@@ -2728,6 +2741,7 @@ GameObject:
   - 114: {fileID: 1470767340}
   - 114: {fileID: 1470767344}
   - 114: {fileID: 1470767346}
+  - 114: {fileID: 1470767351}
   m_Layer: 10
   m_Name: Spider Tank
   m_TagString: Enemy
@@ -3088,6 +3102,18 @@ MonoBehaviour:
   spiderTank: {fileID: 0}
   spawner: {fileID: 1459641853}
   initialMininionCount: 20
+--- !u!114 &1470767351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400042, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 1284778766}
+  m_GameObject: {fileID: 1470767332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54890f060999baa459796158b8ac5d9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1486925989
 GameObject:
   m_ObjectHideFlags: 0

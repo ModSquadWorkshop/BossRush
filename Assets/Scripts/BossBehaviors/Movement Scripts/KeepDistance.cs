@@ -8,10 +8,10 @@ public class KeepDistance : PhysicsMovement
 
 	void Start()
 	{
-		HealthSystem targetHealth = target.gameObject.GetComponent<HealthSystem>();
-		if ( targetHealth != null )
+		DeathSystem targetDeath = target.gameObject.GetComponent<DeathSystem>();
+		if ( targetDeath != null )
 		{
-			targetHealth.RegisterDeathCallback( new HealthSystem.DeathCallback( TargetDeath ) );
+			targetDeath.RegisterDeathCallback( TargetDeath );
 		}
 	}
 
@@ -23,7 +23,7 @@ public class KeepDistance : PhysicsMovement
 		_movement = Vector3.Normalize( _movement );
 	}
 
-	public void TargetDeath( HealthSystem targetHealth )
+	public void TargetDeath( GameObject gameObject )
 	{
 		Destroy( this );
 	}
