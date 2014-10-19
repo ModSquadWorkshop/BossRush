@@ -3,6 +3,10 @@ using System.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
+	public delegate void EnemyCountChange( int count );
+	private int _enemyCount = 0; ///< A global counter of the number of live minions in the world.
+	private EnemyCountChange _enemyCountCallback = delegate( int count ) { }; ///< Callback used to notify listeners when the live enemy count changes.
+
 	public GameObject[] enemyTypes;
 	public float[] enemySpawnChances;
 
@@ -14,6 +18,7 @@ public class EnemySpawner : MonoBehaviour
 	public bool spawnOnStart;
 
 	private Timer _spawnTimer;
+	protected int _spawnIndex = 0; ///< Used for communication with derived spawners on which spawn index was used.
 
 	public virtual void Start()
 	{
@@ -45,17 +50,29 @@ public class EnemySpawner : MonoBehaviour
 		_spawnTimer.Stop();
 	}
 
-	// automatic spawn
+	/**
+	 * \brief Spawns the default number of enemies.
+	 */
 	public void Spawn()
 	{
-		for ( int i = 0; i < amountPerWave; i++ )
+		Spawn( amountPerWave );
+	}
+
+	/**
+	 * \brief Spawns the specified number of enemies.
+	 */
+	public void Spawn( int amount )
+	{
+		for ( int i = 0; i < amount; i++ )
 		{
 			GameObject enemy = GetEnemyBasedOnSpawnChance();
 			InitializeEnemyComponents( enemy );
 		}
 	}
 
-	// manual spawn
+	/**
+	 * \brief Spawns the specified type of enemy.
+	 */
 	public void Spawn( GameObject type, int? amount = null )
 	{
 		// it's optional to provide the amount you want spawned
@@ -76,8 +93,8 @@ public class EnemySpawner : MonoBehaviour
 	protected virtual void InitializeEnemyComponents( GameObject enemy )
 	{
 		// set spawn point
-		int spawnIndex = Random.Range( 0, spawns.Length );
-		enemy.transform.position = spawns[spawnIndex].position;
+		_spawnIndex = Random.Range( 0, spawns.Length );
+		enemy.transform.position = spawns[_spawnIndex].position;
 
 		// if the enemy uses a MoveTowardsTarget script, the target needs to be set
 		MoveTowardsTarget moveTowards = enemy.GetComponent<MoveTowardsTarget>();
@@ -86,8 +103,15 @@ public class EnemySpawner : MonoBehaviour
 			moveTowards.target = GameObject.FindGameObjectWithTag( "Player" ).transform;
 		}
 
-		// likely more components to come later
-		// ...
+		// register for death notification
+		HealthSystem enemyHealth = enemy.GetComponent<HealthSystem>();
+		if ( enemyHealth != null )
+		{
+			enemyHealth.RegisterDeathCallback( new HealthSystem.DeathCallback( EnemyDied ) );
+		}
+
+		// increment live enemy count
+		enemyCount++;
 	}
 
 	protected GameObject GetEnemyBasedOnSpawnChance()
@@ -100,5 +124,31 @@ public class EnemySpawner : MonoBehaviour
 	{
 		// TO DO
 		return spawns[0].position;
+	}
+
+	public void EnemyDied( HealthSystem enemyHealth )
+	{
+		// decrement live enemy count
+		enemyCount--;
+	}
+
+	public int enemyCount
+	{
+		get
+		{
+			return _enemyCount;
+		}
+
+		set
+		{
+			_enemyCount = value;
+			_enemyCountCallback( _enemyCount );
+			Debug.Log( "Enemy Count: " + enemyCount );
+		}
+	}
+
+	public void RegisterEnemyCountCallback( EnemyCountChange callback )
+	{
+		_enemyCountCallback += callback;
 	}
 }

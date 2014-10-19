@@ -8,8 +8,6 @@ public class SpiderTank : MonoBehaviour
 	public BeamWeapon laserCanon;
 	public Gun[] otherGuns;
 
-	public float stateChangeInterval;
-
 	[HideInInspector] public SpiderTankBasicState basicState;
 	[HideInInspector] public SpiderTankFleeState fleeState;
 	[HideInInspector] public SpiderTankHealState healState;

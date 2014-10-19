@@ -29,6 +29,7 @@ GameObject:
   - 82: {fileID: 8200000}
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400040}
   - 114: {fileID: 11400020}
   - 114: {fileID: 11400022}
   - 114: {fileID: 11400026}
@@ -847,7 +848,6 @@ MonoBehaviour:
   otherGuns:
   - {fileID: 11400018}
   - {fileID: 11400012}
-  stateChangeInterval: 10
   basicState: {fileID: 0}
   fleeState: {fileID: 0}
   healState: {fileID: 0}
@@ -941,7 +941,6 @@ MonoBehaviour:
   - {fileID: 400012}
   - {fileID: 400006}
   weight: .100000001
-  _currentControlPoint: 0
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1193,13 +1192,28 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 459c08f16f90d0c43987bf16209851ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spiderTank: {fileID: 0}
   doorCollider: {fileID: 0}
+  returnState: {fileID: 0}
+--- !u!114 &11400040
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c59753965a21e3747a45d2d631b83fe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spiderTank: {fileID: 0}
+  spawner: {fileID: 0}
+  initialMininionCount: 20
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1

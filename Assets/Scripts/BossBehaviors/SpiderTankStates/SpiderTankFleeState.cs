@@ -7,6 +7,8 @@ public class SpiderTankFleeState : SpiderTankState
 
 	private PathMovement pathMovement;
 
+	[HideInInspector] public SpiderTankState returnState;
+
 	public override void Awake()
 	{
 		base.Awake();
@@ -32,6 +34,6 @@ public class SpiderTankFleeState : SpiderTankState
 		Physics.IgnoreCollision( collider, doorCollider, false );
 
 		// transition to another state
-		spiderTank.basicState.enabled = true;
+		returnState.enabled = true;
 	}
 }
