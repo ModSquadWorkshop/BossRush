@@ -26,8 +26,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 60, y: 0, z: -60}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalPosition: {x: 117.304367, y: -1.38458633, z: -80.0414047}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -81,7 +81,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01635b7e2e8b2854db579c808d7b04fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mortar: {fileID: 100000, guid: 9ed2c1e772d32a446a32227248138ec1, type: 2}
+  mortar: {fileID: 100000, guid: 7c6689ae54474ec40ac7f53d318f064f, type: 2}
+  targetMarker: {fileID: 100000, guid: 316f1d7b1bc00e74da9ef1ef8b178666, type: 2}
   speedMin: 20
   speedMax: 40
   minDistance: 0

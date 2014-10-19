@@ -3,10 +3,11 @@ using System.Collections;
 
 public class SpiderTankMortarState : SpiderTankState 
 {
-	public MortarAttack mortarAttack;
+	public GameObject mortarLauncher;
 	public int mortarAmount;
 	public float mortarDelay;
 
+	private MortarAttack _mortarAttack;
 	private Timer _mortarDelayTimer;
 
 	public override void Awake()
@@ -14,7 +15,12 @@ public class SpiderTankMortarState : SpiderTankState
 		base.Awake();
 
 		_mortarDelayTimer = new Timer( mortarDelay, 1 );
-		_mortarDelayTimer.Start();
+
+		_mortarAttack = mortarLauncher.GetComponent<MortarAttack>();
+		if ( _mortarAttack != null )
+		{
+			_mortarDelayTimer.Start();
+		}
 	}
 
 	void Update()
@@ -25,7 +31,7 @@ public class SpiderTankMortarState : SpiderTankState
 
 			if ( _mortarDelayTimer.IsComplete() )
 			{
-				mortarAttack.Launch( mortarAmount );
+				_mortarAttack.Launch( mortarAmount );
 			}
 		}
 	}
