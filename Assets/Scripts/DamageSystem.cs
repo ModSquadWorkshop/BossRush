@@ -11,7 +11,7 @@ sealed public class DamageSystem : MonoBehaviour
 	public List<string> targets;
 	private Hashtable _targets;
 
-	void Start()
+	void Awake()
 	{
 		// a list of targets should be added to the object prior to initilization
 		InitTargets();
@@ -23,28 +23,44 @@ sealed public class DamageSystem : MonoBehaviour
 		// if it is, we can proceed with dealing damage
 		if ( IsTarget( collision.gameObject.tag ) )
 		{
-			// check to see if the colliding object has a health system
-			// if it does, we perform damage to the health
-			// if it doesnt, nothing happens
-			HealthSystem healthSystem = collision.gameObject.GetComponent<HealthSystem>();
-			if ( healthSystem != null )
-			{
-				healthSystem.Damage( CalculateDamage() );
-			}
+			// try to damage the colliding object
+			DamageObject( collision.gameObject );
 
 			// optionally, this object can be destroyed after dealing damage
 			// this is useful for objects such as bullets or suicide bombers
 			if ( destroyAfterDamage )
 			{
 				// if we're on a projectile, explode that projectile
-				Projectile projectile = GetComponent<Projectile>();
+				Projectile projectile = this.gameObject.GetComponent<Projectile>();
 				if ( projectile != null )
 				{
 					projectile.Explode( collision );
 				}
 
 				Destroy( gameObject );
+
 			}
+		}
+	}
+
+	public void DamageObject( GameObject target )
+	{
+		// check to see if the colliding object has a health system
+		// if it does, we perform damage to the health
+		// if it doesnt, nothing happens
+		// check to see if the colliding object has a health system
+		HealthSystem healthSystem = target.GetComponent<HealthSystem>();
+		if ( healthSystem != null )
+		{
+			healthSystem.Damage( CalculateDamage() );
+		}
+	}
+
+	public void DamageObjectIfTarget( GameObject target )
+	{
+		if ( IsTarget( target.tag ) )
+		{
+			DamageObject( target );
 		}
 	}
 
@@ -63,6 +79,11 @@ sealed public class DamageSystem : MonoBehaviour
 		targets = other.targets;
 
 		InitTargets();
+	}
+
+	public bool IsTarget( string tag )
+	{
+		return _targets[tag] != null;
 	}
 
 	private void InitTargets()
@@ -84,10 +105,5 @@ sealed public class DamageSystem : MonoBehaviour
 				_targets[targets[i]] = true;
 			}
 		}
-	}
-
-	private bool IsTarget( string tag )
-	{
-		return _targets[tag] != null;
 	}
 }

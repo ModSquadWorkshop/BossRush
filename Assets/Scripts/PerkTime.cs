@@ -1,35 +1,33 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PerkTime : MonoBehaviour 
+public class PerkTime : MonoBehaviour
 {
 	//time a perk lasts (if using a timer);
 	public float perkLength;
-	
-	public Timer perkTimer;
+	private Timer _perkTimer;
 
-	public bool started = false;
+	public Perk perk;
 
-	public void BeginPerk ()
-	{
-		perkTimer = new Timer( perkLength );
-		perkTimer.Start();
-		started = true;
-	}
-		
 	// Update is called once per frame
-	void Update () 
+	void Update()
 	{
-		if(started)
+		_perkTimer.Update();
+		if ( _perkTimer.IsComplete() )
 		{
-			perkTimer.Update();
-
-			if( perkTimer.IsTicked() )
-			{
-				this.GetComponentInParent<HealthSystem>().immune = false;
-				perkTimer.Stop();
-				started = false;
-			}
+			End();
 		}
+	}
+
+	public void Begin()
+	{
+		_perkTimer = new Timer( perkLength, 1 );
+		_perkTimer.Start();
+	}
+
+	public void End()
+	{
+		this.gameObject.GetComponent<PerkSystem>().RemovePerk( perk );
+		Destroy( this );
 	}
 }

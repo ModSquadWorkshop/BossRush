@@ -21,7 +21,7 @@ public abstract class PhysicsMovement : MonoBehaviour
 	{
 		if ( rigidbody.velocity.sqrMagnitude < maxSpeed * maxSpeed )
 		{
-			rigidbody.AddForce( _movement * rigidbody.mass * acceleration );
+			rigidbody.velocity += _movement * acceleration * Time.fixedDeltaTime;
 		}
 	}
 }
