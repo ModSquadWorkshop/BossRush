@@ -49,6 +49,13 @@ public class SpiderTank : MonoBehaviour
 		// register for damage callbacks
 		health.RegisterHealthCallback( SpiderDamageCallback );
 		SetDamageBase();
+
+		// set up KeepDistance script
+		KeepDistance keepDistance = GetComponent<KeepDistance>();
+		if ( keepDistance != null )
+		{
+			keepDistance.target = player;
+		}
 	}
 
 	void PlayerDeathCallback( GameObject gameObject )
