@@ -14,8 +14,9 @@ GameObject:
   - 54: {fileID: 5400000}
   - 96: {fileID: 9600000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
   m_Layer: 9
-  m_Name: Player Bullet
+  m_Name: Pistol Bullet
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .5, y: .5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -108,7 +109,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Time: .25
-  m_StartWidth: .300000012
+  m_StartWidth: .600000024
   m_EndWidth: 0
   m_Colors:
     m_Color[0]:
@@ -143,6 +144,17 @@ MonoBehaviour:
   maxDistance: 500
   maxTime: 8
   shrapnel: {fileID: 100000, guid: 7eddcbcc30a372345af69f9f059416eb, type: 2}
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54890f060999baa459796158b8ac5d9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

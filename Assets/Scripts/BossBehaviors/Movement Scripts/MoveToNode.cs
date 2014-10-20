@@ -19,10 +19,10 @@ public class MoveToNode : MoveTowardsTarget
 
 	void Start()
 	{
-		HealthSystem referenceTargetHealth = referenceTarget.gameObject.GetComponent<HealthSystem>();
-		if ( referenceTargetHealth != null )
+		DeathSystem targetDeath = referenceTarget.gameObject.GetComponent<DeathSystem>();
+		if ( targetDeath != null )
 		{
-			referenceTargetHealth.RegisterDeathCallback( new HealthSystem.DeathCallback( TargetDeath ) );
+			targetDeath.RegisterDeathCallback( TargetDeathCallback );
 		}
 	}
 

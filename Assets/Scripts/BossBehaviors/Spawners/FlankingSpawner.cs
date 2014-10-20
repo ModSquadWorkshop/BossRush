@@ -8,18 +8,13 @@ public class FlankingSpawner : EnemySpawner
 	[Range( 0.0f, 1.0f )]
 	public float weight;
 
-	public int _currentControlPoint = 0;
-
 	protected override void InitializeEnemyComponents( GameObject enemy )
 	{
-		enemy.transform.position = spawns[_currentControlPoint].position;
+		base.InitializeEnemyComponents( enemy );
 
 		// add control point and weight
 		MoveTowardsTargetFlanking enemyMovement = enemy.GetComponent<MoveTowardsTargetFlanking>();
-		enemyMovement.target = GameObject.FindGameObjectWithTag( "Player" ).transform; // *sigh* I guess this is fine.
-		enemyMovement.controlPoint = controlPoints[_currentControlPoint].position;
+		enemyMovement.controlPoint = controlPoints[_spawnIndex].position;
 		enemyMovement.weight = weight;
-
-		_currentControlPoint = ++_currentControlPoint % controlPoints.Length;
 	}
 }

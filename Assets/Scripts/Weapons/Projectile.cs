@@ -27,10 +27,10 @@ public class Projectile : MonoBehaviour
 		_elapsedTime += Time.deltaTime;
 
 		// if the projectile has traveled farther than its max distance, it is destroyed
-        // or if it has lived longer than its max life time, it is destroyed
+		// or if it has lived longer than its max life time, it is destroyed
 		if ( ( transform.position - _startPoint ).sqrMagnitude > _maxDistanceSquared | _elapsedTime > maxTime )
 		{
-			Destroy( this.gameObject );
+			GetComponent<DeathSystem>().Kill();
 		}
 	}
 

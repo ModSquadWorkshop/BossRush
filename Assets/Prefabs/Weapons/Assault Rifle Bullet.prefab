@@ -12,11 +12,11 @@ GameObject:
   - 23: {fileID: 2300000}
   - 65: {fileID: 6500000}
   - 54: {fileID: 5400000}
-  - 114: {fileID: 11400000}
   - 96: {fileID: 9600000}
+  - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
-  m_Layer: 12
-  m_Name: Cannon Shell
+  m_Layer: 9
+  m_Name: Assault Rifle Bullet
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 3}
+  m_LocalScale: {x: .5, y: .5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -46,7 +46,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 7ad3fe6d80ba579428ba36b108454344, type: 2}
+  - {fileID: 2100000, guid: af08232d8cfaec84ab9f8b588d713020, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -109,21 +109,21 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Time: .25
-  m_StartWidth: 1
+  m_StartWidth: .300000012
   m_EndWidth: 0
   m_Colors:
     m_Color[0]:
       serializedVersion: 2
-      rgba: 4278190335
+      rgba: 4278255601
     m_Color[1]:
       serializedVersion: 2
-      rgba: 4280821931
+      rgba: 4280855465
     m_Color[2]:
       serializedVersion: 2
-      rgba: 3006148267
+      rgba: 3006180254
     m_Color[3]:
       serializedVersion: 2
-      rgba: 2083927631
+      rgba: 2083934030
     m_Color[4]:
       serializedVersion: 2
       rgba: 905969664
@@ -140,10 +140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4285d08d3329e404e864a0bbe14ee442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 200
+  speed: 100
   maxDistance: 500
   maxTime: 8
-  shrapnel: {fileID: 100000, guid: 839163c2334b9c4488b58a07cd7fa597, type: 2}
+  shrapnel: {fileID: 100000, guid: 7eddcbcc30a372345af69f9f059416eb, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

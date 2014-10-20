@@ -13,7 +13,7 @@ GameObject:
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: SpeedPerk
+  m_Name: ImmunityPerk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,12 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97385ee8cae90a47be0bf17c5e3d888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  immunity: 0
-  speedMod: .5
-  fireRateMod: 0
-  maxHealthMod: 0
-  damageMod: 0
-  length: 0
+  startingPerks: []
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

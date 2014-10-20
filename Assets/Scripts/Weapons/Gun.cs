@@ -56,7 +56,7 @@ public class Gun : Weapon
 		{
 			_reloadTimer.Update();
 
-			if ( _reloadTimer.IsComplete() )
+			if ( _reloadTimer.complete )
 			{
 				// stop reloading
 				_reloading = false;

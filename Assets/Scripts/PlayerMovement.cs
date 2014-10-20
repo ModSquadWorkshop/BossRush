@@ -21,7 +21,7 @@ sealed public class PlayerMovement : MonoBehaviour
 	{
 		//register for damage callback (rumble and shake)
 		playerHealth = this.GetComponent<HealthSystem>();
-		playerHealth.RegisterDamageCallback( TargetDamageCallback );
+		playerHealth.RegisterHealthCallback( TargetDamageCallback );
 		camShake = Camera.main.gameObject.GetComponent<CameraFollow>();
 		rumbler = Camera.main.gameObject.GetComponent<RumbleManager>();
 	}

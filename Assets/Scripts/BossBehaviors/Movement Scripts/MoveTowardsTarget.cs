@@ -10,7 +10,7 @@ public class MoveTowardsTarget : PhysicsMovement
 		_movement = Vector3.Normalize( _target.position - transform.position );
 	}
 
-	public void TargetDeath( HealthSystem targetHealth )
+	public void TargetDeathCallback( GameObject gameObject )
 	{
 		// There are cases where the death callback
 		// might be called after the object has been destroyed.
@@ -37,10 +37,10 @@ public class MoveTowardsTarget : PhysicsMovement
 			_target = value;
 
 			// register for death callback
-			HealthSystem targetHealth = _target.gameObject.GetComponent<HealthSystem>();
-			if ( targetHealth != null )
+			DeathSystem targetDeath = _target.GetComponent<DeathSystem>();
+			if ( targetDeath != null )
 			{
-				targetHealth.RegisterDeathCallback( new HealthSystem.DeathCallback( TargetDeath ) );
+				targetDeath.RegisterDeathCallback( TargetDeathCallback );
 			}
 		}
 	}
