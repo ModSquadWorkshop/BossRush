@@ -12,8 +12,10 @@ public class RushAttack : PhysicsMovement
 
 	private RushEndCallback _rushEndCallback;
 
-	public void Awake()
+	public override void Awake()
 	{
+		base.Awake();
+
 		// ensure that _rushEndCallback isn't null
 		_rushEndCallback = delegate() { };
 	}
