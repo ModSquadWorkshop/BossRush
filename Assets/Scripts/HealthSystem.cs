@@ -54,7 +54,7 @@ sealed public class HealthSystem : MonoBehaviour
 		_health -= damage;
 		_healthCallback( this, -damage );
 
-		if ( _health < 0.0f )
+		if ( _health <= 0.0f )
 		{
 			Kill();
 		}

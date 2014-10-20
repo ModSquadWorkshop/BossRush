@@ -45,6 +45,14 @@ public class SpiderTankLaserSpin : SpiderTankState
 	void TransitionOut()
 	{
 		enabled = false;
-		spiderTank.basicState.enabled = true;
+
+		if ( Random.value < 0.5f )
+		{
+			spiderTank.basicState.enabled = true;
+		}
+		else
+		{
+			spiderTank.turboState.enabled = true;
+		}
 	}
 }

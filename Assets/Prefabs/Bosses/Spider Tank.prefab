@@ -1073,7 +1073,7 @@ MonoBehaviour:
   turretSpeed: 50
   canonDelay: .5
   amountPerWave: 5
-  duration: 20
+  duration: 10
   movementScript: {fileID: 11400046}
 --- !u!114 &11400024
 MonoBehaviour:
@@ -1169,8 +1169,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spiderTank: {fileID: 0}
   rotation: 2
-  spawnMinions: 1
-  duration: 20
+  spawnMinions: 0
+  duration: 10
 --- !u!114 &11400036
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1202,7 +1202,7 @@ MonoBehaviour:
   spiderTank: {fileID: 0}
   doorCollider: {fileID: 0}
   mainCanonCooldown: 1
-  minionsPerWave: 10
+  minionsPerWave: 6
   returnState: {fileID: 0}
 --- !u!114 &11400040
 MonoBehaviour:
@@ -1241,7 +1241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spiderTank: {fileID: 0}
   mininionCount: 20
-  healRate: 25
+  healRate: 75
 --- !u!114 &11400046
 MonoBehaviour:
   m_ObjectHideFlags: 1

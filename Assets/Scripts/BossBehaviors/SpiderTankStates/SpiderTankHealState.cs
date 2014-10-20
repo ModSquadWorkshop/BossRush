@@ -30,7 +30,7 @@ public class SpiderTankHealState : SpiderTankState
 
 	public void MinionCountChange( int count )
 	{
-		if ( enabled && count == 0 )
+		if ( this != null && enabled && count == 0 )
 		{
 			enabled = false;
 			arenaSpawner.enabled = false;

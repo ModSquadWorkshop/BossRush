@@ -160,4 +160,9 @@ public class EnemySpawner : MonoBehaviour
 	{
 		_enemyCountCallback += callback;
 	}
+
+	public void DeregisterEnemyCountCallback( EnemyCountChange callback )
+	{
+		_enemyCountCallback -= callback;
+	}
 }

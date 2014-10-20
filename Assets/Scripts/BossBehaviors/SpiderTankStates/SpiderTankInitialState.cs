@@ -18,6 +18,11 @@ public class SpiderTankInitialState : SpiderTankState
 		arenaSpawner.Spawn( mininionCount );
 	}
 
+	void OnDisable()
+	{
+		arenaSpawner.DeregisterEnemyCountCallback( MinionCountChange );
+	}
+
 	public void MinionCountChange( int count )
 	{
 		if ( enabled && count == 0 )
