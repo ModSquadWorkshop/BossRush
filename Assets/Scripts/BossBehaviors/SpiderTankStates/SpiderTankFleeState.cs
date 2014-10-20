@@ -4,6 +4,7 @@ using System.Collections;
 public class SpiderTankFleeState : SpiderTankState
 {
 	public Collider doorCollider;
+	public float mainCanonCooldown;
 
 	private PathMovement pathMovement;
 
@@ -28,16 +29,21 @@ public class SpiderTankFleeState : SpiderTankState
 		// make sure the boss can walk in/out of the arena.
 		Physics.IgnoreCollision( collider, doorCollider, true );
 		pathMovement.enabled = true;
+		mainCanon.SetCooldown( mainCanonCooldown );
+	}
+
+	public void OnDisable()
+	{
+		pathMovement.enabled = false;
+
+		// re-enable collisions with the doorway.
+		Physics.IgnoreCollision( collider, doorCollider, false );
 	}
 
 	public void DestinationReached( PathMovement movement )
 	{
 		enabled = false;
-		movement.enabled = false;
-		movement.traverseBackwards = !movement.traverseBackwards;
-
-		// re-enable collisions with the doorway.
-		Physics.IgnoreCollision( collider, doorCollider, false );
+		pathMovement.traverseBackwards = !pathMovement.traverseBackwards;
 
 		// transition to another state
 		returnState.enabled = true;

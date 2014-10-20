@@ -38,6 +38,7 @@ GameObject:
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400036}
   - 114: {fileID: 11400010}
+  - 114: {fileID: 11400046}
   - 114: {fileID: 11400024}
   - 114: {fileID: 11400028}
   - 114: {fileID: 11400042}
@@ -1054,7 +1055,8 @@ MonoBehaviour:
   amountPerWave: 0
   minRushInterval: 1
   maxRushInterval: 5
-  defaultMovement: {fileID: 11400010}
+  turboChance: .349999994
+  movementScript: {fileID: 11400010}
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1070,6 +1072,8 @@ MonoBehaviour:
   turretSpeed: 50
   canonDelay: .5
   amountPerWave: 5
+  duration: 20
+  movementScript: {fileID: 11400046}
 --- !u!114 &11400024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1163,9 +1167,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spiderTank: {fileID: 0}
-  rotation: 1
+  rotation: 2
   spawnMinions: 1
-  returnState: {fileID: 0}
+  duration: 20
 --- !u!114 &11400036
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1177,10 +1181,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57db56693d1f5047ab35ce7cc184942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 20
-  acceleration: 200
-  nodes: []
-  traverseBackwards: 0
+  maxSpeed: 50
+  acceleration: 300
+  nodes:
+  - {fileID: 0}
+  - {fileID: 0}
+  traverseBackwards: 1
 --- !u!114 &11400038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1194,6 +1200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spiderTank: {fileID: 0}
   doorCollider: {fileID: 0}
+  mainCanonCooldown: 1
   returnState: {fileID: 0}
 --- !u!114 &11400040
 MonoBehaviour:
@@ -1235,6 +1242,19 @@ MonoBehaviour:
   spawner: {fileID: 0}
   mininionCount: 20
   healRate: 25
+--- !u!114 &11400046
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 279090449e4b6944390b1cb3b3fd9dad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 30
+  acceleration: 300
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1

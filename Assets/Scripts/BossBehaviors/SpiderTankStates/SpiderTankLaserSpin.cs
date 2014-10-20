@@ -6,7 +6,7 @@ public class SpiderTankLaserSpin : SpiderTankState
 	public float rotation;
 	public bool spawnMinions;
 
-	[HideInInspector] public SpiderTankState returnState;
+	public float duration;
 
 	private FlankingSpawner _spawner;
 
@@ -20,11 +20,19 @@ public class SpiderTankLaserSpin : SpiderTankState
 	void OnEnable()
 	{
 		_spawner.enabled = spawnMinions;
+		Invoke( "TransitionOut", duration );
+		spiderTank.RegisterHealthTriggerCallback( HealthTriggerCallback );
 	}
 
 	void Update()
 	{
 		spiderTank.laserCanon.PerformPrimaryAttack();
+	}
+
+	void OnDisable()
+	{
+		_spawner.enabled = false;
+		spiderTank.DeregisterHealthTriggerCallback( HealthTriggerCallback );
 	}
 
 	void FixedUpdate()
@@ -34,9 +42,9 @@ public class SpiderTankLaserSpin : SpiderTankState
 		rigidbody.angularVelocity = angularVelocity;
 	}
 
-	void Exit()
+	void TransitionOut()
 	{
 		enabled = false;
-		returnState.enabled = true;
+		spiderTank.basicState.enabled = true;
 	}
 }

@@ -61,4 +61,12 @@ public class SpiderTankState : MonoBehaviour
 			spiderTank.otherGuns = value;
 		}
 	}
+
+	public void HealthTriggerCallback( HealthSystem health )
+	{
+		CancelInvoke();
+		enabled = false;
+		spiderTank.fleeState.returnState = spiderTank.healState;
+		spiderTank.fleeState.enabled = true;
+	}
 }
