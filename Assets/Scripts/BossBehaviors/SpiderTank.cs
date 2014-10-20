@@ -10,6 +10,8 @@ public class SpiderTank : MonoBehaviour
 	public BeamWeapon laserCanon;
 	public Gun[] otherGuns;
 
+	public EnemySpawner arenaSpawner;
+
 	public float defaultCanonLookSpeed;
 
 	public float healthTriggerInterval;
@@ -100,7 +102,7 @@ public class SpiderTank : MonoBehaviour
 	 */
 	public void FireMainCanon()
 	{
-		if ( !mainCanon.IsOnCooldown )
+		if ( !mainCanon.isOnCooldown )
 		{
 			mainCanon.PerformPrimaryAttack();
 		}
@@ -125,7 +127,7 @@ public class SpiderTank : MonoBehaviour
 	{
 		foreach ( Gun gun in otherGuns )
 		{
-			if ( !gun.IsOnCooldown )
+			if ( !gun.isOnCooldown )
 			{
 				gun.PerformPrimaryAttack();
 			}

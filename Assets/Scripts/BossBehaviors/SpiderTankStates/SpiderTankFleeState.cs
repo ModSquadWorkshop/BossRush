@@ -6,6 +6,8 @@ public class SpiderTankFleeState : SpiderTankState
 	public Collider doorCollider;
 	public float mainCanonCooldown;
 
+	public int minionsPerWave;
+
 	private PathMovement pathMovement;
 
 	[HideInInspector] public SpiderTankState returnState;
@@ -18,32 +20,38 @@ public class SpiderTankFleeState : SpiderTankState
 		pathMovement.RegisterDestinationReachedCallback( new PathMovement.DesinationReached( DestinationReached ) );
 	}
 
-	public void Update()
-	{
-		spiderTank.LookMainCanon();
-		spiderTank.FireMainCanon();
-	}
-
 	public void OnEnable()
 	{
 		// make sure the boss can walk in/out of the arena.
 		Physics.IgnoreCollision( collider, doorCollider, true );
 		pathMovement.enabled = true;
 		mainCanon.SetCooldown( mainCanonCooldown );
+
+		arenaSpawner.enabled = true;
+		arenaSpawner.amountPerWave = minionsPerWave;
+		arenaSpawner.StartSpawning();
+	}
+
+	public void Update()
+	{
+		spiderTank.LookMainCanon();
+		spiderTank.FireMainCanon();
 	}
 
 	public void OnDisable()
 	{
+		arenaSpawner.enabled = false;
 		pathMovement.enabled = false;
-
-		// re-enable collisions with the doorway.
-		Physics.IgnoreCollision( collider, doorCollider, false );
+		spiderTank.arenaSpawner.StopSpawning();
 	}
 
 	public void DestinationReached( PathMovement movement )
 	{
 		enabled = false;
 		pathMovement.traverseBackwards = !pathMovement.traverseBackwards;
+
+		// re-enable collisions with the doorway.
+		Physics.IgnoreCollision( collider, doorCollider, false );
 
 		// transition to another state
 		returnState.enabled = true;

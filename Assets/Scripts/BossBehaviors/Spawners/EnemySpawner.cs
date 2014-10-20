@@ -20,10 +20,13 @@ public class EnemySpawner : MonoBehaviour
 	private Timer _spawnTimer;
 	protected int _spawnIndex = 0; ///< Used for communication with derived spawners on which spawn index was used.
 
-	public virtual void Start()
+	public void Awake()
 	{
 		_spawnTimer = new Timer( waveInterval );
+	}
 
+	public void OnEnable()
+	{
 		if ( spawnOnStart )
 		{
 			StartSpawning();
@@ -34,15 +37,22 @@ public class EnemySpawner : MonoBehaviour
 	{
 		_spawnTimer.Update();
 
-		if ( _spawnTimer.IsTicked() )
+		if ( _spawnTimer.ticked )
 		{
 			Spawn();
 		}
 	}
 
-	public void StartSpawning()
+	public void StartSpawning( bool resetTimer = true )
 	{
-		_spawnTimer.Start();
+		if ( resetTimer )
+		{
+			_spawnTimer.Reset( true );
+		}
+		else
+		{
+			_spawnTimer.Start();
+		}
 	}
 
 	public void StopSpawning()

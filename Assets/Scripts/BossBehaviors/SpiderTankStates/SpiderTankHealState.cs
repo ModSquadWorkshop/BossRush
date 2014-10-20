@@ -3,7 +3,6 @@ using System.Collections;
 
 public class SpiderTankHealState : SpiderTankState
 {
-	public EnemySpawner spawner;
 	public int mininionCount;
 
 	public float healRate;
@@ -12,13 +11,12 @@ public class SpiderTankHealState : SpiderTankState
 	{
 		base.Awake();
 
-		spawner.RegisterEnemyCountCallback( new EnemySpawner.EnemyCountChange( MinionCountChange ) );
+		arenaSpawner.RegisterEnemyCountCallback( MinionCountChange );
 	}
 
 	void OnEnable()
 	{
-		spawner.enabled = true;
-		spawner.Spawn( mininionCount );
+		arenaSpawner.Spawn( mininionCount );
 	}
 
 	public void Update()
@@ -35,7 +33,7 @@ public class SpiderTankHealState : SpiderTankState
 		if ( enabled && count == 0 )
 		{
 			enabled = false;
-			spawner.enabled = false;
+			arenaSpawner.enabled = false;
 
 			spiderTank.SetDamageBase();
 

@@ -13,7 +13,7 @@ public class PerkTime : MonoBehaviour
 	void Update()
 	{
 		_perkTimer.Update();
-		if ( _perkTimer.IsComplete() )
+		if ( _perkTimer.complete )
 		{
 			End();
 		}

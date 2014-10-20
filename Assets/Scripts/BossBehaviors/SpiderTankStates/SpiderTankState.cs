@@ -62,6 +62,19 @@ public class SpiderTankState : MonoBehaviour
 		}
 	}
 
+	public EnemySpawner arenaSpawner
+	{
+		get
+		{
+			return spiderTank.arenaSpawner;
+		}
+
+		set
+		{
+			spiderTank.arenaSpawner = value;
+		}
+	}
+
 	public void HealthTriggerCallback( HealthSystem health )
 	{
 		CancelInvoke();

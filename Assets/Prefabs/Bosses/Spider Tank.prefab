@@ -843,6 +843,7 @@ MonoBehaviour:
   otherGuns:
   - {fileID: 11400018}
   - {fileID: 11400012}
+  arenaSpawner: {fileID: 0}
   defaultCanonLookSpeed: 20
   healthTriggerInterval: 1000
   basicState: {fileID: 0}
@@ -1201,6 +1202,7 @@ MonoBehaviour:
   spiderTank: {fileID: 0}
   doorCollider: {fileID: 0}
   mainCanonCooldown: 1
+  minionsPerWave: 10
   returnState: {fileID: 0}
 --- !u!114 &11400040
 MonoBehaviour:
@@ -1214,7 +1216,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spiderTank: {fileID: 0}
-  spawner: {fileID: 0}
   mininionCount: 20
 --- !u!114 &11400042
 MonoBehaviour:
@@ -1239,7 +1240,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spiderTank: {fileID: 0}
-  spawner: {fileID: 0}
   mininionCount: 20
   healRate: 25
 --- !u!114 &11400046
