@@ -81,13 +81,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01635b7e2e8b2854db579c808d7b04fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 100004, guid: c547150bab057b34982e046263a7cf68, type: 2}
   mortar: {fileID: 100000, guid: 7c6689ae54474ec40ac7f53d318f064f, type: 2}
   targetMarker: {fileID: 100000, guid: 316f1d7b1bc00e74da9ef1ef8b178666, type: 2}
+  targetBoundsMin: {x: -50, y: 0, z: 50}
+  targetBoundsMax: {x: -50, y: 0, z: 50}
   speedMin: 20
   speedMax: 40
-  minDistance: 0
-  maxDistance: 100
-  damage: 100
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

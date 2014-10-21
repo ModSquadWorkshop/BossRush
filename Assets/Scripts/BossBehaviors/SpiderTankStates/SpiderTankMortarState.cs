@@ -7,7 +7,7 @@ public class SpiderTankMortarState : SpiderTankState
 	public int mortarAmount;
 	public float mortarDelay;
 
-	private MortarAttack _mortarAttack;
+	private MortarLauncher _mortarAttack;
 	private Timer _mortarDelayTimer;
 
 	public override void Awake()
@@ -16,7 +16,7 @@ public class SpiderTankMortarState : SpiderTankState
 
 		_mortarDelayTimer = new Timer( mortarDelay, 1 );
 
-		_mortarAttack = mortarLauncher.GetComponent<MortarAttack>();
+		_mortarAttack = mortarLauncher.GetComponent<MortarLauncher>();
 		if ( _mortarAttack != null )
 		{
 			_mortarDelayTimer.Start();
