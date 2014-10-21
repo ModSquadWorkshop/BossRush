@@ -21,6 +21,7 @@ public class SpiderTankInitialState : SpiderTankState
 	void OnDisable()
 	{
 		arenaSpawner.DeregisterEnemyCountCallback( MinionCountChange );
+		spiderTank.SetDamageBase();
 	}
 
 	public void MinionCountChange( int count )
