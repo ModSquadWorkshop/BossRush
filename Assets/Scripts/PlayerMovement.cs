@@ -13,17 +13,24 @@ sealed public class PlayerMovement : MonoBehaviour
 	public float dashDistance;
 	public float dashTime;
 
-	HealthSystem playerHealth;
-	CameraFollow camShake;
-	RumbleManager rumbler;
+	private HealthSystem _playerHealth;
+	private CameraFollow _camShake;
+	private RumbleManager _rumbler;
+
+	private Plane _plane;
+
+	void Awake()
+	{
+		_plane = new Plane( Vector3.up, this.transform.position );
+		_playerHealth = this.GetComponent<HealthSystem>();
+		_camShake = Camera.main.gameObject.GetComponent<CameraFollow>();
+		_rumbler = Camera.main.gameObject.GetComponent<RumbleManager>();
+	}
 
 	void Start()
 	{
 		//register for damage callback (rumble and shake)
-		playerHealth = this.GetComponent<HealthSystem>();
-		playerHealth.RegisterHealthCallback( TargetDamageCallback );
-		camShake = Camera.main.gameObject.GetComponent<CameraFollow>();
-		rumbler = Camera.main.gameObject.GetComponent<RumbleManager>();
+		_playerHealth.RegisterHealthCallback( TargetDamageCallback );
 	}
 
 	void Update()
@@ -38,19 +45,27 @@ sealed public class PlayerMovement : MonoBehaviour
 
 		//Direction the player is moving in, used for dashing
 		Vector3 forwardDash = new Vector3( horizontalAxis, 0.0f, verticalAxis );
+
 		// handle mouse input
-		lookTarget.Translate( new Vector3( Input.GetAxis( "Mouse X" ), 0.0f, Input.GetAxis( "Mouse Y" ) ) * lookSpeed );
+		Ray ray = Camera.main.ScreenPointToRay( Input.mousePosition );
+		float hitDistance = 0.0f;
+		if ( _plane.Raycast( ray, out hitDistance ) )
+		{
+			lookTarget.position = ray.GetPoint( hitDistance );
+		}
+//		lookTarget.renderer.enabled = true;
 
 		// handle game pad look
+		// game pad look overrides mouse movement
 		Vector3 gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ),
 		                                   0.0f,
 		                                   Input.GetAxis( "Look Vertical" ) );
 		if ( gamePadLook.sqrMagnitude > 0.0f )
 		{
+			lookTarget.localPosition = gamePadLook;
+
 			// hide look target
 			//lookTarget.renderer.enabled = false;
-
-			lookTarget.localPosition = gamePadLook;
 		}
 
 		//Dash implementation using iTween
@@ -76,9 +91,9 @@ sealed public class PlayerMovement : MonoBehaviour
 
 	void TargetDamageCallback( HealthSystem playerHealth, float damage )
 	{
-		camShake.Shake( damage );
-		rumbler.rumble = true;
-		rumbler.Rumble();
+		_camShake.Shake( damage );
+		_rumbler.rumble = true;
+		_rumbler.Rumble();
 	}
 
 }

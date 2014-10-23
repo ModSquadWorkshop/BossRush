@@ -28,6 +28,17 @@ public class LevelManager : MonoBehaviour
 		bossHealth.RegisterHealthCallback( BossDamaged );
 		bossText.text = "Boss Health: " + bossHealth.health;
 		boss.GetComponent<DeathSystem>().RegisterDeathCallback( BossDied );
+
+		// hide the mouse
+		Screen.showCursor = false;
+	}
+
+	void Update()
+	{
+		if ( Input.GetKeyDown( KeyCode.Escape ) )
+		{
+			Application.Quit();
+		}
 	}
 
 	public void PlayerDamaged( HealthSystem playerHealth, float damage )
