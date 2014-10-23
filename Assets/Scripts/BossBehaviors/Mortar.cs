@@ -67,12 +67,14 @@ public class Mortar : MonoBehaviour
 
 		if ( _player != null )
 		{
-			if ( Vector3.Distance( this.gameObject.transform.position, _player.transform.position) < radius )
+			float distance = Vector3.Distance( this.gameObject.transform.position, _player.transform.position);
+			if ( distance < radius )
 			{
 				HealthSystem healthSystem = _player.GetComponent<HealthSystem>();
 				if ( healthSystem != null )
 				{
-					healthSystem.Damage( damage );
+					float damageDropoff = damage * (distance / radius);
+					healthSystem.Damage( damage - damageDropoff );
 				}
 			}
 		}
