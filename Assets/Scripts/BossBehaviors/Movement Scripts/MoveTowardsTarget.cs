@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MoveTowardsTarget : PhysicsMovement
+public class MoveTowardsTarget : PhysicsMovement, ITargetBasedMovement
 {
 	private Transform _target;
 
