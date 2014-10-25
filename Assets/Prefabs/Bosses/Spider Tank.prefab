@@ -26,8 +26,10 @@ GameObject:
   - 65: {fileID: 6500002}
   - 54: {fileID: 5400000}
   - 82: {fileID: 8200000}
+  - 195: {fileID: 19500000}
   - 114: {fileID: 11400006}
-  - 208: {fileID: 20800000}
+  - 114: {fileID: 11400028}
+  - 114: {fileID: 11400042}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400040}
   - 114: {fileID: 11400020}
@@ -39,10 +41,7 @@ GameObject:
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400036}
   - 114: {fileID: 11400010}
-  - 114: {fileID: 11400046}
   - 114: {fileID: 11400024}
-  - 114: {fileID: 11400028}
-  - 114: {fileID: 11400042}
   m_Layer: 10
   m_Name: Spider Tank
   m_TagString: Enemy
@@ -913,7 +912,6 @@ MonoBehaviour:
   rushState: {fileID: 0}
   turboState: {fileID: 0}
   health: {fileID: 0}
-  spawner: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -983,23 +981,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ba311a52b1c7d24c98128f8e9ab66fb, type: 3}
+  m_Script: {fileID: 11500000, guid: d74c975aef0486b4dad7c3260ff55970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTypes:
-  - {fileID: 100000, guid: c79a083f06b06964b9733d7231b36efa, type: 2}
-  enemySpawnChances: []
-  spawns:
-  - {fileID: 0}
-  - {fileID: 0}
-  spawnPriorities: []
-  amountPerWave: 0
-  waveInterval: 2
-  spawnOnStart: 1
-  controlPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  weight: .100000001
+  movingTarget: 1
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1134,7 +1119,7 @@ MonoBehaviour:
   canonDelay: .5
   amountPerWave: 5
   duration: 10
-  movementScript: {fileID: 11400046}
+  movementScript: {fileID: 0}
 --- !u!114 &11400024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1302,19 +1287,6 @@ MonoBehaviour:
   spiderTank: {fileID: 0}
   mininionCount: 20
   healRate: 75
---- !u!114 &11400046
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 279090449e4b6944390b1cb3b3fd9dad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSpeed: 30
-  acceleration: 300
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -1348,17 +1320,26 @@ LineRenderer:
       serializedVersion: 2
       rgba: 4286085375
   m_UseWorldSpace: 1
---- !u!208 &20800000
-NavMeshObstacle:
+--- !u!195 &19500000
+NavMeshAgent:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 5
-  m_Height: 5
-  m_MoveThreshold: 0
-  m_Carve: 0
+  m_Speed: 30
+  m_Acceleration: 30
+  avoidancePriority: 0
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 0
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 10
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

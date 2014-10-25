@@ -9,11 +9,12 @@ public class SpiderTankTurboState : SpiderTankState
 
 	public float duration;
 
-	public MoveTowardsTarget movementScript;
+	public NavigateTowardsTarget movementScript;
 
 	public override void Awake()
 	{
 		base.Awake();
+		movementScript = GetComponent<NavigateTowardsTarget>();
 		movementScript.target = player;
 	}
 

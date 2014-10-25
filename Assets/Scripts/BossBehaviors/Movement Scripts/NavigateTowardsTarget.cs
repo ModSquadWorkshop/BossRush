@@ -47,7 +47,6 @@ public class NavigateTowardsTarget : MonoBehaviour, ITargetBasedMovement
 		set
 		{
 			_target = value;
-			ResetTarget();
 		}
 	}
 }

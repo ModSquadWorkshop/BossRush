@@ -2813,8 +2813,10 @@ GameObject:
   - 65: {fileID: 1470767333}
   - 54: {fileID: 1470767334}
   - 82: {fileID: 1470767343}
+  - 195: {fileID: 1470767352}
   - 114: {fileID: 1470767337}
-  - 208: {fileID: 1470767353}
+  - 114: {fileID: 1470767346}
+  - 114: {fileID: 1470767351}
   - 114: {fileID: 1470767338}
   - 114: {fileID: 1470767350}
   - 114: {fileID: 1470767342}
@@ -2823,12 +2825,10 @@ GameObject:
   - 114: {fileID: 1470767347}
   - 114: {fileID: 1470767349}
   - 114: {fileID: 1470767335}
+  - 114: {fileID: 1470767339}
   - 114: {fileID: 1470767348}
   - 114: {fileID: 1470767340}
-  - 114: {fileID: 1470767352}
   - 114: {fileID: 1470767344}
-  - 114: {fileID: 1470767346}
-  - 114: {fileID: 1470767351}
   m_Layer: 10
   m_Name: Spider Tank
   m_TagString: Enemy
@@ -2947,6 +2947,19 @@ MonoBehaviour:
   rushState: {fileID: 0}
   turboState: {fileID: 0}
   health: {fileID: 0}
+--- !u!114 &1470767339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400008, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 1826908195}
+  m_GameObject: {fileID: 1470767332}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d74c975aef0486b4dad7c3260ff55970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingTarget: 1
 --- !u!114 &1470767340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2980,7 +2993,7 @@ MonoBehaviour:
   canonDelay: .5
   amountPerWave: 5
   duration: 10
-  movementScript: {fileID: 1470767352}
+  movementScript: {fileID: 0}
 --- !u!114 &1470767342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3185,32 +3198,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54890f060999baa459796158b8ac5d9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1470767352
-MonoBehaviour:
+--- !u!195 &1470767352
+NavMeshAgent:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400046, guid: e69da1848d5a6aa45ad03e2051a43667,
+  m_PrefabParentObject: {fileID: 19500000, guid: e69da1848d5a6aa45ad03e2051a43667,
     type: 2}
   m_PrefabInternal: {fileID: 1826908195}
   m_GameObject: {fileID: 1470767332}
   m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 279090449e4b6944390b1cb3b3fd9dad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSpeed: 30
-  acceleration: 300
---- !u!208 &1470767353
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 20800000, guid: e69da1848d5a6aa45ad03e2051a43667,
-    type: 2}
-  m_PrefabInternal: {fileID: 1826908195}
-  m_GameObject: {fileID: 1470767332}
-  m_Enabled: 1
   m_Radius: 5
-  m_Height: 5
-  m_MoveThreshold: 0
-  m_Carve: 0
+  m_Speed: 30
+  m_Acceleration: 30
+  avoidancePriority: 0
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 0
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 10
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 1
 --- !u!1 &1486925989
 GameObject:
   m_ObjectHideFlags: 0
@@ -3568,7 +3576,7 @@ Prefab:
       value: 
       objectReference: {fileID: 271124761}
     m_RemovedComponents:
-    - {fileID: 11400008, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+    - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
   m_RootGameObject: {fileID: 1470767332}
   m_IsPrefabParent: 0
