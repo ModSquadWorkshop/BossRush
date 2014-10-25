@@ -903,6 +903,7 @@ MonoBehaviour:
   otherGuns:
   - {fileID: 11400018}
   - {fileID: 11400012}
+  shield: {fileID: 100002, guid: 8358d13b6558bd140ac445ffa4bc4908, type: 2}
   defaultCanonLookSpeed: 20
   healthTriggerInterval: 1000
   basicState: {fileID: 0}
@@ -1302,7 +1303,11 @@ MonoBehaviour:
   enemyTypes:
   - {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
   enemySpawnChances: []
-  spawns: []
+  spawns:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   spawnPriorities: []
   amountPerWave: 4
   waveInterval: 1

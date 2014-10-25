@@ -16,6 +16,7 @@ public class SpiderTankHealState : SpiderTankState
 	{
 		spawner.Spawn( mininionCount );
 		spawner.RegisterEnemyCountCallback( MinionCountChange );
+		spiderTank.SpawnShied();
 	}
 
 	public void Update()
@@ -30,6 +31,7 @@ public class SpiderTankHealState : SpiderTankState
 	public void OnDisable()
 	{
 		spawner.DeregisterEnemyCountCallback( MinionCountChange );
+		spiderTank.DestroyShield();
 	}
 
 	public void MinionCountChange( int count )
@@ -41,8 +43,7 @@ public class SpiderTankHealState : SpiderTankState
 
 			spiderTank.SetDamageBase();
 
-			spiderTank.fleeState.returnState = spiderTank.basicState;
-			spiderTank.fleeState.enabled = true;
+			spiderTank.basicState.enabled = true;
 		}
 	}
 }

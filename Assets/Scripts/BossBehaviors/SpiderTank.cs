@@ -9,9 +9,9 @@ public class SpiderTank : MonoBehaviour
 	public Gun mainCanon;
 	public BeamWeapon laserCanon;
 	public Gun[] otherGuns;
+	public GameObject shield;
 
 	public float defaultCanonLookSpeed;
-
 	public float healthTriggerInterval;
 
 	[HideInInspector] public SpiderTankBasicState basicState;
@@ -26,6 +26,7 @@ public class SpiderTank : MonoBehaviour
 
 	private HealthTrigger _healthTriggerCallback = delegate( HealthSystem health ) { };
 	private float _healthTrigger;
+	private GameObject _shield;
 
 	void Awake()
 	{
@@ -155,6 +156,17 @@ public class SpiderTank : MonoBehaviour
 	{
 		FireMainCanon();
 		FireOtherGuns();
+	}
+
+	public void SpawnShied()
+	{
+		_shield = Instantiate( shield, transform.position, transform.rotation ) as GameObject;
+		Physics.IgnoreCollision( collider, _shield.collider );
+	}
+
+	public void DestroyShield()
+	{
+		Destroy( _shield );
 	}
 
 	public void RegisterHealthTriggerCallback( HealthTrigger callback )
