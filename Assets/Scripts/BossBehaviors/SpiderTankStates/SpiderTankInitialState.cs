@@ -5,16 +5,9 @@ public class SpiderTankInitialState : SpiderTankState
 {
 	public int mininionCount;
 
-	public override void Awake()
-	{
-		base.Awake();
-
-		spawner.RegisterEnemyCountCallback( MinionCountChange );
-	}
-
 	void OnEnable()
 	{
-		spawner.enabled = true;
+		spawner.RegisterEnemyCountCallback( MinionCountChange );
 		spawner.Spawn( mininionCount );
 	}
 

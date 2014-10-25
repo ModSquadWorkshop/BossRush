@@ -2755,7 +2755,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1459641854}
-  - 114: {fileID: 1459641853}
   m_Layer: 0
   m_Name: Arena Spawner
   m_TagString: Untagged
@@ -2763,29 +2762,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1459641853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1459641852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23eef0c7e1c23864eb720e3d5817a2f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyTypes:
-  - {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
-  enemySpawnChances: []
-  spawns:
-  - {fileID: 2082473629}
-  - {fileID: 1724109207}
-  - {fileID: 671329780}
-  - {fileID: 395171943}
-  spawnPriorities: []
-  amountPerWave: 0
-  waveInterval: 2
-  spawnOnStart: 1
 --- !u!4 &1459641854
 Transform:
   m_ObjectHideFlags: 0
@@ -2829,6 +2805,7 @@ GameObject:
   - 114: {fileID: 1470767348}
   - 114: {fileID: 1470767340}
   - 114: {fileID: 1470767344}
+  - 114: {fileID: 1470767353}
   m_Layer: 10
   m_Name: Spider Tank
   m_TagString: Enemy
@@ -2937,7 +2914,6 @@ MonoBehaviour:
   otherGuns:
   - {fileID: 497961831}
   - {fileID: 333394151}
-  arenaSpawner: {fileID: 1459641853}
   defaultCanonLookSpeed: 20
   healthTriggerInterval: 1000
   basicState: {fileID: 0}
@@ -2947,6 +2923,7 @@ MonoBehaviour:
   rushState: {fileID: 0}
   turboState: {fileID: 0}
   health: {fileID: 0}
+  spawner: {fileID: 0}
 --- !u!114 &1470767339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3219,6 +3196,30 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
+--- !u!114 &1470767353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400046, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 1826908195}
+  m_GameObject: {fileID: 1470767332}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23eef0c7e1c23864eb720e3d5817a2f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyTypes:
+  - {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
+  enemySpawnChances: []
+  spawns:
+  - {fileID: 2082473629}
+  - {fileID: 1724109207}
+  - {fileID: 671329780}
+  - {fileID: 395171943}
+  spawnPriorities: []
+  amountPerWave: 4
+  waveInterval: 1
+  spawnOnStart: 1
 --- !u!1 &1486925989
 GameObject:
   m_ObjectHideFlags: 0
@@ -3519,6 +3520,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11400046, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: spawns.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3558,7 +3563,7 @@ Prefab:
     - target: {fileID: 11400000, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
       propertyPath: arenaSpawner
       value: 
-      objectReference: {fileID: 1459641853}
+      objectReference: {fileID: 0}
     - target: {fileID: 11400010, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
       propertyPath: target
       value: 
@@ -3575,6 +3580,22 @@ Prefab:
       propertyPath: doorCollider
       value: 
       objectReference: {fileID: 271124761}
+    - target: {fileID: 11400046, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: spawns.Array.data[0]
+      value: 
+      objectReference: {fileID: 2082473629}
+    - target: {fileID: 11400046, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: spawns.Array.data[1]
+      value: 
+      objectReference: {fileID: 1724109207}
+    - target: {fileID: 11400046, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: spawns.Array.data[2]
+      value: 
+      objectReference: {fileID: 671329780}
+    - target: {fileID: 11400046, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+      propertyPath: spawns.Array.data[3]
+      value: 
+      objectReference: {fileID: 395171943}
     m_RemovedComponents:
     - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}

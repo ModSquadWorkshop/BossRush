@@ -10,13 +10,12 @@ public class SpiderTankHealState : SpiderTankState
 	public override void Awake()
 	{
 		base.Awake();
-
-		spawner.RegisterEnemyCountCallback( MinionCountChange );
 	}
 
 	void OnEnable()
 	{
 		spawner.Spawn( mininionCount );
+		spawner.RegisterEnemyCountCallback( MinionCountChange );
 	}
 
 	public void Update()
@@ -26,6 +25,11 @@ public class SpiderTankHealState : SpiderTankState
 		{
 			MinionCountChange( 0 ); // kinda janky, but whatevs
 		}
+	}
+
+	public void OnDisable()
+	{
+		spawner.DeregisterEnemyCountCallback( MinionCountChange );
 	}
 
 	public void MinionCountChange( int count )

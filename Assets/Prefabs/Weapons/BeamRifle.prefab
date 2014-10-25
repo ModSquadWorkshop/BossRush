@@ -192,7 +192,8 @@ MonoBehaviour:
   baseDamage: 25
   damageMultiplier: 1
   destroyAfterDamage: 0
-  targets: []
+  targets:
+  - Enemy
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1

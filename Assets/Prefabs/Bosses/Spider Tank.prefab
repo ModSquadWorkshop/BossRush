@@ -42,6 +42,7 @@ GameObject:
   - 114: {fileID: 11400036}
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400024}
+  - 114: {fileID: 11400046}
   m_Layer: 10
   m_Name: Spider Tank
   m_TagString: Enemy
@@ -902,7 +903,6 @@ MonoBehaviour:
   otherGuns:
   - {fileID: 11400018}
   - {fileID: 11400012}
-  arenaSpawner: {fileID: 0}
   defaultCanonLookSpeed: 20
   healthTriggerInterval: 1000
   basicState: {fileID: 0}
@@ -912,6 +912,7 @@ MonoBehaviour:
   rushState: {fileID: 0}
   turboState: {fileID: 0}
   health: {fileID: 0}
+  spawner: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1287,6 +1288,25 @@ MonoBehaviour:
   spiderTank: {fileID: 0}
   mininionCount: 20
   healRate: 75
+--- !u!114 &11400046
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23eef0c7e1c23864eb720e3d5817a2f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyTypes:
+  - {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
+  enemySpawnChances: []
+  spawns: []
+  spawnPriorities: []
+  amountPerWave: 4
+  waveInterval: 1
+  spawnOnStart: 1
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1

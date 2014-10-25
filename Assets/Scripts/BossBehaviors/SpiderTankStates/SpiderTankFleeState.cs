@@ -42,7 +42,7 @@ public class SpiderTankFleeState : SpiderTankState
 	{
 		spawner.enabled = false;
 		pathMovement.enabled = false;
-		spiderTank.arenaSpawner.StopSpawning();
+		spawner.StopSpawning();
 	}
 
 	public void DestinationReached( PathMovement movement )

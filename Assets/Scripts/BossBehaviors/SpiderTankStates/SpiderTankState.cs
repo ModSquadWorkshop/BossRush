@@ -66,12 +66,12 @@ public class SpiderTankState : MonoBehaviour
 	{
 		get
 		{
-			return spiderTank.arenaSpawner;
+			return spiderTank.spawner;
 		}
 
 		set
 		{
-			spiderTank.arenaSpawner = value;
+			spiderTank.spawner = value;
 		}
 	}
 
