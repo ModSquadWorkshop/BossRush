@@ -9,18 +9,18 @@ public class SpiderTankInitialState : SpiderTankState
 	{
 		base.Awake();
 
-		arenaSpawner.RegisterEnemyCountCallback( MinionCountChange );
+		spawner.RegisterEnemyCountCallback( MinionCountChange );
 	}
 
 	void OnEnable()
 	{
-		arenaSpawner.enabled = true;
-		arenaSpawner.Spawn( mininionCount );
+		spawner.enabled = true;
+		spawner.Spawn( mininionCount );
 	}
 
 	void OnDisable()
 	{
-		arenaSpawner.DeregisterEnemyCountCallback( MinionCountChange );
+		spawner.DeregisterEnemyCountCallback( MinionCountChange );
 		spiderTank.SetDamageBase();
 	}
 
@@ -29,7 +29,7 @@ public class SpiderTankInitialState : SpiderTankState
 		if ( enabled && count == 0 )
 		{
 			enabled = false;
-			arenaSpawner.enabled = false;
+			spawner.enabled = false;
 
 			spiderTank.fleeState.returnState = spiderTank.basicState;
 			spiderTank.fleeState.enabled = true;

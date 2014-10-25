@@ -62,7 +62,7 @@ public class SpiderTankState : MonoBehaviour
 		}
 	}
 
-	public EnemySpawner arenaSpawner
+	public EnemySpawner spawner
 	{
 		get
 		{

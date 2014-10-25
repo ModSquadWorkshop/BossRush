@@ -24,7 +24,6 @@ public class SpiderTank : MonoBehaviour
 	[HideInInspector] public SpiderTankTurboState turboState;
 
 	[HideInInspector] public HealthSystem health;
-	[HideInInspector] public EnemySpawner spawner;
 
 	private HealthTrigger _healthTriggerCallback = delegate( HealthSystem health ) { };
 	private float _healthTrigger;
@@ -41,7 +40,6 @@ public class SpiderTank : MonoBehaviour
 
 		// retrieve other componenets
 		health = GetComponent<HealthSystem>();
-		spawner = GetComponent<EnemySpawner>();
 
 		// register for player death callback
 		player.gameObject.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerDeathCallback );

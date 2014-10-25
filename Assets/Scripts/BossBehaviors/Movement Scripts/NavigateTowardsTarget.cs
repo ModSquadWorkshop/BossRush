@@ -3,6 +3,8 @@ using System.Collections;
 
 public class NavigateTowardsTarget : MonoBehaviour, ITargetBasedMovement
 {
+	public bool movingTarget;
+
 	private Transform _target;
 	private NavMeshAgent _agent;
 
@@ -14,7 +16,7 @@ public class NavigateTowardsTarget : MonoBehaviour, ITargetBasedMovement
 	public void OnEnable()
 	{
 		_agent.enabled = true;
-		Invoke( "ResetTarget", 0.05f );
+		ResetTarget();
 	}
 
 	public void OnDisable()
@@ -25,8 +27,14 @@ public class NavigateTowardsTarget : MonoBehaviour, ITargetBasedMovement
 
 	public void ResetTarget()
 	{
-		_agent.SetDestination( _target.position );
-		Invoke( "ResetTarget", 0.5f );
+		if ( _target != null )
+		{
+			_agent.SetDestination( _target.position );
+		}
+		if ( movingTarget )
+		{
+			Invoke( "ResetTarget", 0.2f );
+		}
 	}
 
 	public Transform target

@@ -8,18 +8,9 @@ public class SpiderTankLaserSpin : SpiderTankState
 
 	public float duration;
 
-	private FlankingSpawner _spawner;
-
-	public override void Awake()
-	{
-		base.Awake();
-
-		_spawner = GetComponent<FlankingSpawner>();
-	}
-
 	void OnEnable()
 	{
-		_spawner.enabled = spawnMinions;
+		spawner.enabled = spawnMinions;
 		Invoke( "TransitionOut", duration );
 		spiderTank.RegisterHealthTriggerCallback( HealthTriggerCallback );
 	}
@@ -31,7 +22,7 @@ public class SpiderTankLaserSpin : SpiderTankState
 
 	void OnDisable()
 	{
-		_spawner.enabled = false;
+		spawner.enabled = false;
 		spiderTank.DeregisterHealthTriggerCallback( HealthTriggerCallback );
 	}
 
