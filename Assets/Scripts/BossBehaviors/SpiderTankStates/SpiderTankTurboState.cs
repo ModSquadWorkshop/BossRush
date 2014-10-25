@@ -9,23 +9,20 @@ public class SpiderTankTurboState : SpiderTankState
 
 	public float duration;
 
-	public MoveTowardsTarget movementScript;
-
-	private FlankingSpawner _spawner;
+	public NavigateTowardsTarget movementScript;
 
 	public override void Awake()
 	{
 		base.Awake();
-
-		_spawner = GetComponent<FlankingSpawner>();
+		movementScript = GetComponent<NavigateTowardsTarget>();
 		movementScript.target = player;
 	}
 
 	void OnEnable()
 	{
 		spiderTank.mainCanon.SetCooldown( canonDelay );
-		_spawner.enabled = true;
-		_spawner.amountPerWave = amountPerWave;
+		spawner.amountPerWave = amountPerWave;
+		spawner.enabled = true;
 		movementScript.enabled = true;
 
 		// register for health trigger callbacks
@@ -42,7 +39,7 @@ public class SpiderTankTurboState : SpiderTankState
 
 	void OnDisable()
 	{
-		_spawner.enabled = false;
+		spawner.enabled = false;
 		movementScript.enabled = false;
 		spiderTank.DeregisterHealthTriggerCallback( HealthTriggerCallback );
 	}

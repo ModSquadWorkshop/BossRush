@@ -10,8 +10,6 @@ public class SpiderTank : MonoBehaviour
 	public BeamWeapon laserCanon;
 	public Gun[] otherGuns;
 
-	public EnemySpawner arenaSpawner;
-
 	public float defaultCanonLookSpeed;
 
 	public float healthTriggerInterval;

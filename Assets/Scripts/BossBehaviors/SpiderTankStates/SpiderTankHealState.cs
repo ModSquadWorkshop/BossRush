@@ -10,13 +10,12 @@ public class SpiderTankHealState : SpiderTankState
 	public override void Awake()
 	{
 		base.Awake();
-
-		arenaSpawner.RegisterEnemyCountCallback( MinionCountChange );
 	}
 
 	void OnEnable()
 	{
-		arenaSpawner.Spawn( mininionCount );
+		spawner.Spawn( mininionCount );
+		spawner.RegisterEnemyCountCallback( MinionCountChange );
 	}
 
 	public void Update()
@@ -28,12 +27,17 @@ public class SpiderTankHealState : SpiderTankState
 		}
 	}
 
+	public void OnDisable()
+	{
+		spawner.DeregisterEnemyCountCallback( MinionCountChange );
+	}
+
 	public void MinionCountChange( int count )
 	{
 		if ( this != null && enabled && count == 0 )
 		{
 			enabled = false;
-			arenaSpawner.enabled = false;
+			spawner.enabled = false;
 
 			spiderTank.SetDamageBase();
 

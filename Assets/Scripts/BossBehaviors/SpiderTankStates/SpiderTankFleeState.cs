@@ -27,9 +27,9 @@ public class SpiderTankFleeState : SpiderTankState
 		pathMovement.enabled = true;
 		mainCanon.SetCooldown( mainCanonCooldown );
 
-		arenaSpawner.enabled = true;
-		arenaSpawner.amountPerWave = minionsPerWave;
-		arenaSpawner.StartSpawning();
+		spawner.enabled = true;
+		spawner.amountPerWave = minionsPerWave;
+		spawner.StartSpawning();
 	}
 
 	public void Update()
@@ -40,9 +40,9 @@ public class SpiderTankFleeState : SpiderTankState
 
 	public void OnDisable()
 	{
-		arenaSpawner.enabled = false;
+		spawner.enabled = false;
 		pathMovement.enabled = false;
-		spiderTank.arenaSpawner.StopSpawning();
+		spawner.StopSpawning();
 	}
 
 	public void DestinationReached( PathMovement movement )
