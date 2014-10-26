@@ -58,10 +58,26 @@ public class SpiderTankState : MonoBehaviour
 		}
 	}
 
+	public NavMeshAgent agent
+	{
+		get
+		{
+			return spiderTank.agent;
+		}
+	}
+
+	public Collider doorCollider
+	{
+		get
+		{
+			return spiderTank.doorCollider;
+		}
+	}
+
 	public void HealthTriggerCallback( HealthSystem health )
 	{
 		CancelInvoke();
 		enabled = false;
-		spiderTank.healState.enabled = true;
+		spiderTank.fleeState.enabled = true;
 	}
 }

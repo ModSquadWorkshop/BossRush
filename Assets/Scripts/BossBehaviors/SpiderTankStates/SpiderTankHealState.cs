@@ -16,7 +16,8 @@ public class SpiderTankHealState : SpiderTankState
 	{
 		spawner.Spawn( mininionCount );
 		spawner.RegisterEnemyCountCallback( MinionCountChange );
-		spiderTank.SpawnShied();
+		shield.SetActive( true );
+		Physics.IgnoreCollision( collider, shield.collider, true );
 	}
 
 	public void Update()
@@ -31,7 +32,7 @@ public class SpiderTankHealState : SpiderTankState
 	public void OnDisable()
 	{
 		spawner.DeregisterEnemyCountCallback( MinionCountChange );
-		spiderTank.DestroyShield();
+		shield.SetActive( false );
 	}
 
 	public void MinionCountChange( int count )

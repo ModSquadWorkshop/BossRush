@@ -6,6 +6,8 @@ public class SpiderTank : MonoBehaviour
 
 	public Transform player;
 
+	public Collider doorCollider;
+
 	public Gun mainCanon;
 	public BeamWeapon laserCanon;
 	public Gun[] otherGuns;
@@ -20,13 +22,14 @@ public class SpiderTank : MonoBehaviour
 	[HideInInspector] public SpiderTankLaserSpin laserSpin;
 	[HideInInspector] public SpiderTankRushState rushState;
 	[HideInInspector] public SpiderTankTurboState turboState;
+	[HideInInspector] public SpiderTankEnterState enterState;
 
 	[HideInInspector] public HealthSystem health;
 	[HideInInspector] public EnemySpawner spawner;
+	[HideInInspector] public NavMeshAgent agent;
 
 	private HealthTrigger _healthTriggerCallback = delegate( HealthSystem health ) { };
 	private float _healthTrigger;
-	private GameObject _shield;
 
 	void Awake()
 	{
@@ -37,10 +40,12 @@ public class SpiderTank : MonoBehaviour
 		laserSpin = GetComponent<SpiderTankLaserSpin>();
 		rushState = GetComponent<SpiderTankRushState>();
 		turboState = GetComponent<SpiderTankTurboState>();
+		enterState = GetComponent<SpiderTankEnterState>();
 
 		// retrieve other componenets
 		health = GetComponent<HealthSystem>();
 		spawner = GetComponent<EnemySpawner>();
+		agent = GetComponent<NavMeshAgent>();
 
 		// register for player death callback
 		player.gameObject.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerDeathCallback );
@@ -156,17 +161,6 @@ public class SpiderTank : MonoBehaviour
 	{
 		FireMainCanon();
 		FireOtherGuns();
-	}
-
-	public void SpawnShied()
-	{
-		_shield = Instantiate( shield, transform.position, transform.rotation ) as GameObject;
-		Physics.IgnoreCollision( collider, _shield.collider );
-	}
-
-	public void DestroyShield()
-	{
-		Destroy( _shield );
 	}
 
 	public void RegisterHealthTriggerCallback( HealthTrigger callback )
