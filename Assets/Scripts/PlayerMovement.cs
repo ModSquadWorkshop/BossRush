@@ -10,8 +10,15 @@ sealed public class PlayerMovement : MonoBehaviour
 	public float speedMultiplier;
 
 	public float lookSpeed = 10.0f;
+
 	public float dashDistance;
 	public float dashTime;
+	public float dashDelay;
+	public bool stopWeaponInDash;
+
+	private Timer _dashTimer;
+	private Timer _dashDelayTimer;
+	private Vector3 _dashForward;
 
 	HealthSystem playerHealth;
 	CameraFollow camShake;
@@ -22,48 +29,78 @@ sealed public class PlayerMovement : MonoBehaviour
 		//register for damage callback (rumble and shake)
 		playerHealth = this.GetComponent<HealthSystem>();
 		playerHealth.RegisterHealthCallback( TargetDamageCallback );
+
 		camShake = Camera.main.gameObject.GetComponent<CameraFollow>();
 		rumbler = Camera.main.gameObject.GetComponent<RumbleManager>();
+
+		_dashTimer = new Timer( dashTime, 1 );
+		_dashDelayTimer = new Timer( dashDelay, 1 );
 	}
 
 	void Update()
 	{
-		float horizontalAxis = Input.GetAxis( "Horizontal" );
-		float verticalAxis = Input.GetAxis( "Vertical" );
-		// cardinal movement
-		Vector3 movement = new Vector3( Input.GetAxis( "Horizontal" ),
-		                                0.0f,
-		                                Input.GetAxis( "Vertical" ) );
-		rigidbody.velocity = movement * baseSpeed * speedMultiplier;
-
-		//Direction the player is moving in, used for dashing
-		Vector3 forwardDash = new Vector3( horizontalAxis, 0.0f, verticalAxis );
-		// handle mouse input
-		lookTarget.Translate( new Vector3( Input.GetAxis( "Mouse X" ), 0.0f, Input.GetAxis( "Mouse Y" ) ) * lookSpeed );
-
-		// handle game pad look
-		Vector3 gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ),
-		                                   0.0f,
-		                                   Input.GetAxis( "Look Vertical" ) );
-		if ( gamePadLook.sqrMagnitude > 0.0f )
+		if ( !_dashTimer.running )
 		{
-			// hide look target
-			//lookTarget.renderer.enabled = false;
+			float horizontalAxis = Input.GetAxis( "Horizontal" );
+			float verticalAxis = Input.GetAxis( "Vertical" );
 
-			lookTarget.localPosition = gamePadLook;
+			Vector3 forward = new Vector3( horizontalAxis, 0.0f, verticalAxis );
+
+			// cardinal movement
+			rigidbody.velocity = forward * speed;
+
+			// handle mouse input
+			lookTarget.Translate( new Vector3( Input.GetAxis( "Mouse X" ), 0.0f, Input.GetAxis( "Mouse Y" ) ) * lookSpeed );
+
+			// handle game pad look
+			Vector3 gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ), 0.0f,
+											   Input.GetAxis( "Look Vertical" ) );
+			if ( gamePadLook.sqrMagnitude > 0.0f )
+			{
+				// hide look target
+				//lookTarget.renderer.enabled = false;
+				lookTarget.localPosition = gamePadLook;
+			}
+
+			_dashDelayTimer.Update();
+
+			// handle dash
+			if ( Input.GetButtonDown( "Dash" ) )
+			{
+				if ( !_dashDelayTimer.running )
+				{
+					_dashTimer.Reset( true );
+					_dashForward = forward * dashDistance;
+
+					if ( stopWeaponInDash )
+					{
+						WeaponSystem weapons = this.GetComponent<WeaponSystem>();
+						weapons.currentWeapon.enabled = false;
+					}
+				}
+			}
+
+			// don't actually rotate the root Player object,
+			// rotate the model.
+			playerModel.transform.LookAt( lookTarget );
 		}
-
-		//Dash implementation using iTween
-		if ( Input.GetButtonDown( "Dash" ) )
+		else
 		{
-			iTween.MoveTo( this.gameObject, this.gameObject.transform.position + ( forwardDash * dashDistance ) , dashTime );
-			//Debug.Log( forwardDash );
+			rigidbody.velocity = _dashForward * speed;
+
+			_dashTimer.Update();
+
+			if ( _dashTimer.complete )
+			{
+				if ( stopWeaponInDash )
+				{
+					WeaponSystem weapons = this.GetComponent<WeaponSystem>();
+					weapons.currentWeapon.enabled = true;
+				}
+
+				_dashDelayTimer.Reset( true );
+			}
 		}
-
-
-		// don't actually rotate the root Player object,
-		// rotate the model.
-		playerModel.transform.LookAt( lookTarget );
 	}
 
 	public float speed
