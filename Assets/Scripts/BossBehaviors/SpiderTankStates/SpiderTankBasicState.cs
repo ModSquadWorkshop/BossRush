@@ -9,7 +9,10 @@ public class SpiderTankBasicState : SpiderTankState
 
 	public float minRushInterval, maxRushInterval;
 
-	public PhysicsMovement defaultMovement;
+	[Range( 0.0f, 1.0f )]
+	public float turboChance;
+
+	public PhysicsMovement movementScript;
 
 	private SpiderTankRushState _rushState;
 	private FlankingSpawner _spawner;
@@ -29,29 +32,43 @@ public class SpiderTankBasicState : SpiderTankState
 		_spawner.amountPerWave = amountPerWave;
 
 		// set initial states of movement scripts
-		defaultMovement.enabled = true;
+		movementScript.enabled = true;
 		_rushState.enabled = false;
+		_rushState.returnState = this;
 
 		// queue up first rush attack
-		Invoke( "StartRush", Random.Range( minRushInterval, maxRushInterval ) );
+		Invoke( "TransitionOut", Random.Range( minRushInterval, maxRushInterval ) );
+
+		// register for health trigger callbacks
+		spiderTank.RegisterHealthTriggerCallback( HealthTriggerCallback );
 	}
 
 	void Update()
 	{
 		spiderTank.LookMainCanon( turretSpeed );
 		spiderTank.FireMainCanon();
+
+		Quaternion lookRotation = Quaternion.LookRotation( player.position - transform.position );
+		transform.rotation = Quaternion.RotateTowards( transform.rotation, lookRotation, 90.0f * Time.deltaTime );
 	}
 
 	void OnDisable()
 	{
-		// make sure pending Invokes aren't called while we're disabled
-		CancelInvoke();
+		movementScript.enabled = false;
+		spiderTank.DeregisterHealthTriggerCallback( HealthTriggerCallback );
 	}
 
-	void StartRush()
+	void TransitionOut()
 	{
-		defaultMovement.enabled = false;
 		enabled = false;
-		_rushState.enabled = true;
+
+		if ( Random.Range( 0.0f, 1.0f ) < turboChance )
+		{
+			spiderTank.turboState.enabled = true;
+		}
+		else
+		{
+			_rushState.enabled = true;
+		}
 	}
 }

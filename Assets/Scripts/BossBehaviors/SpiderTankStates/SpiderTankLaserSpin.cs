@@ -4,8 +4,9 @@ using System.Collections;
 public class SpiderTankLaserSpin : SpiderTankState
 {
 	public float rotation;
-
 	public bool spawnMinions;
+
+	public float duration;
 
 	private FlankingSpawner _spawner;
 
@@ -19,11 +20,19 @@ public class SpiderTankLaserSpin : SpiderTankState
 	void OnEnable()
 	{
 		_spawner.enabled = spawnMinions;
+		Invoke( "TransitionOut", duration );
+		spiderTank.RegisterHealthTriggerCallback( HealthTriggerCallback );
 	}
 
 	void Update()
 	{
 		spiderTank.laserCanon.PerformPrimaryAttack();
+	}
+
+	void OnDisable()
+	{
+		_spawner.enabled = false;
+		spiderTank.DeregisterHealthTriggerCallback( HealthTriggerCallback );
 	}
 
 	void FixedUpdate()
@@ -33,9 +42,17 @@ public class SpiderTankLaserSpin : SpiderTankState
 		rigidbody.angularVelocity = angularVelocity;
 	}
 
-	void Exit()
+	void TransitionOut()
 	{
 		enabled = false;
-		spiderTank.EnterCurrentState();
+
+		if ( Random.value < 0.5f )
+		{
+			spiderTank.basicState.enabled = true;
+		}
+		else
+		{
+			spiderTank.turboState.enabled = true;
+		}
 	}
 }
