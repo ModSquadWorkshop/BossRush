@@ -24,8 +24,7 @@ public class SpiderTankInitialState : SpiderTankState
 			enabled = false;
 			spawner.enabled = false;
 
-			spiderTank.fleeState.returnState = spiderTank.basicState;
-			spiderTank.fleeState.enabled = true;
+			spiderTank.enterState.enabled = true;
 		}
 	}
 }

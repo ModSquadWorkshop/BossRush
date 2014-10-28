@@ -38,11 +38,12 @@ GameObject:
   - 114: {fileID: 11400034}
   - 114: {fileID: 11400038}
   - 114: {fileID: 11400044}
+  - 114: {fileID: 11400048}
   - 114: {fileID: 11400008}
-  - 114: {fileID: 11400036}
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400024}
   - 114: {fileID: 11400046}
+  - 114: {fileID: 11400036}
   m_Layer: 10
   m_Name: Spider Tank
   m_TagString: Enemy
@@ -898,11 +899,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  doorCollider: {fileID: 0}
   mainCanon: {fileID: 11400002}
   laserCanon: {fileID: 11400030}
   otherGuns:
   - {fileID: 11400018}
   - {fileID: 11400012}
+  shield: {fileID: 0}
   defaultCanonLookSpeed: 20
   healthTriggerInterval: 1000
   basicState: {fileID: 0}
@@ -911,8 +914,10 @@ MonoBehaviour:
   laserSpin: {fileID: 0}
   rushState: {fileID: 0}
   turboState: {fileID: 0}
+  enterState: {fileID: 0}
   health: {fileID: 0}
   spawner: {fileID: 0}
+  agent: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1225,15 +1230,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c57db56693d1f5047ab35ce7cc184942, type: 3}
+  m_Script: {fileID: 11500000, guid: 279090449e4b6944390b1cb3b3fd9dad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 50
-  acceleration: 300
-  nodes:
-  - {fileID: 0}
-  - {fileID: 0}
-  traverseBackwards: 1
+  maxSpeed: 75
+  acceleration: 150
 --- !u!114 &11400038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1246,7 +1247,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spiderTank: {fileID: 0}
-  doorCollider: {fileID: 0}
   mainCanonCooldown: 1
   minionsPerWave: 6
   returnState: {fileID: 0}
@@ -1302,11 +1302,28 @@ MonoBehaviour:
   enemyTypes:
   - {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
   enemySpawnChances: []
-  spawns: []
+  spawns:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   spawnPriorities: []
   amountPerWave: 4
   waveInterval: 1
   spawnOnStart: 1
+--- !u!114 &11400048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb030dabac45a0d41b2a10282ae02ba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spiderTank: {fileID: 0}
+  destination: {fileID: 0}
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1
