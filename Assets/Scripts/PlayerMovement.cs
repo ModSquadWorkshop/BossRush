@@ -12,22 +12,27 @@ sealed public class PlayerMovement : MonoBehaviour
 	public float lookSpeed = 10.0f;
 
 	public float dashDistance;
-	public float dashTime;
+	public float dashSpeed;
 	public float dashDelay;
 	public bool stopWeaponInDash;
+
+	private Vector3 _forwardVect;
+	private Vector3 _lookTargetVect;
+	private Vector3 _gamPadVect;
 
 	private Timer _dashTimer;
 	private Timer _dashDelayTimer;
 	private Vector3 _dashOrigin;
-	private Vector3 _dashForward;
 	private RaycastHit _dashHit;
 	private float _dashMaxDistance;
 	private float _dashDistanceTraveled;
 	private int _dashLayerMask;
 
-	HealthSystem playerHealth;
-	CameraFollow camShake;
-	RumbleManager rumbler;
+	private WeaponSystem _playerWeapons;
+
+	private HealthSystem playerHealth;
+	private CameraFollow camShake;
+	private RumbleManager rumbler;
 
 	void Start()
 	{
@@ -38,38 +43,44 @@ sealed public class PlayerMovement : MonoBehaviour
 		camShake = Camera.main.gameObject.GetComponent<CameraFollow>();
 		rumbler = Camera.main.gameObject.GetComponent<RumbleManager>();
 
+		_forwardVect = new Vector3();
+		_lookTargetVect = new Vector3();
+		_gamPadVect = new Vector3();
+
 		// initialize dash timers
-		_dashTimer = new Timer( dashTime, 1 );
+		_dashTimer = new Timer( dashDistance / dashSpeed, 1 );
 		_dashDelayTimer = new Timer( dashDelay, 1 );
 
 		// create a ray casting layer mask that collides with everything accept "Player"
 		_dashLayerMask = 1 << LayerMask.NameToLayer( "Player" );
 		_dashLayerMask = ~_dashLayerMask; // invert the mask
+
+		_playerWeapons = this.GetComponent<WeaponSystem>();
 	}
 
 	void Update()
 	{
 		if ( !_dashTimer.running )
 		{
+			// forward vector
 			float horizontalAxis = Input.GetAxis( "Horizontal" );
 			float verticalAxis = Input.GetAxis( "Vertical" );
-
-			Vector3 forward = new Vector3( horizontalAxis, 0.0f, verticalAxis );
+			_forwardVect.Set( horizontalAxis, 0.0f, verticalAxis );
 
 			// cardinal movement (WASD)
-			rigidbody.velocity = forward * speed;
+			rigidbody.velocity = _forwardVect * speed;
 
 			// handle mouse input
-			lookTarget.Translate( new Vector3( Input.GetAxis( "Mouse X" ), 0.0f, Input.GetAxis( "Mouse Y" ) ) * lookSpeed );
+			_lookTargetVect.Set( Input.GetAxis( "Mouse X" ), 0.0f, Input.GetAxis( "Mouse Y" ) );
+			lookTarget.Translate( _lookTargetVect * lookSpeed );
 
 			// handle game pad look
-			Vector3 gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ), 0.0f,
-											   Input.GetAxis( "Look Vertical" ) );
-			if ( gamePadLook.sqrMagnitude > 0.0f )
+			_gamPadVect.Set( Input.GetAxis( "Look Horizontal" ), 0.0f, Input.GetAxis( "Look Vertical" ) );
+			if ( _gamPadVect.sqrMagnitude > 0.0f )
 			{
 				// hide look target
 				//lookTarget.renderer.enabled = false;
-				lookTarget.localPosition = gamePadLook;
+				lookTarget.localPosition = _gamPadVect;
 			}
 
 			// update the dash delay timer
@@ -85,7 +96,7 @@ sealed public class PlayerMovement : MonoBehaviour
 					_dashOrigin = rigidbody.transform.position;
 
 					// calculate if the dash distance needs to be shorter according to any collisions that will happen
-					if ( Physics.Raycast( _dashOrigin, forward, out _dashHit, Mathf.Infinity, _dashLayerMask ) )
+					if ( Physics.Raycast( _dashOrigin, _forwardVect, out _dashHit, Mathf.Infinity, _dashLayerMask ) )
 					{
 						_dashMaxDistance = _dashHit.distance;
 					}
@@ -97,13 +108,11 @@ sealed public class PlayerMovement : MonoBehaviour
 					if ( stopWeaponInDash ) 
 					{
 						// disable the player's weapon
-						WeaponSystem weapons = this.GetComponent<WeaponSystem>();
-						weapons.currentWeapon.enabled = false;
+						_playerWeapons.currentWeapon.enabled = false;
 					}
 
 					// start the dash
 					_dashDistanceTraveled = 0.0f;
-					_dashForward = forward * dashDistance;
 					_dashTimer.Reset( true );
 				}
 			}
@@ -136,7 +145,7 @@ sealed public class PlayerMovement : MonoBehaviour
 			{
 				// still currently dashing
 
-				rigidbody.velocity = _dashForward * speed;
+				rigidbody.velocity = _forwardVect * dashSpeed;
 			}
 		}
 	}
@@ -151,12 +160,8 @@ sealed public class PlayerMovement : MonoBehaviour
 
 	private void StopDash()
 	{
-		if ( stopWeaponInDash )
-		{
-			// enable the player's weapon
-			WeaponSystem weapons = this.GetComponent<WeaponSystem>();
-			weapons.currentWeapon.enabled = true;
-		}
+		// re-enable the player's weapon
+		_playerWeapons.currentWeapon.enabled = true;
 
 		// start the dash delay timer
 		// the player won't be able to dash again until this timer is complete
