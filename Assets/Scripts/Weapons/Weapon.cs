@@ -32,11 +32,11 @@ public class Weapon : MonoBehaviour
 		}
 	}
 
-	public bool IsOnCooldown
+	public bool isOnCooldown
 	{
 		get
 		{
-			return !_cooldownTimer.IsComplete();
+			return !_cooldownTimer.complete;
 		}
 	}
 
