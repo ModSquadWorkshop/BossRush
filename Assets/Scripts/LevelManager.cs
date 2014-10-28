@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class LevelManager : MonoBehaviour
 {
 	public GameObject player;
 	public GameObject boss;
+
+	public Text bossText;
+	public Text playerText;
 
 	public float levelOverDelay;
 
@@ -15,14 +19,24 @@ public class LevelManager : MonoBehaviour
 		_levelOver = false;
 
 		// register with health systems
-		player.GetComponent<HealthSystem>().RegisterDeathCallback( new HealthSystem.DeathCallback( this.PlayerDied ) );
-		boss.GetComponent<HealthSystem>().RegisterDeathCallback( new HealthSystem.DeathCallback( this.BossDied ) );
+		HealthSystem playerHealth = player.GetComponent<HealthSystem>();
+		playerHealth.RegisterHealthCallback( PlayerDamaged );
+		playerText.text = "Player Health: " + playerHealth.health;
+		player.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerDied );
+
+		HealthSystem bossHealth = boss.GetComponent<HealthSystem>();
+		bossHealth.RegisterHealthCallback( BossDamaged );
+		bossText.text = "Boss Health: " + bossHealth.health;
+		boss.GetComponent<DeathSystem>().RegisterDeathCallback( BossDied );
 	}
 
-	public void PlayerDied( HealthSystem playerHealth )
+	public void PlayerDamaged( HealthSystem playerHealth, float damage )
 	{
-		// TODO say that the player loses
+		playerText.text = "Player Health: " + playerHealth.health;
+	}
 
+	public void PlayerDied( GameObject gameObjectz )
+	{
 		if ( !_levelOver )
 		{
 			_levelOver = true;
@@ -30,10 +44,13 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
-	public void BossDied( HealthSystem bossHealth )
+	public void BossDamaged( HealthSystem bossHealth, float damage )
 	{
-		// TODO say that player wins
+		bossText.text = "Boss Health: " + bossHealth.health;
+	}
 
+	public void BossDied( GameObject gameObject )
+	{
 		if ( !_levelOver )
 		{
 			_levelOver = true;
