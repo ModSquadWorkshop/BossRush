@@ -23,6 +23,7 @@ sealed public class PlayerMovement : MonoBehaviour
 	private Timer _dashTimer;
 	private Timer _dashDelayTimer;
 	private Vector3 _dashOrigin;
+	private Vector3 _dashVelocity;
 	private RaycastHit _dashHit;
 	private float _dashMaxDistance;
 	private float _dashDistanceTraveled;
@@ -113,6 +114,7 @@ sealed public class PlayerMovement : MonoBehaviour
 
 					// start the dash
 					_dashDistanceTraveled = 0.0f;
+					_dashVelocity = _forwardVect * dashSpeed;
 					_dashTimer.Reset( true );
 				}
 			}
@@ -145,7 +147,7 @@ sealed public class PlayerMovement : MonoBehaviour
 			{
 				// still currently dashing
 
-				rigidbody.velocity = _forwardVect * dashSpeed;
+				rigidbody.velocity = _dashVelocity;
 			}
 		}
 	}

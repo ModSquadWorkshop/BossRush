@@ -634,6 +634,10 @@ Prefab:
       propertyPath: baseSpeed
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: c547150bab057b34982e046263a7cf68, type: 2}
+      propertyPath: stopWeaponInDash
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c547150bab057b34982e046263a7cf68, type: 2}
   m_RootGameObject: {fileID: 1363035864}
@@ -1656,7 +1660,7 @@ MonoBehaviour:
   dashDistance: 40
   dashSpeed: 250
   dashDelay: .5
-  stopWeaponInDash: 0
+  stopWeaponInDash: 1
 --- !u!54 &1363035868
 Rigidbody:
   m_ObjectHideFlags: 0
