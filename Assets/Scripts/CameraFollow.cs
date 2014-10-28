@@ -6,13 +6,15 @@ public class CameraFollow : MonoBehaviour
 	public Transform followTarget;
 	public float offset;
 	public float followSpeed = 1.0f;
+	public float shakeForce;
+	public float shakePerDamage;
 
 	void Start()
 	{
-		HealthSystem targetHealth = followTarget.gameObject.GetComponent<HealthSystem>();
-		if ( targetHealth != null )
+		DeathSystem targetDeath = followTarget.gameObject.GetComponent<DeathSystem>();
+		if ( targetDeath != null )
 		{
-			targetHealth.RegisterDeathCallback( TargetDeathCallback );
+			targetDeath.RegisterDeathCallback( TargetDeathCallback );
 		}
 	}
 
@@ -21,8 +23,13 @@ public class CameraFollow : MonoBehaviour
 		transform.position = Vector3.Lerp( transform.position, followTarget.position + new Vector3( 0.0f, offset, 0.0f ), followSpeed * Time.deltaTime );
 	}
 
-	void TargetDeathCallback( HealthSystem targetHealth )
+	void TargetDeathCallback( GameObject gameObject )
 	{
 		Destroy( this );
+	}
+
+	public void Shake( float ammount )
+	{
+		iTween.ShakePosition( Camera.main.gameObject, Vector3.left * ( shakeForce + ( ammount * shakePerDamage ) ), 0f );
 	}
 }
