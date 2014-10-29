@@ -19,6 +19,7 @@ sealed public class PlayerMovement : MonoBehaviour
 	private Vector3 _forwardVect;
 	private Vector3 _lookTargetVect;
 	private Vector3 _gamPadVect;
+	HealthRing bar;
 
 	private Timer _dashTimer;
 	private Timer _dashDelayTimer;
@@ -43,6 +44,7 @@ sealed public class PlayerMovement : MonoBehaviour
 
 		camShake = Camera.main.gameObject.GetComponent<CameraFollow>();
 		rumbler = Camera.main.gameObject.GetComponent<RumbleManager>();
+		bar = GetComponentInChildren<HealthRing>();
 
 		_forwardVect = new Vector3();
 		_lookTargetVect = new Vector3();
@@ -192,6 +194,7 @@ sealed public class PlayerMovement : MonoBehaviour
 
 	private void TargetDamageCallback( HealthSystem playerHealth, float damage )
 	{
+		bar.UpdateHealthBar();
 		camShake.Shake( damage );
 		rumbler.rumble = true;
 		rumbler.Rumble();

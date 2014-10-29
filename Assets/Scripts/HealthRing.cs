@@ -10,12 +10,20 @@ public class HealthRing : MonoBehaviour
 	{
 		playerHealth = this.gameObject.GetComponentInParent<HealthSystem>();
 		maxHealth = this.gameObject.GetComponentInParent<HealthSystem>().maxHealth;
+		renderer.material.SetFloat( "_Cutoff", 0.0001f );
 	}
 
-	void Update () 
+	public void UpdateHealthBar () 
 	{
-		renderer.material.SetFloat( "_Cutoff", 1f - ( playerHealth.health / maxHealth) / 2f );
-		//Debug.Log( 1f - ( playerHealth.health / maxHealth ) / 2f );
+		if ( playerHealth.health / maxHealth < 1 )
+		{
+			renderer.material.SetFloat( "_Cutoff", 1f - (playerHealth.health / maxHealth) );/// 2f );
+			//Debug.Log( 1f - ( playerHealth.health / maxHealth ) / 2f );
+		}
+		else if ( playerHealth.health / maxHealth == 1 )
+		{
+			renderer.material.SetFloat( "_Cutoff", 0.0001f );
+		}
 	}
 }
 
