@@ -14,9 +14,8 @@ public class HealthRing : MonoBehaviour
 
 	void Update () 
 	{
-		renderer.material.SetFloat( "_Cutoff", 1f - (playerHealth.health / maxHealth) );  //Mathf.InverseLerp( 0, Screen.width, Input.mousePosition.x ) ); 
-		//Debug.Log( Mathf.InverseLerp( 0, Screen.width, Input.mousePosition.x) );
-		//Debug.Log( 1f - (playerHealth.health / maxHealth) );
+		renderer.material.SetFloat( "_Cutoff", 1f - ( playerHealth.health / maxHealth) / 2f );
+		//Debug.Log( 1f - ( playerHealth.health / maxHealth ) / 2f );
 	}
 }
 
