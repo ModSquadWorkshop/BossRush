@@ -10,7 +10,6 @@ public class MinionDeath : MonoBehaviour
 
 	HealthSystem otherHealth;
 	DeathTimer timedDeath;
-	DeathTimer effectDeath;
 
 	public GameObject healthDrop; //prefab for health pack perk
 
@@ -19,12 +18,12 @@ public class MinionDeath : MonoBehaviour
 
 	public float explosionRadius;
 	public float explosionDamage;
-	public Material explosionMat;
+	public float explosionForce;
 
 	// Use this for initialization
 	void Start ()
 	{
-		GetComponent<DeathSystem>().RegisterDeathCallback( TargetDeathCallback );
+		GetComponent<DeathSystem>().RegisterDeathCallback( DeathCallback );
 		if ( deathTime > 0 )
 		{
 			timedDeath = gameObject.AddComponent<DeathTimer>();
@@ -32,8 +31,11 @@ public class MinionDeath : MonoBehaviour
 		}
 	}
 
-	void TargetDeathCallback( GameObject minion )
+	void DeathCallback( GameObject minion )
 	{
+		// ensure that we don't get notified of our death multiple times
+		GetComponent<DeathSystem>().DeregisterDeathCallback( DeathCallback );
+
 		if( exploding )
 		{
 			Explode();
@@ -46,28 +48,18 @@ public class MinionDeath : MonoBehaviour
 
 	void Explode()
 	{
-		//Debug.Log( "EXPLODE MINION" );
-		Collider[] col = Physics.OverlapSphere( this.transform.position, explosionRadius );
-
-		//Create a visual representation of explosion
-		GameObject expl = GameObject.CreatePrimitive( PrimitiveType.Sphere );
-		expl.transform.position = this.transform.localPosition;
-		expl.transform.localScale = new Vector3( explosionRadius, explosionRadius, explosionRadius );
-		expl.renderer.material = explosionMat;
-		expl.collider.enabled = false;
-		effectDeath = expl.AddComponent<DeathTimer>();
-		effectDeath.deathTime = 1f;
-
-		int i = 0;
-		while( i < col.Length )
+		Collider[] collisions = Physics.OverlapSphere( transform.position, explosionRadius );
+		foreach ( Collider col in collisions )
 		{
-			otherHealth = col[i].gameObject.GetComponent<HealthSystem>();
+			otherHealth = col.gameObject.GetComponent<HealthSystem>();
 			if( otherHealth != null )
 			{
-				//Debug.Log( "OTHER TAKING EXPLOSION DAMAGE" );
-				otherHealth.health -= explosionDamage;
+				otherHealth.Damage( explosionDamage );
 			}
-			++i;
+			if ( col.rigidbody != null )
+			{
+				col.rigidbody.AddExplosionForce( explosionForce, transform.position, explosionRadius );
+			}
 		}
 	}
 

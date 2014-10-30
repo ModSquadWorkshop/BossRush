@@ -8,16 +8,8 @@ public class DeathTimer : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		if ( deathTime > 0.0f )
-		{
-			_death = new Timer( deathTime, 1 );
-			_death.Start();
-		}
-		else
-		{
-			// don't even bother running the timer
-			enabled = false;
-		}
+		_death = new Timer( deathTime, 1 );
+		_death.Start();
 	}
 
 	// Update is called once per frame
