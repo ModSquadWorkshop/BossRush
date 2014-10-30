@@ -6,35 +6,34 @@ public class Mortar : MonoBehaviour
 	public float damage;
 	public float radius;
 
-	private GameObject _player;
-	private Vector3 _targetPos;
-	private float _arcHeight;
-	private float _time;
-
-	private GameObject _targetMarker; // serves as a reference to a prefab
+	private float		_duration;
+	private GameObject  _target;
+	private Vector3		_targetPos;
+	private GameObject  _targetMarker; // serves as a reference to a prefab
 									  // unity throws an error when trying to destroy this
-	private GameObject _marker; // the actual instantiated target marker
+	private GameObject  _marker; // the actual instantiated target marker
 
-	public void Init( GameObject playerRef, Vector3 startPos, Vector3 targetPos, float arcHeight, float time, GameObject targetMarker )
+	private const float ARC_HEIGHT = 100.0f;
+
+	public void Init( float duration, Vector3 startPos, GameObject target, Vector3 targetPos, GameObject targetMarker )
 	{
 		this.gameObject.transform.position = startPos;
 
-		_player = playerRef;
+		_duration = duration;
+		_target = target;
 		_targetPos = targetPos;
-		_arcHeight = arcHeight;
-		_time = time;
 		_targetMarker = targetMarker;
 	}
 
 	void Start() 
 	{
 
-		float halfTime = _time * 0.5f;
+		float halfTime = _duration * 0.5f;
 
 		iTween.MoveTo( this.gameObject, iTween.Hash( 
 			"x", _targetPos.x, 
-			"z", _targetPos.z, 
-			"y", _targetPos.y + _arcHeight, 
+			"z", _targetPos.z,
+			"y", _targetPos.y + ARC_HEIGHT, 
 			"time", halfTime, 
 			"easeType", iTween.EaseType.linear, 
 			"onComplete", "onMidComplete" ) );
@@ -42,7 +41,7 @@ public class Mortar : MonoBehaviour
 
 	void onMidComplete()
 	{
-		float halfTime = _time * 0.5f;
+		float halfTime = _duration * 0.5f;
 
 		iTween.MoveTo( this.gameObject, iTween.Hash(
 			"y", _targetPos.y,
@@ -56,6 +55,9 @@ public class Mortar : MonoBehaviour
 			_marker = Instantiate( _targetMarker ) as GameObject;
 			_marker.transform.position = _targetPos;
 		}
+
+		// flip the mortar so it faces down
+		this.transform.localScale.Scale( Vector3.one * -1.0f );
 	}
 
 	void onComplete()
@@ -65,12 +67,12 @@ public class Mortar : MonoBehaviour
 			Destroy( _marker );
 		}
 
-		if ( _player != null )
+		if ( _target != null )
 		{
-			float distance = Vector3.Distance( this.gameObject.transform.position, _player.transform.position);
+			float distance = Vector3.Distance( this.gameObject.transform.position, _target.transform.position );
 			if ( distance < radius )
 			{
-				HealthSystem healthSystem = _player.GetComponent<HealthSystem>();
+				HealthSystem healthSystem = _target.GetComponent<HealthSystem>();
 				if ( healthSystem != null )
 				{
 					float damageDropoff = damage * (distance / radius);

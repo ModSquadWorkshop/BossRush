@@ -4,40 +4,40 @@ using System.Collections;
 public class SpiderTankMortarState : SpiderTankState 
 {
 	public GameObject mortarLauncher;
-	public int mortarAmount;
-	public float mortarDelay;
+	public int amountOfMortars;
+	public float delayBeforeLaunch;
 
-	private MortarLauncher _mortarAttack;
+	private MortarAttack _mortarAttack;
 	private Timer _mortarDelayTimer;
 
 	public override void Awake()
 	{
 		base.Awake();
 
-		_mortarDelayTimer = new Timer( mortarDelay, 1 );
+		_mortarDelayTimer = new Timer( delayBeforeLaunch, 1 );
 
-		_mortarAttack = mortarLauncher.GetComponent<MortarLauncher>();
+		_mortarAttack = mortarLauncher.GetComponent<MortarAttack>();
 		if ( _mortarAttack != null )
 		{
+			// auto assign the target of the mortar attack to be the player
+			_mortarAttack.target = player.gameObject;
+
+			// start the delay timer
+			// when the delay is complete, the mortars start launching
 			_mortarDelayTimer.Start();
 		}
 	}
 
 	void Update()
 	{
-		if ( _mortarDelayTimer.IsRunning() )
+		if ( _mortarDelayTimer.running )
 		{
 			_mortarDelayTimer.Update();
 
-			if ( _mortarDelayTimer.IsComplete() )
+			if ( _mortarDelayTimer.complete )
 			{
-				_mortarAttack.Launch( mortarAmount );
+				_mortarAttack.Launch( amountOfMortars );
 			}
 		}
-	}
-
-	public void onEnable()
-	{
-		//...
 	}
 }
