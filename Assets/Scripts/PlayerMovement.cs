@@ -63,26 +63,18 @@ sealed public class PlayerMovement : MonoBehaviour
 	{
 		if ( !_dashTimer.running )
 		{
-			// forward vector
+			/* update the player while not dashing */
+
+			// get the input forward vector
 			float horizontalAxis = Input.GetAxis( "Horizontal" );
 			float verticalAxis = Input.GetAxis( "Vertical" );
 			_forwardVect.Set( horizontalAxis, 0.0f, verticalAxis );
 
-			// cardinal movement (WASD)
+			// apply general movement
 			rigidbody.velocity = _forwardVect * speed;
 
-			// handle mouse input
-			_lookTargetVect.Set( Input.GetAxis( "Mouse X" ), 0.0f, Input.GetAxis( "Mouse Y" ) );
-			lookTarget.Translate( _lookTargetVect * lookSpeed );
-
-			// handle game pad look
-			_gamPadVect.Set( Input.GetAxis( "Look Horizontal" ), 0.0f, Input.GetAxis( "Look Vertical" ) );
-			if ( _gamPadVect.sqrMagnitude > 0.0f )
-			{
-				// hide look target
-				//lookTarget.renderer.enabled = false;
-				lookTarget.localPosition = _gamPadVect;
-			}
+			// handle look direction
+			HandleLookDirection();
 
 			// update the dash delay timer
 			// the player won't be able to dash again until this timer is done running
@@ -91,64 +83,14 @@ sealed public class PlayerMovement : MonoBehaviour
 			// handle dash input
 			if ( Input.GetButtonDown( "Dash" ) ) 
 			{
-				// insure the player isn't already dashing
-				if ( !_dashDelayTimer.running ) 
-				{
-					_dashOrigin = rigidbody.transform.position;
-
-					// calculate if the dash distance needs to be shorter according to any collisions that will happen
-					if ( Physics.Raycast( _dashOrigin, _forwardVect, out _dashHit, Mathf.Infinity, _dashLayerMask ) )
-					{
-						_dashMaxDistance = _dashHit.distance;
-					}
-					else
-					{
-						_dashMaxDistance = Mathf.Infinity;
-					}
-
-					if ( stopWeaponInDash ) 
-					{
-						// disable the player's weapon
-						_playerWeapons.currentWeapon.enabled = false;
-					}
-
-					// start the dash
-					_dashDistanceTraveled = 0.0f;
-					_dashVelocity = _forwardVect * dashSpeed;
-					_dashTimer.Reset( true );
-				}
+				Dash();
 			}
-
-			// don't actually rotate the root Player object, rotate the model
-			playerModel.transform.LookAt( lookTarget );
 		}
 		else
 		{
-			// update dash properties to determine if it needs to be stopped
-			_dashDistanceTraveled = Vector3.Distance( _dashOrigin, rigidbody.transform.position );
-			_dashTimer.Update();
+			/* update the player while dashing */
 
-			if ( _dashTimer.complete ) 
-			{
-				// a full dash occured
-
-				StopDash();
-			}
-			else if ( _dashDistanceTraveled >= _dashMaxDistance )
-			{
-				// a partial dash occured because of collision
-
-				StopDash();
-
-				rigidbody.transform.position = _dashHit.point;
-				rigidbody.velocity = Vector3.zero;
-			}
-			else
-			{
-				// still currently dashing
-
-				rigidbody.velocity = _dashVelocity;
-			}
+			DashingUpdate();
 		}
 	}
 
@@ -157,6 +99,84 @@ sealed public class PlayerMovement : MonoBehaviour
 		get
 		{
 			return baseSpeed * speedMultiplier;
+		}
+	}
+
+	private void HandleLookDirection()
+	{
+		// handle mouse input look
+		_lookTargetVect.Set( Input.GetAxis( "Mouse X" ), 0.0f, Input.GetAxis( "Mouse Y" ) );
+		lookTarget.Translate( _lookTargetVect * lookSpeed );
+
+		// handle game pad look
+		_gamPadVect.Set( Input.GetAxis( "Look Horizontal" ), 0.0f, Input.GetAxis( "Look Vertical" ) );
+		if ( _gamPadVect.sqrMagnitude > 0.0f )
+		{
+			lookTarget.localPosition = _gamPadVect;
+		}
+
+		// don't actually rotate the root Player object, rotate the model
+		playerModel.transform.LookAt( lookTarget );
+	}
+
+	private void Dash() 
+	{
+		// insure the player isn't already dashing
+		if ( !_dashDelayTimer.running )
+		{
+			_dashOrigin = rigidbody.transform.position;
+
+			// calculate if the dash distance needs to be shorter according to any collisions that will happen
+			if ( Physics.Raycast( _dashOrigin, _forwardVect, out _dashHit, Mathf.Infinity, _dashLayerMask ) )
+			{
+				// the dash distance is limited to the closest colliding object
+				_dashMaxDistance = _dashHit.distance;
+			}
+			else
+			{
+				// the dash distance is not limited because no collisions will occur
+				_dashMaxDistance = Mathf.Infinity;
+			}
+
+			if ( stopWeaponInDash )
+			{
+				// disable the player's weapon
+				_playerWeapons.currentWeapon.enabled = false;
+			}
+
+			// start the dash
+			_dashDistanceTraveled = 0.0f;
+			_dashVelocity = _forwardVect * dashSpeed;
+			_dashTimer.Reset( true );
+		}
+	}
+
+	private void DashingUpdate() 
+	{
+		// update dash properties to determine if it needs to be stopped
+		_dashDistanceTraveled = Vector3.Distance( _dashOrigin, rigidbody.transform.position );
+		_dashTimer.Update();
+
+		if ( _dashTimer.complete )
+		{
+			/* a full dash occured */
+
+			StopDash();
+		}
+		else if ( _dashDistanceTraveled >= _dashMaxDistance )
+		{
+			/* a partial dash occured because of collision */
+
+			StopDash();
+
+			rigidbody.transform.position = _dashHit.point;
+			rigidbody.velocity = Vector3.zero;
+		}
+		else
+		{
+			/* still currently dashing */
+
+			rigidbody.velocity = _dashVelocity;
 		}
 	}
 
@@ -170,7 +190,7 @@ sealed public class PlayerMovement : MonoBehaviour
 		_dashDelayTimer.Reset( true );
 	}
 
-	void TargetDamageCallback( HealthSystem playerHealth, float damage )
+	private void TargetDamageCallback( HealthSystem playerHealth, float damage )
 	{
 		camShake.Shake( damage );
 		rumbler.rumble = true;
