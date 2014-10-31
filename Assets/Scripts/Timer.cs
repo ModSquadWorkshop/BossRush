@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
 public class Timer
 {
 	private float _deltaTime;       // in seconds
@@ -53,11 +54,6 @@ public class Timer
 
 	public void Start()
 	{
-		if ( _running )
-		{
-			return;
-		}
-
 		if ( _currentInterval >= _totalIntervals && _totalIntervals > 0 )
 		{
 			return;
@@ -95,13 +91,19 @@ public class Timer
 		return _running;
 	}
 
-	public bool IsTicked()
+	public bool ticked
 	{
-		return _ticked;
+		get
+		{
+			return _ticked;
+		}
 	}
 
-	public bool IsComplete()
+	public bool complete
 	{
-		return _complete;
+		get
+		{
+			return _complete;
+		}
 	}
 }
