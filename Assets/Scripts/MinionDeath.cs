@@ -11,7 +11,8 @@ public class MinionDeath : MonoBehaviour
 	HealthSystem otherHealth;
 	DeathTimer timedDeath;
 
-	public GameObject healthDrop; //prefab for health pack perk
+	public GameObject dropItem;
+	public GameObject explosionEffect;
 
 	[Range( 0.0f, 1.0f )]
 	public float dropChance;
@@ -61,13 +62,15 @@ public class MinionDeath : MonoBehaviour
 				col.rigidbody.AddExplosionForce( explosionForce, transform.position, explosionRadius );
 			}
 		}
+
+		( Instantiate( explosionEffect, transform.position, transform.rotation ) as GameObject ).GetComponent<Explosion>().radius = explosionRadius;
 	}
 
 	void Drop()
 	{
 		if ( Random.Range( 0.0f, 1.0f ) < dropChance )
 		{
-			Instantiate( healthDrop, this.transform.localPosition, this.transform.rotation );
+			Instantiate( dropItem, this.transform.localPosition, this.transform.rotation );
 			Debug.Log( "HEALTH PACK DEPLOYED" );
 		}
 	}

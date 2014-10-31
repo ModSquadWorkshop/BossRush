@@ -154,7 +154,8 @@ MonoBehaviour:
   deathTime: 0
   exploding: 1
   dropping: 0
-  healthDrop: {fileID: 100000, guid: be9500392faf11e44811eea59134f552, type: 2}
+  dropItem: {fileID: 0}
+  explosionEffect: {fileID: 100000, guid: f50fcebfdae35044683c14337e5c36e8, type: 2}
   dropChance: .125
   explosionRadius: 10
   explosionDamage: 10
