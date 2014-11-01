@@ -9,7 +9,7 @@ public class SpiderTank : MonoBehaviour
 	public Collider doorCollider;
 
 	public Gun mainCanon;
-	public BeamWeapon laserCanon;
+	public BeamWeapon [] laserCanon;
 	public Gun[] otherGuns;
 	public GameObject shield;
 

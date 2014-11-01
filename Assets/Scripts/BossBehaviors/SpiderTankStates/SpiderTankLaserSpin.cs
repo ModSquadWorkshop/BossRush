@@ -17,7 +17,10 @@ public class SpiderTankLaserSpin : SpiderTankState
 
 	void Update()
 	{
-		spiderTank.laserCanon.PerformPrimaryAttack();
+		for ( int i = 0; i < spiderTank.laserCanon.Length; ++i )
+		{
+			spiderTank.laserCanon[i].PerformPrimaryAttack();
+		}
 	}
 
 	void OnDisable()
