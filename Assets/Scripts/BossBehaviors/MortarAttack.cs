@@ -53,7 +53,7 @@ public class MortarAttack : MonoBehaviour
 		Mortar m = mortarObject.GetComponent<Mortar>();
 		Vector3 targetPos = RandomTargetPosition();
 
-		m.Init( 100.0f / Random.Range( mortarSpeedMin, mortarSpeedMax ), // speed/time/duration
+		m.Init( Random.Range( mortarSpeedMin, mortarSpeedMax ),
 				this.gameObject.transform.position,
 				target,
 				targetPos,

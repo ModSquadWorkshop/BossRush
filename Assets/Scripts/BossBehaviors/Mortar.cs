@@ -6,20 +6,23 @@ public class Mortar : MonoBehaviour
 	public float damage;
 	public float radius;
 
-	private float		_duration;
+	private float		_speed;
 	private GameObject  _target;
 	private Vector3		_targetPos;
 	private GameObject  _targetMarker; // serves as a reference to a prefab
 									  // unity throws an error when trying to destroy this
 	private GameObject  _marker; // the actual instantiated target marker
+	private Vector3		_velocity;
+	private bool		_peakReached;
 
 	private const float ARC_HEIGHT = 100.0f;
+	private const float SPEED_INCREASE = 2.5f;
 
-	public void Init( float duration, Vector3 startPos, GameObject target, Vector3 targetPos, GameObject targetMarker )
+	public void Init( float speed, Vector3 startPos, GameObject target, Vector3 targetPos, GameObject targetMarker )
 	{
 		this.gameObject.transform.position = startPos;
 
-		_duration = duration;
+		_speed = speed;
 		_target = target;
 		_targetPos = targetPos;
 		_targetMarker = targetMarker;
@@ -27,28 +30,41 @@ public class Mortar : MonoBehaviour
 
 	void Start() 
 	{
-
-		float halfTime = _duration * 0.5f;
-
-		iTween.MoveTo( this.gameObject, iTween.Hash( 
-			"x", _targetPos.x, 
-			"z", _targetPos.z,
-			"y", _targetPos.y + ARC_HEIGHT, 
-			"time", halfTime, 
-			"easeType", iTween.EaseType.linear, 
-			"onComplete", "onMidComplete" ) );
+		_peakReached = false;
+		_velocity = Vector3.zero;
+		_targetPos.Set( _targetPos.x, _targetPos.y + ARC_HEIGHT, _targetPos.z );
 	}
 
-	void onMidComplete()
+	void Update()
 	{
-		float halfTime = _duration * 0.5f;
+		if ( _peakReached )
+		{
+			this.gameObject.transform.Translate( _velocity * Time.deltaTime, Space.World );
 
-		iTween.MoveTo( this.gameObject, iTween.Hash(
-			"y", _targetPos.y,
-			"time", halfTime,
-			"delay", halfTime,
-			"easeType", iTween.EaseType.linear,
-			"oncomplete", "onComplete" ) );
+			if ( Vector3.Distance( this.gameObject.transform.position, _targetPos ) < 2.0f )
+			{
+				OnComplete();
+			}
+		}
+		else
+		{
+			this.gameObject.transform.position = Vector3.SmoothDamp( this.gameObject.transform.position, _targetPos, ref _velocity, Time.deltaTime * _speed );
+			this.gameObject.transform.rotation = Quaternion.AngleAxis( Mathf.Atan2( _velocity.y, _velocity.x ) * Mathf.Rad2Deg, Vector3.forward * 90.0f );
+
+			if ( Vector3.Distance( this.gameObject.transform.position, _targetPos ) < 2.0f )
+			{
+				OnMidComplete();
+			}
+		}
+	}
+
+	void OnMidComplete()
+	{
+		_speed *= SPEED_INCREASE;
+		_targetPos.Set( _targetPos.x, _targetPos.y - ARC_HEIGHT, _targetPos.z );
+		_velocity = Vector3.down * _speed;
+
+		this.gameObject.transform.rotation = Quaternion.AngleAxis( Mathf.Atan2( _velocity.y, _velocity.x ) * Mathf.Rad2Deg, Vector3.forward * 90.0f );
 
 		if ( _targetMarker != null )
 		{
@@ -56,11 +72,10 @@ public class Mortar : MonoBehaviour
 			_marker.transform.position = _targetPos;
 		}
 
-		// flip the mortar so it faces down
-		this.transform.localScale.Scale( Vector3.one * -1.0f );
+		_peakReached = true;
 	}
 
-	void onComplete()
+	void OnComplete()
 	{
 		if ( _marker != null )
 		{
@@ -81,6 +96,7 @@ public class Mortar : MonoBehaviour
 			}
 		}
 
+		this.enabled = false;
 		Destroy( this.gameObject );
 	}
 }
