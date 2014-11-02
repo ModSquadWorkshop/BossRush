@@ -26,7 +26,7 @@ public class SpiderTankState : MonoBehaviour
 		}
 	}
 
-	public BeamWeapon laserCanon
+	public BeamWeapon[] laserCanon
 	{
 		get
 		{
