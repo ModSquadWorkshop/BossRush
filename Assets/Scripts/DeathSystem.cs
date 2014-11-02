@@ -9,9 +9,12 @@ public class DeathSystem : MonoBehaviour
 
 	public void RegisterDeathCallback( DeathCallback callback )
 	{
-		// by the power of delegate composition,
-		// I combine thee!
 		_deathCallback += callback;
+	}
+
+	public void DeregisterDeathCallback( DeathCallback callback )
+	{
+		_deathCallback -= callback;
 	}
 
 	public void NotifyDeath()
