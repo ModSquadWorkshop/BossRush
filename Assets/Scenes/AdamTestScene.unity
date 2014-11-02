@@ -503,6 +503,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11400000, guid: 1c20c631b8bde4a4d8eb734b60fa807f, type: 2}
+      propertyPath: predefinedTargetPos.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1c20c631b8bde4a4d8eb734b60fa807f, type: 2}
       propertyPath: m_LocalPosition.x
       value: 100
@@ -583,6 +587,18 @@ Prefab:
       propertyPath: targetMarker
       value: 
       objectReference: {fileID: 100000, guid: 1a748d5f766af9345ae5d3d8018f8c26, type: 2}
+    - target: {fileID: 11400000, guid: 1c20c631b8bde4a4d8eb734b60fa807f, type: 2}
+      propertyPath: usePredefinedTargetPos
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 1c20c631b8bde4a4d8eb734b60fa807f, type: 2}
+      propertyPath: predefinedTargetPos.Array.data[0]
+      value: 
+      objectReference: {fileID: 1363035870}
+    - target: {fileID: 11400000, guid: 1c20c631b8bde4a4d8eb734b60fa807f, type: 2}
+      propertyPath: predefinedTargetPos.Array.data[1]
+      value: 
+      objectReference: {fileID: 1470767336}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1c20c631b8bde4a4d8eb734b60fa807f, type: 2}
   m_RootGameObject: {fileID: 1103973108}
@@ -1354,6 +1370,8 @@ MonoBehaviour:
   mortarMinDistance: 0
   mortarMaxDistance: 20
   delayBetweenMortars: .150000006
+  usePredefinedTargetPos: 0
+  predefinedTargetPos: []
 --- !u!23 &1103973110
 Renderer:
   m_ObjectHideFlags: 0
