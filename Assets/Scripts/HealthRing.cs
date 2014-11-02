@@ -1,26 +1,21 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class HealthRing : MonoBehaviour 
+public class HealthRing : MonoBehaviour
 {
-	HealthSystem playerHealth;
-	float maxHealth;
-
-	void Start () 
+	void Start()
 	{
-		playerHealth = this.gameObject.GetComponentInParent<HealthSystem>();
-		maxHealth = this.gameObject.GetComponentInParent<HealthSystem>().maxHealth;
-		renderer.material.SetFloat( "_Cutoff", 0.0001f );
+		HealthSystem playerHealth = GetComponentInParent<HealthSystem>();
+		playerHealth.RegisterHealthCallback( UpdateHealthBar );
+		UpdateHealthBar( playerHealth, 0.0f ); // set initial health bar state
 	}
 
-	public void UpdateHealthBar () 
+	public void UpdateHealthBar( HealthSystem playerHealth, float healthChange )
 	{
-		if ( playerHealth.health / maxHealth < 1 )
+		if ( playerHealth.health / playerHealth.maxHealth < 1 )
 		{
-			renderer.material.SetFloat( "_Cutoff", 1f - (playerHealth.health / maxHealth) );/// 2f );
-			//Debug.Log( 1f - ( playerHealth.health / maxHealth ) / 2f );
+			renderer.material.SetFloat( "_Cutoff", 1f - ( playerHealth.health / playerHealth.maxHealth ) );
 		}
-		else if ( playerHealth.health / maxHealth == 1 )
+		else if ( playerHealth.health / playerHealth.maxHealth == 1 )
 		{
 			renderer.material.SetFloat( "_Cutoff", 0.0001f );
 		}

@@ -19,7 +19,6 @@ public class DeathSystem : MonoBehaviour
 
 	public void NotifyDeath()
 	{
-
 		_deathCallback( gameObject );
 	}
 

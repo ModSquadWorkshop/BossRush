@@ -45,8 +45,14 @@ public class SpiderTankHealState : SpiderTankState
 		spawner.enabled = false;
 		spiderTank.SetDamageBase();
 		spawner.DeregisterEnemyCountCallback( MinionCountChange );
-		shield.SetActive( false );
-		shield.gameObject.GetComponent<DeathSystem>().DeregisterDeathCallback( ShieldDestroyed );
+
+		// on shutdown the shield gets destroyed before the spider tank,
+		// so we have the potential for null references here
+		if ( shield != null )
+		{
+			shield.SetActive( false );
+			shield.gameObject.GetComponent<DeathSystem>().DeregisterDeathCallback( ShieldDestroyed );
+		}
 	}
 
 	public void MinionCountChange( int count )
