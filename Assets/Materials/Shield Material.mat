@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: GreenMat
-  m_Shader: {fileID: 7, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: Shield Material
+  m_Shader: {fileID: 33, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -24,7 +24,7 @@ Material:
         first:
           name: _BumpMap
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: dab0806454e4d924491b1b84dddaa6b7, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -52,7 +52,7 @@ Material:
       data:
         first:
           name: _Shininess
-        second: .078125
+        second: 1
       data:
         first:
           name: _InvFade
@@ -64,20 +64,20 @@ Material:
       data:
         first:
           name: _Parallax
-        second: .0199999996
+        second: .0799999982
     m_Colors:
       data:
         first:
           name: _Color
-        second: {r: 0, g: 1, b: 0, a: 1}
+        second: {r: .117241383, g: 1, b: 0, a: .549019635}
       data:
         first:
           name: _Emission
-        second: {r: .286943644, g: .779411793, b: .269355536, a: 0}
+        second: {r: .254817367, g: .75, b: .237132356, a: 0}
       data:
         first:
           name: _SpecColor
-        second: {r: 1, g: .972413778, b: 0, a: 0}
+        second: {r: 1, g: .889655232, b: 0, a: 0}
       data:
         first:
           name: _TintColor

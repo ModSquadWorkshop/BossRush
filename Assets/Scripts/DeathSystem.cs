@@ -5,19 +5,28 @@ public class DeathSystem : MonoBehaviour
 {
 	public delegate void DeathCallback( GameObject gameObject );
 
+	public bool notifyOnce;
+
 	private DeathCallback _deathCallback = delegate( GameObject gameObject ) { };
 
 	public void RegisterDeathCallback( DeathCallback callback )
 	{
-		// by the power of delegate composition,
-		// I combine thee!
 		_deathCallback += callback;
+	}
+
+	public void DeregisterDeathCallback( DeathCallback callback )
+	{
+		_deathCallback -= callback;
 	}
 
 	public void NotifyDeath()
 	{
-
 		_deathCallback( gameObject );
+
+		if ( notifyOnce )
+		{
+			_deathCallback = delegate( GameObject obj ) { };
+		}
 	}
 
 	public void Kill()
