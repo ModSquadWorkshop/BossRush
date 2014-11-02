@@ -21,7 +21,7 @@ public class SpiderTankTurboState : SpiderTankState
 	void OnEnable()
 	{
 		spiderTank.mainCanon.SetCooldown( canonDelay );
-		spawner.amountPerWave = amountPerWave;
+		spawner.baseAmountPerWave = amountPerWave;
 		spawner.enabled = true;
 		movementScript.enabled = true;
 
