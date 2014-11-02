@@ -17,53 +17,31 @@ public class MortarAttack : MonoBehaviour
 	public Transform[] predefinedTargetPos;
 
 	private int _amountMortars;
-	private Timer _delayTimer;
-
-	void Start()
-	{
-		_delayTimer = new Timer( delayBetweenMortars, 1 );
-	}
-
-	void Update()
-	{
-		if ( _amountMortars > 0 )
-		{
-			if ( _delayTimer.running )
-			{
-				_delayTimer.Update();
-
-				if ( _delayTimer.complete )
-				{
-					LaunchMortar();
-				}
-			}
-		}
-		else
-		{
-			_delayTimer.Stop();
-		}
-	}
 
 	public void Launch( int amountMortars )
 	{
 		_amountMortars = amountMortars;
-		_delayTimer.Reset( true );
+		LaunchMortar();
 	}
 
 	private void LaunchMortar()
 	{
-		GameObject mortarObject = Instantiate( mortar ) as GameObject;
-		Mortar m = mortarObject.GetComponent<Mortar>();
-		Vector3 targetPos = GetTargetPosition();
+		if ( _amountMortars > 0 )
+		{
+			GameObject mortarObject = Instantiate( mortar ) as GameObject;
+			Mortar m = mortarObject.GetComponent<Mortar>();
+			Vector3 targetPos = GetTargetPosition();
 
-		m.Init( Random.Range( mortarSpeedMin, mortarSpeedMax ),
-				this.gameObject.transform.position,
-				target,
-				targetPos,
-				targetMarker );
+			m.Init( Random.Range( mortarSpeedMin, mortarSpeedMax ),
+					this.gameObject.transform.position,
+					target,
+					targetPos,
+					targetMarker );
 
-		_amountMortars--;
-		_delayTimer.Reset( true );
+			_amountMortars--;
+
+			Invoke( "LaunchMortar", delayBetweenMortars );
+		}
 	}
 
 	private Vector3 GetTargetPosition()
