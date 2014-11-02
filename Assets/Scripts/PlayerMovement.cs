@@ -81,7 +81,7 @@ sealed public class PlayerMovement : MonoBehaviour
 			_dashDelayTimer.Update();
 
 			// handle dash input
-			if ( Input.GetButtonDown( "Dash" ) ) 
+			if ( Input.GetButtonDown( "Dash" ) )
 			{
 				Dash();
 			}
@@ -119,7 +119,7 @@ sealed public class PlayerMovement : MonoBehaviour
 		playerModel.transform.LookAt( lookTarget );
 	}
 
-	private void Dash() 
+	private void Dash()
 	{
 		// insure the player isn't already dashing
 		if ( !_dashDelayTimer.running )
@@ -151,7 +151,7 @@ sealed public class PlayerMovement : MonoBehaviour
 		}
 	}
 
-	private void DashingUpdate() 
+	private void DashingUpdate()
 	{
 		// update dash properties to determine if it needs to be stopped
 		_dashDistanceTraveled = Vector3.Distance( _dashOrigin, rigidbody.transform.position );
