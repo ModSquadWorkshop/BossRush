@@ -1526,7 +1526,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   spawnPriorities: []
-  amountPerWave: 4
+  baseAmountPerWave: 0
+  amountPerSpawner: 1
   waveInterval: 1
   spawnOnStart: 1
 --- !u!114 &11400048

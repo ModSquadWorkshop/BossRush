@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -10,10 +11,13 @@ public class EnemySpawner : MonoBehaviour
 	public GameObject[] enemyTypes;
 	public float[] enemySpawnChances;
 
-	public Transform[] spawns;
+	public List<Transform> spawns;
+	private DeathSystem _spawnerDeath;
+
 	public float[] spawnPriorities;
 
-	public int amountPerWave;
+	public int baseAmountPerWave;
+	public int amountPerSpawner;
 	public float waveInterval;
 	public bool spawnOnStart;
 
@@ -23,6 +27,12 @@ public class EnemySpawner : MonoBehaviour
 	public void Awake()
 	{
 		_spawnTimer = new Timer( waveInterval );
+		for ( int i = 0; i < spawns.Count; i++ )
+		{
+			//Debug.Log( i );
+			_spawnerDeath = spawns[i].gameObject.GetComponent<DeathSystem>();
+			_spawnerDeath.RegisterDeathCallback( SpawnerDeathCallback );
+		}
 	}
 
 	public void OnEnable()
@@ -65,7 +75,7 @@ public class EnemySpawner : MonoBehaviour
 	 */
 	public void Spawn()
 	{
-		Spawn( amountPerWave );
+		Spawn( baseAmountPerWave + (amountPerSpawner * spawns.Count) );
 	}
 
 	/**
@@ -73,10 +83,13 @@ public class EnemySpawner : MonoBehaviour
 	 */
 	public void Spawn( int amount )
 	{
-		for ( int i = 0; i < amount; i++ )
+		if ( spawns.Count > 0 )
 		{
-			GameObject enemy = GetEnemyBasedOnSpawnChance();
-			InitializeEnemyComponents( enemy );
+			for ( int i = 0; i < amount; i++ )
+			{
+				GameObject enemy = GetEnemyBasedOnSpawnChance();
+				InitializeEnemyComponents( enemy );
+			}
 		}
 	}
 
@@ -88,40 +101,46 @@ public class EnemySpawner : MonoBehaviour
 		// it's optional to provide the amount you want spawned
 		// if you haven't provided an actual amount (e.g. anything greater 0),
 		// then the EnemyManager spawns its normal amount (amountPerSpawn)
-		if ( amount == null )
+		if ( spawns.Count > 0 )
 		{
-			amount = amountPerWave;
-		}
+			if ( amount == null )
+			{
+				amount = baseAmountPerWave + (amountPerSpawner * spawns.Count);
+			}
 
-		for ( int i = 0; i < amount; i++ )
-		{
-			GameObject enemy = Instantiate( type ) as GameObject;
-			InitializeEnemyComponents( enemy );
+			for ( int i = 0; i < amount; i++ )
+			{
+				GameObject enemy = Instantiate( type ) as GameObject;
+				InitializeEnemyComponents( enemy );
+			}
 		}
 	}
 
 	protected virtual void InitializeEnemyComponents( GameObject enemy )
 	{
 		// set spawn point
-		_spawnIndex = Random.Range( 0, spawns.Length );
-		enemy.transform.position = spawns[_spawnIndex].position;
-
-		// if the enemy uses a MoveTowardsTarget script, the target needs to be set
-		ITargetBasedMovement moveTowards = enemy.GetComponent( typeof( ITargetBasedMovement ) ) as ITargetBasedMovement;
-		if ( moveTowards != null )
+		if ( spawns.Count > 0 )
 		{
-			moveTowards.target = GameObject.FindGameObjectWithTag( "Player" ).transform;
-		}
+			_spawnIndex = Random.Range( 0, spawns.Count );
+			enemy.transform.position = spawns[_spawnIndex].position;
 
-		// register for death notification
-		DeathSystem enemyDeath = enemy.GetComponent<DeathSystem>();
-		if ( enemyDeath != null )
-		{
-			enemyDeath.RegisterDeathCallback( EnemyDeathCallback );
-		}
+			// if the enemy uses a MoveTowardsTarget script, the target needs to be set
+			ITargetBasedMovement moveTowards = enemy.GetComponent( typeof( ITargetBasedMovement ) ) as ITargetBasedMovement;
+			if ( moveTowards != null )
+			{
+				moveTowards.target = GameObject.FindGameObjectWithTag( "Player" ).transform;
+			}
 
-		// increment live enemy count
-		enemyCount++;
+			// register for death notification
+			DeathSystem enemyDeath = enemy.GetComponent<DeathSystem>();
+			if ( enemyDeath != null )
+			{
+				enemyDeath.RegisterDeathCallback( EnemyDeathCallback );
+			}
+
+			// increment live enemy count
+			enemyCount++;
+		}
 	}
 
 	protected GameObject GetEnemyBasedOnSpawnChance()
@@ -164,5 +183,10 @@ public class EnemySpawner : MonoBehaviour
 	public void DeregisterEnemyCountCallback( EnemyCountChange callback )
 	{
 		_enemyCountCallback -= callback;
+	}
+
+	private void SpawnerDeathCallback( GameObject spawner )
+	{
+		spawns.Remove( spawner.transform);
 	}
 }

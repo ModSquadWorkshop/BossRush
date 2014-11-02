@@ -16,7 +16,7 @@ public class SpiderTankFleeState : SpiderTankState
 		mainCanon.SetCooldown( mainCanonCooldown );
 
 		spawner.enabled = true;
-		spawner.amountPerWave = minionsPerWave;
+		spawner.baseAmountPerWave = minionsPerWave;
 		spawner.StartSpawning();
 	}
 
