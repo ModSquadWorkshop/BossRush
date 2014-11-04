@@ -82,7 +82,7 @@ public class BeamWeapon : Weapon
 					// check to see if damage can be dealt according to the repeat flag
 					if ( repeatDamage || !_damageDealt )
 					{
-						if ( _damageTimer.IsTicked() )
+						if ( _damageTimer.ticked )
 						{
 							// deal damage to the target
 							_damageSystem.DamageObject( hit.collider.gameObject );
@@ -104,7 +104,7 @@ public class BeamWeapon : Weapon
 
 			_beamTimer.Update();
 
-			if ( _beamTimer.IsComplete() )
+			if ( _beamTimer.complete )
 			{
 				// disable the beam
 				beam.enabled = false;

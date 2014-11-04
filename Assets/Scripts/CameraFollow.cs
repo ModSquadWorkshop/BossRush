@@ -11,10 +11,10 @@ public class CameraFollow : MonoBehaviour
 
 	void Start()
 	{
-		HealthSystem targetHealth = followTarget.gameObject.GetComponent<HealthSystem>();
-		if ( targetHealth != null )
+		DeathSystem targetDeath = followTarget.gameObject.GetComponent<DeathSystem>();
+		if ( targetDeath != null )
 		{
-			targetHealth.RegisterDeathCallback( TargetDeathCallback );
+			targetDeath.RegisterDeathCallback( TargetDeathCallback );
 		}
 	}
 
@@ -23,7 +23,7 @@ public class CameraFollow : MonoBehaviour
 		transform.position = Vector3.Lerp( transform.position, followTarget.position + new Vector3( 0.0f, offset, 0.0f ), followSpeed * Time.deltaTime );
 	}
 
-	void TargetDeathCallback( HealthSystem targetHealth )
+	void TargetDeathCallback( GameObject gameObject )
 	{
 		Destroy( this );
 	}

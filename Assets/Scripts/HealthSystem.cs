@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Diagnostics;
 
 sealed public class HealthSystem : MonoBehaviour
 {
-	public delegate void DeathCallback( HealthSystem self );
-	public delegate void DamageCallback( HealthSystem self, float damage );
+	public delegate void HealthCallback( HealthSystem self, float change );
 
-	public bool immune = false;
-	public bool destroyOnNoLives = true;
+	public bool immune;
+	public bool destroyOnNoLives;
 
-	public int startingLives = 1;
-	public int maxLives = 1;
+	public int startingLives;
+	public int maxLives;
 
-	public float startingHealth = 100.0f;
-	public float maxHealth = 100.0f;
+	public float startingHealth;
+	public float maxHealth;
 
 	public AudioClip[] damageSounds;
 	public AudioClip[] deathSounds;
@@ -21,38 +21,26 @@ sealed public class HealthSystem : MonoBehaviour
 	[SerializeField] private int _lives;
 	[SerializeField] private float _health;
 
-	private DeathCallback _deathCallback;
-	private DamageCallback _damageCallback;
+	private HealthCallback _healthCallback = delegate( HealthSystem self, float change ) { };
 
-	void Start()
+	void Awake()
 	{
 		_health = Mathf.Clamp( startingHealth, 0.0f, maxHealth );
 	}
 
-	public void RegisterDeathCallback( DeathCallback callback )
+	public void RegisterHealthCallback( HealthCallback callback )
 	{
-		// by the power of delegate composition,
-		// I combine thee!
-		_deathCallback += callback;
-	}
-
-	public void RegisterDamageCallback( DamageCallback callback )
-	{
-		_damageCallback += callback;
+		_healthCallback += callback;
 	}
 
 	public float Damage( float damage )
 	{
+		System.Diagnostics.Debug.Assert( damage > 0.0f );
+
 		// if the object is immune, it cannot be damaged
 		if ( immune )
 		{
 			return _health;
-		}
-
-		// if the damage amount is negative, its the same as healing the object
-		if ( damage < 0.0f )
-		{
-			return Heal( damage );
 		}
 
 		if ( damageSounds.Length > 0 )
@@ -60,14 +48,8 @@ sealed public class HealthSystem : MonoBehaviour
 			audio.PlayOneShot( damageSounds[Random.Range( 0, damageSounds.Length )] );
 		}
 
-		_health -= damage;
-
-		if ( _damageCallback != null )
-		{
-			_damageCallback( this, damage );
-		}
-
-		if ( _health < 0.0f )
+		health -= damage;
+		if ( _health <= 0.0f )
 		{
 			Kill();
 		}
@@ -75,17 +57,13 @@ sealed public class HealthSystem : MonoBehaviour
 		return _health;
 	}
 
-	public float Heal( float n )
+	public float Heal( float healAmount )
 	{
-		// if the heal amount is negative, its the same as damaging the object
-		if ( n < 0.0f )
-		{
-			return Damage( n );
-		}
+		System.Diagnostics.Debug.Assert( healAmount > 0.0f );
 
-		_health = Mathf.Clamp( _health + n, 0.0f, maxHealth );
+		health += healAmount;
 
-		return _health;
+		return health;
 	}
 
 	public void Kill()
@@ -99,22 +77,31 @@ sealed public class HealthSystem : MonoBehaviour
 
 		if ( _lives <= 0 )
 		{
-			// call back listeners
-			if ( _deathCallback != null )
-			{
-				_deathCallback( this );
-			}
-
 			if ( destroyOnNoLives )
 			{
-				Destroy( gameObject );
+				GetComponent<DeathSystem>().Kill();
 			}
 			else
 			{
-				// clear death callbacks to prevent them
-				// from being called twice.
-				_deathCallback = null;
+				GetComponent<DeathSystem>().NotifyDeath();
 			}
+		}
+	}
+
+	/**
+	 * \brief Resets health and lives to their starting values.
+	 */
+	public void Reset()
+	{
+		health = startingHealth;
+		lives = startingLives;
+	}
+
+	public bool alive
+	{
+		get
+		{
+			return _health > 0.0f && _lives > 0;
 		}
 	}
 
@@ -124,32 +111,51 @@ sealed public class HealthSystem : MonoBehaviour
 		{
 			return _lives;
 		}
+
 		set
 		{
 			_lives = Mathf.Clamp( value, 0, maxLives );
 		}
 	}
 
+	/**
+	 * \note This bypasses immunity and doesn't play any damage/healing sounds.
+	 * If you actually mean to damage or heal the object, call Damage() or Heal().
+	 */
 	public float health
 	{
 		get
 		{
 			return _health;
 		}
+
 		set
 		{
+			float difference = value - _health;
 			_health = Mathf.Clamp( value, 0.0f, maxHealth );
+			_healthCallback( this, difference );
 		}
 	}
 
-	public float GetHealthPercent()
+	public bool atMaxHealth
 	{
-		return ( _health / maxHealth ) * 100.0f;
+		get
+		{
+			return _health >= maxHealth;
+		}
+	}
+
+	public float percent
+	{
+		get
+		{
+			return _health / maxHealth;
+		}
 	}
 
 	public string GetHealthPercentAsString()
 	{
-		return GetHealthPercent().ToString() + "%";
+		return ( percent * 100.0f ).ToString() + "%";
 	}
 
 	public string GetHealthRatioAsString()

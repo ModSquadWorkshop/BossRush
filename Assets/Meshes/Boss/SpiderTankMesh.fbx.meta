@@ -17,22 +17,24 @@ ModelImporter:
     100022: pCylinder7
     100024: polySurface1
     100026: polySurface1 1
-    100028: SpiderBody
-    100030: //RootNode
-    100032: transform1
-    100034: transform10
-    100036: transform11
-    100038: transform12
-    100040: transform13
-    100042: transform14
-    100044: transform2
-    100046: transform3
-    100048: transform4
-    100050: transform5
-    100052: transform6
-    100054: transform7
-    100056: transform8
-    100058: transform9
+    100028: polySurface5
+    100030: SpiderBody
+    100032: //RootNode
+    100034: transform1
+    100036: transform10
+    100038: transform11
+    100040: transform12
+    100042: transform13
+    100044: transform14
+    100046: transform15
+    100048: transform2
+    100050: transform3
+    100052: transform4
+    100054: transform5
+    100056: transform6
+    100058: transform7
+    100060: transform8
+    100062: transform9
     400000: pCube2
     400002: pCube3
     400004: pCube4
@@ -47,30 +49,32 @@ ModelImporter:
     400022: pCylinder7
     400024: polySurface1
     400026: polySurface1 1
-    400028: SpiderBody
-    400030: //RootNode
-    400032: transform1
-    400034: transform10
-    400036: transform11
-    400038: transform12
-    400040: transform13
-    400042: transform14
-    400044: transform2
-    400046: transform3
-    400048: transform4
-    400050: transform5
-    400052: transform6
-    400054: transform7
-    400056: transform8
-    400058: transform9
-    2300000: polySurface1
-    3300000: polySurface1
-    4300000: polySurface1
+    400028: polySurface5
+    400030: SpiderBody
+    400032: //RootNode
+    400034: transform1
+    400036: transform10
+    400038: transform11
+    400040: transform12
+    400042: transform13
+    400044: transform14
+    400046: transform15
+    400048: transform2
+    400050: transform3
+    400052: transform4
+    400054: transform5
+    400056: transform6
+    400058: transform7
+    400060: transform8
+    400062: transform9
+    2300000: polySurface5
+    3300000: polySurface5
+    4300000: polySurface5
     9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

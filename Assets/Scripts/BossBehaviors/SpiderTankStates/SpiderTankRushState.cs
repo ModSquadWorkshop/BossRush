@@ -3,6 +3,8 @@ using System.Collections;
 
 public class SpiderTankRushState : SpiderTankState
 {
+	[HideInInspector] public SpiderTankState returnState;
+
 	private RushAttack _rushAttack;
 	private DamageSystem _damageSystem;
 
@@ -14,8 +16,10 @@ public class SpiderTankRushState : SpiderTankState
 		_damageSystem = GetComponent<DamageSystem>();
 	}
 
-	public void OnEnable()
+	public override void OnEnable()
 	{
+		base.OnEnable();
+
 		_rushAttack.target = spiderTank.player;
 		_rushAttack.RegisterCallback( new RushAttack.RushEndCallback( EndRush ) );
 		_rushAttack.enabled = true;
@@ -26,7 +30,6 @@ public class SpiderTankRushState : SpiderTankState
 	{
 		enabled = false;
 		_damageSystem.enabled = false;
-
-		spiderTank.EnterCurrentState();
+		returnState.enabled = true;
 	}
 }

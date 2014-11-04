@@ -7,9 +7,6 @@ public class LevelManager : MonoBehaviour
 	public GameObject player;
 	public GameObject boss;
 
-	public Text bossText;
-	public Text playerText;
-
 	public float levelOverDelay;
 
 	private bool _levelOver; //< Used to prevent ResetLevel() from being called twice if both the player and the boss die.
@@ -18,27 +15,12 @@ public class LevelManager : MonoBehaviour
 	{
 		_levelOver = false;
 
-		// register with health systems
-		HealthSystem playerHealth = player.GetComponent<HealthSystem>();
-		playerHealth.RegisterDamageCallback( new HealthSystem.DamageCallback( this.PlayerDamaged ) );
-		playerHealth.RegisterDeathCallback( new HealthSystem.DeathCallback( this.PlayerDied ) );
-		playerText.text = "Player Health: " + playerHealth.health;
-
-		HealthSystem bossHealth = boss.GetComponent<HealthSystem>();
-		bossHealth.RegisterDamageCallback( new HealthSystem.DamageCallback( this.BossDamaged ) );
-		bossHealth.RegisterDeathCallback( new HealthSystem.DeathCallback( this.BossDied ) );
-		bossText.text = "Boss Health: " + bossHealth.health;
+		player.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerDied );
+		boss.GetComponent<DeathSystem>().RegisterDeathCallback( BossDied );
 	}
 
-	public void PlayerDamaged( HealthSystem playerHealth, float damage )
+	public void PlayerDied( GameObject gameObjectz )
 	{
-		playerText.text = "Player Health: " + playerHealth.health;
-	}
-
-	public void PlayerDied( HealthSystem playerHealth )
-	{
-		// TODO say that the player loses
-
 		if ( !_levelOver )
 		{
 			_levelOver = true;
@@ -46,15 +28,8 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
-	public void BossDamaged( HealthSystem bossHealth, float damage )
+	public void BossDied( GameObject gameObject )
 	{
-		bossText.text = "Boss Health: " + bossHealth.health;
-	}
-
-	public void BossDied( HealthSystem bossHealth )
-	{
-		// TODO say that player wins
-
 		if ( !_levelOver )
 		{
 			_levelOver = true;
