@@ -1698,8 +1698,8 @@ Transform:
   m_PrefabInternal: {fileID: 1843697105}
   m_GameObject: {fileID: 708587581}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1942585077}
   m_RootOrder: 0
@@ -1731,7 +1731,7 @@ MeshFilter:
     type: 2}
   m_PrefabInternal: {fileID: 1843697105}
   m_GameObject: {fileID: 708587581}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: c42cc496beedbe94184e610abc4fd551, type: 3}
 --- !u!1 &810496227
 GameObject:
   m_ObjectHideFlags: 0
@@ -4650,6 +4650,18 @@ Prefab:
     - target: {fileID: 11400000, guid: c547150bab057b34982e046263a7cf68, type: 2}
       propertyPath: immune
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3300002, guid: c547150bab057b34982e046263a7cf68, type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: c42cc496beedbe94184e610abc4fd551, type: 3}
+    - target: {fileID: 400002, guid: c547150bab057b34982e046263a7cf68, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: c547150bab057b34982e046263a7cf68, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c547150bab057b34982e046263a7cf68, type: 2}
