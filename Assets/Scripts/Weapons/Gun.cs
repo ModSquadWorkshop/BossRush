@@ -17,19 +17,15 @@ public class Gun : Weapon
 	public float sprayAngle;
 	public bool circleSpray;
 
-	private float _halfSpray;
+	protected float _halfSpray;
 
-	[SerializeField] private int _magazines;
-	[SerializeField] private int _magazineAmmo;
+	[SerializeField] protected int _magazines;
+	[SerializeField] protected int _magazineAmmo;
 
-	private bool _reloading;
-	private Timer _reloadTimer;
+	protected bool _reloading;
 
-	public override void Awake()
+	void Awake()
 	{
-		// we still need to call Weapon.Start() to initialize the timer and whatnot.
-		base.Awake();
-
 		// instantiate casing emitter
 		casingEmitter = Instantiate( casingEmitter ) as GameObject;
 		casingEmitter.transform.parent = casingAnchor;
@@ -45,91 +41,37 @@ public class Gun : Weapon
 		_magazineAmmo = ( _magazines > 0 ) ? ammoPerMagazine : 0;
 		_magazineAmmo = ( infiniteAmmo ) ? Mathf.Max( _magazineAmmo, 1 ) : _magazineAmmo; // this line just insures you have atleast 1 ammo available
 		_reloading = false;
-		_reloadTimer = new Timer( reloadSpeed, 1 );
 
 		_halfSpray = 0.5f * sprayAngle;
 	}
 
-	public override void Update()
-	{
-		if ( _reloading )
-		{
-			_reloadTimer.Update();
-
-			if ( _reloadTimer.complete )
-			{
-				// stop reloading
-				_reloading = false;
-
-				// update ammo
-				_magazines--;
-				_magazineAmmo = ammoPerMagazine;
-			}
-		}
-
-		base.Update();
-	}
-
 	public override void PerformPrimaryAttack()
 	{
-		if ( _reloading || _magazineAmmo <= 0 )
+		if ( !_reloading && _magazineAmmo > 0 )
 		{
-			return;
-		}
+			// instantiate and initialize a bullet
+			InitializeBullet( Instantiate( projectile ) as GameObject );
+			PlayPrimarySound();
 
-		// instantiate and initialize a bullet
-		InitializeBullet( Instantiate( projectile ) as GameObject );
-		PlayPrimarySound();
-
-		// update ammunition data
-		if ( !infiniteAmmo )
-		{
-			_magazineAmmo--;
-
-			if ( _magazineAmmo <= 0 )
+			// update ammunition data
+			if ( !infiniteAmmo )
 			{
-				Reload();
+				_magazineAmmo--;
+
+				if ( _magazineAmmo <= 0 )
+				{
+					Reload();
+				}
 			}
-		}
 
-		// create shell casing
-		casingEmitter.particleSystem.Emit( 1 );
+			// create shell casing
+			casingEmitter.particleSystem.Emit( 1 );
 
-		// reset and start the gun cooldown
-		_cooldownTimer.Reset( true );
-	}
-
-	public void Reload()
-	{
-		// if already reloading, don't reload again
-		// and, reloading is only possible if another ammo clip is available
-		if ( !_reloading && _magazines > 0 )
-		{
-			// start reloading
-			_reloading = true;
-			_reloadTimer.Reset( true );
+			StartCooldown();
 		}
 	}
 
-	public bool IsOutOfAmmo()
-	{
-		return GetTotalAmmo() == 0;
-	}
-
-	public int GetTotalAmmo()
-	{
-		return ( _magazines * ammoPerMagazine ) + _magazineAmmo;
-	}
-
-	public bool reloading
-	{
-		get
-		{
-			return _reloading;
-		}
-	}
-
-	private void InitializeBullet( GameObject bullet )
+	protected void InitializeBullet( GameObject bullet )
 	{
 		DamageSystem bulletDamage = bullet.GetComponent<DamageSystem>();
 		if ( bulletDamage == null )
@@ -137,7 +79,7 @@ public class Gun : Weapon
 			bulletDamage = bullet.AddComponent<DamageSystem>();
 		}
 
-		DamageSystem weaponDamage = GetComponent<DamageSystem>();
+		DamageSystem weaponDamage = this.GetComponent<DamageSystem>();
 		if ( weaponDamage != null )
 		{
 			// the bullet inherits the damage properties from the gun that fired it
@@ -158,6 +100,46 @@ public class Gun : Weapon
 			// flat spray (good for the player, since a circle spray makes them shoot the ground).
 			// pick a random rotation between -_halfSpray and _halfSpray.
 			bullet.transform.rotation = transform.rotation * Quaternion.Euler( 0.0f, Random.Range( -_halfSpray, _halfSpray ), 0.0f );
+		}
+	}
+
+	public void Reload()
+	{
+		// if already reloading, don't reload again
+		// and, reloading is only possible if another ammo clip is available
+		if ( !_reloading && _magazines > 0 )
+		{
+			// start reloading
+			_reloading = true;
+			Invoke( "ReloadComplete", reloadSpeed );
+		}
+	}
+
+	private void ReloadComplete()
+	{
+		// stop reloading
+		_reloading = false;
+
+		// update ammo
+		_magazines--;
+		_magazineAmmo = ammoPerMagazine;
+	}
+
+	public bool IsOutOfAmmo()
+	{
+		return GetTotalAmmo() == 0;
+	}
+
+	public int GetTotalAmmo()
+	{
+		return ( _magazines * ammoPerMagazine ) + _magazineAmmo;
+	}
+
+	public bool reloading
+	{
+		get
+		{
+			return _reloading;
 		}
 	}
 }

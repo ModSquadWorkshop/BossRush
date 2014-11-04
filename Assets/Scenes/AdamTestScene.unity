@@ -334,6 +334,110 @@ Transform:
   - {fileID: 271124759}
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!1 &409491902
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100012, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 409491903}
+  - 82: {fileID: 954872696}
+  - 114: {fileID: 409491906}
+  - 114: {fileID: 409491905}
+  - 120: {fileID: 409491904}
+  m_Layer: 10
+  m_Name: Laser Canon
+  m_TagString: Weapon
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &409491903
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400012, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 409491902}
+  m_LocalRotation: {x: 0, y: -4.37113883e-08, z: 0, w: 1}
+  m_LocalPosition: {x: 1.95572725e-14, y: 3.86689997, z: 6.01489258}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1856531126}
+  - {fileID: 1517234308}
+  m_Father: {fileID: 1891707346}
+  m_RootOrder: 0
+--- !u!120 &409491904
+LineRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 12000008, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 409491902}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    startWidth: 1
+    endWidth: 1
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 4278190335
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 4286085375
+  m_UseWorldSpace: 1
+--- !u!114 &409491905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400064, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 409491902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 10
+  damageMultiplier: 1
+  destroyAfterDamage: 0
+  targets:
+  - Player
+--- !u!114 &409491906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400062, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 409491902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15872b8914c62454f81f4707f8cb5356, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+  primaryAttackSounds: []
+  repeatDamage: 1
+  beam: {fileID: 409491904}
+  beamWidth: 1
+  maxRange: 1000
+  damageInterval: .100000001
+  piercingsAmount: 100
 --- !u!1 &485395885
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,7 +601,7 @@ Transform:
   - {fileID: 116412163}
   - {fileID: 1371746904}
   m_Father: {fileID: 1470767336}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!1 &580840406
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,6 +629,178 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1942585077}
   m_RootOrder: 1
+--- !u!1 &587282704
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100010, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 587282705}
+  - 114: {fileID: 587282708}
+  - 114: {fileID: 587282707}
+  - 120: {fileID: 587282706}
+  m_Layer: 10
+  m_Name: Laser Canon
+  m_TagString: Weapon
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &587282705
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400010, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 587282704}
+  m_LocalRotation: {x: 0, y: -.939692616, z: 0, w: .342020154}
+  m_LocalPosition: {x: 0, y: 3.86689997, z: 6.01489258}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1891707346}
+  m_RootOrder: 1
+--- !u!120 &587282706
+LineRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 12000006, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 587282704}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    startWidth: 1
+    endWidth: 1
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 4278190335
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 4286085375
+  m_UseWorldSpace: 1
+--- !u!114 &587282707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400058, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 587282704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 10
+  damageMultiplier: 1
+  destroyAfterDamage: 0
+  targets:
+  - Player
+--- !u!114 &587282708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400060, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 587282704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15872b8914c62454f81f4707f8cb5356, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+  primaryAttackSounds: []
+  repeatDamage: 1
+  beam: {fileID: 587282706}
+  beamWidth: 1
+  maxRange: 1000
+  damageInterval: .100000001
+  piercingsAmount: 100
+--- !u!1 &591839415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100038, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 591839416}
+  - 33: {fileID: 591839419}
+  - 23: {fileID: 591839418}
+  - 114: {fileID: 591839417}
+  m_Layer: 0
+  m_Name: HealthBar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &591839416
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400038, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 591839415}
+  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 20, y: 20, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1470767336}
+  m_RootOrder: 4
+--- !u!114 &591839417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400066, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 591839415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 403fe1079fcb81744884e7db32b509dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!23 &591839418
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2300010, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 591839415}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: e1c4a93d55147c94d8fcbcd889d2465e, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!33 &591839419
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 3300008, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 591839415}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &708587581
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,6 +914,18 @@ Prefab:
       propertyPath: stopWeaponInDash
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: c547150bab057b34982e046263a7cf68, type: 2}
+      propertyPath: weapons.Array.data[2]
+      value: 
+      objectReference: {fileID: 100000, guid: d63f5b9b77d9d514ab0359efa4ae504f, type: 2}
+    - target: {fileID: 11400004, guid: c547150bab057b34982e046263a7cf68, type: 2}
+      propertyPath: weapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 100000, guid: ec638bf6dd881f045a7eb8e5b51638c1, type: 2}
+    - target: {fileID: 11400004, guid: c547150bab057b34982e046263a7cf68, type: 2}
+      propertyPath: weapons.Array.data[1]
+      value: 
+      objectReference: {fileID: 100000, guid: 4be7c3b028769d9418dd2959e6095ba9, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c547150bab057b34982e046263a7cf68, type: 2}
   m_RootGameObject: {fileID: 1363035864}
@@ -750,7 +1038,7 @@ Transform:
   - {fileID: 1516910130}
   - {fileID: 1314847319}
   m_Father: {fileID: 1470767336}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!114 &783805349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -968,7 +1256,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 954872693}
-  - 82: {fileID: 954872696}
   - 114: {fileID: 954872700}
   - 114: {fileID: 954872694}
   - 120: {fileID: 954872698}
@@ -985,14 +1272,12 @@ Transform:
   m_PrefabParentObject: {fileID: 400000, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
   m_PrefabInternal: {fileID: 757914076}
   m_GameObject: {fileID: 954872692}
-  m_LocalRotation: {x: 0, y: -4.37113883e-08, z: 0, w: 1}
-  m_LocalPosition: {x: -2.19859999e-07, y: 3.86689997, z: 6.01490021}
+  m_LocalRotation: {x: 0, y: .939692616, z: 0, w: .342020154}
+  m_LocalPosition: {x: 0, y: 3.86689997, z: 6.01489258}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1856531126}
-  - {fileID: 1517234308}
-  m_Father: {fileID: 1470767336}
-  m_RootOrder: 2
+  m_Children: []
+  m_Father: {fileID: 1891707346}
+  m_RootOrder: 4
 --- !u!114 &954872694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1042,7 +1327,7 @@ AudioSource:
   m_PrefabParentObject: {fileID: 8200002, guid: e69da1848d5a6aa45ad03e2051a43667,
     type: 2}
   m_PrefabInternal: {fileID: 757914076}
-  m_GameObject: {fileID: 954872692}
+  m_GameObject: {fileID: 409491902}
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 0}
@@ -1612,9 +1897,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapons:
+  - {fileID: 100000, guid: ec638bf6dd881f045a7eb8e5b51638c1, type: 2}
   - {fileID: 100000, guid: 4be7c3b028769d9418dd2959e6095ba9, type: 2}
   - {fileID: 100000, guid: d63f5b9b77d9d514ab0359efa4ae504f, type: 2}
-  - {fileID: 100000, guid: 8d9767fadad9723499315d03b95ffd8c, type: 2}
   defaultWeaponID: 0
   switchWeaponKeybind: 9
   weaponAnchor: {fileID: 580840407}
@@ -1635,7 +1920,7 @@ MonoBehaviour:
   startingLives: 1
   maxLives: 1
   startingHealth: 100
-  maxHealth: 150
+  maxHealth: 100
   damageSounds: []
   deathSounds: []
   _lives: 0
@@ -1703,6 +1988,7 @@ Transform:
   - {fileID: 943654249}
   - {fileID: 1942585077}
   - {fileID: 1666905555}
+  - {fileID: 2038309224}
   m_Father: {fileID: 0}
   m_RootOrder: 4
 --- !u!114 &1363035871
@@ -1717,6 +2003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54890f060999baa459796158b8ac5d9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  notifyOnce: 0
 --- !u!1 &1371746903
 GameObject:
   m_ObjectHideFlags: 0
@@ -1838,11 +2125,12 @@ GameObject:
   - 114: {fileID: 1470767349}
   - 114: {fileID: 1470767348}
   - 114: {fileID: 1470767347}
+  - 114: {fileID: 1470767355}
   - 114: {fileID: 1470767339}
-  - 114: {fileID: 1470767346}
   - 114: {fileID: 1470767340}
   - 114: {fileID: 1470767345}
   - 114: {fileID: 1470767344}
+  - 114: {fileID: 1470767346}
   m_Layer: 10
   m_Name: Spider Tank
   m_TagString: Enemy
@@ -1899,9 +2187,10 @@ Transform:
   m_Children:
   - {fileID: 1081013407}
   - {fileID: 1784389518}
-  - {fileID: 954872693}
   - {fileID: 783805348}
   - {fileID: 485395892}
+  - {fileID: 591839416}
+  - {fileID: 1891707346}
   m_Father: {fileID: 0}
   m_RootOrder: 5
 --- !u!114 &1470767337
@@ -1939,11 +2228,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1363035870}
+  doorCollider: {fileID: 0}
   mainCanon: {fileID: 954872695}
-  laserCanon: {fileID: 954872700}
+  laserCanon:
+  - {fileID: 587282708}
+  - {fileID: 1519967669}
+  - {fileID: 409491906}
+  - {fileID: 1704398510}
+  - {fileID: 954872700}
   otherGuns:
   - {fileID: 783805350}
   - {fileID: 485395887}
+  shield: {fileID: 0}
   defaultCanonLookSpeed: 20
   healthTriggerInterval: 1000
   basicState: {fileID: 0}
@@ -1952,8 +2248,10 @@ MonoBehaviour:
   laserSpin: {fileID: 0}
   rushState: {fileID: 0}
   turboState: {fileID: 0}
+  enterState: {fileID: 0}
   health: {fileID: 0}
   spawner: {fileID: 0}
+  agent: {fileID: 0}
 --- !u!114 &1470767339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2059,6 +2357,7 @@ MonoBehaviour:
   canonDelay: .5
   amountPerWave: 5
   duration: 10
+  laserChance: .5
   movementScript: {fileID: 0}
 --- !u!114 &1470767343
 MonoBehaviour:
@@ -2095,9 +2394,14 @@ MonoBehaviour:
   enemyTypes:
   - {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
   enemySpawnChances: []
-  spawns: []
+  spawns:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   spawnPriorities: []
-  amountPerWave: 4
+  baseAmountPerWave: 0
+  amountPerSpawner: 1
   waveInterval: 1
   spawnOnStart: 1
 --- !u!114 &1470767345
@@ -2126,15 +2430,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1470767332}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c57db56693d1f5047ab35ce7cc184942, type: 3}
+  m_Script: {fileID: 11500000, guid: 279090449e4b6944390b1cb3b3fd9dad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 50
-  acceleration: 300
-  nodes:
-  - {fileID: 0}
-  - {fileID: 0}
-  traverseBackwards: 1
+  maxSpeed: 75
+  acceleration: 150
 --- !u!114 &1470767347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2150,6 +2450,7 @@ MonoBehaviour:
   spiderTank: {fileID: 0}
   mininionCount: 20
   healRate: 75
+  endWhenNoMinionsLeft: 0
 --- !u!114 &1470767348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2163,7 +2464,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spiderTank: {fileID: 0}
-  doorCollider: {fileID: 0}
   mainCanonCooldown: 1
   minionsPerWave: 6
   returnState: {fileID: 0}
@@ -2223,6 +2523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54890f060999baa459796158b8ac5d9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  notifyOnce: 0
 --- !u!114 &1470767353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2261,6 +2562,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
+--- !u!114 &1470767355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400048, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 1470767332}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb030dabac45a0d41b2a10282ae02ba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spiderTank: {fileID: 0}
+  destination: {fileID: 0}
 --- !u!1 &1516910129
 GameObject:
   m_ObjectHideFlags: 0
@@ -2315,8 +2630,109 @@ Transform:
   m_LocalPosition: {x: -1.29999999e-14, y: 1.06920004, z: -6.09450006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 954872693}
+  m_Father: {fileID: 409491903}
   m_RootOrder: 1
+--- !u!1 &1519967665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100008, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1519967666}
+  - 114: {fileID: 1519967669}
+  - 114: {fileID: 1519967668}
+  - 120: {fileID: 1519967667}
+  m_Layer: 10
+  m_Name: Laser Canon
+  m_TagString: Weapon
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1519967666
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400008, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 1519967665}
+  m_LocalRotation: {x: 0, y: -.57357645, z: 0, w: .819152057}
+  m_LocalPosition: {x: 0, y: 3.86689997, z: 6.01489258}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1891707346}
+  m_RootOrder: 2
+--- !u!120 &1519967667
+LineRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 12000004, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 1519967665}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    startWidth: 1
+    endWidth: 1
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 4278190335
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 4286085375
+  m_UseWorldSpace: 1
+--- !u!114 &1519967668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400056, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 1519967665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 10
+  damageMultiplier: 1
+  destroyAfterDamage: 0
+  targets:
+  - Player
+--- !u!114 &1519967669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400054, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 1519967665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15872b8914c62454f81f4707f8cb5356, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+  primaryAttackSounds: []
+  repeatDamage: 1
+  beam: {fileID: 1519967667}
+  beamWidth: 1
+  maxRange: 1000
+  damageInterval: .100000001
+  piercingsAmount: 100
 --- !u!1 &1591145409
 GameObject:
   m_ObjectHideFlags: 0
@@ -2346,8 +2762,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1363035864}
   boss: {fileID: 1470767332}
-  bossText: {fileID: 0}
-  playerText: {fileID: 0}
   levelOverDelay: 2
 --- !u!4 &1591145411
 Transform:
@@ -2425,6 +2839,107 @@ Light:
   m_ShadowAngle: 0
   m_IndirectIntensity: 1
   m_AreaSize: {x: 1, y: 1}
+--- !u!1 &1704398508
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100006, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1704398509}
+  - 114: {fileID: 1704398510}
+  - 114: {fileID: 1704398512}
+  - 120: {fileID: 1704398511}
+  m_Layer: 10
+  m_Name: Laser Canon
+  m_TagString: Weapon
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1704398509
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400006, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 1704398508}
+  m_LocalRotation: {x: 0, y: .57357645, z: 0, w: .819152057}
+  m_LocalPosition: {x: 0, y: 3.86689997, z: 6.01489258}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1891707346}
+  m_RootOrder: 3
+--- !u!114 &1704398510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400052, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 1704398508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15872b8914c62454f81f4707f8cb5356, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+  primaryAttackSounds: []
+  repeatDamage: 1
+  beam: {fileID: 1704398511}
+  beamWidth: 1
+  maxRange: 1000
+  damageInterval: .100000001
+  piercingsAmount: 100
+--- !u!120 &1704398511
+LineRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 12000002, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 1704398508}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    startWidth: 1
+    endWidth: 1
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 4278190335
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 4286085375
+  m_UseWorldSpace: 1
+--- !u!114 &1704398512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400050, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 1704398508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 10
+  damageMultiplier: 1
+  destroyAfterDamage: 0
+  targets:
+  - Player
 --- !u!1 &1741846549
 GameObject:
   m_ObjectHideFlags: 0
@@ -2617,8 +3132,40 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 954872693}
+  m_Father: {fileID: 409491903}
   m_RootOrder: 0
+--- !u!1 &1891707345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100036, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1891707346}
+  m_Layer: 10
+  m_Name: Lasers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1891707346
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400036, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 1891707345}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 409491903}
+  - {fileID: 587282705}
+  - {fileID: 1519967666}
+  - {fileID: 1704398509}
+  - {fileID: 954872693}
+  m_Father: {fileID: 1470767336}
+  m_RootOrder: 5
 --- !u!1 &1942585076
 GameObject:
   m_ObjectHideFlags: 0
@@ -2648,3 +3195,74 @@ Transform:
   - {fileID: 580840407}
   m_Father: {fileID: 1363035870}
   m_RootOrder: 1
+--- !u!1 &2038309223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100012, guid: c547150bab057b34982e046263a7cf68, type: 2}
+  m_PrefabInternal: {fileID: 740703679}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2038309224}
+  - 33: {fileID: 2038309227}
+  - 23: {fileID: 2038309226}
+  - 114: {fileID: 2038309225}
+  m_Layer: 0
+  m_Name: HealthBar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2038309224
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400012, guid: c547150bab057b34982e046263a7cf68, type: 2}
+  m_PrefabInternal: {fileID: 740703679}
+  m_GameObject: {fileID: 2038309223}
+  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_Children: []
+  m_Father: {fileID: 1363035870}
+  m_RootOrder: 3
+--- !u!114 &2038309225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400008, guid: c547150bab057b34982e046263a7cf68,
+    type: 2}
+  m_PrefabInternal: {fileID: 740703679}
+  m_GameObject: {fileID: 2038309223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 403fe1079fcb81744884e7db32b509dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!23 &2038309226
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2300004, guid: c547150bab057b34982e046263a7cf68,
+    type: 2}
+  m_PrefabInternal: {fileID: 740703679}
+  m_GameObject: {fileID: 2038309223}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: e1c4a93d55147c94d8fcbcd889d2465e, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!33 &2038309227
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 3300004, guid: c547150bab057b34982e046263a7cf68,
+    type: 2}
+  m_PrefabInternal: {fileID: 740703679}
+  m_GameObject: {fileID: 2038309223}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}

@@ -18,10 +18,8 @@ public class BeamWeapon : Weapon
 	private Timer _damageTimer;
 	private bool _damageDealt;
 
-	public override void Awake()
+	void Awake()
 	{
-		base.Awake();
-
 		if ( beam == null )
 		{
 			beam = this.gameObject.AddComponent<LineRenderer>();
@@ -48,7 +46,7 @@ public class BeamWeapon : Weapon
 		}
 	}
 
-	public override void Update()
+	void Update()
 	{
 		if ( beam.enabled )
 		{
@@ -57,8 +55,8 @@ public class BeamWeapon : Weapon
 			_damageTimer.Update();
 
 			// set the origin and direction of the ray to match the weapon/player's transformation
-			_ray.origin = this.transform.position;
-			_ray.direction = this.transform.forward;
+			_ray.origin = this.gameObject.transform.position;
+			_ray.direction = this.gameObject.transform.forward;
 
 			// set the starting vertex of the beam to the weapon/player position
 			beam.SetPosition( 0, _ray.origin );
@@ -110,8 +108,6 @@ public class BeamWeapon : Weapon
 				beam.enabled = false;
 			}
 		}
-
-		base.Update();
 	}
 
 	public override void PerformPrimaryAttack()
