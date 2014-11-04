@@ -14,8 +14,10 @@ public class SpiderTankEnterState : SpiderTankState
 		_movement = GetComponent<MoveTowardsTarget>();
 	}
 
-	void OnEnable()
+	public override void OnEnable()
 	{
+		base.OnEnable();
+
 		_movement.target = destination;
 		_movement.enabled = true;
 
@@ -32,8 +34,10 @@ public class SpiderTankEnterState : SpiderTankState
 		}
 	}
 
-	void OnDisable()
+	public override void OnDisable()
 	{
+		base.OnDisable();
+
 		_movement.enabled = false;
 		Physics.IgnoreCollision( collider, doorCollider, false );
 	}

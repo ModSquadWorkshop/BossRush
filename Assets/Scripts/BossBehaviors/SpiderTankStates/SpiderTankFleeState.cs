@@ -9,15 +9,13 @@ public class SpiderTankFleeState : SpiderTankState
 
 	[HideInInspector] public SpiderTankState returnState;
 
-	public void OnEnable()
+	public override void OnEnable()
 	{
+		base.OnEnable();
+
 		agent.enabled = true;
 		agent.SetDestination( shield.transform.position );
 		mainCanon.SetCooldown( mainCanonCooldown );
-
-		spawner.enabled = true;
-		spawner.amountPerWave = minionsPerWave;
-		spawner.StartSpawning();
 	}
 
 	public void Update()
@@ -25,7 +23,7 @@ public class SpiderTankFleeState : SpiderTankState
 		spiderTank.LookMainCanon();
 		spiderTank.FireMainCanon();
 
-		// check if we're at we're destination
+		// check if we're at our destination
 		if ( ( transform.position - shield.transform.position ).sqrMagnitude < 1.0f )
 		{
 			enabled = false;
@@ -33,10 +31,10 @@ public class SpiderTankFleeState : SpiderTankState
 		}
 	}
 
-	public void OnDisable()
+	public override void OnDisable()
 	{
-		spawner.enabled = false;
+		base.OnDisable();
+
 		agent.enabled = false;
-		spawner.StopSpawning();
 	}
 }

@@ -80,14 +80,6 @@ public class Timer
 		}
 	}
 
-	public bool running
-	{
-		get
-		{
-			return _running;
-		}
-	}
-
 	public bool ticked
 	{
 		get
@@ -101,6 +93,14 @@ public class Timer
 		get
 		{
 			return _complete;
+		}
+	}
+
+	public bool running
+	{
+		get
+		{
+			return _running;
 		}
 	}
 }

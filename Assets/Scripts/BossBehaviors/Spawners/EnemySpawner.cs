@@ -1,63 +1,56 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemySpawner : MonoBehaviour
 {
 	public delegate void EnemyCountChange( int count );
-	private int _enemyCount = 0; ///< A global counter of the number of live minions in the world.
-	private EnemyCountChange _enemyCountCallback = delegate( int count ) { }; ///< Callback used to notify listeners when the live enemy count changes.
 
 	public GameObject[] enemyTypes;
-	public float[] enemySpawnChances;
+	public List<Transform> spawns;
+	public SpawnerSettings defaultSettings;
+	public int maxSpawned;
 
-	public Transform[] spawns;
-	public float[] spawnPriorities;
+	protected int _spawnIndex = 0; //!< Used for communication with derived spawners on which spawn index was used.
 
-	public int amountPerWave;
-	public float waveInterval;
-	public bool spawnOnStart;
-
-	private Timer _spawnTimer;
-	protected int _spawnIndex = 0; ///< Used for communication with derived spawners on which spawn index was used.
+	private DeathSystem _spawnerDeath;
+	private bool _spawning = false; //!< Used to tell the coroutine to stop spawning.
+	private int _enemyCount = 0; //!< A counter of the number of live minions in the world.
+	private SpawnerSettings _settings;
+	private EnemyCountChange _enemyCountCallback = delegate( int count ) { }; //!< Callback used to notify listeners when the live enemy count changes.
 
 	public void Awake()
 	{
-		_spawnTimer = new Timer( waveInterval );
+		_settings = defaultSettings;
+
+		for ( int i = 0; i < spawns.Count; i++ )
+		{
+			_spawnerDeath = spawns[i].gameObject.GetComponent<DeathSystem>();
+			_spawnerDeath.RegisterDeathCallback( SpawnerDeathCallback );
+		}
 	}
 
 	public void OnEnable()
 	{
-		if ( spawnOnStart )
+		if ( _settings.spawnOnStart )
 		{
-			StartSpawning();
+			StartCoroutine( StartSpawning() );
 		}
 	}
 
-	void Update()
+	public IEnumerator StartSpawning()
 	{
-		_spawnTimer.Update();
-
-		if ( _spawnTimer.ticked )
+		_spawning = true;
+		while ( _spawning )
 		{
 			Spawn();
-		}
-	}
-
-	public void StartSpawning( bool resetTimer = true )
-	{
-		if ( resetTimer )
-		{
-			_spawnTimer.Reset( true );
-		}
-		else
-		{
-			_spawnTimer.Start();
+			yield return new WaitForSeconds( _settings.waveInterval );
 		}
 	}
 
 	public void StopSpawning()
 	{
-		_spawnTimer.Stop();
+		_spawning = false;
 	}
 
 	/**
@@ -65,7 +58,7 @@ public class EnemySpawner : MonoBehaviour
 	 */
 	public void Spawn()
 	{
-		Spawn( amountPerWave );
+		Spawn( _settings.baseAmountPerWave + ( _settings.amountPerSpawner * spawns.Count ) );
 	}
 
 	/**
@@ -73,37 +66,19 @@ public class EnemySpawner : MonoBehaviour
 	 */
 	public void Spawn( int amount )
 	{
-		for ( int i = 0; i < amount; i++ )
+		if ( spawns.Count > 0 )
 		{
-			GameObject enemy = GetEnemyBasedOnSpawnChance();
-			InitializeEnemyComponents( enemy );
-		}
-	}
-
-	/**
-	 * \brief Spawns the specified type of enemy.
-	 */
-	public void Spawn( GameObject type, int? amount = null )
-	{
-		// it's optional to provide the amount you want spawned
-		// if you haven't provided an actual amount (e.g. anything greater 0),
-		// then the EnemyManager spawns its normal amount (amountPerSpawn)
-		if ( amount == null )
-		{
-			amount = amountPerWave;
-		}
-
-		for ( int i = 0; i < amount; i++ )
-		{
-			GameObject enemy = Instantiate( type ) as GameObject;
-			InitializeEnemyComponents( enemy );
+			for ( int i = 0; i < amount && _enemyCount < maxSpawned; i++ )
+			{
+				InitializeEnemyComponents( Instantiate( enemyTypes[Random.Range( 0, enemyTypes.Length )] ) as GameObject );
+			}
 		}
 	}
 
 	protected virtual void InitializeEnemyComponents( GameObject enemy )
 	{
 		// set spawn point
-		_spawnIndex = Random.Range( 0, spawns.Length );
+		_spawnIndex = Random.Range( 0, spawns.Count );
 		enemy.transform.position = spawns[_spawnIndex].position;
 
 		// if the enemy uses a MoveTowardsTarget script, the target needs to be set
@@ -121,19 +96,7 @@ public class EnemySpawner : MonoBehaviour
 		}
 
 		// increment live enemy count
-		enemyCount++;
-	}
-
-	protected GameObject GetEnemyBasedOnSpawnChance()
-	{
-		// TO DO
-		return Instantiate( enemyTypes[0] ) as GameObject;
-	}
-
-	protected Vector3 GetSpawnBasedOnPriority()
-	{
-		// TO DO
-		return spawns[0].position;
+		enemyCount = enemyCount + 1;
 	}
 
 	public void EnemyDeathCallback( GameObject enemy )
@@ -156,6 +119,16 @@ public class EnemySpawner : MonoBehaviour
 		}
 	}
 
+	public void ApplySettings( SpawnerSettings settings )
+	{
+		_settings = settings;
+	}
+
+	public void ResetSettings()
+	{
+		_settings = defaultSettings;
+	}
+
 	public void RegisterEnemyCountCallback( EnemyCountChange callback )
 	{
 		_enemyCountCallback += callback;
@@ -165,4 +138,18 @@ public class EnemySpawner : MonoBehaviour
 	{
 		_enemyCountCallback -= callback;
 	}
+
+	private void SpawnerDeathCallback( GameObject spawner )
+	{
+		spawns.Remove( spawner.transform );
+	}
+}
+
+[System.Serializable]
+public class SpawnerSettings
+{
+	public int baseAmountPerWave;
+	public int amountPerSpawner;
+	public float waveInterval;
+	public bool spawnOnStart;
 }
