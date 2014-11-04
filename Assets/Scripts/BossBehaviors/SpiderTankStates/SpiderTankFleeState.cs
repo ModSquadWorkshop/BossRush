@@ -3,57 +3,38 @@ using System.Collections;
 
 public class SpiderTankFleeState : SpiderTankState
 {
-	public Collider doorCollider;
 	public float mainCanonCooldown;
 
 	public int minionsPerWave;
 
-	private PathMovement pathMovement;
-
 	[HideInInspector] public SpiderTankState returnState;
 
-	public override void Awake()
+	public override void OnEnable()
 	{
-		base.Awake();
+		base.OnEnable();
 
-		pathMovement = GetComponent<PathMovement>();
-		pathMovement.RegisterDestinationReachedCallback( new PathMovement.DesinationReached( DestinationReached ) );
-	}
-
-	public void OnEnable()
-	{
-		// make sure the boss can walk in/out of the arena.
-		Physics.IgnoreCollision( collider, doorCollider, true );
-		pathMovement.enabled = true;
+		agent.enabled = true;
+		agent.SetDestination( shield.transform.position );
 		mainCanon.SetCooldown( mainCanonCooldown );
-
-		spawner.enabled = true;
-		spawner.amountPerWave = minionsPerWave;
-		spawner.StartSpawning();
 	}
 
 	public void Update()
 	{
 		spiderTank.LookMainCanon();
 		spiderTank.FireMainCanon();
+
+		// check if we're at our destination
+		if ( ( transform.position - shield.transform.position ).sqrMagnitude < 1.0f )
+		{
+			enabled = false;
+			spiderTank.healState.enabled = true;
+		}
 	}
 
-	public void OnDisable()
+	public override void OnDisable()
 	{
-		spawner.enabled = false;
-		pathMovement.enabled = false;
-		spawner.StopSpawning();
-	}
+		base.OnDisable();
 
-	public void DestinationReached( PathMovement movement )
-	{
-		enabled = false;
-		pathMovement.traverseBackwards = !pathMovement.traverseBackwards;
-
-		// re-enable collisions with the doorway.
-		Physics.IgnoreCollision( collider, doorCollider, false );
-
-		// transition to another state
-		returnState.enabled = true;
+		agent.enabled = false;
 	}
 }

@@ -5,14 +5,18 @@ public class SpiderTankInitialState : SpiderTankState
 {
 	public int mininionCount;
 
-	void OnEnable()
+	public override void OnEnable()
 	{
+		base.OnEnable();
+
 		spawner.RegisterEnemyCountCallback( MinionCountChange );
 		spawner.Spawn( mininionCount );
 	}
 
-	void OnDisable()
+	public override void OnDisable()
 	{
+		base.OnDisable();
+
 		spawner.DeregisterEnemyCountCallback( MinionCountChange );
 		spiderTank.SetDamageBase();
 	}
@@ -24,8 +28,7 @@ public class SpiderTankInitialState : SpiderTankState
 			enabled = false;
 			spawner.enabled = false;
 
-			spiderTank.fleeState.returnState = spiderTank.basicState;
-			spiderTank.fleeState.enabled = true;
+			spiderTank.enterState.enabled = true;
 		}
 	}
 }

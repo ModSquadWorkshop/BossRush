@@ -3,6 +3,9 @@ using System.Collections;
 
 public class SpiderTankState : MonoBehaviour
 {
+	public bool useSpawner;
+	public SpawnerSettings spawnerSettings;
+
 	[HideInInspector] public SpiderTank spiderTank;
 
 	public virtual void Awake()
@@ -10,16 +13,26 @@ public class SpiderTankState : MonoBehaviour
 		spiderTank = GetComponent<SpiderTank>();
 	}
 
+	public virtual void OnEnable()
+	{
+		if ( useSpawner )
+		{
+			spawner.ApplySettings( spawnerSettings );
+			spawner.enabled = true;
+		}
+	}
+
+	public virtual void OnDisable()
+	{
+		spawner.enabled = false;
+		spawner.ResetSettings();
+	}
+
 	public Transform player
 	{
 		get
 		{
 			return spiderTank.player;
-		}
-
-		set
-		{
-			spiderTank.player = value;
 		}
 	}
 
@@ -29,23 +42,13 @@ public class SpiderTankState : MonoBehaviour
 		{
 			return spiderTank.mainCanon;
 		}
-
-		set
-		{
-			spiderTank.mainCanon = value;
-		}
 	}
 
-	public BeamWeapon laserCanon
+	public BeamWeapon[] laserCanon
 	{
 		get
 		{
 			return spiderTank.laserCanon;
-		}
-
-		set
-		{
-			spiderTank.laserCanon = value;
 		}
 	}
 
@@ -55,11 +58,6 @@ public class SpiderTankState : MonoBehaviour
 		{
 			return spiderTank.otherGuns;
 		}
-
-		set
-		{
-			spiderTank.otherGuns = value;
-		}
 	}
 
 	public EnemySpawner spawner
@@ -68,10 +66,29 @@ public class SpiderTankState : MonoBehaviour
 		{
 			return spiderTank.spawner;
 		}
+	}
 
-		set
+	public GameObject shield
+	{
+		get
 		{
-			spiderTank.spawner = value;
+			return spiderTank.shield;
+		}
+	}
+
+	public NavMeshAgent agent
+	{
+		get
+		{
+			return spiderTank.agent;
+		}
+	}
+
+	public Collider doorCollider
+	{
+		get
+		{
+			return spiderTank.doorCollider;
 		}
 	}
 
@@ -79,7 +96,6 @@ public class SpiderTankState : MonoBehaviour
 	{
 		CancelInvoke();
 		enabled = false;
-		spiderTank.fleeState.returnState = spiderTank.healState;
 		spiderTank.fleeState.enabled = true;
 	}
 }
