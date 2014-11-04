@@ -72,12 +72,10 @@ public class WeaponSystem : MonoBehaviour
 		if ( Input.GetButton( "Fire1" ) || gamePadLook.sqrMagnitude > JOYSTICK_THRESHOLD )
 		{
 			// if the weapon is still on cooldown, it cannot perform an attack
-			if ( _currentWeapon.isOnCooldown )
+			if ( !_currentWeapon.isOnCooldown )
 			{
-				return;
+				_currentWeapon.PerformPrimaryAttack();
 			}
-
-			_currentWeapon.PerformPrimaryAttack();
 		}
 
 		/*
@@ -87,12 +85,10 @@ public class WeaponSystem : MonoBehaviour
 		if ( Input.GetButton( "Fire2" ) )
 		{
 			// if the weapon is still on cooldown, it cannot perform an attack
-			if ( _currentWeapon.isOnCooldown )
+			if ( !_currentWeapon.isOnCooldown )
 			{
-				return;
+				_currentWeapon.PerformSecondaryAttack();
 			}
-
-			_currentWeapon.PerformSecondaryAttack();
 		}
 	}
 
