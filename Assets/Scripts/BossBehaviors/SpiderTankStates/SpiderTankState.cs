@@ -3,11 +3,29 @@ using System.Collections;
 
 public class SpiderTankState : MonoBehaviour
 {
+	public bool useSpawner;
+	public SpawnerSettings spawnerSettings;
+
 	[HideInInspector] public SpiderTank spiderTank;
 
 	public virtual void Awake()
 	{
 		spiderTank = GetComponent<SpiderTank>();
+	}
+
+	public virtual void OnEnable()
+	{
+		if ( useSpawner )
+		{
+			spawner.ApplySettings( spawnerSettings );
+			spawner.enabled = true;
+		}
+	}
+
+	public virtual void OnDisable()
+	{
+		spawner.enabled = false;
+		spawner.ResetSettings();
 	}
 
 	public Transform player

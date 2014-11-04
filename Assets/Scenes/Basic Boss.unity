@@ -3942,10 +3942,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 265b0c87905103e4a9867ecbca21f184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useSpawner: 1
+  spawnerSettings:
+    baseAmountPerWave: 2
+    amountPerSpawner: 1
+    waveInterval: 2
+    spawnOnStart: 1
   spiderTank: {fileID: 0}
-  mininionCount: 20
   healRate: 75
-  endWhenNoMinionsLeft: 0
 --- !u!4 &1470767336
 Transform:
   m_ObjectHideFlags: 0
@@ -4064,6 +4068,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d304b450b33b55b489dadf590505e37b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useSpawner: 1
+  spawnerSettings:
+    baseAmountPerWave: 2
+    amountPerSpawner: 2
+    waveInterval: 2
+    spawnOnStart: 1
   spiderTank: {fileID: 0}
   turretSpeed: 50
   canonDelay: .5
@@ -4083,6 +4093,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fba2eb2f60f8214c927b5c976359d8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useSpawner: 0
+  spawnerSettings:
+    baseAmountPerWave: 0
+    amountPerSpawner: 0
+    waveInterval: 0
+    spawnOnStart: 0
   spiderTank: {fileID: 0}
   turretSpeed: 10
   canonDelay: 2
@@ -4179,6 +4195,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 145cab610876f9649a637d947280f136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useSpawner: 0
+  spawnerSettings:
+    baseAmountPerWave: 0
+    amountPerSpawner: 0
+    waveInterval: 0
+    spawnOnStart: 0
   spiderTank: {fileID: 0}
   returnState: {fileID: 0}
 --- !u!114 &1470767346
@@ -4210,9 +4232,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbe66e7299ef940428847254da31eae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useSpawner: 0
+  spawnerSettings:
+    baseAmountPerWave: 0
+    amountPerSpawner: 0
+    waveInterval: 0
+    spawnOnStart: 0
   spiderTank: {fileID: 0}
-  rotation: 2
-  spawnMinions: 0
+  rotation: 1.5
   duration: 10
 --- !u!114 &1470767348
 MonoBehaviour:
@@ -4240,6 +4267,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 459c08f16f90d0c43987bf16209851ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useSpawner: 0
+  spawnerSettings:
+    baseAmountPerWave: 0
+    amountPerSpawner: 0
+    waveInterval: 0
+    spawnOnStart: 0
   spiderTank: {fileID: 0}
   mainCanonCooldown: 1
   minionsPerWave: 6
@@ -4256,6 +4289,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c59753965a21e3747a45d2d631b83fe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useSpawner: 0
+  spawnerSettings:
+    baseAmountPerWave: 0
+    amountPerSpawner: 0
+    waveInterval: 0
+    spawnOnStart: 0
   spiderTank: {fileID: 0}
   mininionCount: 20
 --- !u!114 &1470767351
@@ -4306,17 +4345,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyTypes:
   - {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
-  enemySpawnChances: []
   spawns:
   - {fileID: 993944226}
   - {fileID: 877304723}
   - {fileID: 300556917}
   - {fileID: 664820155}
-  spawnPriorities: []
-  baseAmountPerWave: 0
-  amountPerSpawner: 1
-  waveInterval: 1
-  spawnOnStart: 1
+  defaultSettings:
+    baseAmountPerWave: 2
+    amountPerSpawner: 1
+    waveInterval: 2
+    spawnOnStart: 0
 --- !u!114 &1470767354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4329,6 +4367,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb030dabac45a0d41b2a10282ae02ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useSpawner: 0
+  spawnerSettings:
+    baseAmountPerWave: 0
+    amountPerSpawner: 0
+    waveInterval: 0
+    spawnOnStart: 0
   spiderTank: {fileID: 0}
   destination: {fileID: 1557820479}
 --- !u!1 &1486925989

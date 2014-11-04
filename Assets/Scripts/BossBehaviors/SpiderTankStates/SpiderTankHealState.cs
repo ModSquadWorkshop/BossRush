@@ -3,27 +3,11 @@ using System.Collections;
 
 public class SpiderTankHealState : SpiderTankState
 {
-	public int mininionCount;
 	public float healRate;
 
-	public bool endWhenNoMinionsLeft;
-
-	public override void Awake()
+	public override void OnEnable()
 	{
-		base.Awake();
-	}
-
-	void OnEnable()
-	{
-		if ( endWhenNoMinionsLeft )
-		{
-			spawner.RegisterEnemyCountCallback( MinionCountChange );
-		}
-		else
-		{
-			spawner.enabled = true;
-		}
-		spawner.Spawn( mininionCount );
+		base.OnEnable();
 
 		shield.SetActive( true );
 		shield.gameObject.GetComponent<DeathSystem>().RegisterDeathCallback( ShieldDestroyed );
@@ -36,15 +20,15 @@ public class SpiderTankHealState : SpiderTankState
 		spiderTank.health.Heal( healRate * Time.deltaTime );
 		if ( spiderTank.health.atMaxHealth )
 		{
-			MinionCountChange( 0 ); // kinda janky, but whatevs
+			ShieldDestroyed( shield ); // make sure we go through a common exit path
 		}
 	}
 
-	public void OnDisable()
+	public override void OnDisable()
 	{
-		spawner.enabled = false;
+		base.OnDisable();
+
 		spiderTank.SetDamageBase();
-		spawner.DeregisterEnemyCountCallback( MinionCountChange );
 
 		// on shutdown the shield gets destroyed before the spider tank,
 		// so we have the potential for null references here
@@ -52,15 +36,6 @@ public class SpiderTankHealState : SpiderTankState
 		{
 			shield.SetActive( false );
 			shield.gameObject.GetComponent<DeathSystem>().DeregisterDeathCallback( ShieldDestroyed );
-		}
-	}
-
-	public void MinionCountChange( int count )
-	{
-		if ( this != null && enabled && count == 0 )
-		{
-			enabled = false;
-			spiderTank.basicState.enabled = true;
 		}
 	}
 

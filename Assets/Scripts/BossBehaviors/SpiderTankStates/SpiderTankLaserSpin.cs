@@ -4,13 +4,12 @@ using System.Collections;
 public class SpiderTankLaserSpin : SpiderTankState
 {
 	public float rotation;
-	public bool spawnMinions;
-
 	public float duration;
 
-	void OnEnable()
+	public override void OnEnable()
 	{
-		spawner.enabled = spawnMinions;
+		base.OnEnable();
+
 		Invoke( "TransitionOut", duration );
 		spiderTank.RegisterHealthTriggerCallback( HealthTriggerCallback );
 	}
@@ -23,9 +22,10 @@ public class SpiderTankLaserSpin : SpiderTankState
 		}
 	}
 
-	void OnDisable()
+	public override void OnDisable()
 	{
-		spawner.enabled = false;
+		base.OnDisable();
+
 		spiderTank.DeregisterHealthTriggerCallback( HealthTriggerCallback );
 	}
 

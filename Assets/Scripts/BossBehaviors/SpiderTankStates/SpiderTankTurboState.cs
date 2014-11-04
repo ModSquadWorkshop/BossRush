@@ -21,11 +21,9 @@ public class SpiderTankTurboState : SpiderTankState
 		movementScript.target = player;
 	}
 
-	void OnEnable()
+	public override void OnEnable()
 	{
-		spiderTank.mainCanon.SetCooldown( canonDelay );
-		spawner.baseAmountPerWave = amountPerWave;
-		spawner.enabled = true;
+		base.OnEnable();
 		movementScript.enabled = true;
 
 		// register for health trigger callbacks
@@ -40,9 +38,10 @@ public class SpiderTankTurboState : SpiderTankState
 		spiderTank.FireAllGuns();
 	}
 
-	void OnDisable()
+	public override void OnDisable()
 	{
-		spawner.enabled = false;
+		base.OnDisable();
+
 		movementScript.enabled = false;
 		spiderTank.DeregisterHealthTriggerCallback( HealthTriggerCallback );
 	}
