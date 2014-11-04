@@ -14,13 +14,14 @@ public class SpiderTankBasicState : SpiderTankState
 
 	public PhysicsMovement movementScript;
 
-	void OnEnable()
+	public override void OnEnable()
 	{
+		base.OnEnable();
+
 		spiderTank.mainCanon.SetCooldown( canonDelay );
 
 		// set initial states of movement scripts
 		movementScript.enabled = true;
-		spiderTank.rushState.enabled = false;
 		spiderTank.rushState.returnState = this;
 
 		// queue up first rush attack
@@ -39,8 +40,10 @@ public class SpiderTankBasicState : SpiderTankState
 		transform.rotation = Quaternion.RotateTowards( transform.rotation, lookRotation, 90.0f * Time.deltaTime );
 	}
 
-	void OnDisable()
+	public override void OnDisable()
 	{
+		base.OnDisable();
+
 		movementScript.enabled = false;
 		spiderTank.DeregisterHealthTriggerCallback( HealthTriggerCallback );
 	}
