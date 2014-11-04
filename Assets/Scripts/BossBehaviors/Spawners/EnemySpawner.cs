@@ -7,14 +7,13 @@ public class EnemySpawner : MonoBehaviour
 	public delegate void EnemyCountChange( int count );
 
 	public GameObject[] enemyTypes;
-
 	public List<Transform> spawns;
-	private DeathSystem _spawnerDeath;
-
 	public SpawnerSettings defaultSettings;
+	public int maxSpawned;
 
 	protected int _spawnIndex = 0; //!< Used for communication with derived spawners on which spawn index was used.
 
+	private DeathSystem _spawnerDeath;
 	private bool _spawning = false; //!< Used to tell the coroutine to stop spawning.
 	private int _enemyCount = 0; //!< A counter of the number of live minions in the world.
 	private SpawnerSettings _settings;
@@ -69,7 +68,7 @@ public class EnemySpawner : MonoBehaviour
 	{
 		if ( spawns.Count > 0 )
 		{
-			for ( int i = 0; i < amount; i++, _spawnIndex = ++_spawnIndex % spawns.Count )
+			for ( int i = 0; i < amount && _enemyCount < maxSpawned; i++ )
 			{
 				InitializeEnemyComponents( Instantiate( enemyTypes[Random.Range( 0, enemyTypes.Length )] ) as GameObject );
 			}
@@ -79,28 +78,25 @@ public class EnemySpawner : MonoBehaviour
 	protected virtual void InitializeEnemyComponents( GameObject enemy )
 	{
 		// set spawn point
-		if ( spawns.Count > 0 )
+		_spawnIndex = Random.Range( 0, spawns.Count );
+		enemy.transform.position = spawns[_spawnIndex].position;
+
+		// if the enemy uses a MoveTowardsTarget script, the target needs to be set
+		ITargetBasedMovement moveTowards = enemy.GetComponent( typeof( ITargetBasedMovement ) ) as ITargetBasedMovement;
+		if ( moveTowards != null )
 		{
-			_spawnIndex = Random.Range( 0, spawns.Count );
-			enemy.transform.position = spawns[_spawnIndex].position;
-
-			// if the enemy uses a MoveTowardsTarget script, the target needs to be set
-			ITargetBasedMovement moveTowards = enemy.GetComponent( typeof( ITargetBasedMovement ) ) as ITargetBasedMovement;
-			if ( moveTowards != null )
-			{
-				moveTowards.target = GameObject.FindGameObjectWithTag( "Player" ).transform;
-			}
-
-			// register for death notification
-			DeathSystem enemyDeath = enemy.GetComponent<DeathSystem>();
-			if ( enemyDeath != null )
-			{
-				enemyDeath.RegisterDeathCallback( EnemyDeathCallback );
-			}
-
-			// increment live enemy count
-			enemyCount++;
+			moveTowards.target = GameObject.FindGameObjectWithTag( "Player" ).transform;
 		}
+
+		// register for death notification
+		DeathSystem enemyDeath = enemy.GetComponent<DeathSystem>();
+		if ( enemyDeath != null )
+		{
+			enemyDeath.RegisterDeathCallback( EnemyDeathCallback );
+		}
+
+		// increment live enemy count
+		enemyCount = enemyCount + 1;
 	}
 
 	public void EnemyDeathCallback( GameObject enemy )

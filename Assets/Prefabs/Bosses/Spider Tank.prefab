@@ -1541,12 +1541,10 @@ MonoBehaviour:
   spawnerSettings:
     baseAmountPerWave: 2
     amountPerSpawner: 1
-    waveInterval: 2
+    waveInterval: 3
     spawnOnStart: 1
   spiderTank: {fileID: 0}
-  mininionCount: 20
   healRate: 75
-  endWhenNoMinionsLeft: 0
 --- !u!114 &11400046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1570,6 +1568,7 @@ MonoBehaviour:
     amountPerSpawner: 1
     waveInterval: 2
     spawnOnStart: 0
+  maxSpawned: 50
 --- !u!114 &11400048
 MonoBehaviour:
   m_ObjectHideFlags: 1
