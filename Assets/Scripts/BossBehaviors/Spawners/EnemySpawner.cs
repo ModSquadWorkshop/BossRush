@@ -126,9 +126,14 @@ public class EnemySpawner : MonoBehaviour
 
 			// if the enemy uses a MoveTowardsTarget script, the target needs to be set
 			ITargetBasedMovement moveTowards = enemy.GetComponent( typeof( ITargetBasedMovement ) ) as ITargetBasedMovement;
+			Orbit orbitPlayer = enemy.GetComponent<Orbit>();
 			if ( moveTowards != null )
 			{
 				moveTowards.target = GameObject.FindGameObjectWithTag( "Player" ).transform;
+			}
+			if ( orbitPlayer != null )
+			{
+				orbitPlayer.target = GameObject.FindGameObjectWithTag( "Player" ).transform;
 			}
 
 			// register for death notification
