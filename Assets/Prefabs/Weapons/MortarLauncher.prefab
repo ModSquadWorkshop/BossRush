@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 117.304367, y: -1.38458633, z: -80.0414047}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -37,7 +37,7 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
@@ -89,6 +89,8 @@ MonoBehaviour:
   mortarMinDistance: 0
   mortarMaxDistance: 20
   delayBetweenMortars: .150000006
+  usePredefinedTargetPos: 0
+  predefinedTargetPos: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

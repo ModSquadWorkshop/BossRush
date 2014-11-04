@@ -26,6 +26,8 @@ public class SpiderTankState : MonoBehaviour
 	{
 		spawner.enabled = false;
 		spawner.ResetSettings();
+		CancelInvoke();
+		StopAllCoroutines();
 	}
 
 	public Transform player
@@ -60,6 +62,14 @@ public class SpiderTankState : MonoBehaviour
 		}
 	}
 
+	public MortarAttack mortarLauncher
+	{
+		get
+		{
+			return spiderTank.mortarLauncher;
+		}
+	}
+
 	public EnemySpawner spawner
 	{
 		get
@@ -89,6 +99,20 @@ public class SpiderTankState : MonoBehaviour
 		get
 		{
 			return spiderTank.doorCollider;
+		}
+	}
+
+	public void StartLaunchAtInterval( int mortarCount, float interval )
+	{
+		StartCoroutine( LaunchAtInterval( mortarCount, interval ) );
+	}
+
+	private IEnumerator LaunchAtInterval( int mortarCount, float interval )
+	{
+		while ( true )
+		{
+			mortarLauncher.Launch( mortarCount );
+			yield return new WaitForSeconds( interval );
 		}
 	}
 

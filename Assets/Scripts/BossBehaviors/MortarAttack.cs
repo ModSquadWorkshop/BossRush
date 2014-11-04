@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MortarAttack : MonoBehaviour 
+public class MortarAttack : MonoBehaviour
 {
 	public GameObject mortar;
 	public GameObject target;
@@ -13,35 +13,40 @@ public class MortarAttack : MonoBehaviour
 	public float mortarMaxDistance = 20.0f;
 	public float delayBetweenMortars = 0.15f;
 
+	public bool allowMultipleLaunches;
+
 	public bool usePredefinedTargetPos;
 	public Transform[] predefinedTargetPos;
 
-	private int _amountMortars;
+	private bool _firing = false;
 
-	public void Launch( int amountMortars )
+	public void Launch( int numMortars )
 	{
-		_amountMortars = amountMortars;
-		LaunchMortar();
+		if ( !( !allowMultipleLaunches && _firing ) )
+		{
+			StartCoroutine( LaunchMortar( numMortars ) );
+			_firing = true;
+		}
 	}
 
-	private void LaunchMortar()
+	private IEnumerator LaunchMortar( int numMortars )
 	{
-		if ( _amountMortars > 0 )
+		while ( numMortars > 0 )
 		{
-			GameObject mortarObject = Instantiate( mortar ) as GameObject;
-			Mortar m = mortarObject.GetComponent<Mortar>();
+			Mortar mortarObject = ( Instantiate( mortar ) as GameObject ).GetComponent<Mortar>();
 			Vector3 targetPos = GetTargetPosition();
 
-			m.Init( Random.Range( mortarSpeedMin, mortarSpeedMax ),
-					this.gameObject.transform.position,
-					target,
-					targetPos,
-					targetMarker );
+			mortarObject.Init( Random.Range( mortarSpeedMin, mortarSpeedMax ),
+			                   transform.position,
+			                   target,
+			                   targetPos,
+			                   targetMarker );
 
-			_amountMortars--;
+			numMortars--;
 
-			Invoke( "LaunchMortar", delayBetweenMortars );
+			yield return new WaitForSeconds( delayBetweenMortars );
 		}
+		_firing = false;
 	}
 
 	private Vector3 GetTargetPosition()
