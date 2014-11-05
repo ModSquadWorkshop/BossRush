@@ -9,14 +9,12 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 33: {fileID: 3300000}
-  - 65: {fileID: 6500000}
   - 23: {fileID: 2300000}
   - 82: {fileID: 8200000}
-  - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
-  - 120: {fileID: 12000000}
-  m_Layer: 10
-  m_Name: BeamRifle
+  - 114: {fileID: 11400002}
+  m_Layer: 0
+  m_Name: Assault Rifle
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +28,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400002}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Casing Anchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,18 +87,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &6500000
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &8200000
 AudioSource:
   m_ObjectHideFlags: 1
@@ -167,17 +153,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15872b8914c62454f81f4707f8cb5356, type: 3}
+  m_Script: {fileID: 11500000, guid: 58170baa63ed6b949bc5bb273cbe6cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0
-  primaryAttackSounds: []
-  repeatDamage: 1
-  beam: {fileID: 12000000}
-  beamWidth: 1
-  maxRange: 100
-  damageInterval: .0500000007
-  piercingsAmount: 1
+  cooldown: .0500000007
+  primaryAttackSounds:
+  - {fileID: 8300000, guid: 9cd82d14829e3fa4cb03d283e6803685, type: 3}
+  projectile: {fileID: 100000, guid: 29e3809d3eae60d499db32210dbbcd56, type: 2}
+  casingAnchor: {fileID: 400002}
+  casingEmitter: {fileID: 100000, guid: b425d3dd3171cdf4cbf686d9fad193e4, type: 2}
+  infiniteAmmo: 1
+  ammoPerMagazine: 30
+  amountOfMagazines: 5
+  reloadSpeed: 1.5
+  sprayAngle: 10
+  circleSpray: 0
+  _magazines: 0
+  _magazineAmmo: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -189,44 +181,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 25
+  baseDamage: 35
   damageMultiplier: 1
   destroyAfterDamage: 0
   targets:
-  - Enemy
---- !u!120 &12000000
-LineRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
-  m_Parameters:
-    startWidth: 1
-    endWidth: 1
-    m_StartColor:
-      serializedVersion: 2
-      rgba: 4279177209
-    m_EndColor:
-      serializedVersion: 2
-      rgba: 4278190335
-  m_UseWorldSpace: 1
+  - Scenery
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

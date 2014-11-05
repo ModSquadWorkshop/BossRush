@@ -9,9 +9,6 @@ public class SpiderTankTurboState : SpiderTankState
 
 	public float duration;
 
-	public int numMortars;
-	public float launchInterval;
-
 	[Range( 0.0f, 1.0f )]
 	public float laserChance;
 
@@ -33,8 +30,6 @@ public class SpiderTankTurboState : SpiderTankState
 		spiderTank.RegisterHealthTriggerCallback( HealthTriggerCallback );
 
 		Invoke( "TransitionOut", duration );
-
-		StartLaunchAtInterval( numMortars, launchInterval );
 	}
 
 	void Update()

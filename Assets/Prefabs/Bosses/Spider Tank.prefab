@@ -367,8 +367,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400040}
-  - 33: {fileID: 3300012}
-  - 23: {fileID: 2300012}
   - 114: {fileID: 11400068}
   m_Layer: 0
   m_Name: MortarLauncher
@@ -769,26 +767,6 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!23 &2300012
-Renderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100040}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: fc1a4d7a40d41d545b6d510012fe2fbf, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
 --- !u!33 &3300000
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -831,13 +809,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100028}
   m_Mesh: {fileID: 4300000, guid: eadf01619ef42f442881dd58aa95924b, type: 3}
---- !u!33 &3300012
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100040}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &5400000
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -1381,6 +1352,9 @@ MonoBehaviour:
     amountPerSpawner: 0
     waveInterval: 0
     spawnOnStart: 0
+  useMortars: 0
+  numMortars: 0
+  launchInterval: 0
   spiderTank: {fileID: 0}
   turretSpeed: 10
   canonDelay: 2
@@ -1406,13 +1380,14 @@ MonoBehaviour:
     amountPerSpawner: 2
     waveInterval: 2
     spawnOnStart: 1
+  useMortars: 0
+  numMortars: 10
+  launchInterval: 3
   spiderTank: {fileID: 0}
   turretSpeed: 50
   canonDelay: .5
   amountPerWave: 5
   duration: 10
-  numMortars: 10
-  launchInterval: 3
   laserChance: .5
   movementScript: {fileID: 0}
 --- !u!114 &11400024
@@ -1448,6 +1423,9 @@ MonoBehaviour:
     amountPerSpawner: 0
     waveInterval: 0
     spawnOnStart: 0
+  useMortars: 0
+  numMortars: 0
+  launchInterval: 0
   spiderTank: {fileID: 0}
   returnState: {fileID: 0}
 --- !u!114 &11400028
@@ -1519,6 +1497,9 @@ MonoBehaviour:
     amountPerSpawner: 0
     waveInterval: 0
     spawnOnStart: 0
+  useMortars: 0
+  numMortars: 0
+  launchInterval: 0
   spiderTank: {fileID: 0}
   rotation: 1.5
   duration: 10
@@ -1552,6 +1533,9 @@ MonoBehaviour:
     amountPerSpawner: 0
     waveInterval: 0
     spawnOnStart: 0
+  useMortars: 0
+  numMortars: 0
+  launchInterval: 0
   spiderTank: {fileID: 0}
   mainCanonCooldown: 1
   minionsPerWave: 6
@@ -1573,6 +1557,9 @@ MonoBehaviour:
     amountPerSpawner: 0
     waveInterval: 0
     spawnOnStart: 0
+  useMortars: 0
+  numMortars: 0
+  launchInterval: 0
   spiderTank: {fileID: 0}
   mininionCount: 20
 --- !u!114 &11400042
@@ -1586,7 +1573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54890f060999baa459796158b8ac5d9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notifyOnce: 0
+  allowMultipleDeaths: 0
 --- !u!114 &11400044
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1604,6 +1591,9 @@ MonoBehaviour:
     amountPerSpawner: 1
     waveInterval: 3
     spawnOnStart: 1
+  useMortars: 1
+  numMortars: 10
+  launchInterval: 3
   spiderTank: {fileID: 0}
   healRate: 75
 --- !u!114 &11400046
@@ -1647,6 +1637,9 @@ MonoBehaviour:
     amountPerSpawner: 0
     waveInterval: 0
     spawnOnStart: 0
+  useMortars: 0
+  numMortars: 0
+  launchInterval: 0
   spiderTank: {fileID: 0}
   destination: {fileID: 0}
 --- !u!114 &11400050
@@ -1812,16 +1805,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mortar: {fileID: 100000, guid: 7c6689ae54474ec40ac7f53d318f064f, type: 2}
-  target: {fileID: 0}
-  targetMarker: {fileID: 100000, guid: 1a748d5f766af9345ae5d3d8018f8c26, type: 2}
-  mortarSpeedMin: 40
-  mortarSpeedMax: 80
-  mortarMinDistance: 0
-  mortarMaxDistance: 20
+  mortarSettings:
+    target: {fileID: 0}
+    targetMarker: {fileID: 100000, guid: 1a748d5f766af9345ae5d3d8018f8c26, type: 2}
+    minSpeed: 40
+    maxSpeed: 50
+    minTargetOffset: 10
+    maxTargetOffset: 30
+    arcHeight: 100
+    speedIncrease: 2.5
+    usePredefinedTargetPos: 0
+    predefinedTargetPos: []
   delayBetweenMortars: .150000006
   allowMultipleLaunches: 0
-  usePredefinedTargetPos: 0
-  predefinedTargetPos: []
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1

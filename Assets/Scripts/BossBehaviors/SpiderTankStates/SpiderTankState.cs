@@ -6,6 +6,10 @@ public class SpiderTankState : MonoBehaviour
 	public bool useSpawner;
 	public SpawnerSettings spawnerSettings;
 
+	public bool useMortars;
+	public int numMortars;
+	public float launchInterval;
+
 	[HideInInspector] public SpiderTank spiderTank;
 
 	public virtual void Awake()
@@ -19,6 +23,11 @@ public class SpiderTankState : MonoBehaviour
 		{
 			spawner.ApplySettings( spawnerSettings );
 			spawner.enabled = true;
+		}
+
+		if ( useMortars )
+		{
+			StartLaunchAtInterval( numMortars, launchInterval );
 		}
 	}
 
