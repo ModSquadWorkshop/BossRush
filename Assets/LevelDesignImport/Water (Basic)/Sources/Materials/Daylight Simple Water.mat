@@ -109,12 +109,12 @@ Material:
         second: {r: 0, g: 0, b: 0, a: 1}
       data:
         first:
-          name: _MainTex_ST
-        second: {r: 1, g: 1, b: 0, a: 0}
-      data:
-        first:
           name: _SpecColor
         second: {r: 0, g: 0, b: 0, a: .400000006}
+      data:
+        first:
+          name: _MainTex_ST
+        second: {r: 1, g: 1, b: 0, a: 0}
       data:
         first:
           name: _BumpMap_ST
@@ -122,7 +122,7 @@ Material:
       data:
         first:
           name: _horizonColor
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: 1, g: 1, b: 1, a: .725490212}
       data:
         first:
           name: WaveSpeed
