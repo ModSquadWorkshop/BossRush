@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Orbit : MonoBehaviour 
+public class Orbit : MonoBehaviour, ITargetBasedMovement
 {
 	//public GameObject targetObj;
 	private Transform _target;

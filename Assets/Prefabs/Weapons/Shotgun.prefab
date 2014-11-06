@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
   m_Layer: 0
-  m_Name: AssaultRifle
+  m_Name: Shotgun
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,25 +153,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58170baa63ed6b949bc5bb273cbe6cea, type: 3}
+  m_Script: {fileID: 11500000, guid: 24d226df38c4ae64cb8ca99bd6fb0d75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: .0500000007
+  cooldown: .270000011
   primaryAttackSounds:
   - {fileID: 8300000, guid: 9cd82d14829e3fa4cb03d283e6803685, type: 3}
-  projectile: {fileID: 100000, guid: 29e3809d3eae60d499db32210dbbcd56, type: 2}
+  projectile: {fileID: 100000, guid: 20b65e6a645ad724e8d6e71187586206, type: 2}
   casingAnchor: {fileID: 400002}
   casingEmitter: {fileID: 100000, guid: b425d3dd3171cdf4cbf686d9fad193e4, type: 2}
   infiniteAmmo: 1
-  ammoPerMagazine: 30
+  ammoPerMagazine: 10
   amountOfMagazines: 5
   reloadSpeed: 1.5
-  shakeForce: .300000012
-  shakeTime: 0
-  sprayAngle: 10
+  sprayAngle: 45
   circleSpray: 0
   _magazines: 0
   _magazineAmmo: 0
+  shellsPerShot: 6
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -183,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 35
+  baseDamage: 100
   damageMultiplier: 1
   destroyAfterDamage: 0
   targets:
