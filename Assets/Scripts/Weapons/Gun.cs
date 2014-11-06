@@ -13,8 +13,6 @@ public class Gun : Weapon
 	public int amountOfMagazines;
 	public float reloadSpeed;
 
-	private WeaponSystem _weaponList;
-
 	[Range( 0.0f, 180.0f )]
 	public float sprayAngle;
 	public bool circleSpray;
@@ -45,8 +43,6 @@ public class Gun : Weapon
 		_reloading = false;
 
 		_halfSpray = 0.5f * sprayAngle;
-
-		_weaponList = this.GetComponentInParent<WeaponSystem>();
 	}
 
 	public override void PerformPrimaryAttack()
@@ -61,11 +57,6 @@ public class Gun : Weapon
 			if ( !infiniteAmmo )
 			{
 				_magazineAmmo--;
-				if ( IsOutOfAmmo() )
-				{
-					_weaponList.NextWeapon();
-					_weaponList.weapons.Remove( this.gameObject );
-				}
 				if ( _magazineAmmo <= 0 )
 				{
 					Reload();

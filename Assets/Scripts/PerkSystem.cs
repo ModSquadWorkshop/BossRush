@@ -10,7 +10,7 @@ public class PerkSystem : MonoBehaviour
 	HealthSystem playerHealth;
 	DamageSystem playerDamage;
 	Gun playerGun;
-	//WeaponSystem playerWeapons;
+	WeaponSystem playerWeapons;
 
 	void Start()
 	{
@@ -25,7 +25,7 @@ public class PerkSystem : MonoBehaviour
 		playerHealth = this.gameObject.GetComponent<HealthSystem>();
 		//playerDamage = this.gameObject.GetComponent<WeaponSystem>().currentWeapon.GetComponent<DamageSystem>();
 		//playerGun = this.gameObject.GetComponent<WeaponSystem>().currentWeapon.GetComponent<Gun>();
-		//playerWeapons = this.gameObject.GetComponent<WeaponSystem>();
+		playerWeapons = this.gameObject.GetComponent<WeaponSystem>();
 	}
 
 	public void AddPerk( Perk perk )
@@ -47,12 +47,12 @@ public class PerkSystem : MonoBehaviour
 		//playerGun.reloadSpeed += perk.reloadMod;
 		//playerGun.infiniteAmmo = perk.infiniteAmmo || playerGun.infiniteAmmo;
 		playerHealth.immune = perk.immunity || playerHealth.immune;
-		/*
-		if ( perk.gunDrop != null )
+		
+		if ( perk.gunDrop != null && playerWeapons.weapons.Count < 3)
 		{
 			playerWeapons.weapons.Add( perk.gunDrop );
 			playerWeapons.NewWeapon();
-		}*/
+		}
 	}
 
 	public void ResetPerk( Perk reset )
@@ -61,16 +61,16 @@ public class PerkSystem : MonoBehaviour
 		playerSpeed.speedMultiplier -= reset.speedMod;
 		playerHealth.maxHealth -= reset.maxHealthMod;
 		playerHealth.health -= reset.healthMod;
-		playerDamage.damageMultiplier -= reset.damageMod;
-		playerGun.cooldown -= reset.fireRateMod;
-		playerGun.amountOfMagazines -= reset.magazinesMod;
-		playerGun.reloadSpeed -= reset.reloadMod;
-
+		//playerDamage.damageMultiplier -= reset.damageMod;
+		//playerGun.cooldown -= reset.fireRateMod;
+		//playerGun.amountOfMagazines -= reset.magazinesMod;
+		//playerGun.reloadSpeed -= reset.reloadMod;
+		/*
 		if ( reset.infiniteAmmo )
 		{
 			playerGun.infiniteAmmo = false;
 		}
-
+		*/
 		if ( reset.immunity )
 		{
 			playerHealth.immune = false;

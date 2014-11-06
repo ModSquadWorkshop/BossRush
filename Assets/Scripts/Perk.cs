@@ -15,7 +15,7 @@ public class Perk : MonoBehaviour
 	public float damageMod;
 	public float reloadMod;
 	public int magazinesMod;
-	//public GameObject gunDrop;
+	public GameObject gunDrop;
 	//time a perk lasts (if using a timer);
 	public float length;
 
