@@ -829,7 +829,7 @@ AudioSource:
   rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
-  BypassReverbZones: 0
+  BypassReverbZones: 1
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1122,7 +1122,7 @@ MonoBehaviour:
   - {fileID: 11400012}
   shield: {fileID: 0}
   defaultCanonLookSpeed: 20
-  healthTriggerInterval: 1000
+  healthTriggerInterval: 1500
   basicState: {fileID: 0}
   fleeState: {fileID: 0}
   healState: {fileID: 0}
@@ -1188,8 +1188,8 @@ MonoBehaviour:
   destroyOnNoLives: 1
   startingLives: 100
   maxLives: 1
-  startingHealth: 4000
-  maxHealth: 4000
+  startingHealth: 8000
+  maxHealth: 8000
   damageSounds: []
   deathSounds: []
   _lives: 0
