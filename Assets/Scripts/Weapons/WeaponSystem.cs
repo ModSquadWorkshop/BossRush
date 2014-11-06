@@ -14,7 +14,7 @@ public class WeaponSystem : MonoBehaviour
 	private int _currentWeaponID;
 	private Weapon _currentWeapon;
 	private Weapon _defaultWeapon;
-	private Gun _specialGun;
+	public Gun specialGun;
 	public const float JOYSTICK_THRESHOLD = 0.75f;
 
 	void Start()
@@ -52,7 +52,6 @@ public class WeaponSystem : MonoBehaviour
 			_defaultWeapon = InitializeWeapon( weapon );
 		}
 
-		_specialGun = weapons[2].GetComponent<Gun>();
 		/*
 		// set the current weapon
 		*/
@@ -86,11 +85,11 @@ public class WeaponSystem : MonoBehaviour
 		if ( Input.GetButton( "Fire1" ) || gamePadLook.sqrMagnitude > JOYSTICK_THRESHOLD )
 		{
 			// if the weapon is still on cooldown, it cannot perform an attack
-			if ( _currentWeaponID == 2 && _specialGun.IsOutOfAmmo() )
+			if ( _currentWeaponID == 2 && specialGun.IsOutOfAmmo() )
 			{
 				NextWeapon();
 				Debug.Log( "OUT OF AMMO" );
-				weapons.Remove( _specialGun.gameObject );
+				weapons.Remove( specialGun.gameObject );
 			}
 			if ( !_currentWeapon.isOnCooldown )
 			{
@@ -118,6 +117,7 @@ public class WeaponSystem : MonoBehaviour
 		weapon.gameObject.SetActive( false );
 		weapon.gameObject.transform.parent = weaponAnchor;
 		weapon.gameObject.transform.localPosition = Vector3.zero;
+		weapon.gameObject.transform.localRotation = Quaternion.identity;
 
 		return weapon;
 	}

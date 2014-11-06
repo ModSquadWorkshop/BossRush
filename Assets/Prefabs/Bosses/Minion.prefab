@@ -153,8 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathTime: 0
-  dropping: 0
-  dropItem: {fileID: 0}
+  dropping: 1
+  dropItem: {fileID: 100000, guid: c8de83263b587a84eaf0c91b42ed4ab0, type: 2}
   dropChance: .125
 --- !u!114 &11400008
 MonoBehaviour:
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54890f060999baa459796158b8ac5d9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notifyOnce: 1
+  allowMultipleDeaths: 0
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1

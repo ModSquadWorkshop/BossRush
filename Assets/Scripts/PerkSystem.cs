@@ -52,6 +52,7 @@ public class PerkSystem : MonoBehaviour
 		{
 			playerWeapons.weapons.Add( perk.gunDrop );
 			playerWeapons.NewWeapon();
+			playerWeapons.specialGun = playerWeapons.weapons[2].GetComponent<Gun>();
 		}
 	}
 
