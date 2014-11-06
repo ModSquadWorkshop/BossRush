@@ -8,7 +8,8 @@ public class PerkObject : MonoBehaviour
 		if ( other.gameObject.tag == "Player" )
 		{
 			other.gameObject.GetComponent<PerkSystem>().AddPerk( this.gameObject.GetComponent<Perk>() );
-			GetComponent<DeathSystem>().Kill();
+			Destroy( this.gameObject );
+			//GetComponent<DeathSystem>().Kill();
 		}
 	}
 }

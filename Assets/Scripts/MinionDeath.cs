@@ -71,7 +71,7 @@ public class MinionDeath : MonoBehaviour
 		if ( Random.Range( 0.0f, 1.0f ) < dropChance )
 		{
 			Instantiate( dropItem, this.transform.localPosition, this.transform.rotation );
-			Debug.Log( "HEALTH PACK DEPLOYED" );
+			//Debug.Log( "HEALTH PACK DEPLOYED" );
 		}
 	}
 }
