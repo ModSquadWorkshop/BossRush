@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class WeaponSystem : MonoBehaviour
 {
-	public GameObject[] weapons;
+	public List<GameObject> weapons;
+	//public GameObject[] weapons;
 	public int defaultWeaponID = 0;
 	public KeyCode switchWeaponKeybind;
 
@@ -21,7 +23,7 @@ public class WeaponSystem : MonoBehaviour
 		// initialize the weapons
 		*/
 
-		for ( int i = 0; i < weapons.Length; ++i )
+		for ( int i = 0; i < weapons.Count; ++i )
 		{
 			// re-assigning the GameObject is import because Instantiate() creates a clone
 			// when switching weapons, we need to get the Weapon component of the correct object (the clone)
@@ -55,6 +57,17 @@ public class WeaponSystem : MonoBehaviour
 		*/
 
 		SwitchWeapon( defaultWeaponID );
+	}
+
+	public void NewWeapon()
+	{
+		//Initialize 3rd slot weapon
+		weapons[2] = Instantiate( weapons[2] ) as GameObject;
+		InitializeWeapon( GetWeapon( 2 ) );
+
+		// the weapon prefabs don't default to hitting enemies (only scenery),
+		// so add it to their list of targets.
+		weapons[2].GetComponent<DamageSystem>().targets.Add( "Enemy" );
 	}
 
 	void Update()
@@ -155,14 +168,14 @@ public class WeaponSystem : MonoBehaviour
 
 	private int NormalizeWeaponID( int weaponID )
 	{
-		if ( weaponID >= weapons.Length )
+		if ( weaponID >= weapons.Count )
 		{
 			weaponID = 0;
 		}
 
 		if ( weaponID < 0 )
 		{
-			weaponID = weapons.Length - 1;
+			weaponID = weapons.Count - 1;
 		}
 
 		return weaponID;

@@ -152,11 +152,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathTime: 0
-  exploding: 1
-  dropping: 0
-  dropItem: {fileID: 0}
+  exploding: 0
+  dropping: 1
+  dropItem: {fileID: 100000, guid: be9500392faf11e44811eea59134f552, type: 2}
   explosionEffect: {fileID: 100000, guid: f50fcebfdae35044683c14337e5c36e8, type: 2}
-  dropChance: .125
+  dropChance: .503000021
   explosionRadius: 7.5
   explosionDamage: 10
   explosionForce: 1000

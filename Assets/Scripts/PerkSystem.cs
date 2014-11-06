@@ -10,6 +10,7 @@ public class PerkSystem : MonoBehaviour
 	HealthSystem playerHealth;
 	DamageSystem playerDamage;
 	Gun playerGun;
+	WeaponSystem playerWeapons;
 
 	void Start()
 	{
@@ -24,6 +25,7 @@ public class PerkSystem : MonoBehaviour
 		playerHealth = this.gameObject.GetComponent<HealthSystem>();
 		playerDamage = this.gameObject.GetComponent<WeaponSystem>().currentWeapon.GetComponent<DamageSystem>();
 		playerGun = this.gameObject.GetComponent<WeaponSystem>().currentWeapon.GetComponent<Gun>();
+		playerWeapons = this.gameObject.GetComponent<WeaponSystem>();
 	}
 
 	public void AddPerk( Perk perk )
@@ -45,6 +47,12 @@ public class PerkSystem : MonoBehaviour
 		playerGun.reloadSpeed += perk.reloadMod;
 		playerGun.infiniteAmmo = perk.infiniteAmmo || playerGun.infiniteAmmo;
 		playerHealth.immune = perk.immunity || playerHealth.immune;
+		/*
+		if ( perk.gunDrop != null )
+		{
+			playerWeapons.weapons.Add( perk.gunDrop );
+			playerWeapons.NewWeapon();
+		}*/
 	}
 
 	public void ResetPerk( Perk reset )
