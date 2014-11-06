@@ -2655,6 +2655,13 @@ MonoBehaviour:
   shield: {fileID: 0}
   defaultCanonLookSpeed: 20
   healthTriggerInterval: 1500
+  healthCheckpoints:
+    phaseHealthPercents:
+    - 100
+    - 75
+    - 50
+    - 25
+    currentPhase: 0
   basicState: {fileID: 0}
   fleeState: {fileID: 0}
   healState: {fileID: 0}

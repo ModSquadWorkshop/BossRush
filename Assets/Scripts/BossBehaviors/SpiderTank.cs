@@ -17,6 +17,8 @@ public class SpiderTank : MonoBehaviour
 	public float defaultCanonLookSpeed;
 	public float healthTriggerInterval;
 
+	public HealthCheckpoints healthCheckpoints;
+
 	[HideInInspector] public SpiderTankBasicState basicState;
 	[HideInInspector] public SpiderTankFleeState fleeState;
 	[HideInInspector] public SpiderTankHealState healState;
@@ -31,8 +33,6 @@ public class SpiderTank : MonoBehaviour
 
 	private HealthTrigger _healthTriggerCallback = delegate( HealthSystem health ) { };
 	private float _healthTrigger;
-
-	private int _currentPhase;
 
 	void Awake()
 	{
@@ -55,6 +55,7 @@ public class SpiderTank : MonoBehaviour
 
 		// register for damage callbacks
 		health.RegisterHealthCallback( SpiderDamageCallback );
+		healthCheckpoints.currentPhase = 0;
 
 		// set up KeepDistance script
 		KeepDistance keepDistance = GetComponent<KeepDistance>();
@@ -83,9 +84,22 @@ public class SpiderTank : MonoBehaviour
 
 	void SpiderDamageCallback( HealthSystem health, float damage )
 	{
+		/* not sure if this is needed with the new health checkpoints system
 		if ( health.health < _healthTrigger )
 		{
 			_healthTriggerCallback( health );
+		}
+		 * */
+
+		int currentPhase = healthCheckpoints.currentPhase;
+		if ( currentPhase < healthCheckpoints.phaseHealthPercents.Length - 1 )
+		{
+			float healthCheckpoint = healthCheckpoints.phaseHealthPercents[currentPhase + 1];
+			if ( (health.percent * 100.0f) <= healthCheckpoint )
+			{
+				healthCheckpoints.currentPhase++;
+				health.maxHealth = healthCheckpoint;
+			}
 		}
 	}
 
@@ -182,8 +196,16 @@ public class SpiderTank : MonoBehaviour
 	{
 		get
 		{
-			return _currentPhase;
+			return healthCheckpoints.currentPhase;
 		}
 	}
 
+}
+
+
+[System.Serializable]
+public class HealthCheckpoints
+{
+	public float[] phaseHealthPercents = new float[]{ 100.0f, 75.0f, 50.0f, 25.0f };
+	public int currentPhase;
 }
