@@ -49,6 +49,7 @@ public class Mortar : MonoBehaviour
 
 	void OnComplete()
 	{
+		_settings.target.GetComponent<DeathSystem>().DeregisterDeathCallback( TargetDeath );
 		GetComponent<DeathSystem>().Kill();
 		Destroy( _marker );
 	}
@@ -71,17 +72,14 @@ public class Mortar : MonoBehaviour
 
 	void TargetDeath( GameObject obj )
 	{
-		if ( gameObject != null )
+		// don't go through the DeathSystem,
+		// we're doing cleanup, not normal gameplay
+		Destroy( gameObject );
+		if ( _marker != null )
 		{
-			// don't go through the DeathSystem,
-			// we're doing cleanup, not normal gameplay
-			Destroy( gameObject );
-			if ( _marker != null )
-			{
-				Destroy( _marker );
-			}
-			CancelInvoke();
+			Destroy( _marker );
 		}
+		CancelInvoke();
 	}
 }
 

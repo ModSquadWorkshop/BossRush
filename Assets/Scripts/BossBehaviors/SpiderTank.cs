@@ -75,6 +75,8 @@ public class SpiderTank : MonoBehaviour
 		{
 			GetComponent<DeathSystem>().Gut();
 		}
+
+		Destroy( mortarLauncher );
 	}
 
 	void SpiderDamageCallback( HealthSystem health, float damage )
