@@ -32,6 +32,8 @@ public class SpiderTank : MonoBehaviour
 	private HealthTrigger _healthTriggerCallback = delegate( HealthSystem health ) { };
 	private float _healthTrigger;
 
+	private int _currentPhase;
+
 	void Awake()
 	{
 		// retrieve all states
@@ -175,4 +177,13 @@ public class SpiderTank : MonoBehaviour
 	{
 		_healthTriggerCallback -= callback;
 	}
+
+	public int currentPhase
+	{
+		get
+		{
+			return _currentPhase;
+		}
+	}
+
 }

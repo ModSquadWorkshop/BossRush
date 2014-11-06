@@ -3,14 +3,10 @@ using System.Collections;
 
 public class SpiderTankState : MonoBehaviour
 {
-	public bool useSpawner;
-	public SpawnerSettings spawnerSettings;
-
-	public bool useMortars;
-	public int numMortars;
-	public float launchInterval;
-
 	[HideInInspector] public SpiderTank spiderTank;
+
+	public GlobalStateSettingsList globalSettings;
+	private GlobalStateSettings[] _stateSettings;
 
 	public virtual void Awake()
 	{
@@ -19,15 +15,21 @@ public class SpiderTankState : MonoBehaviour
 
 	public virtual void OnEnable()
 	{
-		if ( useSpawner )
+		_stateSettings = new GlobalStateSettings[] { globalSettings.phaseOneSettings, 
+													 globalSettings.phaseTwoSettings, 
+													 globalSettings.phaseThreeSettings, 
+													 globalSettings.phaseFourSettings };
+
+		if ( _stateSettings[spiderTank.currentPhase].useSpawner )
 		{
-			spawner.ApplySettings( spawnerSettings );
+			spawner.ApplySettings( _stateSettings[spiderTank.currentPhase].spawnerSettings );
 			spawner.enabled = true;
 		}
 
-		if ( useMortars )
+		if ( _stateSettings[spiderTank.currentPhase].useMortars )
 		{
-			StartLaunchAtInterval( numMortars, launchInterval );
+			StartLaunchAtInterval( _stateSettings[spiderTank.currentPhase].numMortars, 
+								   _stateSettings[spiderTank.currentPhase].launchInterval );
 		}
 	}
 
@@ -131,4 +133,27 @@ public class SpiderTankState : MonoBehaviour
 		enabled = false;
 		spiderTank.fleeState.enabled = true;
 	}
+}
+
+
+[System.Serializable]
+public class GlobalStateSettings 
+{
+	public bool useSpawner;
+	public SpawnerSettings spawnerSettings;
+
+	public bool useMortars;
+	public int numMortars;
+	public float launchInterval;
+}
+
+
+// this struct only exists to organize the settings in the inspector
+[System.Serializable]
+public class GlobalStateSettingsList
+{
+	public GlobalStateSettings phaseOneSettings;
+	public GlobalStateSettings phaseTwoSettings;
+	public GlobalStateSettings phaseThreeSettings;
+	public GlobalStateSettings phaseFourSettings;
 }
