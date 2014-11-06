@@ -147,7 +147,6 @@ public class SpiderTank : MonoBehaviour
 		}
 	}
 
-
 	/**
 	 * \brief Have the main canon and other guns look at the player gradually.
 	 */
