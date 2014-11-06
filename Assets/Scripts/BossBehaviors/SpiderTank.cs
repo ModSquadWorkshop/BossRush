@@ -11,6 +11,7 @@ public class SpiderTank : MonoBehaviour
 	public Gun mainCanon;
 	public BeamWeapon [] laserCanon;
 	public Gun[] otherGuns;
+	public MortarAttack mortarLauncher;
 	public GameObject shield;
 
 	public float defaultCanonLookSpeed;
@@ -74,6 +75,8 @@ public class SpiderTank : MonoBehaviour
 		{
 			GetComponent<DeathSystem>().Gut();
 		}
+
+		Destroy( mortarLauncher );
 	}
 
 	void SpiderDamageCallback( HealthSystem health, float damage )

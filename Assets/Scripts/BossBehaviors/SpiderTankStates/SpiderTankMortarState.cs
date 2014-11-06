@@ -1,30 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpiderTankMortarState : SpiderTankState 
+public class SpiderTankMortarState : SpiderTankState
 {
-	public GameObject mortarLauncher;
 	public int amountOfMortars;
-	public float delayBeforeLaunch;
+	public float launchInterval;
 
-	private MortarAttack _mortarAttack;
-
-	public override void Awake()
+	public override void OnEnable()
 	{
-		base.Awake();
-
-		_mortarAttack = mortarLauncher.GetComponent<MortarAttack>();
-		if ( _mortarAttack != null )
-		{
-			// auto assign the target of the mortar attack to be the player
-			_mortarAttack.target = player.gameObject;
-		}
-
-		Invoke( "Launch", delayBeforeLaunch );
-	}
-
-	void Launch()
-	{
-		_mortarAttack.Launch( amountOfMortars );
+		base.OnEnable();
+		StartLaunchAtInterval( amountOfMortars, launchInterval );
 	}
 }
