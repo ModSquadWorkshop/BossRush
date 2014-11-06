@@ -1380,7 +1380,7 @@ MonoBehaviour:
     amountPerSpawner: 2
     waveInterval: 2
     spawnOnStart: 1
-  useMortars: 0
+  useMortars: 1
   numMortars: 10
   launchInterval: 3
   spiderTank: {fileID: 0}
@@ -1812,6 +1812,7 @@ MonoBehaviour:
     maxSpeed: 50
     minTargetOffset: 10
     maxTargetOffset: 30
+    targetLead: 25
     arcHeight: 100
     speedIncrease: 2.5
     usePredefinedTargetPos: 0

@@ -62,7 +62,9 @@ public class Mortar : MonoBehaviour
 
 		if ( !_settings.usePredefinedTargetPos )
 		{
-			return offset + _settings.target.transform.position; // offset the position to the origin of the targeted object
+			// offset the position to the origin of the targeted object
+			Vector3 targetDirection = Vector3.Normalize( _settings.target.rigidbody.velocity );
+			return offset + _settings.target.transform.position +  targetDirection * _settings.targetLead;
 		}
 		else
 		{
@@ -93,6 +95,7 @@ public class MortarSettings
 	public float maxSpeed;
 	public float minTargetOffset;
 	public float maxTargetOffset;
+	public float targetLead;
 
 	public float arcHeight;
 	public float speedIncrease;
