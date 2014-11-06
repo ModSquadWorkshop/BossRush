@@ -4,8 +4,8 @@ using System.Collections;
 public class Mortar : MonoBehaviour
 {
 	private float       _speed;
-	private Vector3     _targetPos;
-	private GameObject  _marker; // the actual instantiated target marker
+	protected Vector3     _targetPos;
+	protected GameObject  _marker; // the actual instantiated target marker
 	private Vector3     _velocity;
 
 	private MortarSettings _settings;
@@ -48,7 +48,7 @@ public class Mortar : MonoBehaviour
 		Invoke( "OnComplete", timeToTarget );
 	}
 
-	void OnComplete()
+	public virtual void OnComplete()
 	{
 		GetComponent<DeathSystem>().Kill();
 		Destroy( _marker );
