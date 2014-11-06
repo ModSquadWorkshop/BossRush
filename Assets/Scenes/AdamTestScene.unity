@@ -2948,9 +2948,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 1000
   acceleration: 1500
-  rushTime: .5
-  attackDamage: 10
   target: {fileID: 0}
+  settings:
+    rushTime: 0
+    attackDamage: 0
 --- !u!114 &1470767346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3073,6 +3074,19 @@ MonoBehaviour:
       numMortars: 0
       launchInterval: 0
   returnState: {fileID: 0}
+  rushStateSettings:
+    phaseOneSettings:
+      rushTime: 0
+      attackDamage: 0
+    phaseTwoSettings:
+      rushTime: 0
+      attackDamage: 0
+    phaseThreeSettings:
+      rushTime: 0
+      attackDamage: 0
+    phaseFourSettings:
+      rushTime: 0
+      attackDamage: 0
 --- !u!114 &1470767348
 MonoBehaviour:
   m_ObjectHideFlags: 0
