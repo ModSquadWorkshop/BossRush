@@ -192,9 +192,13 @@ sealed public class PlayerMovement : MonoBehaviour
 
 	private void TargetDamageCallback( HealthSystem playerHealth, float damage )
 	{
-		camShake.Shake( damage );
-		rumbler.rumble = true;
-		rumbler.Rumble();
+		//Debug.Log( damage );
+		if ( damage < 0 )
+		{
+			camShake.Shake( damage );
+			rumbler.rumble = true;
+			rumbler.Rumble( damage );
+		}
 	}
 
 }

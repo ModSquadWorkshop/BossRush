@@ -12,7 +12,10 @@ public class RumbleManager : MonoBehaviour
 	[Range( 0.0f, 1f )]
 	public float rightForce;
 
+	public float rumbleMod;
 	public float rumbleTime;
+
+	private float _force;
 
 	// Use this for initialization
 	void Start()
@@ -29,19 +32,21 @@ public class RumbleManager : MonoBehaviour
 		GamePad.SetVibration( 0, 0f, 0f );
 	}
 
-	public void Rumble()
+	public void Rumble( float force )
 	{
 		if( rumble )
 		{
-			//Debug.Log( rumble );
+			_force = Mathf.Abs(force);
 			StartCoroutine( "Vibrate" );
 			rumble = false;
+			//Debug.Log( rightForce + (rumbleMod * _force) );
+
 		}
 	}
 
 	public void Begin()
 	{
-		GamePad.SetVibration( 0, leftForce, rightForce );
+		GamePad.SetVibration( 0, leftForce + ( rumbleMod * _force ), rightForce + ( rumbleMod * _force ) );
 	}
 
 	public void Kill()
