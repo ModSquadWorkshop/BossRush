@@ -32,7 +32,7 @@ sealed public class PlayerMovement : MonoBehaviour
 	private WeaponSystem _playerWeapons;
 
 	private HealthSystem playerHealth;
-	private CameraFollow camShake;
+	private CameraShake camShake;
 	private RumbleManager rumbler;
 
 	void Start()
@@ -41,7 +41,7 @@ sealed public class PlayerMovement : MonoBehaviour
 		playerHealth = this.GetComponent<HealthSystem>();
 		playerHealth.RegisterHealthCallback( TargetDamageCallback );
 
-		camShake = Camera.main.gameObject.GetComponent<CameraFollow>();
+		camShake = Camera.main.gameObject.GetComponent<CameraShake>();
 		rumbler = Camera.main.gameObject.GetComponent<RumbleManager>();
 
 		_forwardVect = new Vector3();
@@ -195,10 +195,8 @@ sealed public class PlayerMovement : MonoBehaviour
 		//Debug.Log( damage );
 		if ( damage < 0 )
 		{
-			camShake.Shake( damage );
-			rumbler.rumble = true;
 			rumbler.Rumble( damage );
+			camShake.Shake( damage );
 		}
 	}
-
 }

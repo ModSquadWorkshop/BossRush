@@ -1,62 +1,58 @@
 ﻿using UnityEngine;
 using System.Collections;
-using XInputDotNetPure; //Might have trouble with visual studio
-
+using XInputDotNetPure;
 
 public class RumbleManager : MonoBehaviour
 {
-	public bool rumble;
-
 	[Range( 0.0f, 1f )]
 	public float leftForce;
 	[Range( 0.0f, 1f )]
 	public float rightForce;
 
-	public float rumbleMod;
 	public float rumbleTime;
 
-	private float _force;
-
-	// Use this for initialization
-	void Start()
-	{
-		rumble = false;
-	}
+	private float _force = 0.0f;
+	private float _timeRemaining = 0.0f;
+	private bool _rumbling = false;
 
 	IEnumerator Vibrate()
 	{
-		GamePad.SetVibration( 0, leftForce, rightForce );
-		//Debug.Log( "VIBRATION BEGIN" );
-		yield return new WaitForSeconds( rumbleTime );
-		//Debug.Log( "VIBRATION END" );
-		GamePad.SetVibration( 0, 0f, 0f );
+		_rumbling = true;
+		do
+		{
+			float tempTime = _timeRemaining;
+			_timeRemaining = 0.0f;
+			GamePad.SetVibration( 0, leftForce * _force, rightForce * _force );
+			yield return new WaitForSeconds( tempTime );
+		}
+		while ( _timeRemaining > 0.0f );
+
+		KillRumble();
+		_rumbling = false; ;
 	}
 
 	public void Rumble( float force )
 	{
-		if( rumble )
+		_force = Mathf.Abs( force );
+		_timeRemaining += _force * rumbleTime;
+		if ( !_rumbling )
 		{
-			_force = Mathf.Abs(force);
-			StartCoroutine( "Vibrate" );
-			rumble = false;
-			//Debug.Log( rightForce + (rumbleMod * _force) );
-
+			StartCoroutine( Vibrate() );
 		}
 	}
 
 	public void Begin()
 	{
-		GamePad.SetVibration( 0, leftForce + ( rumbleMod * _force ), rightForce + ( rumbleMod * _force ) );
+		GamePad.SetVibration( 0, leftForce  * _force, rightForce * _force );
 	}
 
-	public void Kill()
+	public void KillRumble()
 	{
 		GamePad.SetVibration( 0, 0f, 0f );
 	}
 
 	void OnDestroy()
 	{
-		Kill();
+		KillRumble();
 	}
-	 
 }
