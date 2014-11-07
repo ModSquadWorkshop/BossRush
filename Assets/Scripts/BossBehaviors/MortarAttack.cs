@@ -10,7 +10,7 @@ public class MortarAttack : MonoBehaviour
 	public float delayBetweenMortars = 0.15f;
 	public bool allowMultipleLaunches;
 
-	private bool _firing = false;
+	protected bool _firing = false;
 
 	public void Launch( int numMortars )
 	{
@@ -21,7 +21,7 @@ public class MortarAttack : MonoBehaviour
 		}
 	}
 
-	private IEnumerator LaunchMortar( int numMortars )
+	protected virtual IEnumerator LaunchMortar( int numMortars )
 	{
 		while ( numMortars > 0 )
 		{

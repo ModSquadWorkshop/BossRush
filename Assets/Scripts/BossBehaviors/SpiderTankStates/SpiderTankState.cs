@@ -10,6 +10,9 @@ public class SpiderTankState : MonoBehaviour
 	public int numMortars;
 	public float launchInterval;
 
+	public bool launchSpawners;
+	public float spawnerLaunchInterval;
+
 	[HideInInspector] public SpiderTank spiderTank;
 
 	public virtual void Awake()
@@ -27,7 +30,12 @@ public class SpiderTankState : MonoBehaviour
 
 		if ( useMortars )
 		{
-			StartLaunchAtInterval( numMortars, launchInterval );
+			StartMortarLaunchAtInterval( numMortars, launchInterval );
+		}
+
+		if ( launchSpawners )
+		{
+			StartSpawnLaunchAtInterval( spawnerLaunchInterval );
 		}
 	}
 
@@ -79,6 +87,14 @@ public class SpiderTankState : MonoBehaviour
 		}
 	}
 
+	public MortarAttack spawnerLauncher
+	{
+		get
+		{
+			return spiderTank.spawnerLauncher;
+		}
+	}
+
 	public EnemySpawner spawner
 	{
 		get
@@ -111,16 +127,21 @@ public class SpiderTankState : MonoBehaviour
 		}
 	}
 
-	public void StartLaunchAtInterval( int mortarCount, float interval )
+	public void StartMortarLaunchAtInterval( int mortarCount, float interval )
 	{
-		StartCoroutine( LaunchAtInterval( mortarCount, interval ) );
+		StartCoroutine( LaunchAtInterval( mortarLauncher, mortarCount, interval ) );
 	}
 
-	private IEnumerator LaunchAtInterval( int mortarCount, float interval )
+	public void StartSpawnLaunchAtInterval( float interval )
+	{
+		StartCoroutine( LaunchAtInterval( spawnerLauncher, 1, interval ) );
+	}
+
+	private IEnumerator LaunchAtInterval( MortarAttack mortar, int mortarCount, float interval )
 	{
 		while ( true )
 		{
-			mortarLauncher.Launch( mortarCount );
+			mortar.Launch( mortarCount );
 			yield return new WaitForSeconds( interval );
 		}
 	}
