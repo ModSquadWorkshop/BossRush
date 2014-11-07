@@ -369,7 +369,23 @@ GameObject:
   - 4: {fileID: 400040}
   - 114: {fileID: 11400068}
   m_Layer: 0
-  m_Name: MortarLauncher
+  m_Name: Spawner Launcher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400042}
+  - 114: {fileID: 11400070}
+  m_Layer: 0
+  m_Name: Mortar Launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -403,6 +419,7 @@ Transform:
   - {fileID: 400016}
   - {fileID: 400038}
   - {fileID: 400036}
+  - {fileID: 400042}
   - {fileID: 400040}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -641,6 +658,18 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100040}
+  m_LocalRotation: {x: 0, y: -4.37113883e-08, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 8.8427, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400002}
+  m_RootOrder: 7
+--- !u!4 &400042
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100042}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 8.8427, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -1149,7 +1178,8 @@ MonoBehaviour:
   otherGuns:
   - {fileID: 11400018}
   - {fileID: 11400012}
-  mortarLauncher: {fileID: 11400068}
+  mortarLauncher: {fileID: 11400070}
+  spawnerLauncher: {fileID: 11400068}
   shield: {fileID: 0}
   defaultCanonLookSpeed: 20
   healthTriggerInterval: 1500
@@ -1355,6 +1385,8 @@ MonoBehaviour:
   useMortars: 0
   numMortars: 0
   launchInterval: 0
+  launchSpawners: 0
+  spawnerLaunchInterval: 0
   spiderTank: {fileID: 0}
   turretSpeed: 10
   canonDelay: 2
@@ -1383,6 +1415,8 @@ MonoBehaviour:
   useMortars: 1
   numMortars: 10
   launchInterval: 3
+  launchSpawners: 1
+  spawnerLaunchInterval: 2
   spiderTank: {fileID: 0}
   turretSpeed: 50
   canonDelay: .5
@@ -1426,6 +1460,8 @@ MonoBehaviour:
   useMortars: 0
   numMortars: 0
   launchInterval: 0
+  launchSpawners: 0
+  spawnerLaunchInterval: 0
   spiderTank: {fileID: 0}
   returnState: {fileID: 0}
 --- !u!114 &11400028
@@ -1500,6 +1536,8 @@ MonoBehaviour:
   useMortars: 0
   numMortars: 0
   launchInterval: 0
+  launchSpawners: 0
+  spawnerLaunchInterval: 0
   spiderTank: {fileID: 0}
   rotation: 1.5
   duration: 10
@@ -1536,6 +1574,8 @@ MonoBehaviour:
   useMortars: 0
   numMortars: 0
   launchInterval: 0
+  launchSpawners: 0
+  spawnerLaunchInterval: 0
   spiderTank: {fileID: 0}
   mainCanonCooldown: 1
   minionsPerWave: 6
@@ -1560,6 +1600,8 @@ MonoBehaviour:
   useMortars: 0
   numMortars: 0
   launchInterval: 0
+  launchSpawners: 0
+  spawnerLaunchInterval: 0
   spiderTank: {fileID: 0}
   mininionCount: 20
 --- !u!114 &11400042
@@ -1594,6 +1636,8 @@ MonoBehaviour:
   useMortars: 1
   numMortars: 10
   launchInterval: 3
+  launchSpawners: 0
+  spawnerLaunchInterval: 0
   spiderTank: {fileID: 0}
   healRate: 75
 --- !u!114 &11400046
@@ -1614,6 +1658,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  maxSpawnPoints: 5
   defaultSettings:
     baseAmountPerWave: 2
     amountPerSpawner: 1
@@ -1640,6 +1685,8 @@ MonoBehaviour:
   useMortars: 0
   numMortars: 0
   launchInterval: 0
+  launchSpawners: 0
+  spawnerLaunchInterval: 0
   spiderTank: {fileID: 0}
   destination: {fileID: 0}
 --- !u!114 &11400050
@@ -1801,12 +1848,52 @@ MonoBehaviour:
   m_GameObject: {fileID: 100040}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 506d668e90eea1343a6ac71f43ea516d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mortar: {fileID: 100000, guid: 25f6bfc5938519c4fa99f6baaca87531, type: 2}
+  mortarSettings:
+    targets:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    targetMarker: {fileID: 100000, guid: 1a748d5f766af9345ae5d3d8018f8c26, type: 2}
+    minSpeed: 40
+    maxSpeed: 50
+    minTargetOffset: 10
+    maxTargetOffset: 30
+    targetLead: 0
+    arcHeight: 100
+    speedIncrease: 2.5
+  delayBetweenMortars: .150000006
+  allowMultipleLaunches: 0
+  spiderTank: {fileID: 0}
+--- !u!114 &11400070
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01635b7e2e8b2854db579c808d7b04fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mortar: {fileID: 100000, guid: 7c6689ae54474ec40ac7f53d318f064f, type: 2}
   mortarSettings:
-    target: {fileID: 0}
+    targets: []
     targetMarker: {fileID: 100000, guid: 1a748d5f766af9345ae5d3d8018f8c26, type: 2}
     minSpeed: 40
     maxSpeed: 50
@@ -1815,8 +1902,6 @@ MonoBehaviour:
     targetLead: 25
     arcHeight: 100
     speedIncrease: 2.5
-    usePredefinedTargetPos: 0
-    predefinedTargetPos: []
   delayBetweenMortars: .150000006
   allowMultipleLaunches: 0
 --- !u!120 &12000000

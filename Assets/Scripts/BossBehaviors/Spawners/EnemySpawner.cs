@@ -8,12 +8,13 @@ public class EnemySpawner : MonoBehaviour
 
 	public GameObject[] enemyTypes;
 	public List<Transform> spawns;
+	public int maxSpawnPoints;
+
 	public SpawnerSettings defaultSettings;
 	public int maxSpawned;
 
 	protected int _spawnIndex = 0; //!< Used for communication with derived spawners on which spawn index was used.
 
-	private DeathSystem _spawnerDeath;
 	private bool _spawning = false; //!< Used to tell the coroutine to stop spawning.
 	private int _enemyCount = 0; //!< A counter of the number of live minions in the world.
 	private SpawnerSettings _settings;
@@ -23,10 +24,9 @@ public class EnemySpawner : MonoBehaviour
 	{
 		_settings = defaultSettings;
 
-		for ( int i = 0; i < spawns.Count; i++ )
+		foreach ( Transform spawnPoint in spawns )
 		{
-			_spawnerDeath = spawns[i].gameObject.GetComponent<DeathSystem>();
-			_spawnerDeath.RegisterDeathCallback( SpawnerDeathCallback );
+			spawnPoint.GetComponent<DeathSystem>().RegisterDeathCallback( SpawnerDeathCallback );
 		}
 	}
 
@@ -127,6 +127,12 @@ public class EnemySpawner : MonoBehaviour
 	public void ResetSettings()
 	{
 		_settings = defaultSettings;
+	}
+
+	public void AddSpawnPoint( Transform spawnPoint )
+	{
+		spawns.Add( spawnPoint );
+		spawnPoint.GetComponent<DeathSystem>().RegisterDeathCallback( SpawnerDeathCallback );
 	}
 
 	public void RegisterEnemyCountCallback( EnemyCountChange callback )
