@@ -27,8 +27,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: .707106888, y: 0, z: 0, w: .707106769}
-  m_LocalPosition: {x: 0, y: 50, z: 0}
+  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
+  m_LocalPosition: {x: 0, y: 100, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -91,10 +91,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followTarget: {fileID: 0}
-  offset: 80
+  offset: 75
   followSpeed: 2
-  shakeForce: 0
-  shakePerDamage: 0
+  shakeForce: .200000003
+  shakePerDamage: .0500000007
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -107,8 +107,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rumble: 1
-  leftForce: 1
-  rightForce: 1
+  leftForce: .200000003
+  rightForce: .200000003
+  rumbleMod: .0299999993
   rumbleTime: .100000001
 --- !u!124 &12400000
 Behaviour:
