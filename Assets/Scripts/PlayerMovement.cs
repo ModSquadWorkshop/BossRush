@@ -5,6 +5,7 @@ sealed public class PlayerMovement : MonoBehaviour
 {
 	public Transform lookTarget;
 	public Transform playerModel;
+	public PlayerCrosshairs crosshairs;
 
 	public float baseSpeed;
 	public float speedMultiplier;
@@ -17,7 +18,6 @@ sealed public class PlayerMovement : MonoBehaviour
 	public bool stopWeaponInDash;
 
 	private Vector3 _forwardVect;
-	private Vector3 _lookTargetVect;
 	private Vector3 _gamPadVect;
 
 	private Timer _dashTimer;
@@ -30,33 +30,36 @@ sealed public class PlayerMovement : MonoBehaviour
 	private int _dashLayerMask;
 
 	private WeaponSystem _playerWeapons;
+	private HealthSystem _playerHealth;
+	private CameraShake _camShake;
+	private RumbleManager _rumbler;
 
-	private HealthSystem playerHealth;
-	private CameraFollow camShake;
-	private RumbleManager rumbler;
+	private Plane _plane;
 
-	void Start()
+	void Awake()
 	{
-		// register for damage callback (rumble and shake)
-		playerHealth = this.GetComponent<HealthSystem>();
-		playerHealth.RegisterHealthCallback( TargetDamageCallback );
-
-		camShake = Camera.main.gameObject.GetComponent<CameraFollow>();
-		rumbler = Camera.main.gameObject.GetComponent<RumbleManager>();
-
-		_forwardVect = new Vector3();
-		_lookTargetVect = new Vector3();
-		_gamPadVect = new Vector3();
-
-		// initialize dash timers
-		_dashTimer = new Timer( dashDistance / dashSpeed, 1 );
-		_dashDelayTimer = new Timer( dashDelay, 1 );
+		_playerHealth = GetComponent<HealthSystem>();
+		_playerWeapons = GetComponent<WeaponSystem>();
+		_plane = new Plane( Vector3.up, this.transform.position );
 
 		// create a ray casting layer mask that collides with everything accept "Player"
 		_dashLayerMask = 1 << LayerMask.NameToLayer( "Player" );
 		_dashLayerMask = ~_dashLayerMask; // invert the mask
+	}
 
-		_playerWeapons = this.GetComponent<WeaponSystem>();
+	void Start()
+	{
+		// register for damage callback (rumble and shake)
+		_playerHealth.RegisterHealthCallback( TargetDamageCallback );
+
+		_camShake = Camera.main.gameObject.GetComponent<CameraShake>();
+		_rumbler = Camera.main.gameObject.GetComponent<RumbleManager>();
+
+		_forwardVect = new Vector3();
+
+		// initialize dash timers
+		_dashTimer = new Timer( dashDistance / dashSpeed, 1 );
+		_dashDelayTimer = new Timer( dashDelay, 1 );
 	}
 
 	void Update()
@@ -81,7 +84,7 @@ sealed public class PlayerMovement : MonoBehaviour
 			_dashDelayTimer.Update();
 
 			// handle dash input
-			if ( Input.GetButtonDown( "Dash" ) ) 
+			if ( Input.GetButtonDown( "Dash" ) )
 			{
 				Dash();
 			}
@@ -89,7 +92,6 @@ sealed public class PlayerMovement : MonoBehaviour
 		else
 		{
 			/* update the player while dashing */
-
 			DashingUpdate();
 		}
 	}
@@ -104,22 +106,41 @@ sealed public class PlayerMovement : MonoBehaviour
 
 	private void HandleLookDirection()
 	{
-		// handle mouse input look
-		_lookTargetVect.Set( Input.GetAxis( "Mouse X" ), 0.0f, Input.GetAxis( "Mouse Y" ) );
-		lookTarget.Translate( _lookTargetVect * lookSpeed );
+		// handle mouse input
+		Ray ray = Camera.main.ScreenPointToRay( Input.mousePosition );
+		float hitDistance = 0.0f;
+		if ( _plane.Raycast( ray, out hitDistance ) )
+		{
+			lookTarget.position = ray.GetPoint( hitDistance );
+		}
+
+		bool mouseMoved = ( new Vector3( Input.GetAxis( "Mouse X" ),
+		                                 0.0f,
+		                                 Input.GetAxis( "Mouse Y" ) ) ).sqrMagnitude > 0.0f;
 
 		// handle game pad look
-		_gamPadVect.Set( Input.GetAxis( "Look Horizontal" ), 0.0f, Input.GetAxis( "Look Vertical" ) );
-		if ( _gamPadVect.sqrMagnitude > 0.0f )
+		// game pad look overrides mouse movement
+		Vector3 gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ),
+		                                   0.0f,
+		                                   Input.GetAxis( "Look Vertical" ) );
+
+		bool controllerMoved = gamePadLook.sqrMagnitude > 0.0f;
+		if ( controllerMoved )
 		{
-			lookTarget.localPosition = _gamPadVect;
+			lookTarget.localPosition = gamePadLook;
+			crosshairs.show = false;
+		}
+
+		if ( mouseMoved )
+		{
+			crosshairs.show = true;
 		}
 
 		// don't actually rotate the root Player object, rotate the model
 		playerModel.transform.LookAt( lookTarget );
 	}
 
-	private void Dash() 
+	private void Dash()
 	{
 		// insure the player isn't already dashing
 		if ( !_dashDelayTimer.running )
@@ -151,7 +172,7 @@ sealed public class PlayerMovement : MonoBehaviour
 		}
 	}
 
-	private void DashingUpdate() 
+	private void DashingUpdate()
 	{
 		// update dash properties to determine if it needs to be stopped
 		_dashDistanceTraveled = Vector3.Distance( _dashOrigin, rigidbody.transform.position );
@@ -192,9 +213,11 @@ sealed public class PlayerMovement : MonoBehaviour
 
 	private void TargetDamageCallback( HealthSystem playerHealth, float damage )
 	{
-		camShake.Shake( damage );
-		rumbler.rumble = true;
-		rumbler.Rumble();
+		//Debug.Log( damage );
+		if ( damage < 0 )
+		{
+			_rumbler.Rumble( damage );
+			_camShake.Shake( damage );
+		}
 	}
-
 }

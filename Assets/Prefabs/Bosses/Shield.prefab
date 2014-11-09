@@ -28,9 +28,12 @@ GameObject:
   - 23: {fileID: 2300000}
   - 135: {fileID: 13500000}
   - 208: {fileID: 20800000}
+  - 114: {fileID: 11400002}
+  - 114: {fileID: 11400000}
+  - 114: {fileID: 11400004}
   m_Layer: 10
   m_Name: Shield
-  m_TagString: Scenery
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,7 +75,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: cfc414be5ceed9c40a5a7ae6763563d9, type: 2}
+  - {fileID: 2100000, guid: f25afc8b13d87e9489d905c1ba4b40e0, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -122,6 +125,52 @@ Light:
   m_ShadowAngle: 0
   m_IndirectIntensity: 1
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d857f201bdb5b5c499a61a1b301189c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  immune: 0
+  destroyOnNoLives: 0
+  startingLives: 1
+  maxLives: 1
+  startingHealth: 2000
+  maxHealth: 2000
+  damageSounds: []
+  deathSounds: []
+  _lives: 1
+  _health: 0
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54890f060999baa459796158b8ac5d9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allowMultipleDeaths: 1
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60a528ae7917db94a875bbe77ef33e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fullHealthColor: {r: 0, g: 1, b: .00689649582, a: .588235319}
+  noHealthColor: {r: 1, g: 0, b: 0, a: .588235319}
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -141,7 +190,7 @@ NavMeshObstacle:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
-  m_Radius: .75
+  m_Radius: .5
   m_Height: 1
   m_MoveThreshold: 0
   m_Carve: 0
