@@ -12,7 +12,7 @@ GameObject:
   - 136: {fileID: 13600000}
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400000}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: ShotgunDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: e9624c40340a76c49bc8185b36862403, type: 2}
+  - {fileID: 2100000, guid: cfc414be5ceed9c40a5a7ae6763563d9, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -69,6 +69,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977c784b6514ff742a2a3906df8de4e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settings:
+    minChance: .310000002
+    maxChance: .50999999
   immunity: 0
   infiniteAmmo: 0
   speedMod: 0

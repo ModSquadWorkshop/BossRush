@@ -69,12 +69,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977c784b6514ff742a2a3906df8de4e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settings:
+    minChance: 0
+    maxChance: .300000012
   immunity: 0
   infiniteAmmo: 0
   speedMod: 0
   fireRateMod: 0
   maxHealthMod: 0
-  healthMod: 25
+  healthMod: 10
   damageMod: 0
   reloadMod: 0
   magazinesMod: 0

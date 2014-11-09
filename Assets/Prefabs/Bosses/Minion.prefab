@@ -154,8 +154,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathTime: 0
   dropping: 1
-  dropItem: {fileID: 100000, guid: c8de83263b587a84eaf0c91b42ed4ab0, type: 2}
-  dropChance: .125
+  drops:
+  - {fileID: 11400000, guid: be9500392faf11e44811eea59134f552, type: 2}
+  - {fileID: 11400000, guid: c8de83263b587a84eaf0c91b42ed4ab0, type: 2}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1

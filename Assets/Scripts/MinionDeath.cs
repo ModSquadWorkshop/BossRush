@@ -10,10 +10,11 @@ public class MinionDeath : MonoBehaviour
 	DeathTimer timedDeath;
 	HealthSystem minionHealth;
 
-	public GameObject dropItem;
+	private GameObject _drop;
+	public Perk[] drops;
 
-	[Range( 0.0f, 1.0f )]
-	public float dropChance;
+	//[Range( 0.0f, 1.0f )]
+	private float _dropGen;
 
 	// Use this for initialization
 	void Start ()
@@ -44,10 +45,15 @@ public class MinionDeath : MonoBehaviour
 
 	void Drop()
 	{
-		if ( Random.Range( 0.0f, 1.0f ) < dropChance )
+		_dropGen = Random.Range( 0f, 1f );
+		Debug.Log( _dropGen );
+		foreach ( Perk drop in drops )
 		{
-			Instantiate( dropItem, this.transform.localPosition, this.transform.rotation );
-			//Debug.Log( "HEALTH PACK DEPLOYED" );
+			if ( _dropGen >= drop.settings.minChance && _dropGen <= drop.settings.maxChance )
+			{
+				Debug.Log( "DROP SOMETHING" );
+				_drop = Instantiate( drop.gameObject, this.transform.localPosition, this.transform.rotation ) as GameObject;
+			}
 		}
 	}
 }
