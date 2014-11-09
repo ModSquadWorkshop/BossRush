@@ -5,6 +5,7 @@ sealed public class PlayerMovement : MonoBehaviour
 {
 	public Transform lookTarget;
 	public Transform playerModel;
+	public PlayerCrosshairs crosshairs;
 
 	public float baseSpeed;
 	public float speedMultiplier;
@@ -112,19 +113,27 @@ sealed public class PlayerMovement : MonoBehaviour
 		{
 			lookTarget.position = ray.GetPoint( hitDistance );
 		}
-//		lookTarget.renderer.enabled = true;
+
+		bool mouseMoved = ( new Vector3( Input.GetAxis( "Mouse X" ),
+		                                 0.0f,
+		                                 Input.GetAxis( "Mouse Y" ) ) ).sqrMagnitude > 0.0f;
 
 		// handle game pad look
 		// game pad look overrides mouse movement
 		Vector3 gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ),
 		                                   0.0f,
 		                                   Input.GetAxis( "Look Vertical" ) );
-		if ( gamePadLook.sqrMagnitude > 0.0f )
+
+		bool controllerMoved = gamePadLook.sqrMagnitude > 0.0f;
+		if ( controllerMoved )
 		{
 			lookTarget.localPosition = gamePadLook;
+			crosshairs.show = false;
+		}
 
-			// hide look target
-			//lookTarget.renderer.enabled = false;
+		if ( mouseMoved )
+		{
+			crosshairs.show = true;
 		}
 
 		// don't actually rotate the root Player object, rotate the model
