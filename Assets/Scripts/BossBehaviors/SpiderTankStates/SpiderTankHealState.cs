@@ -9,7 +9,8 @@ public class SpiderTankHealState : SpiderTankState
 	public void Update()
 	{
 		spiderTank.health.Heal( _settings[spiderTank.currentPhase].healRate * Time.deltaTime );
-		if ( spiderTank.health.atMaxHealth )
+
+		if ( spiderTank.atMaxHealth )
 		{
 			ShieldDestroyed( shield ); // make sure we go through a common exit path
 		}

@@ -28,8 +28,8 @@ public class SpiderTankState : MonoBehaviour
 
 		if ( _stateSettings[spiderTank.currentPhase].useMortars )
 		{
-			StartLaunchAtInterval( _stateSettings[spiderTank.currentPhase].numMortars, 
-								   _stateSettings[spiderTank.currentPhase].launchInterval );
+			StartLaunchAtInterval( _stateSettings[spiderTank.currentPhase].mortarSettings.amountOfMortars, 
+								   _stateSettings[spiderTank.currentPhase].mortarSettings.launchInterval );
 		}
 	}
 
@@ -140,11 +140,9 @@ public class SpiderTankState : MonoBehaviour
 public class GlobalStateSettings 
 {
 	public bool useSpawner;
-	public SpawnerSettings spawnerSettings;
-
 	public bool useMortars;
-	public int numMortars;
-	public float launchInterval;
+	public SpawnerSettings spawnerSettings;
+	public MortarStateSettings mortarSettings;
 }
 
 

@@ -32,6 +32,8 @@ public class SpiderTank : MonoBehaviour
 	[HideInInspector] public NavMeshAgent agent;
 
 	private HealthTrigger _healthTriggerCallback = delegate( HealthSystem health ) { };
+	private float _healthMaxCurr;
+	private float _healthMaxStart;
 	private float _healthTrigger;
 
 	void Awake()
@@ -63,6 +65,9 @@ public class SpiderTank : MonoBehaviour
 		{
 			keepDistance.target = player;
 		}
+
+		_healthMaxStart = health.maxHealth;
+		_healthMaxCurr = _healthMaxStart;
 	}
 
 	void PlayerDeathCallback( GameObject gameObject )
@@ -84,12 +89,10 @@ public class SpiderTank : MonoBehaviour
 
 	void SpiderDamageCallback( HealthSystem health, float damage )
 	{
-		/* not sure if this is needed with the new health checkpoints system
 		if ( health.health < _healthTrigger )
 		{
 			_healthTriggerCallback( health );
 		}
-		 * */
 
 		int currentPhase = healthCheckpoints.currentPhase;
 		if ( currentPhase < healthCheckpoints.phaseHealthPercents.Length - 1 )
@@ -98,7 +101,7 @@ public class SpiderTank : MonoBehaviour
 			if ( (health.percent * 100.0f) <= healthCheckpoint )
 			{
 				healthCheckpoints.currentPhase++;
-				health.maxHealth = healthCheckpoint;
+				_healthMaxCurr = _healthMaxStart * healthCheckpoint * 0.01f;
 			}
 		}
 	}
@@ -197,6 +200,14 @@ public class SpiderTank : MonoBehaviour
 		get
 		{
 			return healthCheckpoints.currentPhase;
+		}
+	}
+
+	public bool atMaxHealth
+	{
+		get
+		{
+			return health.health >= _healthMaxCurr;
 		}
 	}
 
