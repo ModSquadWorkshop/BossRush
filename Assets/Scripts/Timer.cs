@@ -29,47 +29,41 @@ public class Timer
 
 	public void Update()
 	{
-		if ( !_running )
+		if ( _running )
 		{
-			return;
-		}
+			_ticked = false;
+			_deltaTime += Time.deltaTime;
 
-		_ticked = false;
-		_deltaTime += Time.deltaTime;
-
-		if ( _deltaTime >= _intervalDelay )
-		{
-			_currentInterval++;
-			_deltaTime = 0.0f;
-
-			_ticked = true;
-
-			if ( _currentInterval >= _totalIntervals && _totalIntervals > 0 )
+			if ( _deltaTime >= _intervalDelay )
 			{
-				_complete = true;
-				Stop();
+				_currentInterval++;
+				_deltaTime = 0.0f;
+
+				_ticked = true;
+
+				if ( _currentInterval >= _totalIntervals && _totalIntervals > 0 )
+				{
+					_complete = true;
+					Stop();
+				}
 			}
 		}
 	}
 
 	public void Start()
 	{
-		if ( _currentInterval >= _totalIntervals && _totalIntervals > 0 )
+		if ( _currentInterval < _totalIntervals || _totalIntervals <= 0 )
 		{
-			return;
+			_running = true;
 		}
-
-		_running = true;
 	}
 
 	public void Stop()
 	{
-		if ( !_running )
+		if ( _running )
 		{
-			return;
+			_running = false;
 		}
-
-		_running = false;
 	}
 
 	public void Reset( bool startAfterReset = false )
@@ -86,11 +80,6 @@ public class Timer
 		}
 	}
 
-	public bool IsRunning()
-	{
-		return _running;
-	}
-
 	public bool ticked
 	{
 		get
@@ -104,6 +93,14 @@ public class Timer
 		get
 		{
 			return _complete;
+		}
+	}
+
+	public bool running
+	{
+		get
+		{
+			return _running;
 		}
 	}
 }
