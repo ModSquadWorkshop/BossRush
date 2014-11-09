@@ -15,7 +15,7 @@ public class PerkSystem : MonoBehaviour
 	{
 		_perks = new Hashtable();
 
-		for (int i = 0; i < startingPerks.Length; i++)
+		for ( int i = 0; i < startingPerks.Length; i++ )
 		{
 			AddPerk( startingPerks[i] );
 		}
@@ -38,7 +38,7 @@ public class PerkSystem : MonoBehaviour
 		//apply modifiers
 		playerSpeed.speedMultiplier += perk.speedMod;
 		playerHealth.maxHealth += perk.maxHealthMod;
-		playerHealth.health += perk.healthMod;
+		playerHealth.Heal( perk.healthMod );
 		playerDamage.damageMultiplier += perk.damageMod;
 		playerGun.cooldown += perk.fireRateMod;
 		playerGun.amountOfMagazines += perk.magazinesMod;
@@ -82,7 +82,7 @@ public class PerkSystem : MonoBehaviour
 
 	public bool IsActive( Perk perk )
 	{
-		return (bool)_perks[perk];
+		return ( bool )_perks[perk];
 	}
 
 	public void Clear()

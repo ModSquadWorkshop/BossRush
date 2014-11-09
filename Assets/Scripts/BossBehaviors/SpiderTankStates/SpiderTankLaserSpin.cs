@@ -4,34 +4,28 @@ using System.Collections;
 public class SpiderTankLaserSpin : SpiderTankState
 {
 	public float rotation;
-	public bool spawnMinions;
-
 	public float duration;
 
-	private FlankingSpawner _spawner;
-
-	public override void Awake()
+	public override void OnEnable()
 	{
-		base.Awake();
+		base.OnEnable();
 
-		_spawner = GetComponent<FlankingSpawner>();
-	}
-
-	void OnEnable()
-	{
-		_spawner.enabled = spawnMinions;
 		Invoke( "TransitionOut", duration );
 		spiderTank.RegisterHealthTriggerCallback( HealthTriggerCallback );
 	}
 
 	void Update()
 	{
-		spiderTank.laserCanon.PerformPrimaryAttack();
+		for ( int i = 0; i < spiderTank.laserCanon.Length; ++i )
+		{
+			spiderTank.laserCanon[i].PerformPrimaryAttack();
+		}
 	}
 
-	void OnDisable()
+	public override void OnDisable()
 	{
-		_spawner.enabled = false;
+		base.OnDisable();
+
 		spiderTank.DeregisterHealthTriggerCallback( HealthTriggerCallback );
 	}
 

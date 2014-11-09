@@ -6,14 +6,16 @@ public class SpiderTank : MonoBehaviour
 
 	public Transform player;
 
-	public Gun mainCanon;
-	public BeamWeapon laserCanon;
-	public Gun[] otherGuns;
+	public Collider doorCollider;
 
-	public EnemySpawner arenaSpawner;
+	public Gun mainCanon;
+	public BeamWeapon [] laserCanon;
+	public Gun[] otherGuns;
+	public MortarAttack mortarLauncher;
+	public SpawnerMortarAttack spawnerLauncher;
+	public GameObject shield;
 
 	public float defaultCanonLookSpeed;
-
 	public float healthTriggerInterval;
 
 	[HideInInspector] public SpiderTankBasicState basicState;
@@ -22,9 +24,11 @@ public class SpiderTank : MonoBehaviour
 	[HideInInspector] public SpiderTankLaserSpin laserSpin;
 	[HideInInspector] public SpiderTankRushState rushState;
 	[HideInInspector] public SpiderTankTurboState turboState;
+	[HideInInspector] public SpiderTankEnterState enterState;
 
 	[HideInInspector] public HealthSystem health;
 	[HideInInspector] public EnemySpawner spawner;
+	[HideInInspector] public NavMeshAgent agent;
 
 	private HealthTrigger _healthTriggerCallback = delegate( HealthSystem health ) { };
 	private float _healthTrigger;
@@ -38,10 +42,12 @@ public class SpiderTank : MonoBehaviour
 		laserSpin = GetComponent<SpiderTankLaserSpin>();
 		rushState = GetComponent<SpiderTankRushState>();
 		turboState = GetComponent<SpiderTankTurboState>();
+		enterState = GetComponent<SpiderTankEnterState>();
 
 		// retrieve other componenets
 		health = GetComponent<HealthSystem>();
 		spawner = GetComponent<EnemySpawner>();
+		agent = GetComponent<NavMeshAgent>();
 
 		// register for player death callback
 		player.gameObject.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerDeathCallback );
@@ -49,12 +55,15 @@ public class SpiderTank : MonoBehaviour
 		// register for damage callbacks
 		health.RegisterHealthCallback( SpiderDamageCallback );
 
-		// set up KeepDistance script
+		// set hand player over as the target to a bunch of script
 		KeepDistance keepDistance = GetComponent<KeepDistance>();
 		if ( keepDistance != null )
 		{
 			keepDistance.target = player;
 		}
+		mortarLauncher.mortarSettings.targets = new Transform[1];
+		mortarLauncher.mortarSettings.targets[0] = player;
+		spawnerLauncher.spiderTank = this;
 	}
 
 	void PlayerDeathCallback( GameObject gameObject )
@@ -70,6 +79,8 @@ public class SpiderTank : MonoBehaviour
 		{
 			GetComponent<DeathSystem>().Gut();
 		}
+
+		Destroy( mortarLauncher );
 	}
 
 	void SpiderDamageCallback( HealthSystem health, float damage )
@@ -139,7 +150,6 @@ public class SpiderTank : MonoBehaviour
 			}
 		}
 	}
-
 
 	/**
 	 * \brief Have the main canon and other guns look at the player gradually.

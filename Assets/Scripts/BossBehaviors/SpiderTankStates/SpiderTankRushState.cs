@@ -16,8 +16,10 @@ public class SpiderTankRushState : SpiderTankState
 		_damageSystem = GetComponent<DamageSystem>();
 	}
 
-	public void OnEnable()
+	public override void OnEnable()
 	{
+		base.OnEnable();
+
 		_rushAttack.target = spiderTank.player;
 		_rushAttack.RegisterCallback( new RushAttack.RushEndCallback( EndRush ) );
 		_rushAttack.enabled = true;

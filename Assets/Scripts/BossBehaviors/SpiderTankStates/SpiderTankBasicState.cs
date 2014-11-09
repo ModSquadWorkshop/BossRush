@@ -14,27 +14,15 @@ public class SpiderTankBasicState : SpiderTankState
 
 	public PhysicsMovement movementScript;
 
-	private SpiderTankRushState _rushState;
-	private FlankingSpawner _spawner;
-
-	public override void Awake()
+	public override void OnEnable()
 	{
-		base.Awake();
+		base.OnEnable();
 
-		_spawner = GetComponent<FlankingSpawner>();
-		_rushState = GetComponent<SpiderTankRushState>();
-	}
-
-	void OnEnable()
-	{
 		spiderTank.mainCanon.SetCooldown( canonDelay );
-		_spawner.enabled = true;
-		_spawner.amountPerWave = amountPerWave;
 
 		// set initial states of movement scripts
 		movementScript.enabled = true;
-		_rushState.enabled = false;
-		_rushState.returnState = this;
+		spiderTank.rushState.returnState = this;
 
 		// queue up first rush attack
 		Invoke( "TransitionOut", Random.Range( minRushInterval, maxRushInterval ) );
@@ -52,8 +40,10 @@ public class SpiderTankBasicState : SpiderTankState
 		transform.rotation = Quaternion.RotateTowards( transform.rotation, lookRotation, 90.0f * Time.deltaTime );
 	}
 
-	void OnDisable()
+	public override void OnDisable()
 	{
+		base.OnDisable();
+
 		movementScript.enabled = false;
 		spiderTank.DeregisterHealthTriggerCallback( HealthTriggerCallback );
 	}
@@ -68,7 +58,7 @@ public class SpiderTankBasicState : SpiderTankState
 		}
 		else
 		{
-			_rushState.enabled = true;
+			spiderTank.rushState.enabled = true;
 		}
 	}
 }
