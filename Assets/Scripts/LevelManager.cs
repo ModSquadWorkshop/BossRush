@@ -6,6 +6,7 @@ public class LevelManager : MonoBehaviour
 {
 	public GameObject player;
 	public GameObject boss;
+	public GameObject mainMenu;
 
 	public float levelOverDelay;
 
@@ -19,7 +20,14 @@ public class LevelManager : MonoBehaviour
 		boss.GetComponent<DeathSystem>().RegisterDeathCallback( BossDied );
 	}
 
-	public void PlayerDied( GameObject gameObjectz )
+	public void StartGame()
+	{
+		player.SetActive( true );
+		boss.SetActive( true );
+		mainMenu.SetActive( false );
+	}
+
+	void PlayerDied( GameObject gameObjectz )
 	{
 		if ( !_levelOver )
 		{
@@ -28,7 +36,7 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
-	public void BossDied( GameObject gameObject )
+	void BossDied( GameObject gameObject )
 	{
 		if ( !_levelOver )
 		{
