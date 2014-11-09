@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -69,6 +69,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977c784b6514ff742a2a3906df8de4e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settings:
+    minChance: 0
+    maxChance: 0
   immunity: 0
   infiniteAmmo: 0
   speedMod: 0
@@ -79,6 +82,7 @@ MonoBehaviour:
   reloadMod: 0
   magazinesMod: 0
   gunDrop: {fileID: 0}
+  ID: 
   length: 0
 --- !u!136 &13600000
 CapsuleCollider:

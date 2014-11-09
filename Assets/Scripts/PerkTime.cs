@@ -25,9 +25,15 @@ public class PerkTime : MonoBehaviour
 		_perkTimer.Start();
 	}
 
+	public void RefreshTimer()
+	{
+		_perkTimer.Reset();
+	}
+
 	public void End()
 	{
 		this.gameObject.GetComponent<PerkSystem>().RemovePerk( perk );
+		this.gameObject.GetComponent<PerkSystem>().timers.Remove( this );
 		Destroy( this );
 	}
 }

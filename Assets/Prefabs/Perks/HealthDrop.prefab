@@ -71,7 +71,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings:
     minChance: 0
-    maxChance: .300000012
+    maxChance: .100000001
   immunity: 0
   infiniteAmmo: 0
   speedMod: 0
@@ -82,6 +82,7 @@ MonoBehaviour:
   reloadMod: 0
   magazinesMod: 0
   gunDrop: {fileID: 0}
+  ID: Health
   length: 0
 --- !u!136 &13600000
 CapsuleCollider:

@@ -10,7 +10,6 @@ public class MinionDeath : MonoBehaviour
 	DeathTimer timedDeath;
 	HealthSystem minionHealth;
 
-	private GameObject _drop;
 	public Perk[] drops;
 
 	//[Range( 0.0f, 1.0f )]
@@ -52,7 +51,7 @@ public class MinionDeath : MonoBehaviour
 			if ( _dropGen >= drop.settings.minChance && _dropGen <= drop.settings.maxChance )
 			{
 				Debug.Log( "DROP SOMETHING" );
-				_drop = Instantiate( drop.gameObject, this.transform.localPosition, this.transform.rotation ) as GameObject;
+				Instantiate( drop.gameObject, this.transform.localPosition, this.transform.rotation );
 			}
 		}
 	}

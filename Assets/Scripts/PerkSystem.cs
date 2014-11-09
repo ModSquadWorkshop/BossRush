@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PerkSystem : MonoBehaviour
 {
 	public Perk[] startingPerks;
 	private Hashtable _perks;
+	private Hashtable _perkCounts;
+	public List<PerkTime> timers;
 
 	PlayerMovement playerSpeed;
 	HealthSystem playerHealth;
@@ -15,7 +18,7 @@ public class PerkSystem : MonoBehaviour
 	void Start()
 	{
 		_perks = new Hashtable();
-
+		_perkCounts = new Hashtable();
 		for ( int i = 0; i < startingPerks.Length; i++ )
 		{
 			AddPerk( startingPerks[i] );
@@ -30,9 +33,46 @@ public class PerkSystem : MonoBehaviour
 
 	public void AddPerk( Perk perk )
 	{
-		_perks[perk] = true;
-		SetPerk( perk );
-		CreateTimer( perk );
+		int actives = 0;
+		if ( _perkCounts[perk.ID] != null )
+		{
+			actives = (int)_perkCounts[perk.ID];
+		}
+		else
+		{
+			_perkCounts[perk.ID] = 0;
+		}
+
+		if ( actives > 0 && ( perk.gunDrop != null || perk.length > 0 ) )
+		{
+			RefreshPerk( perk );
+		}
+		else
+		{
+			_perks[perk] = true;
+			int count = (int) _perkCounts[perk.ID];
+			count++;
+			_perkCounts[perk.ID] = count;
+			SetPerk( perk );
+			CreateTimer( perk );
+		}
+	}
+
+	public void RefreshPerk( Perk perk )
+	{
+		//refresh ammo if gun drop, otherwise refresh timer
+		if( perk.gunDrop != null )
+		{
+			Gun special = GetComponent<WeaponSystem>().weapons[2].GetComponent<Gun>();
+			special.RefreshAmmo();
+		}
+		else if ( perk.length > 0 )
+		{
+			foreach ( PerkTime time in timers )
+			{
+				time.RefreshTimer();
+			}
+		}
 	}
 
 	public void SetPerk( Perk perk )
@@ -82,10 +122,17 @@ public class PerkSystem : MonoBehaviour
 	{
 		if ( perk.length > 0f )
 		{
-			PerkTime timer = this.gameObject.AddComponent<PerkTime>();
+			//PerkTime timer = this.gameObject.AddComponent<PerkTime>();
+			PerkTime timer = new PerkTime();
+			timers.Add( timer );
+			timers[timers.Count-1].perkLength = perk.length;
+			timers[timers.Count-1].perk = perk;
+			timers[timers.Count-1].Begin();
+			/*
 			timer.perkLength = perk.length;
 			timer.perk = perk;
 			timer.Begin();
+			 */
 		}
 	}
 
@@ -96,17 +143,25 @@ public class PerkSystem : MonoBehaviour
 
 	public void Clear()
 	{
+		/*
 		PerkTime[] timers = gameObject.GetComponents<PerkTime>();
 		foreach ( PerkTime time in timers )
 		{
 			time.End();
 		}
+		*/
+		timers.Clear();
 		_perks.Clear();
+		_perkCounts.Clear();
 	}
 
 	public void RemovePerk( Perk perk )
 	{
 		ResetPerk( perk );
+		int count = (int)_perkCounts[perk.ID];
+		count--;
+		_perkCounts[perk.ID] = count;
+		SetPerk( perk );
 		_perks[perk] = false;
 	}
 

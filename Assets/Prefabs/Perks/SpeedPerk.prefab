@@ -12,8 +12,8 @@ GameObject:
   - 136: {fileID: 13600000}
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400000}
-  m_Layer: 0
-  m_Name: ShotgunDrop
+  m_Layer: 13
+  m_Name: SpeedPerk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: cfc414be5ceed9c40a5a7ae6763563d9, type: 2}
+  - {fileID: 2100000, guid: 296b46fea8f079b4f8f8aef27ebe8e6e, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -70,20 +70,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings:
-    minChance: .109999999
-    maxChance: .140000001
+    minChance: .150000006
+    maxChance: .400000006
   immunity: 0
   infiniteAmmo: 0
-  speedMod: 0
+  speedMod: 1
   fireRateMod: 0
   maxHealthMod: 0
   healthMod: 0
   damageMod: 0
   reloadMod: 0
   magazinesMod: 0
-  gunDrop: {fileID: 100000, guid: ec638bf6dd881f045a7eb8e5b51638c1, type: 2}
-  ID: Shotgun
-  length: 0
+  gunDrop: {fileID: 0}
+  ID: Speed
+  length: 4
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

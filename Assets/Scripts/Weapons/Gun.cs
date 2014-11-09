@@ -45,6 +45,14 @@ public class Gun : Weapon
 		_halfSpray = 0.5f * sprayAngle;
 	}
 
+	public void RefreshAmmo()
+	{
+		_magazines = amountOfMagazines;
+		_magazineAmmo = (_magazines > 0) ? ammoPerMagazine : 0;
+		_magazineAmmo = (infiniteAmmo) ? Mathf.Max( _magazineAmmo, 1 ) : _magazineAmmo; // this line just insures you have atleast 1 ammo available
+		_reloading = false;
+	}
+
 	public override void PerformPrimaryAttack()
 	{
 		if ( !_reloading && _magazineAmmo > 0 )
