@@ -26,7 +26,10 @@ GameObject:
   - 65: {fileID: 6500002}
   - 54: {fileID: 5400000}
   - 82: {fileID: 8200000}
+  - 195: {fileID: 19500000}
   - 114: {fileID: 11400006}
+  - 114: {fileID: 11400028}
+  - 114: {fileID: 11400042}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400040}
   - 114: {fileID: 11400020}
@@ -35,13 +38,12 @@ GameObject:
   - 114: {fileID: 11400034}
   - 114: {fileID: 11400038}
   - 114: {fileID: 11400044}
+  - 114: {fileID: 11400048}
   - 114: {fileID: 11400008}
-  - 114: {fileID: 11400036}
   - 114: {fileID: 11400010}
-  - 114: {fileID: 11400046}
   - 114: {fileID: 11400024}
-  - 114: {fileID: 11400028}
-  - 114: {fileID: 11400042}
+  - 114: {fileID: 11400046}
+  - 114: {fileID: 11400036}
   m_Layer: 10
   m_Name: Spider Tank
   m_TagString: Enemy
@@ -64,66 +66,6 @@ GameObject:
   m_Layer: 10
   m_Name: Laser Canon
   m_TagString: Weapon
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &100006
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400006}
-  m_Layer: 10
-  m_Name: Right Control
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &100008
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400008}
-  m_Layer: 10
-  m_Name: Left Spawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &100010
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400010}
-  m_Layer: 10
-  m_Name: Right Spawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &100012
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400012}
-  m_Layer: 10
-  m_Name: Left Control
-  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -333,7 +275,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -4.37113883e-08}
-  m_LocalPosition: {x: 67.0070038, y: 0, z: 259.23999}
+  m_LocalPosition: {x: 0, y: 0, z: 150}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400014}
@@ -341,10 +283,6 @@ Transform:
   - {fileID: 400000}
   - {fileID: 400022}
   - {fileID: 400016}
-  - {fileID: 400008}
-  - {fileID: 400012}
-  - {fileID: 400010}
-  - {fileID: 400006}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &400004
@@ -359,54 +297,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 400000}
   m_RootOrder: 0
---- !u!4 &400006
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100006}
-  m_LocalRotation: {x: 0, y: -4.37113883e-08, z: 0, w: 1}
-  m_LocalPosition: {x: 30, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400002}
-  m_RootOrder: 8
---- !u!4 &400008
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100008}
-  m_LocalRotation: {x: 0, y: -4.37113883e-08, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: 0, z: 1.25167773e-07}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400002}
-  m_RootOrder: 5
---- !u!4 &400010
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100010}
-  m_LocalRotation: {x: 0, y: -4.37113883e-08, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: 0, z: 6.5567086e-08}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400002}
-  m_RootOrder: 7
---- !u!4 &400012
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100012}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -30, y: 0, z: -7.15334636e-08}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400002}
-  m_RootOrder: 6
 --- !u!4 &400014
 Transform:
   m_ObjectHideFlags: 1
@@ -1009,12 +899,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  doorCollider: {fileID: 0}
   mainCanon: {fileID: 11400002}
   laserCanon: {fileID: 11400030}
   otherGuns:
   - {fileID: 11400018}
   - {fileID: 11400012}
-  arenaSpawner: {fileID: 0}
+  shield: {fileID: 0}
   defaultCanonLookSpeed: 20
   healthTriggerInterval: 1000
   basicState: {fileID: 0}
@@ -1023,8 +914,10 @@ MonoBehaviour:
   laserSpin: {fileID: 0}
   rushState: {fileID: 0}
   turboState: {fileID: 0}
+  enterState: {fileID: 0}
   health: {fileID: 0}
   spawner: {fileID: 0}
+  agent: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1094,23 +987,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ba311a52b1c7d24c98128f8e9ab66fb, type: 3}
+  m_Script: {fileID: 11500000, guid: d74c975aef0486b4dad7c3260ff55970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTypes:
-  - {fileID: 100000, guid: c79a083f06b06964b9733d7231b36efa, type: 2}
-  enemySpawnChances: []
-  spawns:
-  - {fileID: 400008}
-  - {fileID: 400010}
-  spawnPriorities: []
-  amountPerWave: 0
-  waveInterval: 2
-  spawnOnStart: 1
-  controlPoints:
-  - {fileID: 400012}
-  - {fileID: 400006}
-  weight: .100000001
+  movingTarget: 1
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1245,7 +1125,7 @@ MonoBehaviour:
   canonDelay: .5
   amountPerWave: 5
   duration: 10
-  movementScript: {fileID: 11400046}
+  movementScript: {fileID: 0}
 --- !u!114 &11400024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1350,15 +1230,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c57db56693d1f5047ab35ce7cc184942, type: 3}
+  m_Script: {fileID: 11500000, guid: 279090449e4b6944390b1cb3b3fd9dad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 50
-  acceleration: 300
-  nodes:
-  - {fileID: 0}
-  - {fileID: 0}
-  traverseBackwards: 0
+  maxSpeed: 75
+  acceleration: 150
 --- !u!114 &11400038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1371,7 +1247,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spiderTank: {fileID: 0}
-  doorCollider: {fileID: 0}
   mainCanonCooldown: 1
   minionsPerWave: 6
   returnState: {fileID: 0}
@@ -1421,11 +1296,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 279090449e4b6944390b1cb3b3fd9dad, type: 3}
+  m_Script: {fileID: 11500000, guid: 23eef0c7e1c23864eb720e3d5817a2f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 30
-  acceleration: 300
+  enemyTypes:
+  - {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
+  enemySpawnChances: []
+  spawns:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spawnPriorities: []
+  amountPerWave: 4
+  waveInterval: 1
+  spawnOnStart: 1
+--- !u!114 &11400048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb030dabac45a0d41b2a10282ae02ba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spiderTank: {fileID: 0}
+  destination: {fileID: 0}
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -1459,6 +1357,26 @@ LineRenderer:
       serializedVersion: 2
       rgba: 4286085375
   m_UseWorldSpace: 1
+--- !u!195 &19500000
+NavMeshAgent:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 0
+  m_Radius: 5
+  m_Speed: 30
+  m_Acceleration: 30
+  avoidancePriority: 0
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 0
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 10
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

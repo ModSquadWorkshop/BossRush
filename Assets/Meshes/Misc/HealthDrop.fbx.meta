@@ -1,40 +1,30 @@
 fileFormatVersion: 2
-guid: a47b2701d0a6e8f489ac5702fdd69ed2
+guid: db597cfd386f5754b880d37a0ccc67ee
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
     100000: //RootNode
     100002: pCube1
-    100004: pPyramid1
-    100006: pPyramid2
-    100008: pPyramid3
-    100010: pPyramid4
+    100004: pCube2
+    100006: pCube3
     400000: //RootNode
     400002: pCube1
-    400004: pPyramid1
-    400006: pPyramid2
-    400008: pPyramid3
-    400010: pPyramid4
+    400004: pCube2
+    400006: pCube3
     2300000: pCube1
-    2300002: pPyramid1
-    2300004: pPyramid2
-    2300006: pPyramid3
-    2300008: pPyramid4
+    2300002: pCube2
+    2300004: pCube3
     3300000: pCube1
-    3300002: pPyramid1
-    3300004: pPyramid2
-    3300006: pPyramid3
-    3300008: pPyramid4
+    3300002: pCube2
+    3300004: pCube3
     4300000: pCube1
-    4300002: pPyramid1
-    4300004: pPyramid2
-    4300006: pPyramid3
-    4300008: pPyramid4
+    4300002: pCube2
+    4300004: pCube3
     9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -50,7 +40,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: .00999999978
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1

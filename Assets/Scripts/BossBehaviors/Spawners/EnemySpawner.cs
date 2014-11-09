@@ -107,7 +107,7 @@ public class EnemySpawner : MonoBehaviour
 		enemy.transform.position = spawns[_spawnIndex].position;
 
 		// if the enemy uses a MoveTowardsTarget script, the target needs to be set
-		MoveTowardsTarget moveTowards = enemy.GetComponent<MoveTowardsTarget>();
+		ITargetBasedMovement moveTowards = enemy.GetComponent( typeof( ITargetBasedMovement ) ) as ITargetBasedMovement;
 		if ( moveTowards != null )
 		{
 			moveTowards.target = GameObject.FindGameObjectWithTag( "Player" ).transform;
