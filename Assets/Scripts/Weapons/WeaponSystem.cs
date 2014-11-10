@@ -88,8 +88,8 @@ public class WeaponSystem : MonoBehaviour
 			if ( _currentWeaponID == 2 && specialGun.IsOutOfAmmo() )
 			{
 				NextWeapon();
-				Debug.Log( "OUT OF AMMO" );
 				weapons.Remove( specialGun.gameObject );
+				Destroy( specialGun.gameObject );
 			}
 			if ( !_currentWeapon.isOnCooldown )
 			{

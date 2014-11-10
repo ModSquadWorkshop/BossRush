@@ -359,8 +359,6 @@ MonoBehaviour:
   reloadSpeed: 0
   sprayAngle: 0
   circleSpray: 0
-  _magazines: 0
-  _magazineAmmo: 0
 --- !u!114 &186959742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -987,8 +985,6 @@ MonoBehaviour:
   reloadSpeed: 0
   sprayAngle: 5
   circleSpray: 1
-  _magazines: 0
-  _magazineAmmo: 0
 --- !u!114 &333394152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1403,8 +1399,6 @@ MonoBehaviour:
   reloadSpeed: 0
   sprayAngle: 5
   circleSpray: 1
-  _magazines: 0
-  _magazineAmmo: 0
 --- !u!114 &497961832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3751,6 +3745,7 @@ GameObject:
   - 114: {fileID: 1363035866}
   - 114: {fileID: 1363035865}
   - 114: {fileID: 1363035871}
+  - 114: {fileID: 1363035873}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -3773,10 +3768,10 @@ MonoBehaviour:
   weapons:
   - {fileID: 100000, guid: 4be7c3b028769d9418dd2959e6095ba9, type: 2}
   - {fileID: 100000, guid: d63f5b9b77d9d514ab0359efa4ae504f, type: 2}
-  - {fileID: 100000, guid: 8d9767fadad9723499315d03b95ffd8c, type: 2}
   defaultWeaponID: 0
   switchWeaponKeybind: 9
   weaponAnchor: {fileID: 580840407}
+  specialGun: {fileID: 0}
 --- !u!114 &1363035866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3793,8 +3788,8 @@ MonoBehaviour:
   destroyOnNoLives: 1
   startingLives: 1
   maxLives: 1
-  startingHealth: 100
-  maxHealth: 100
+  startingHealth: 1000
+  maxHealth: 1000
   damageSounds: []
   deathSounds: []
   _lives: 0
@@ -3890,6 +3885,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 403fe1079fcb81744884e7db32b509dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1363035873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400010, guid: c547150bab057b34982e046263a7cf68,
+    type: 2}
+  m_PrefabInternal: {fileID: 333524381}
+  m_GameObject: {fileID: 1363035864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d97385ee8cae90a47be0bf17c5e3d888, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingPerks: []
 --- !u!1 &1385265361
 GameObject:
   m_ObjectHideFlags: 0
