@@ -45,12 +45,10 @@ public class MinionDeath : MonoBehaviour
 	void Drop()
 	{
 		_dropGen = Random.Range( 0f, 1f );
-		Debug.Log( _dropGen );
 		foreach ( Perk drop in drops )
 		{
 			if ( _dropGen >= drop.settings.minChance && _dropGen <= drop.settings.maxChance )
 			{
-				Debug.Log( "DROP SOMETHING" );
 				Instantiate( drop.gameObject, this.transform.localPosition, this.transform.rotation );
 			}
 		}

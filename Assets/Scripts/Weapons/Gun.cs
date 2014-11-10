@@ -48,8 +48,8 @@ public class Gun : Weapon
 	public void RefreshAmmo()
 	{
 		_magazines = amountOfMagazines;
-		_magazineAmmo = (_magazines > 0) ? ammoPerMagazine : 0;
-		_magazineAmmo = (infiniteAmmo) ? Mathf.Max( _magazineAmmo, 1 ) : _magazineAmmo; // this line just insures you have atleast 1 ammo available
+		_magazineAmmo = ( _magazines > 0 ) ? ammoPerMagazine : 0;
+		_magazineAmmo = ( infiniteAmmo ) ? Mathf.Max( _magazineAmmo, 1 ) : _magazineAmmo; // this line just insures you have atleast 1 ammo available
 		_reloading = false;
 	}
 

@@ -20,15 +20,44 @@ public class Perk : MonoBehaviour
 	public GameObject gunDrop;
 	public string ID;
 	//time a perk lasts (if using a timer);
-	public float length;
+	public float duration;
 
+	PerkSystem perkSystem;
+	
 	void OnCollisionEnter( Collision other )
 	{
 		if ( other.gameObject.tag == "Player" )
 		{
-			other.gameObject.GetComponent<PerkSystem>().AddPerk( this );
+			perkSystem = other.gameObject.GetComponent<PerkSystem>();
+			perkSystem.AddPerk( this );
+
+			this.gameObject.renderer.enabled = false;
+			this.gameObject.collider.enabled = false;
+		}
+	}
+
+	public void Refresh()
+	{
+		CancelInvoke();
+		Begin();
+	}
+
+	public void Begin()
+	{
+		if ( duration > 0 )
+		{
+			Invoke( "End", duration );
+		}
+		else
+		{
 			Destroy( this.gameObject );
 		}
+	}
+
+	void End()
+	{
+		perkSystem.RemovePerk( this );
+		Destroy( this.gameObject );
 	}
 }
 

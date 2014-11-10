@@ -77,13 +77,13 @@ MonoBehaviour:
   speedMod: 0
   fireRateMod: 0
   maxHealthMod: 0
-  healthMod: 10
+  healthMod: 25
   damageMod: 0
   reloadMod: 0
   magazinesMod: 0
   gunDrop: {fileID: 0}
   ID: Health
-  length: 0
+  duration: 0
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1
