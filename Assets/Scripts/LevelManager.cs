@@ -10,6 +10,8 @@ public class LevelManager : MonoBehaviour
 
 	public float levelOverDelay;
 
+	public bool skipMenu;
+
 	private bool _levelOver; //< Used to prevent ResetLevel() from being called twice if both the player and the boss die.
 
 	void Start()
@@ -18,6 +20,11 @@ public class LevelManager : MonoBehaviour
 
 		player.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerDied );
 		boss.GetComponent<DeathSystem>().RegisterDeathCallback( BossDied );
+
+		if ( skipMenu )
+		{
+			StartGame();
+		}
 	}
 
 	public void StartGame()
