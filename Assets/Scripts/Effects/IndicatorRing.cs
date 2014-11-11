@@ -27,7 +27,7 @@ public class IndicatorRing : MonoBehaviour
 		// this is done so that we can have the indicator ring
 		// be a child of the object its attached to,
 		// but not have it rotate with the parent object
-		transform.localRotation = ROTATION;
+		transform.rotation = ROTATION;
 	}
 
 	public void UpdateHealthBar( HealthSystem healthSystem, float healthChange )

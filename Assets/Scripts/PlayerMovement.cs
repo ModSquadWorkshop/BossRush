@@ -18,7 +18,6 @@ sealed public class PlayerMovement : MonoBehaviour
 	public bool stopWeaponInDash;
 
 	private Vector3 _forwardVect;
-	private Vector3 _gamPadVect;
 
 	private Timer _dashTimer;
 	private Timer _dashDelayTimer;
