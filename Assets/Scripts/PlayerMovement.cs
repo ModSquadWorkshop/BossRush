@@ -210,13 +210,12 @@ sealed public class PlayerMovement : MonoBehaviour
 		_dashDelayTimer.Reset( true );
 	}
 
-	private void TargetDamageCallback( HealthSystem playerHealth, float damage )
+	private void TargetDamageCallback( HealthSystem playerHealth, float healthChange )
 	{
-		//Debug.Log( damage );
-		if ( damage < 0 )
+		if ( healthChange < 0.0f )
 		{
-			_rumbler.Rumble( damage );
-			_camShake.Shake( damage );
+			_camShake.Shake( healthChange );
+			_rumbler.Rumble( healthChange );
 		}
 	}
 }

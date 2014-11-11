@@ -3121,6 +3121,7 @@ MonoBehaviour:
   maxRange: 1000
   damageInterval: .100000001
   piercingsAmount: 100
+  duration: 0
 --- !u!1 &205029072
 GameObject:
   m_ObjectHideFlags: 0
@@ -6439,6 +6440,7 @@ MonoBehaviour:
   maxRange: 1000
   damageInterval: .100000001
   piercingsAmount: 100
+  duration: 0
 --- !u!120 &398424567
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -7721,6 +7723,7 @@ MonoBehaviour:
   maxRange: 1000
   damageInterval: .100000001
   piercingsAmount: 100
+  duration: 0
 --- !u!82 &465806891
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9432,8 +9435,6 @@ MonoBehaviour:
   reloadSpeed: 0
   sprayAngle: 5
   circleSpray: 1
-  _magazines: 0
-  _magazineAmmo: 0
 --- !u!82 &589642452
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11943,10 +11944,11 @@ GameObject:
   - 4: {fileID: 793478079}
   - 65: {fileID: 793478084}
   - 54: {fileID: 793478083}
-  - 114: {fileID: 793478082}
   - 114: {fileID: 793478081}
-  - 114: {fileID: 793478080}
   - 114: {fileID: 793478085}
+  - 114: {fileID: 793478086}
+  - 114: {fileID: 793478082}
+  - 114: {fileID: 793478080}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -11985,6 +11987,7 @@ MonoBehaviour:
   weapons:
   - {fileID: 100000, guid: 4be7c3b028769d9418dd2959e6095ba9, type: 2}
   - {fileID: 100000, guid: d63f5b9b77d9d514ab0359efa4ae504f, type: 2}
+  perk: {fileID: 0}
   defaultWeaponID: 0
   switchWeaponKeybind: 9
   weaponAnchor: {fileID: 929745528}
@@ -12074,6 +12077,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allowMultipleDeaths: 0
+--- !u!114 &793478086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400016, guid: c547150bab057b34982e046263a7cf68,
+    type: 2}
+  m_PrefabInternal: {fileID: 345055025}
+  m_GameObject: {fileID: 793478078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d97385ee8cae90a47be0bf17c5e3d888, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingPerks: []
 --- !u!1 &797486584
 GameObject:
   m_ObjectHideFlags: 0
@@ -29695,8 +29711,6 @@ MonoBehaviour:
   reloadSpeed: 0
   sprayAngle: 0
   circleSpray: 0
-  _magazines: 0
-  _magazineAmmo: 0
 --- !u!82 &1923415344
 AudioSource:
   m_ObjectHideFlags: 0
@@ -30726,8 +30740,6 @@ MonoBehaviour:
   reloadSpeed: 0
   sprayAngle: 5
   circleSpray: 1
-  _magazines: 0
-  _magazineAmmo: 0
 --- !u!82 &1973082791
 AudioSource:
   m_ObjectHideFlags: 0
@@ -32222,6 +32234,7 @@ MonoBehaviour:
   maxRange: 1000
   damageInterval: .100000001
   piercingsAmount: 100
+  duration: 0
 --- !u!1 &2078557171
 GameObject:
   m_ObjectHideFlags: 0
@@ -32522,6 +32535,7 @@ MonoBehaviour:
   maxRange: 1000
   damageInterval: .100000001
   piercingsAmount: 100
+  duration: 0
 --- !u!120 &2102698144
 LineRenderer:
   m_ObjectHideFlags: 0

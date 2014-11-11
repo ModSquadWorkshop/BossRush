@@ -13,7 +13,7 @@ GameObject:
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400000}
   m_Layer: 13
-  m_Name: GenericPerk
+  m_Name: ImmunityDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,10 +69,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977c784b6514ff742a2a3906df8de4e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings:
-    minChance: 0
-    maxChance: 0
-  immunity: 0
+  dropChance: .00999999978
+  immunity: 1
   infiniteAmmo: 0
   speedMod: 0
   fireRateMod: 0
@@ -82,8 +80,8 @@ MonoBehaviour:
   reloadMod: 0
   magazinesMod: 0
   gunDrop: {fileID: 0}
-  ID: 
-  duration: 0
+  ID: Immunity
+  duration: 5
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1
