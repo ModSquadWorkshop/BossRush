@@ -145,8 +145,10 @@ public class WeaponSystem : MonoBehaviour
 	public void RemoveSpecial()
 	{
 		NextWeapon();
+		Destroy( GetWeapon( 2 ).gameObject );
 		weapons.RemoveAt( 2 );
 		_perkSystem.RemovePerk( perk );
+		
 	}
 
 	public void SwitchWeapon( int weaponID )

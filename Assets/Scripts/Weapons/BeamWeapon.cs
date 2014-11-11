@@ -40,6 +40,7 @@ public class BeamWeapon : Weapon
 		_damageTimer = new Timer( damageInterval, -1 );
 		_beamTimer = new Timer( 0.1f, 1 );
 		_beamDuration = new Timer( duration, 1 );
+		_beamDuration.Start();
 		_ray = new Ray();
 
 		// get a reference to the damage system attached to the weapon
@@ -59,7 +60,6 @@ public class BeamWeapon : Weapon
 			// the beam can only deal damage every time the timer is ticked at a set interval
 			// every frame the beam is enabled, the timer is updated such that it's not relative to target collision
 			_damageTimer.Update();
-			_beamDuration.Update();
 
 			// set the origin and direction of the ray to match the weapon/player's transformation
 			_ray.origin = this.gameObject.transform.position;
@@ -117,7 +117,7 @@ public class BeamWeapon : Weapon
 
 			if ( _beamDuration.complete )
 			{
-				Debug.Log( "BEAM OUT OF TIME" );
+				//Debug.Log( "BEAM OUT OF TIME" );
 				_done = true;
 			}
 		}
@@ -130,7 +130,7 @@ public class BeamWeapon : Weapon
 
 	public void ResetTimer()
 	{
-		_beamDuration.Reset();
+		_beamDuration.Reset( true );
 	}
 
 	public override void PerformPrimaryAttack()
@@ -140,10 +140,9 @@ public class BeamWeapon : Weapon
 		{
 			_damageTimer.Reset( true );
 			_damageDealt = false;
-
 			beam.enabled = true;
 		}
-
+		_beamDuration.Update();
 		_beamTimer.Reset( true );
 	}
 }

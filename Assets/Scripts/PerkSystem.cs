@@ -61,7 +61,10 @@ public class PerkSystem : MonoBehaviour
 			_perkCounts[perk.ID] = count;
 
 			SetPerk( perk );
-			perk.Begin();
+			if ( perk.gunDrop == null )
+			{
+				perk.Begin();
+			}
 		}
 	}
 
@@ -81,6 +84,7 @@ public class PerkSystem : MonoBehaviour
 		//refresh ammo if gun drop, otherwise refresh timer
 		if ( perk.gunDrop != null && perk.duration <= 0 )
 		{
+			//Debug.Log( "ADD AMMO" );
 			if ( playerWeapons.DetermineType() )
 			{
 				Gun special = playerWeapons.weapons[2].GetComponent<Gun>();
@@ -88,6 +92,7 @@ public class PerkSystem : MonoBehaviour
 			}
 			else if ( !playerWeapons.DetermineType() )
 			{
+				//Debug.Log( "ADD TIME" );
 				BeamWeapon special = playerWeapons.weapons[2].GetComponent<BeamWeapon>();
 				special.ResetTimer();
 			}
