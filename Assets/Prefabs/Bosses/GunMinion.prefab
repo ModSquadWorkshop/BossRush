@@ -197,9 +197,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4d2d0b7e15eb4a43a0f0635885d6c4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 60
-  rotationSpeed: 30
-  travelSpeed: 30
+  rotationSpeeds:
+  - 30
+  - -30
+  - 15
+  - -15
+  travelSpeeds:
+  - 30
+  - 20
+  - 10
+  - -30
+  radiusMin: 30
+  radiusMax: 60
+  cooldownMin: 1
+  cooldownMax: 3
   minionGun: {fileID: 11400012}
 --- !u!114 &11400006
 MonoBehaviour:
@@ -213,14 +224,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathTime: 0
-  exploding: 0
   dropping: 0
   dropItem: {fileID: 0}
-  explosionEffect: {fileID: 100000, guid: f50fcebfdae35044683c14337e5c36e8, type: 2}
   dropChance: .125
-  explosionRadius: 7.5
-  explosionDamage: 10
-  explosionForce: 1000
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -232,7 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54890f060999baa459796158b8ac5d9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notifyOnce: 0
+  allowMultipleDeaths: 0
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
