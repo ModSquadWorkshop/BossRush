@@ -207,10 +207,10 @@ MonoBehaviour:
   - 20
   - 10
   - -30
-  radiusMin: 30
-  radiusMax: 60
+  radiusMin: 5
+  radiusMax: 50
   cooldownMin: 1
-  cooldownMax: 3
+  cooldownMax: 5
   minionGun: {fileID: 11400012}
 --- !u!114 &11400006
 MonoBehaviour:
@@ -224,9 +224,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathTime: 0
-  dropping: 0
-  dropItem: {fileID: 0}
-  dropChance: .125
+  dropping: 1
+  drops:
+  - {fileID: 11400000, guid: 0eee44b12fc4d954abf1113bb221223f, type: 2}
+  - {fileID: 11400000, guid: badb42f665f71024f8a9a9cfe9b2444b, type: 2}
+  - {fileID: 11400000, guid: be9500392faf11e44811eea59134f552, type: 2}
+  - {fileID: 11400000, guid: 7ae75e4ae1ab38b43be972430539c266, type: 2}
+  - {fileID: 11400000, guid: c8de83263b587a84eaf0c91b42ed4ab0, type: 2}
+  - {fileID: 11400000, guid: a00447257a95da64185813e334d71ede, type: 2}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -278,8 +283,6 @@ MonoBehaviour:
   reloadSpeed: 0
   sprayAngle: 0
   circleSpray: 0
-  _magazines: 0
-  _magazineAmmo: 0
 --- !u!195 &19500000
 NavMeshAgent:
   m_ObjectHideFlags: 1
