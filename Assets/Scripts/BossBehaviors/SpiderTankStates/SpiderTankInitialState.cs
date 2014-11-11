@@ -3,20 +3,18 @@ using System.Collections;
 
 public class SpiderTankInitialState : SpiderTankState
 {
-	public InitialStateSettingsList initialStateSettings;
-	private InitialStateSettings[] _settings;
+	public GameObject explodeMinion;
+	public int numMinions;
+	public float maxWaitTime;
 
 	public override void OnEnable()
 	{
 		base.OnEnable();
 
-		_settings = new InitialStateSettings[] { initialStateSettings.phaseOneSettings, 
-												 initialStateSettings.phaseTwoSettings, 
-												 initialStateSettings.phaseThreeSettings, 
-												 initialStateSettings.phaseFourSettings };
-
 		spawner.RegisterEnemyCountCallback( MinionCountChange );
-		spawner.Spawn( _settings[spiderTank.currentPhase].mininionCount );
+		spawner.Spawn( numMinions, explodeMinion );
+
+		Invoke( "Exit", maxWaitTime );
 	}
 
 	public override void OnDisable()
@@ -31,28 +29,15 @@ public class SpiderTankInitialState : SpiderTankState
 	{
 		if ( enabled && count == 0 )
 		{
-			enabled = false;
-			spawner.enabled = false;
-
-			spiderTank.enterState.enabled = true;
+			Exit();
 		}
 	}
-}
 
+	void Exit()
+	{
+		enabled = false;
+		spawner.enabled = false;
 
-[System.Serializable]
-public class InitialStateSettings
-{
-	public int mininionCount;
-}
-
-
-// this struct only exists to organize the settings in the inspector
-[System.Serializable]
-public class InitialStateSettingsList
-{
-	public InitialStateSettings phaseOneSettings;
-	public InitialStateSettings phaseTwoSettings;
-	public InitialStateSettings phaseThreeSettings;
-	public InitialStateSettings phaseFourSettings;
+		spiderTank.enterState.enabled = true;
+	}
 }
