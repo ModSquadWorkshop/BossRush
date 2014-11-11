@@ -1,0 +1,128 @@
+fileFormatVersion: 2
+guid: e6833da0ddbaa2147b634e72174a20e5
+labels:
+- combat
+- unit
+- vehicle
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: mediumvehicle
+    100002: colour_mediumvehicle_gun1
+    100004: //RootNode
+    100006: mediumvehicle_gun
+    100008: colour_mediumvehicle_gun2
+    100010: tracks_mediumvehicle
+    100012: mediumvehicle_wheels
+    100014: gun_fx_mount
+    400000: mediumvehicle
+    400002: colour_mediumvehicle_gun1
+    400004: //RootNode
+    400006: mediumvehicle_gun
+    400008: colour_mediumvehicle_gun2
+    400010: tracks_mediumvehicle
+    400012: mediumvehicle_wheels
+    400014: gun_fx_mount
+    2300000: mediumvehicle
+    2300002: colour_mediumvehicle_gun1
+    2300004: mediumvehicle_gun
+    2300006: colour_mediumvehicle_gun2
+    2300008: tracks_mediumvehicle
+    2300010: mediumvehicle_wheels
+    3300000: mediumvehicle
+    3300002: colour_mediumvehicle_gun1
+    3300004: mediumvehicle_gun
+    3300006: colour_mediumvehicle_gun2
+    3300008: tracks_mediumvehicle
+    3300010: mediumvehicle_wheels
+    4300000: Box012
+    4300002: Object010
+    4300004: mediumvehicle
+    4300006: tracks_mediumvehicle
+    4300008: mediumvehicle_gun
+    4300010: colour_mediumvehicle_gun1
+    4300012: colour_mediumvehicle_gun2
+    4300014: mediumvehicle_wheels
+    7400000: Take 001
+    7400002: move
+    11100000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 3
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: move
+      takeName: 
+      firstFrame: 0
+      lastFrame: 80
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 1
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00600000005
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 1
+  userData: 

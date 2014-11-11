@@ -16,9 +16,9 @@ public class SpiderTankState : MonoBehaviour
 	public virtual void OnEnable()
 	{
 		_stateSettings = new GlobalStateSettings[] { globalSettings.phaseOneSettings, 
-													 globalSettings.phaseTwoSettings, 
-													 globalSettings.phaseThreeSettings, 
-													 globalSettings.phaseFourSettings };
+		                                             globalSettings.phaseTwoSettings, 
+		                                             globalSettings.phaseThreeSettings, 
+		                                             globalSettings.phaseFourSettings };
 
 		if ( _stateSettings[spiderTank.currentPhase].useSpawner )
 		{
@@ -28,8 +28,8 @@ public class SpiderTankState : MonoBehaviour
 
 		if ( _stateSettings[spiderTank.currentPhase].useMortars )
 		{
-			StartLaunchAtInterval( _stateSettings[spiderTank.currentPhase].mortarSettings.amountOfMortars, 
-								   _stateSettings[spiderTank.currentPhase].mortarSettings.launchInterval );
+			StartMortarLaunchAtInterval( _stateSettings[spiderTank.currentPhase].mortarSettings.amountOfMortars, 
+			                       _stateSettings[spiderTank.currentPhase].mortarSettings.launchInterval );
 		}
 	}
 
@@ -81,6 +81,14 @@ public class SpiderTankState : MonoBehaviour
 		}
 	}
 
+	public MortarAttack spawnerLauncher
+	{
+		get
+		{
+			return spiderTank.spawnerLauncher;
+		}
+	}
+
 	public EnemySpawner spawner
 	{
 		get
@@ -113,16 +121,21 @@ public class SpiderTankState : MonoBehaviour
 		}
 	}
 
-	public void StartLaunchAtInterval( int mortarCount, float interval )
+	public void StartMortarLaunchAtInterval( int mortarCount, float interval )
 	{
-		StartCoroutine( LaunchAtInterval( mortarCount, interval ) );
+		StartCoroutine( LaunchAtInterval( mortarLauncher, mortarCount, interval ) );
 	}
 
-	private IEnumerator LaunchAtInterval( int mortarCount, float interval )
+	public void StartSpawnLaunchAtInterval( float interval )
+	{
+		StartCoroutine( LaunchAtInterval( spawnerLauncher, 1, interval ) );
+	}
+
+	private IEnumerator LaunchAtInterval( MortarAttack mortar, int mortarCount, float interval )
 	{
 		while ( true )
 		{
-			mortarLauncher.Launch( mortarCount );
+			mortar.Launch( mortarCount );
 			yield return new WaitForSeconds( interval );
 		}
 	}

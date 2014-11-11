@@ -17,6 +17,17 @@ public class LevelManager : MonoBehaviour
 
 		player.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerDied );
 		boss.GetComponent<DeathSystem>().RegisterDeathCallback( BossDied );
+
+		// hide the mouse
+		Screen.showCursor = false;
+	}
+
+	void Update()
+	{
+		if ( Input.GetKeyDown( KeyCode.Escape ) )
+		{
+			Application.Quit();
+		}
 	}
 
 	public void PlayerDied( GameObject gameObjectz )

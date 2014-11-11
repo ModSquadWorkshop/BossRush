@@ -4,8 +4,8 @@ using System.Collections;
 public class Mortar : MonoBehaviour
 {
 	private float       _speed;
-	private Vector3     _targetPos;
-	private GameObject  _marker; // the actual instantiated target marker
+	protected Vector3     _targetPos;
+	protected GameObject  _marker; // the actual instantiated target marker
 	private Vector3     _velocity;
 
 	private MortarSettings _settings;
@@ -14,8 +14,6 @@ public class Mortar : MonoBehaviour
 	{
 		_settings = settings;
 		transform.position = startPos;
-
-		_settings.target.GetComponent<DeathSystem>().RegisterDeathCallback( TargetDeath );
 
 		// configure all the things
 		_speed = Random.Range( _settings.minSpeed, _settings.maxSpeed );
@@ -26,6 +24,8 @@ public class Mortar : MonoBehaviour
 		// calculate time to apex
 		float timeToApex = Vector3.Distance( transform.position, _targetPos ) / _speed;
 		Invoke( "OnMidComplete", timeToApex );
+
+		transform.rotation = Quaternion.LookRotation( Vector3.up );
 	}
 
 	void Update()
@@ -37,8 +37,9 @@ public class Mortar : MonoBehaviour
 	{
 		// calculate the things
 		_speed *= _settings.speedIncrease;
-		transform.rotation = Quaternion.AngleAxis( Mathf.Atan2( _velocity.y, _velocity.x ) * Mathf.Rad2Deg, Vector3.forward * 90.0f );
+		transform.rotation = Quaternion.LookRotation( Vector3.down );
 		_targetPos = GetTargetPosition();
+		transform.position = _targetPos + new Vector3( 0.0f, _settings.arcHeight, 0.0f );
 		_marker = Instantiate( _settings.targetMarker, _targetPos, Quaternion.identity ) as GameObject;
 		_velocity = Vector3.Normalize( _targetPos - transform.position ) * _speed;
 
@@ -47,9 +48,8 @@ public class Mortar : MonoBehaviour
 		Invoke( "OnComplete", timeToTarget );
 	}
 
-	void OnComplete()
+	public virtual void OnComplete()
 	{
-		_settings.target.GetComponent<DeathSystem>().DeregisterDeathCallback( TargetDeath );
 		GetComponent<DeathSystem>().Kill();
 		Destroy( _marker );
 	}
@@ -60,14 +60,22 @@ public class Mortar : MonoBehaviour
 		offset.z = offset.y; // Random.insideUnitCircle returns a 2D vector with (x, y), so we swap y with z for an accurate 3D position
 		offset.y = 0.0f;
 
-		if ( !_settings.usePredefinedTargetPos )
+		Transform target = _settings.targets[Random.Range( 0, _settings.targets.Length )];
+
+		// just give up if the target has already been destroyed
+		if ( target == null )
 		{
-			return offset + _settings.target.transform.position; // offset the position to the origin of the targeted object
+			Destroy( gameObject );
+			return new Vector3();
 		}
-		else
+
+		// take the amount to lead the target by into account
+		if ( target.rigidbody != null )
 		{
-			return offset + _settings.predefinedTargetPos[Random.Range( 0, _settings.predefinedTargetPos.Length )].position;
+			offset += Vector3.Normalize( target.rigidbody.velocity ) * _settings.targetLead;
 		}
+
+		return offset + target.position;
 	}
 
 	void TargetDeath( GameObject obj )
@@ -86,17 +94,15 @@ public class Mortar : MonoBehaviour
 [System.Serializable]
 public class MortarSettings
 {
-	public GameObject target;
+	public Transform[] targets;
 	public GameObject targetMarker;
 
 	public float minSpeed;
 	public float maxSpeed;
 	public float minTargetOffset;
 	public float maxTargetOffset;
+	public float targetLead;
 
 	public float arcHeight;
 	public float speedIncrease;
-
-	public bool usePredefinedTargetPos;
-	public Transform[] predefinedTargetPos;
 }

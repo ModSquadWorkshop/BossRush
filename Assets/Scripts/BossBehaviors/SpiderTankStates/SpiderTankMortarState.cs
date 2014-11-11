@@ -11,12 +11,12 @@ public class SpiderTankMortarState : SpiderTankState
 		base.OnEnable();
 
 		_settings = new MortarStateSettings[] { mortarStateSettings.phaseOneSettings, 
-												mortarStateSettings.phaseTwoSettings, 
-												mortarStateSettings.phaseThreeSettings, 
-												mortarStateSettings.phaseFourSettings };
+		                                        mortarStateSettings.phaseTwoSettings, 
+		                                        mortarStateSettings.phaseThreeSettings, 
+		                                        mortarStateSettings.phaseFourSettings };
 
-		StartLaunchAtInterval( _settings[spiderTank.currentPhase].amountOfMortars, 
-							   _settings[spiderTank.currentPhase].launchInterval );
+		StartMortarLaunchAtInterval( _settings[spiderTank.currentPhase].amountOfMortars, 
+		                       _settings[spiderTank.currentPhase].launchInterval );
 	}
 }
 

@@ -3,19 +3,9 @@ using System.Collections;
 
 public class SpiderTankEnterState : SpiderTankState
 {
-	public EnterStateSettingsList enterStateSettings;
-	private EnterStateSettings[] _settings;
+	public EnterStateSettings enterStateSettings;
 
 	private MoveTowardsTarget _movement;
-
-	void Update()
-	{
-		if ( ( transform.position - _settings[spiderTank.currentPhase].destination.position ).sqrMagnitude < 1.0f )
-		{
-			enabled = false;
-			spiderTank.basicState.enabled = true;
-		}
-	}
 
 	public override void Awake()
 	{
@@ -28,16 +18,16 @@ public class SpiderTankEnterState : SpiderTankState
 	{
 		base.OnEnable();
 
-		_settings = new EnterStateSettings[] { enterStateSettings.phaseOneSettings, 
-											   enterStateSettings.phaseTwoSettings, 
-											   enterStateSettings.phaseThreeSettings, 
-											   enterStateSettings.phaseFourSettings };
-
-		_movement.target = _settings[spiderTank.currentPhase].destination;
+		_movement.target = enterStateSettings.destination;
 		_movement.enabled = true;
 
 		// make sure the boss can walk in/out of the arena.
 		Physics.IgnoreCollision( collider, doorCollider, true );
+	}
+
+	void Update()
+	{
+		enabled = ( transform.position - enterStateSettings.destination.position ).sqrMagnitude > 1.0f;
 	}
 
 	public override void OnDisable()
@@ -45,6 +35,7 @@ public class SpiderTankEnterState : SpiderTankState
 		base.OnDisable();
 
 		_movement.enabled = false;
+		spiderTank.basicState.enabled = true;
 		Physics.IgnoreCollision( collider, doorCollider, false );
 	}
 }
@@ -54,15 +45,4 @@ public class SpiderTankEnterState : SpiderTankState
 public class EnterStateSettings
 {
 	public Transform destination;
-}
-
-
-// this struct only exists to organize the settings in the inspector
-[System.Serializable]
-public class EnterStateSettingsList
-{
-	public EnterStateSettings phaseOneSettings;
-	public EnterStateSettings phaseTwoSettings;
-	public EnterStateSettings phaseThreeSettings;
-	public EnterStateSettings phaseFourSettings;
 }
