@@ -7,21 +7,23 @@ public class MinionDeath : MonoBehaviour
 
 	public bool dropping;
 
-	DeathTimer timedDeath;
 	HealthSystem minionHealth;
 
 	public Perk[] drops;
 
 	// Use this for initialization
-	void Start ()
+	void Awake()
 	{
 		GetComponent<DeathSystem>().RegisterDeathCallback( DeathCallback );
 		minionHealth = GetComponent<HealthSystem>();
 		minionHealth.RegisterHealthCallback( HealthCallback );
-		if ( deathTime > 0 )
+	}
+
+	void Start()
+	{
+		if ( deathTime > 0.0f )
 		{
-			timedDeath = gameObject.AddComponent<DeathTimer>();
-			timedDeath.deathTime = this.deathTime;
+			Invoke( "DestroySelf", deathTime );
 		}
 	}
 
@@ -37,6 +39,11 @@ public class MinionDeath : MonoBehaviour
 	{
 		// ensure that we don't get notified of our death multiple times
 		GetComponent<DeathSystem>().DeregisterDeathCallback( DeathCallback );
+	}
+
+	void DestroySelf()
+	{
+		GetComponent<DeathSystem>().Kill();
 	}
 
 	void Drop()

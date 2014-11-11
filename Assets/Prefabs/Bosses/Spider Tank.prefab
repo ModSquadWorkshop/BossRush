@@ -427,7 +427,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -4.37113883e-08}
-  m_LocalPosition: {x: 0, y: 0, z: 150}
+  m_LocalPosition: {x: 65.3209991, y: 0, z: 262.079987}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400014}
@@ -1200,8 +1200,6 @@ MonoBehaviour:
   reloadSpeed: 0
   sprayAngle: 0
   circleSpray: 0
-  _magazines: 0
-  _magazineAmmo: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1289,8 +1287,6 @@ MonoBehaviour:
   reloadSpeed: 0
   sprayAngle: 5
   circleSpray: 1
-  _magazines: 0
-  _magazineAmmo: 0
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1348,8 +1344,6 @@ MonoBehaviour:
   reloadSpeed: 0
   sprayAngle: 5
   circleSpray: 1
-  _magazines: 0
-  _magazineAmmo: 0
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1643,6 +1637,7 @@ MonoBehaviour:
   maxRange: 1000
   damageInterval: .100000001
   piercingsAmount: 100
+  duration: 0
 --- !u!114 &11400032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1971,6 +1966,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyTypes:
   - {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
+  - {fileID: 100000, guid: 8050589df98ae4943952875bf5e4c5ee, type: 2}
   spawns:
   - {fileID: 0}
   - {fileID: 0}
@@ -2077,6 +2073,7 @@ MonoBehaviour:
   maxRange: 1000
   damageInterval: .100000001
   piercingsAmount: 100
+  duration: 0
 --- !u!114 &11400054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2096,6 +2093,7 @@ MonoBehaviour:
   maxRange: 1000
   damageInterval: .100000001
   piercingsAmount: 100
+  duration: 0
 --- !u!114 &11400056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2147,6 +2145,7 @@ MonoBehaviour:
   maxRange: 1000
   damageInterval: .100000001
   piercingsAmount: 100
+  duration: 0
 --- !u!114 &11400062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2166,6 +2165,7 @@ MonoBehaviour:
   maxRange: 1000
   damageInterval: .100000001
   piercingsAmount: 100
+  duration: 0
 --- !u!114 &11400064
 MonoBehaviour:
   m_ObjectHideFlags: 1
