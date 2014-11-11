@@ -117,7 +117,7 @@ public class PerkSystem : MonoBehaviour
 		playerWeapons.SetBuffs( perk.fireRateMod, perk.damageMod, perk.reloadMod, perk.infiniteAmmo );
 		playerHealth.immune = perk.immunity || playerHealth.immune; //create shield or change healthbar if true
 		
-		if ( perk.gunDrop != null && playerWeapons.weapons.Count <= 3)
+		if ( perk.gunDrop != null && playerWeapons.weapons.Count <= 3 )
 		{
 			if ( playerWeapons.weapons.Count == 3 )
 			{

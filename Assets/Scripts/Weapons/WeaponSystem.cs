@@ -230,6 +230,11 @@ public class WeaponSystem : MonoBehaviour
 		//apply buffs to all weapons in system
 	}
 
+	public void SetBuff( int index, float fireRate, float damage, float reloadSpeed, bool infiniteAmmo )
+	{
+		//apply current buffs to one weapon
+	}
+
 	public void RevertBuffs( float fireRate, float damage, float reloadSpeed, bool infiniteAmmo )
 	{
 		//remove buffs from all weapons in system

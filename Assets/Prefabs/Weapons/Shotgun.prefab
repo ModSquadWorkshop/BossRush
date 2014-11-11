@@ -163,13 +163,11 @@ MonoBehaviour:
   casingAnchor: {fileID: 400002}
   casingEmitter: {fileID: 100000, guid: b425d3dd3171cdf4cbf686d9fad193e4, type: 2}
   infiniteAmmo: 0
-  ammoPerMagazine: 10
-  amountOfMagazines: 4
-  reloadSpeed: 1.5
+  ammoPerMagazine: 5
+  amountOfMagazines: 0
+  reloadSpeed: 0
   sprayAngle: 45
   circleSpray: 0
-  _magazines: 4
-  _magazineAmmo: 10
   shellsPerShot: 6
 --- !u!114 &11400002
 MonoBehaviour:

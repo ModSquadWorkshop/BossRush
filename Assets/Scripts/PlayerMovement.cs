@@ -190,9 +190,9 @@ sealed public class PlayerMovement : MonoBehaviour
 		_dashDelayTimer.Reset( true );
 	}
 
-	private void TargetDamageCallback( HealthSystem playerHealth, float damage )
+	private void TargetDamageCallback( HealthSystem playerHealth, float healthChange )
 	{
-		camShake.Shake( damage );
+		camShake.Shake( healthChange );
 		rumbler.rumble = true;
 		rumbler.Rumble();
 	}

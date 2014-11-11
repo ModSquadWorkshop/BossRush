@@ -19,8 +19,8 @@ public class Gun : Weapon
 
 	protected float _halfSpray;
 
-	[SerializeField] protected int _magazines;
-	[SerializeField] protected int _magazineAmmo;
+	protected int _magazines;
+	protected int _magazineAmmo;
 
 	protected bool _reloading;
 
@@ -38,7 +38,7 @@ public class Gun : Weapon
 
 		// initialize ammunition and reloading
 		_magazines = amountOfMagazines;
-		_magazineAmmo = ( _magazines > 0 ) ? ammoPerMagazine : 0;
+		_magazineAmmo = ammoPerMagazine; 
 		_magazineAmmo = ( infiniteAmmo ) ? Mathf.Max( _magazineAmmo, 1 ) : _magazineAmmo; // this line just insures you have atleast 1 ammo available
 		_reloading = false;
 
@@ -48,7 +48,7 @@ public class Gun : Weapon
 	public void RefreshAmmo()
 	{
 		_magazines = amountOfMagazines;
-		_magazineAmmo = ( _magazines > 0 ) ? ammoPerMagazine : 0;
+		_magazineAmmo = ammoPerMagazine;
 		_magazineAmmo = ( infiniteAmmo ) ? Mathf.Max( _magazineAmmo, 1 ) : _magazineAmmo; // this line just insures you have atleast 1 ammo available
 		_reloading = false;
 	}
