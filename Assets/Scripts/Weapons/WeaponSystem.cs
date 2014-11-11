@@ -20,6 +20,10 @@ public class WeaponSystem : MonoBehaviour
 	private BeamWeapon _specialBeam;
 	public const float JOYSTICK_THRESHOLD = 0.75f;
 
+	private float _rateMod;
+	private float _damageMod;
+	private float _reloadMod;
+
 	void Start()
 	{
 		/*
@@ -62,6 +66,10 @@ public class WeaponSystem : MonoBehaviour
 		SwitchWeapon( defaultWeaponID );
 
 		_perkSystem = GetComponent<PerkSystem>();
+
+		_rateMod = 0;
+		_damageMod = 0;
+		_reloadMod = 0; 
 	}
 
 	public void NewWeapon()
@@ -77,6 +85,7 @@ public class WeaponSystem : MonoBehaviour
 
 		_specialGun = weapons[2].GetComponent<Gun>();
 		_specialBeam = weapons[2].GetComponent<BeamWeapon>();
+		SetBuffs();
 	}
 
 	public bool DetermineType()
@@ -225,23 +234,52 @@ public class WeaponSystem : MonoBehaviour
 		}
 	}
 
-	public void SetBuffs( float fireRate, float damage, float reloadSpeed, bool infiniteAmmo )
+	public void SetBuff( float fireRate, float damage, float reloadSpeed )
 	{
-		//apply buffs to all weapons in system
+		//apply buff of 1 perk to all weapons
+		foreach ( GameObject weapon in weapons )
+		{
+			weapon.GetComponent<Weapon>().cooldown += fireRate;
+			weapon.GetComponent<DamageSystem>().damageMultiplier += damage;
+			if ( weapon.GetComponent<Gun>() != null )
+			{
+				weapon.GetComponent<Gun>().reloadSpeed += reloadSpeed;
+			}
+		}
+		CurrentBuffs( fireRate, damage, reloadSpeed );
 	}
 
-	public void SetBuff( int index, float fireRate, float damage, float reloadSpeed, bool infiniteAmmo )
+	public void SetBuffs()
 	{
-		//apply current buffs to one weapon
+		//apply all current buffs to special weapon
+		weapons[2].GetComponent<Weapon>().cooldown += _rateMod;
+		weapons[2].GetComponent<DamageSystem>().damageMultiplier += _damageMod;
+		if ( DetermineType() )
+		{
+			weapons[2].GetComponent<Gun>().reloadSpeed += _reloadMod;
+		}
 	}
 
-	public void RevertBuffs( float fireRate, float damage, float reloadSpeed, bool infiniteAmmo )
+	public void RevertBuff( float fireRate, float damage, float reloadSpeed )
 	{
-		//remove buffs from all weapons in system
+		//remove buff of 1 perk from all weapons in system
+		foreach ( GameObject weapon in weapons )
+		{
+			weapon.GetComponent<Weapon>().cooldown -= fireRate;
+			weapon.GetComponent<DamageSystem>().damageMultiplier -= damage;
+			if ( weapon.GetComponent<Gun>() != null )
+			{
+				weapon.GetComponent<Gun>().reloadSpeed -= reloadSpeed;
+			}
+		}
+		CurrentBuffs( -fireRate, -damage, -reloadSpeed );
 	}
 
-	public void CurrentBuffs( float fireRate, float damage, float reloadSpeed, bool infiniteAmmo )
+	public void CurrentBuffs( float fireRate, float damage, float reloadSpeed )
 	{
-		//keeps track of current buffs for newly added guns
+		//sets all currently applicable modifiers to proper values
+		_rateMod += fireRate;
+		_damageMod += damage;
+		_reloadMod += reloadSpeed;
 	}
 }

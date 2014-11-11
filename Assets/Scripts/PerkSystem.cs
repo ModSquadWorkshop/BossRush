@@ -109,12 +109,7 @@ public class PerkSystem : MonoBehaviour
 		playerSpeed.speedMultiplier += perk.speedMod;
 		playerHealth.maxHealth += perk.maxHealthMod;
 		playerHealth.Heal( perk.healthMod );
-		//playerDamage.damageMultiplier += perk.damageMod;
-		//playerGun.cooldown += perk.fireRateMod;
-		//playerGun.amountOfMagazines += perk.magazinesMod;
-		//playerGun.reloadSpeed += perk.reloadMod;
-		//playerGun.infiniteAmmo = perk.infiniteAmmo || playerGun.infiniteAmmo;
-		playerWeapons.SetBuffs( perk.fireRateMod, perk.damageMod, perk.reloadMod, perk.infiniteAmmo );
+		playerWeapons.SetBuff( perk.fireRateMod, perk.damageMod, perk.reloadMod );
 		playerHealth.immune = perk.immunity || playerHealth.immune; //create shield or change healthbar if true
 		
 		if ( perk.gunDrop != null && playerWeapons.weapons.Count <= 3 )
@@ -135,17 +130,8 @@ public class PerkSystem : MonoBehaviour
 		playerSpeed.speedMultiplier -= reset.speedMod;
 		playerHealth.maxHealth -= reset.maxHealthMod;
 		playerHealth.health -= reset.healthMod;
-		playerWeapons.RevertBuffs( reset.fireRateMod, reset.damageMod, reset.reloadMod, reset.infiniteAmmo );
-		//playerDamage.damageMultiplier -= reset.damageMod;
-		//playerGun.cooldown -= reset.fireRateMod;
-		//playerGun.amountOfMagazines -= reset.magazinesMod;
-		//playerGun.reloadSpeed -= reset.reloadMod;
-		/*
-		if ( reset.infiniteAmmo )
-		{
-		    playerGun.infiniteAmmo = false;
-		}
-		*/
+		playerWeapons.RevertBuff( reset.fireRateMod, reset.damageMod, reset.reloadMod );
+
 		if ( reset.immunity )
 		{
 			playerHealth.immune = false;
