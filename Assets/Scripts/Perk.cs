@@ -23,7 +23,7 @@ public class Perk : MonoBehaviour
 	public float duration;
 
 	PerkSystem perkSystem;
-	
+
 	void OnCollisionEnter( Collision other )
 	{
 		if ( other.gameObject.tag == "Player" )
