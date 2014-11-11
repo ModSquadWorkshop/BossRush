@@ -1231,8 +1231,8 @@ MonoBehaviour:
   destroyOnNoLives: 1
   startingLives: 100
   maxLives: 1
-  startingHealth: 10000
-  maxHealth: 10000
+  startingHealth: 8000
+  maxHealth: 8000
   damageSounds: []
   deathSounds: []
   _lives: 0
@@ -1391,16 +1391,16 @@ MonoBehaviour:
         amountOfMortars: 0
         launchInterval: 0
     phaseFourSettings:
-      useSpawner: 0
-      useMortars: 0
+      useSpawner: 1
+      useMortars: 1
       spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
+        baseAmountPerWave: 5
+        amountPerSpawner: 5
+        waveInterval: 5
         spawnOnStart: 0
       mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
+        amountOfMortars: 10
+        launchInterval: .150000006
   basicStateSettings:
     phaseOneSettings:
       turretSpeed: 2
@@ -1479,15 +1479,15 @@ MonoBehaviour:
         launchInterval: 0
     phaseFourSettings:
       useSpawner: 1
-      useMortars: 0
+      useMortars: 1
       spawnerSettings:
         baseAmountPerWave: 10
         amountPerSpawner: 20
         waveInterval: 5
         spawnOnStart: 1
       mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
+        amountOfMortars: 10
+        launchInterval: .150000006
   turboStateSettings:
     phaseOneSettings:
       turretSpeed: 2
@@ -1568,26 +1568,26 @@ MonoBehaviour:
         launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
-      useMortars: 0
+      useMortars: 1
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
       mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
+        amountOfMortars: 5
+        launchInterval: .5
     phaseFourSettings:
       useSpawner: 0
-      useMortars: 0
+      useMortars: 1
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
       mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
+        amountOfMortars: 10
+        launchInterval: .150000006
   returnState: {fileID: 0}
   rushStateSettings:
     phaseOneSettings:
@@ -1978,7 +1978,7 @@ MonoBehaviour:
     amountPerSpawner: 1
     waveInterval: 2
     spawnOnStart: 0
-  maxSpawned: 25
+  maxSpawned: 20
 --- !u!114 &11400048
 MonoBehaviour:
   m_ObjectHideFlags: 1
