@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class WeaponSystem : MonoBehaviour
 {
 	public List<GameObject> weapons;
+	public Perk perk;
+	private PerkSystem _perkSystem;
 	//public GameObject[] weapons;
 	public int defaultWeaponID = 0;
 	public KeyCode switchWeaponKeybind;
@@ -14,7 +16,8 @@ public class WeaponSystem : MonoBehaviour
 	private int _currentWeaponID;
 	private Weapon _currentWeapon;
 	private Weapon _defaultWeapon;
-	public Gun specialGun;
+	private Gun _specialGun;
+	private BeamWeapon _specialBeam;
 	public const float JOYSTICK_THRESHOLD = 0.75f;
 
 	void Start()
@@ -57,6 +60,8 @@ public class WeaponSystem : MonoBehaviour
 		*/
 
 		SwitchWeapon( defaultWeaponID );
+
+		_perkSystem = GetComponent<PerkSystem>();
 	}
 
 	public void NewWeapon()
@@ -68,6 +73,16 @@ public class WeaponSystem : MonoBehaviour
 		// the weapon prefabs don't default to hitting enemies (only scenery),
 		// so add it to their list of targets.
 		weapons[2].GetComponent<DamageSystem>().targets.Add( "Enemy" );
+		SwitchWeapon( 2 );
+
+		_specialGun = weapons[2].GetComponent<Gun>();
+		_specialBeam = weapons[2].GetComponent<BeamWeapon>();
+	}
+
+	public bool DetermineType()
+	{
+		//return true if gun, false if beam
+		return _specialGun != null;
 	}
 
 	void Update()
@@ -85,11 +100,16 @@ public class WeaponSystem : MonoBehaviour
 		if ( Input.GetButton( "Fire1" ) || gamePadLook.sqrMagnitude > JOYSTICK_THRESHOLD )
 		{
 			// if the weapon is still on cooldown, it cannot perform an attack
-			if ( _currentWeaponID == 2 && specialGun.IsOutOfAmmo() )
+			if ( _currentWeaponID == 2 )
 			{
-				NextWeapon();
-				Debug.Log( "OUT OF AMMO" );
-				weapons.Remove( specialGun.gameObject );
+				if ( DetermineType() && _specialGun.IsOutOfAmmo() )
+				{
+					RemoveSpecial();
+				}
+				else if ( !DetermineType() && _specialBeam.IsDone() )
+				{
+					RemoveSpecial();
+				}
 			}
 			if ( !_currentWeapon.isOnCooldown )
 			{
@@ -120,6 +140,13 @@ public class WeaponSystem : MonoBehaviour
 		weapon.gameObject.transform.localRotation = Quaternion.identity;
 
 		return weapon;
+	}
+
+	public void RemoveSpecial()
+	{
+		NextWeapon();
+		weapons.RemoveAt( 2 );
+		_perkSystem.RemovePerk( perk );
 	}
 
 	public void SwitchWeapon( int weaponID )
@@ -194,5 +221,20 @@ public class WeaponSystem : MonoBehaviour
 		{
 			return _currentWeapon;
 		}
+	}
+
+	public void SetBuffs( float fireRate, float damage, float reloadSpeed, bool infiniteAmmo )
+	{
+		//apply buffs to all weapons in system
+	}
+
+	public void RevertBuffs( float fireRate, float damage, float reloadSpeed, bool infiniteAmmo )
+	{
+		//remove buffs from all weapons in system
+	}
+
+	public void CurrentBuffs( float fireRate, float damage, float reloadSpeed, bool infiniteAmmo )
+	{
+		//keeps track of current buffs for newly added guns
 	}
 }

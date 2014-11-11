@@ -47,7 +47,8 @@ public class PerkSystem : MonoBehaviour
 			Perk currentPerk = _perks[perk.ID] as Perk;
 			if ( currentPerk != null )
 			{
-				currentPerk.Refresh();
+				//currentPerk.Refresh();
+				RefreshPerk( currentPerk );
 			}
 			Destroy( perk.gameObject );
 		}
@@ -78,10 +79,18 @@ public class PerkSystem : MonoBehaviour
 	public void RefreshPerk( Perk perk )
 	{
 		//refresh ammo if gun drop, otherwise refresh timer
-		if ( perk.gunDrop != null )
+		if ( perk.gunDrop != null && perk.duration <= 0 )
 		{
-			Gun special = GetComponent<WeaponSystem>().weapons[2].GetComponent<Gun>();
-			special.RefreshAmmo();
+			if ( playerWeapons.DetermineType() )
+			{
+				Gun special = playerWeapons.weapons[2].GetComponent<Gun>();
+				special.RefreshAmmo();
+			}
+			else if ( !playerWeapons.DetermineType() )
+			{
+				BeamWeapon special = playerWeapons.weapons[2].GetComponent<BeamWeapon>();
+				special.ResetTimer();
+			}
 		}
 		else if ( perk.duration > 0 )
 		{
@@ -100,23 +109,28 @@ public class PerkSystem : MonoBehaviour
 		//playerGun.amountOfMagazines += perk.magazinesMod;
 		//playerGun.reloadSpeed += perk.reloadMod;
 		//playerGun.infiniteAmmo = perk.infiniteAmmo || playerGun.infiniteAmmo;
-		playerHealth.immune = perk.immunity || playerHealth.immune;
+		playerWeapons.SetBuffs( perk.fireRateMod, perk.damageMod, perk.reloadMod, perk.infiniteAmmo );
+		playerHealth.immune = perk.immunity || playerHealth.immune; //create shield or change healthbar if true
 		
-		if ( perk.gunDrop != null && playerWeapons.weapons.Count < 3)
+		if ( perk.gunDrop != null && playerWeapons.weapons.Count <= 3)
 		{
+			if ( playerWeapons.weapons.Count == 3 )
+			{
+				playerWeapons.RemoveSpecial();
+			}
 			playerWeapons.weapons.Add( perk.gunDrop );
+			playerWeapons.perk = perk;
 			playerWeapons.NewWeapon();
-			playerWeapons.specialGun = playerWeapons.weapons[2].GetComponent<Gun>();
 		}
 	}
 
 	public void ResetPerk( Perk reset )
 	{
 		//revert modifiers
-		Debug.Log( "RESETTING PERK" );
 		playerSpeed.speedMultiplier -= reset.speedMod;
 		playerHealth.maxHealth -= reset.maxHealthMod;
 		playerHealth.health -= reset.healthMod;
+		playerWeapons.RevertBuffs( reset.fireRateMod, reset.damageMod, reset.reloadMod, reset.infiniteAmmo );
 		//playerDamage.damageMultiplier -= reset.damageMod;
 		//playerGun.cooldown -= reset.fireRateMod;
 		//playerGun.amountOfMagazines -= reset.magazinesMod;

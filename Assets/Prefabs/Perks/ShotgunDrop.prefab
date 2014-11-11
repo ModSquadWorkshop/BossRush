@@ -70,8 +70,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings:
-    minChance: .109999999
-    maxChance: .140000001
+    minChance: 0
+    maxChance: .200000003
   immunity: 0
   infiniteAmmo: 0
   speedMod: 0
@@ -83,7 +83,7 @@ MonoBehaviour:
   magazinesMod: 0
   gunDrop: {fileID: 100000, guid: ec638bf6dd881f045a7eb8e5b51638c1, type: 2}
   ID: Shotgun
-  length: 0
+  duration: 0
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

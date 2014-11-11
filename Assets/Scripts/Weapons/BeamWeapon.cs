@@ -13,10 +13,13 @@ public class BeamWeapon : Weapon
 
 	private Ray _ray;
 	private Timer _beamTimer;
+	private Timer _beamDuration;
+	public float duration;
 
 	private DamageSystem _damageSystem;
 	private Timer _damageTimer;
 	private bool _damageDealt;
+	private bool _done;
 
 	void Awake()
 	{
@@ -24,6 +27,8 @@ public class BeamWeapon : Weapon
 		{
 			beam = this.gameObject.AddComponent<LineRenderer>();
 		}
+
+		_done = false;
 
 		// the beam should only every have 2 vertexes
 		// the width of the beam is the same from vertex to vertex
@@ -34,6 +39,7 @@ public class BeamWeapon : Weapon
 		// initialize the beam timers and the ray
 		_damageTimer = new Timer( damageInterval, -1 );
 		_beamTimer = new Timer( 0.1f, 1 );
+		_beamDuration = new Timer( duration, 1 );
 		_ray = new Ray();
 
 		// get a reference to the damage system attached to the weapon
@@ -53,6 +59,7 @@ public class BeamWeapon : Weapon
 			// the beam can only deal damage every time the timer is ticked at a set interval
 			// every frame the beam is enabled, the timer is updated such that it's not relative to target collision
 			_damageTimer.Update();
+			_beamDuration.Update();
 
 			// set the origin and direction of the ray to match the weapon/player's transformation
 			_ray.origin = this.gameObject.transform.position;
@@ -107,7 +114,23 @@ public class BeamWeapon : Weapon
 				// disable the beam
 				beam.enabled = false;
 			}
+
+			if ( _beamDuration.complete )
+			{
+				Debug.Log( "BEAM OUT OF TIME" );
+				_done = true;
+			}
 		}
+	}
+
+	public bool IsDone()
+	{
+		return _done;
+	}
+
+	public void ResetTimer()
+	{
+		_beamDuration.Reset();
 	}
 
 	public override void PerformPrimaryAttack()
