@@ -114,16 +114,10 @@ public class PerkSystem : MonoBehaviour
 		//playerGun.amountOfMagazines += perk.magazinesMod;
 		//playerGun.reloadSpeed += perk.reloadMod;
 		//playerGun.infiniteAmmo = perk.infiniteAmmo || playerGun.infiniteAmmo;
-<<<<<<< HEAD
 		playerWeapons.SetBuffs( perk.fireRateMod, perk.damageMod, perk.reloadMod, perk.infiniteAmmo );
 		playerHealth.immune = perk.immunity || playerHealth.immune; //create shield or change healthbar if true
 		
 		if ( perk.gunDrop != null && playerWeapons.weapons.Count <= 3 )
-=======
-		playerHealth.immune = perk.immunity || playerHealth.immune;
-
-		if ( perk.gunDrop != null && playerWeapons.weapons.Count < 3 )
->>>>>>> origin/drop_system
 		{
 			if ( playerWeapons.weapons.Count == 3 )
 			{
