@@ -19,6 +19,7 @@ public class LevelManager : MonoBehaviour
 	void Start()
 	{
 		_levelOver = false;
+		Screen.showCursor = true;
 
 		player.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerDied );
 		boss.GetComponent<DeathSystem>().RegisterDeathCallback( BossDied );
