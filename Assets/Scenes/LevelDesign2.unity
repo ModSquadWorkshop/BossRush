@@ -7543,7 +7543,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 768694547}
   m_GameObject: {fileID: 460028736}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a66ccb54ba76914db3d52a6acc4398f, type: 3}
   m_Name: 
@@ -7558,7 +7558,7 @@ Transform:
   m_PrefabInternal: {fileID: 768694547}
   m_GameObject: {fileID: 460028736}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 80, z: 0}
+  m_LocalPosition: {x: 39.4869995, y: 226.440002, z: 90.8759995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1078159060}
@@ -11508,15 +11508,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 5ff318d6ce113cb4c9f92f8199a3fd98, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 39.4869995
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5ff318d6ce113cb4c9f92f8199a3fd98, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 80
+      value: 226.440002
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5ff318d6ce113cb4c9f92f8199a3fd98, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 90.8759995
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5ff318d6ce113cb4c9f92f8199a3fd98, type: 2}
       propertyPath: m_LocalRotation.x
@@ -24538,6 +24538,10 @@ Prefab:
       propertyPath: boss
       value: 
       objectReference: {fileID: 1800426934}
+    - target: {fileID: 11400006, guid: b76c03ade0795794884cc6477dac31cd, type: 2}
+      propertyPath: cameraFollow
+      value: 
+      objectReference: {fileID: 460028737}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b76c03ade0795794884cc6477dac31cd, type: 2}
   m_RootGameObject: {fileID: 1736291849}
@@ -25947,6 +25951,8 @@ MonoBehaviour:
   player: {fileID: 793478078}
   boss: {fileID: 1800426934}
   mainMenu: {fileID: 1220712507}
+  cameraFollow: {fileID: 460028737}
+  startDelay: 3
   levelOverDelay: 5
   skipMenu: 0
 --- !u!4 &1736291851

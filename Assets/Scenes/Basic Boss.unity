@@ -4454,7 +4454,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1222073128}
   m_GameObject: {fileID: 1357048502}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a66ccb54ba76914db3d52a6acc4398f, type: 3}
   m_Name: 
@@ -6080,6 +6080,10 @@ Prefab:
       propertyPath: boss
       value: 
       objectReference: {fileID: 1470767332}
+    - target: {fileID: 11400006, guid: b76c03ade0795794884cc6477dac31cd, type: 2}
+      propertyPath: cameraFollow
+      value: 
+      objectReference: {fileID: 1357048503}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b76c03ade0795794884cc6477dac31cd, type: 2}
   m_RootGameObject: {fileID: 1591145409}
@@ -6341,6 +6345,8 @@ MonoBehaviour:
   player: {fileID: 1363035864}
   boss: {fileID: 1470767332}
   mainMenu: {fileID: 236838895}
+  cameraFollow: {fileID: 1357048503}
+  startDelay: 3
   levelOverDelay: 5
   skipMenu: 0
 --- !u!4 &1591145411

@@ -7,7 +7,9 @@ public class LevelManager : MonoBehaviour
 	public GameObject player;
 	public GameObject boss;
 	public GameObject mainMenu;
+	public CameraFollow cameraFollow;
 
+	public float startDelay;
 	public float levelOverDelay;
 
 	public bool skipMenu;
@@ -33,8 +35,15 @@ public class LevelManager : MonoBehaviour
 	public void StartGame()
 	{
 		player.SetActive( true );
-		boss.SetActive( true );
 		mainMenu.SetActive( false );
+		cameraFollow.enabled = true;
+
+		Invoke( "AwakeSpiderTank", startDelay );
+	}
+
+	void AwakeSpiderTank()
+	{
+		boss.SetActive( true );
 	}
 
 	void PlayerDied( GameObject gameObjectz )

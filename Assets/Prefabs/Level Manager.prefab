@@ -249,6 +249,8 @@ MonoBehaviour:
   player: {fileID: 0}
   boss: {fileID: 0}
   mainMenu: {fileID: 100010}
+  cameraFollow: {fileID: 0}
+  startDelay: 3
   levelOverDelay: 5
   skipMenu: 0
 --- !u!114 &11400008
