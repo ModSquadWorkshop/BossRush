@@ -14,7 +14,7 @@ public class PerkSystem : MonoBehaviour
 	Gun playerGun;
 	WeaponSystem playerWeapons;
 
-	void Start()
+	void Awake()
 	{
 		_perks = new Hashtable();
 		_perkCounts = new Hashtable();

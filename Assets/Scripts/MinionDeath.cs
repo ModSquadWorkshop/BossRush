@@ -12,9 +12,6 @@ public class MinionDeath : MonoBehaviour
 
 	public Perk[] drops;
 
-	//[Range( 0.0f, 1.0f )]
-	private float _dropGen;
-
 	// Use this for initialization
 	void Start ()
 	{
@@ -44,12 +41,15 @@ public class MinionDeath : MonoBehaviour
 
 	void Drop()
 	{
-		_dropGen = Random.Range( 0f, 1f );
+		float dropGen = Random.Range( 0.0f, 1.0f );
+		float cumulativeChance = 0.0f;
 		foreach ( Perk drop in drops )
 		{
-			if ( _dropGen >= drop.settings.minChance && _dropGen <= drop.settings.maxChance )
+			cumulativeChance += drop.dropChance;
+			if ( cumulativeChance > dropGen )
 			{
-				Instantiate( drop.gameObject, this.transform.localPosition, this.transform.rotation );
+				Instantiate( drop.gameObject, transform.localPosition, transform.rotation );
+				return;
 			}
 		}
 	}

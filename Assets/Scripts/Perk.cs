@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Perk : MonoBehaviour
 {
-	public DropSettings settings;
+	[Range( 0.0f, 1f )]
+	public float dropChance;
 
 	//bools to determine what is being modified by a perk object
 	public bool immunity;
@@ -58,13 +59,4 @@ public class Perk : MonoBehaviour
 		perkSystem.RemovePerk( this );
 		Destroy( this.gameObject );
 	}
-}
-
-[System.Serializable]
-public class DropSettings
-{
-	[Range( 0.0f, 1f )]
-	public float minChance;
-	[Range( 0.0f, 1f )]
-	public float maxChance;
 }
