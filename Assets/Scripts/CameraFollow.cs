@@ -6,8 +6,6 @@ public class CameraFollow : MonoBehaviour
 	public Transform followTarget;
 	public float offset;
 	public float followSpeed = 1.0f;
-	public float shakeForce;
-	public float shakePerDamage;
 
 	void Start()
 	{
@@ -26,10 +24,5 @@ public class CameraFollow : MonoBehaviour
 	void TargetDeathCallback( GameObject gameObject )
 	{
 		Destroy( this );
-	}
-
-	public void Shake( float ammount )
-	{
-		iTween.ShakePosition( Camera.main.gameObject, Vector3.left * ( shakeForce + ( ammount * shakePerDamage ) ), 0f );
 	}
 }

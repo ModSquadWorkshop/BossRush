@@ -6,8 +6,13 @@ public class LevelManager : MonoBehaviour
 {
 	public GameObject player;
 	public GameObject boss;
+	public GameObject mainMenu;
+	public CameraFollow cameraFollow;
 
+	public float startDelay;
 	public float levelOverDelay;
+
+	public bool skipMenu;
 
 	private bool _levelOver; //< Used to prevent ResetLevel() from being called twice if both the player and the boss die.
 
@@ -17,9 +22,31 @@ public class LevelManager : MonoBehaviour
 
 		player.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerDied );
 		boss.GetComponent<DeathSystem>().RegisterDeathCallback( BossDied );
+
+		// hide the mouse
+		Screen.showCursor = false;
+
+		if ( skipMenu )
+		{
+			StartGame();
+		}
 	}
 
-	public void PlayerDied( GameObject gameObjectz )
+	public void StartGame()
+	{
+		player.SetActive( true );
+		mainMenu.SetActive( false );
+		cameraFollow.enabled = true;
+
+		Invoke( "AwakeSpiderTank", startDelay );
+	}
+
+	void AwakeSpiderTank()
+	{
+		boss.SetActive( true );
+	}
+
+	void PlayerDied( GameObject gameObjectz )
 	{
 		if ( !_levelOver )
 		{
@@ -28,7 +55,7 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
-	public void BossDied( GameObject gameObject )
+	void BossDied( GameObject gameObject )
 	{
 		if ( !_levelOver )
 		{
