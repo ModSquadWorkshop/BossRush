@@ -7,21 +7,31 @@ public class MinionDeath : MonoBehaviour
 
 	public bool dropping;
 
-	DeathTimer timedDeath;
+	HealthSystem minionHealth;
 
-	public GameObject dropItem;
-
-	[Range( 0.0f, 1.0f )]
-	public float dropChance;
+	public Perk[] drops;
 
 	// Use this for initialization
-	void Start ()
+	void Awake()
 	{
 		GetComponent<DeathSystem>().RegisterDeathCallback( DeathCallback );
-		if ( deathTime > 0 )
+		minionHealth = GetComponent<HealthSystem>();
+		minionHealth.RegisterHealthCallback( HealthCallback );
+	}
+
+	void Start()
+	{
+		if ( deathTime > 0.0f )
 		{
-			timedDeath = gameObject.AddComponent<DeathTimer>();
-			timedDeath.deathTime = this.deathTime;
+			Invoke( "DestroySelf", deathTime );
+		}
+	}
+
+	void HealthCallback( HealthSystem minionHealth, float change )
+	{
+		if ( dropping && minionHealth.health <= 0 )
+		{
+			Drop();
 		}
 	}
 
@@ -29,19 +39,25 @@ public class MinionDeath : MonoBehaviour
 	{
 		// ensure that we don't get notified of our death multiple times
 		GetComponent<DeathSystem>().DeregisterDeathCallback( DeathCallback );
+	}
 
-		if ( dropping )
-		{
-			Drop();
-		}
+	void DestroySelf()
+	{
+		GetComponent<DeathSystem>().Kill();
 	}
 
 	void Drop()
 	{
-		if ( Random.Range( 0.0f, 1.0f ) < dropChance )
+		float dropGen = Random.Range( 0.0f, 1.0f );
+		float cumulativeChance = 0.0f;
+		foreach ( Perk drop in drops )
 		{
-			Instantiate( dropItem, this.transform.localPosition, this.transform.rotation );
-			Debug.Log( "HEALTH PACK DEPLOYED" );
+			cumulativeChance += drop.dropChance;
+			if ( cumulativeChance > dropGen )
+			{
+				Instantiate( drop.gameObject, transform.localPosition, transform.rotation );
+				return;
+			}
 		}
 	}
 }

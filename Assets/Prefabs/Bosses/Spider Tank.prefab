@@ -50,7 +50,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100004
 GameObject:
   m_ObjectHideFlags: 1
@@ -152,9 +152,10 @@ GameObject:
   - 4: {fileID: 400014}
   - 33: {fileID: 3300004}
   - 23: {fileID: 2300002}
-  m_Layer: 10
-  m_Name: Model
-  m_TagString: Enemy
+  - 95: {fileID: 9500000}
+  m_Layer: 0
+  m_Name: SpiderTankMesh
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -348,7 +349,7 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 224: {fileID: 22400000}
+  - 224: {fileID: 22400002}
   - 222: {fileID: 22200000}
   - 114: {fileID: 11400072}
   m_Layer: 5
@@ -397,10 +398,10 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 224: {fileID: 22400002}
+  - 224: {fileID: 22400000}
   - 223: {fileID: 22300000}
-  - 114: {fileID: 11400074}
   - 114: {fileID: 11400066}
+  - 114: {fileID: 11400074}
   m_Layer: 5
   m_Name: Ring Indicator
   m_TagString: Untagged
@@ -427,7 +428,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -4.37113883e-08}
-  m_LocalPosition: {x: 0, y: 0, z: 150}
+  m_LocalPosition: {x: 65.3209991, y: 0, z: 262.079987}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400014}
@@ -437,7 +438,7 @@ Transform:
   - {fileID: 400036}
   - {fileID: 400042}
   - {fileID: 400040}
-  - {fileID: 22400002}
+  - {fileID: 22400000}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &400004
@@ -508,8 +509,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100014}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: -4.37113883e-08}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.97849989, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
@@ -713,7 +714,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 7ad3fe6d80ba579428ba36b108454344, type: 2}
+  - {fileID: 2100000, guid: 0ed76d6aa75eec04e94e5c1251325b2e, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -773,7 +774,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 296b46fea8f079b4f8f8aef27ebe8e6e, type: 2}
+  - {fileID: 2100000, guid: 7ad3fe6d80ba579428ba36b108454344, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1133,6 +1134,21 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!95 &9500000
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100014}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 5498dcc6d3c392f4ab176e7fd057a75d, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1161,6 +1177,13 @@ MonoBehaviour:
   shield: {fileID: 0}
   defaultCanonLookSpeed: 20
   healthTriggerInterval: 1500
+  healthCheckpoints:
+    phaseHealthPercents:
+    - 100
+    - 75
+    - 50
+    - 25
+    currentPhase: 0
   basicState: {fileID: 0}
   fleeState: {fileID: 0}
   healState: {fileID: 0}
@@ -1193,8 +1216,6 @@ MonoBehaviour:
   reloadSpeed: 0
   sprayAngle: 0
   circleSpray: 0
-  _magazines: 0
-  _magazineAmmo: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1282,8 +1303,6 @@ MonoBehaviour:
   reloadSpeed: 0
   sprayAngle: 5
   circleSpray: 1
-  _magazines: 0
-  _magazineAmmo: 0
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1341,8 +1360,6 @@ MonoBehaviour:
   reloadSpeed: 0
   sprayAngle: 5
   circleSpray: 1
-  _magazines: 0
-  _magazineAmmo: 0
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1354,24 +1371,81 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fba2eb2f60f8214c927b5c976359d8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useSpawner: 0
-  spawnerSettings:
-    baseAmountPerWave: 0
-    amountPerSpawner: 0
-    waveInterval: 0
-    spawnOnStart: 0
-  useMortars: 0
-  numMortars: 0
-  launchInterval: 0
-  launchSpawners: 0
-  spawnerLaunchInterval: 0
   spiderTank: {fileID: 0}
-  turretSpeed: 10
-  canonDelay: 2
-  amountPerWave: 0
-  minRushInterval: 1
-  maxRushInterval: 5
-  turboChance: .349999994
+  globalSettings:
+    phaseOneSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+    phaseTwoSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+    phaseThreeSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+    phaseFourSettings:
+      useSpawner: 1
+      useMortars: 1
+      spawnerSettings:
+        baseAmountPerWave: 5
+        amountPerSpawner: 5
+        waveInterval: 5
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 10
+        launchInterval: .150000006
+  basicStateSettings:
+    phaseOneSettings:
+      turretSpeed: 2
+      canonDelay: 1
+      amountPerWave: 20
+      minRushInterval: 1
+      maxRushInterval: 3
+      turboChance: .5
+    phaseTwoSettings:
+      turretSpeed: 2
+      canonDelay: 1
+      amountPerWave: 20
+      minRushInterval: 1
+      maxRushInterval: 3
+      turboChance: .5
+    phaseThreeSettings:
+      turretSpeed: 2
+      canonDelay: 1
+      amountPerWave: 20
+      minRushInterval: 1
+      maxRushInterval: 3
+      turboChance: .5
+    phaseFourSettings:
+      turretSpeed: 2
+      canonDelay: 1
+      amountPerWave: 20
+      minRushInterval: 1
+      maxRushInterval: 3
+      turboChance: .5
   movementScript: {fileID: 11400010}
 --- !u!114 &11400022
 MonoBehaviour:
@@ -1384,23 +1458,77 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d304b450b33b55b489dadf590505e37b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useSpawner: 1
-  spawnerSettings:
-    baseAmountPerWave: 2
-    amountPerSpawner: 2
-    waveInterval: 2
-    spawnOnStart: 1
-  useMortars: 1
-  numMortars: 10
-  launchInterval: 3
-  launchSpawners: 1
-  spawnerLaunchInterval: 2
   spiderTank: {fileID: 0}
-  turretSpeed: 50
-  canonDelay: .5
-  amountPerWave: 5
-  duration: 10
-  laserChance: .5
+  globalSettings:
+    phaseOneSettings:
+      useSpawner: 1
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 10
+        amountPerSpawner: 20
+        waveInterval: 5
+        spawnOnStart: 1
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+    phaseTwoSettings:
+      useSpawner: 1
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 10
+        amountPerSpawner: 20
+        waveInterval: 5
+        spawnOnStart: 1
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+    phaseThreeSettings:
+      useSpawner: 1
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 10
+        amountPerSpawner: 20
+        waveInterval: 5
+        spawnOnStart: 1
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+    phaseFourSettings:
+      useSpawner: 1
+      useMortars: 1
+      spawnerSettings:
+        baseAmountPerWave: 10
+        amountPerSpawner: 20
+        waveInterval: 5
+        spawnOnStart: 1
+      mortarSettings:
+        amountOfMortars: 10
+        launchInterval: .150000006
+  turboStateSettings:
+    phaseOneSettings:
+      turretSpeed: 2
+      canonDelay: 1
+      amountPerWave: 20
+      duration: 5
+      laserChance: .5
+    phaseTwoSettings:
+      turretSpeed: 2
+      canonDelay: 1
+      amountPerWave: 20
+      duration: 5
+      laserChance: .5
+    phaseThreeSettings:
+      turretSpeed: 2
+      canonDelay: 1
+      amountPerWave: 20
+      duration: 5
+      laserChance: .5
+    phaseFourSettings:
+      turretSpeed: 2
+      canonDelay: 1
+      amountPerWave: 20
+      duration: 5
+      laserChance: .5
   movementScript: {fileID: 0}
 --- !u!114 &11400024
 MonoBehaviour:
@@ -1415,9 +1543,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 1000
   acceleration: 1500
-  rushTime: .5
-  attackDamage: 10
   target: {fileID: 0}
+  settings:
+    rushTime: 0
+    attackDamage: 0
 --- !u!114 &11400026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1429,19 +1558,66 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 145cab610876f9649a637d947280f136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useSpawner: 0
-  spawnerSettings:
-    baseAmountPerWave: 0
-    amountPerSpawner: 0
-    waveInterval: 0
-    spawnOnStart: 0
-  useMortars: 0
-  numMortars: 0
-  launchInterval: 0
-  launchSpawners: 0
-  spawnerLaunchInterval: 0
   spiderTank: {fileID: 0}
+  globalSettings:
+    phaseOneSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+    phaseTwoSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+    phaseThreeSettings:
+      useSpawner: 0
+      useMortars: 1
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 5
+        launchInterval: .5
+    phaseFourSettings:
+      useSpawner: 0
+      useMortars: 1
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 10
+        launchInterval: .150000006
   returnState: {fileID: 0}
+  rushStateSettings:
+    phaseOneSettings:
+      rushTime: .5
+      attackDamage: 100
+    phaseTwoSettings:
+      rushTime: .5
+      attackDamage: 100
+    phaseThreeSettings:
+      rushTime: .5
+      attackDamage: 100
+    phaseFourSettings:
+      rushTime: .5
+      attackDamage: 100
 --- !u!114 &11400028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1477,6 +1653,7 @@ MonoBehaviour:
   maxRange: 1000
   damageInterval: .100000001
   piercingsAmount: 100
+  duration: 0
 --- !u!114 &11400032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1505,20 +1682,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbe66e7299ef940428847254da31eae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useSpawner: 0
-  spawnerSettings:
-    baseAmountPerWave: 0
-    amountPerSpawner: 0
-    waveInterval: 0
-    spawnOnStart: 0
-  useMortars: 0
-  numMortars: 0
-  launchInterval: 0
-  launchSpawners: 0
-  spawnerLaunchInterval: 0
   spiderTank: {fileID: 0}
-  rotation: 1.5
-  duration: 10
+  globalSettings:
+    phaseOneSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+    phaseTwoSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+    phaseThreeSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+    phaseFourSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+  laserSpinSettings:
+    phaseOneSettings:
+      rotation: 1
+      duration: 5
+    phaseTwoSettings:
+      rotation: 1
+      duration: 5
+    phaseThreeSettings:
+      rotation: 1
+      duration: 5
+    phaseFourSettings:
+      rotation: 1
+      duration: 5
 --- !u!114 &11400036
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1543,20 +1765,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 459c08f16f90d0c43987bf16209851ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useSpawner: 0
-  spawnerSettings:
-    baseAmountPerWave: 0
-    amountPerSpawner: 0
-    waveInterval: 0
-    spawnOnStart: 0
-  useMortars: 0
-  numMortars: 0
-  launchInterval: 0
-  launchSpawners: 0
-  spawnerLaunchInterval: 0
   spiderTank: {fileID: 0}
-  mainCanonCooldown: 1
-  minionsPerWave: 6
+  globalSettings:
+    phaseOneSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+    phaseTwoSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+    phaseThreeSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+    phaseFourSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+  fleeStateSettings:
+    phaseOneSettings:
+      mainCanonCooldown: 3
+      minionsPerWave: 50
+    phaseTwoSettings:
+      mainCanonCooldown: 3
+      minionsPerWave: 50
+    phaseThreeSettings:
+      mainCanonCooldown: 3
+      minionsPerWave: 50
+    phaseFourSettings:
+      mainCanonCooldown: 3
+      minionsPerWave: 50
   returnState: {fileID: 0}
 --- !u!114 &11400040
 MonoBehaviour:
@@ -1569,19 +1836,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c59753965a21e3747a45d2d631b83fe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useSpawner: 0
-  spawnerSettings:
-    baseAmountPerWave: 0
-    amountPerSpawner: 0
-    waveInterval: 0
-    spawnOnStart: 0
-  useMortars: 0
-  numMortars: 0
-  launchInterval: 0
-  launchSpawners: 0
-  spawnerLaunchInterval: 0
   spiderTank: {fileID: 0}
-  mininionCount: 20
+  globalSettings:
+    phaseOneSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+    phaseTwoSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+    phaseThreeSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+    phaseFourSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+  initialStateSettings:
+    phaseOneSettings:
+      mininionCount: 20
+    phaseTwoSettings:
+      mininionCount: 20
+    phaseThreeSettings:
+      mininionCount: 20
+    phaseFourSettings:
+      mininionCount: 20
 --- !u!114 &11400042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1605,19 +1914,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 265b0c87905103e4a9867ecbca21f184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useSpawner: 1
-  spawnerSettings:
-    baseAmountPerWave: 2
-    amountPerSpawner: 1
-    waveInterval: 3
-    spawnOnStart: 1
-  useMortars: 1
-  numMortars: 10
-  launchInterval: 3
-  launchSpawners: 0
-  spawnerLaunchInterval: 0
   spiderTank: {fileID: 0}
-  healRate: 75
+  globalSettings:
+    phaseOneSettings:
+      useSpawner: 1
+      useMortars: 1
+      spawnerSettings:
+        baseAmountPerWave: 10
+        amountPerSpawner: 20
+        waveInterval: 5
+        spawnOnStart: 1
+      mortarSettings:
+        amountOfMortars: 20
+        launchInterval: 2
+    phaseTwoSettings:
+      useSpawner: 1
+      useMortars: 1
+      spawnerSettings:
+        baseAmountPerWave: 10
+        amountPerSpawner: 20
+        waveInterval: 5
+        spawnOnStart: 1
+      mortarSettings:
+        amountOfMortars: 20
+        launchInterval: 2
+    phaseThreeSettings:
+      useSpawner: 1
+      useMortars: 1
+      spawnerSettings:
+        baseAmountPerWave: 10
+        amountPerSpawner: 20
+        waveInterval: 5
+        spawnOnStart: 1
+      mortarSettings:
+        amountOfMortars: 20
+        launchInterval: 2
+    phaseFourSettings:
+      useSpawner: 1
+      useMortars: 1
+      spawnerSettings:
+        baseAmountPerWave: 10
+        amountPerSpawner: 20
+        waveInterval: 5
+        spawnOnStart: 1
+      mortarSettings:
+        amountOfMortars: 20
+        launchInterval: 2
+  healStateSettings:
+    phaseOneSettings:
+      healRate: 300
+    phaseTwoSettings:
+      healRate: 300
+    phaseThreeSettings:
+      healRate: 300
+    phaseFourSettings:
+      healRate: 300
 --- !u!114 &11400046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1631,18 +1982,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyTypes:
   - {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
+  - {fileID: 100000, guid: 8050589df98ae4943952875bf5e4c5ee, type: 2}
   spawns:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  maxSpawnPoints: 5
+  maxSpawnPoints: 0
   defaultSettings:
     baseAmountPerWave: 2
     amountPerSpawner: 1
     waveInterval: 2
     spawnOnStart: 0
-  maxSpawned: 25
+  maxSpawned: 20
 --- !u!114 &11400048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1654,19 +2006,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb030dabac45a0d41b2a10282ae02ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useSpawner: 0
-  spawnerSettings:
-    baseAmountPerWave: 0
-    amountPerSpawner: 0
-    waveInterval: 0
-    spawnOnStart: 0
-  useMortars: 0
-  numMortars: 0
-  launchInterval: 0
-  launchSpawners: 0
-  spawnerLaunchInterval: 0
   spiderTank: {fileID: 0}
-  destination: {fileID: 0}
+  globalSettings:
+    phaseOneSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+    phaseTwoSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+    phaseThreeSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+    phaseFourSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+  enterStateSettings:
+    destination: {fileID: 0}
 --- !u!114 &11400050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1702,6 +2089,7 @@ MonoBehaviour:
   maxRange: 1000
   damageInterval: .100000001
   piercingsAmount: 100
+  duration: 0
 --- !u!114 &11400054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1721,6 +2109,7 @@ MonoBehaviour:
   maxRange: 1000
   damageInterval: .100000001
   piercingsAmount: 100
+  duration: 0
 --- !u!114 &11400056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1772,6 +2161,7 @@ MonoBehaviour:
   maxRange: 1000
   damageInterval: .100000001
   piercingsAmount: 100
+  duration: 0
 --- !u!114 &11400062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1791,6 +2181,7 @@ MonoBehaviour:
   maxRange: 1000
   damageInterval: .100000001
   piercingsAmount: 100
+  duration: 0
 --- !u!114 &11400064
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1815,10 +2206,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 100044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afb9c26e8187a6b409c17e8fad2fb70b, type: 3}
+  m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  indicatorImage: {fileID: 11400072}
+  m_Priority: 3
+  ignoreReversedGraphics: 1
+  blockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &11400068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1832,22 +2228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mortar: {fileID: 100000, guid: 25f6bfc5938519c4fa99f6baaca87531, type: 2}
   mortarSettings:
-    targets:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    targets: []
     targetMarker: {fileID: 100000, guid: 1a748d5f766af9345ae5d3d8018f8c26, type: 2}
     minSpeed: 40
     maxSpeed: 50
@@ -1878,7 +2259,7 @@ MonoBehaviour:
     maxSpeed: 50
     minTargetOffset: 10
     maxTargetOffset: 30
-    targetLead: 25
+    targetLead: 0
     arcHeight: 100
     speedIncrease: 2.5
   delayBetweenMortars: .150000006
@@ -1912,15 +2293,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Script: {fileID: 11500000, guid: afb9c26e8187a6b409c17e8fad2fb70b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Priority: 3
-  ignoreReversedGraphics: 1
-  blockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  indicatorImage: {fileID: 11400072}
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -2134,35 +2510,35 @@ RectTransform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100038}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 22400002}
-  m_RootOrder: 0
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 25, y: 25}
-  m_Pivot: {x: .5, y: .5}
---- !u!224 &22400002
-RectTransform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100044}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 22400000}
+  - {fileID: 22400002}
   m_Father: {fileID: 400002}
   m_RootOrder: 7
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: .100000001}
   m_SizeDelta: {x: 1, y: 1}
+  m_Pivot: {x: .5, y: .5}
+--- !u!224 &22400002
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100038}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 22400000}
+  m_RootOrder: 0
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: .5, y: .5}
 --- !u!1001 &100100000
 Prefab:

@@ -3,25 +3,32 @@ using System.Collections;
 
 public class SpiderTankHealState : SpiderTankState
 {
-	public float healRate;
+	public HealStateSettingsList healStateSettings;
+	private HealStateSettings[] _settings;
+
+	public void Update()
+	{
+		spiderTank.health.Heal( _settings[spiderTank.currentPhase].healRate * Time.deltaTime );
+
+		if ( spiderTank.atMaxHealth )
+		{
+			ShieldDestroyed( shield ); // make sure we go through a common exit path
+		}
+	}
 
 	public override void OnEnable()
 	{
 		base.OnEnable();
 
+		_settings = new HealStateSettings[] { healStateSettings.phaseOneSettings, 
+											  healStateSettings.phaseTwoSettings, 
+											  healStateSettings.phaseThreeSettings, 
+											  healStateSettings.phaseFourSettings };
+
 		shield.SetActive( true );
 		shield.gameObject.GetComponent<DeathSystem>().RegisterDeathCallback( ShieldDestroyed );
 
 		Physics.IgnoreCollision( collider, shield.collider, true );
-	}
-
-	public void Update()
-	{
-		spiderTank.health.Heal( healRate * Time.deltaTime );
-		if ( spiderTank.health.atMaxHealth )
-		{
-			ShieldDestroyed( shield ); // make sure we go through a common exit path
-		}
 	}
 
 	public override void OnDisable()
@@ -44,4 +51,22 @@ public class SpiderTankHealState : SpiderTankState
 		enabled = false;
 		spiderTank.basicState.enabled = true;
 	}
+}
+
+
+[System.Serializable]
+public class HealStateSettings
+{
+	public float healRate;
+}
+
+
+// this struct only exists to organize the settings in the inspector
+[System.Serializable]
+public class HealStateSettingsList
+{
+	public HealStateSettings phaseOneSettings;
+	public HealStateSettings phaseTwoSettings;
+	public HealStateSettings phaseThreeSettings;
+	public HealStateSettings phaseFourSettings;
 }

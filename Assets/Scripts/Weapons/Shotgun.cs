@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Shotgun : Gun 
+public class Shotgun : Gun
 {
 	public int shellsPerShot = 6;
 
