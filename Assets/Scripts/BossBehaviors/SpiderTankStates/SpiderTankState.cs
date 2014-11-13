@@ -15,21 +15,29 @@ public class SpiderTankState : MonoBehaviour
 
 	public virtual void OnEnable()
 	{
-		_stateSettings = new GlobalStateSettings[] { globalSettings.phaseOneSettings, 
-		                                             globalSettings.phaseTwoSettings, 
-		                                             globalSettings.phaseThreeSettings, 
+		_stateSettings = new GlobalStateSettings[] { globalSettings.phaseOneSettings,
+		                                             globalSettings.phaseTwoSettings,
+		                                             globalSettings.phaseThreeSettings,
 		                                             globalSettings.phaseFourSettings };
 
 		if ( _stateSettings[spiderTank.currentPhase].useSpawner )
 		{
-			spawner.ApplySettings( _stateSettings[spiderTank.currentPhase].spawnerSettings );
-			spawner.enabled = true;
+			if ( spawner.spawns.Count > 0 )
+			{
+				// if no spawners available, launch them from mortar
+				spawner.ApplySettings( _stateSettings[spiderTank.currentPhase].spawnerSettings );
+				spawner.enabled = true;
+			}
+			else
+			{
+				StartSpawnLaunchAtInterval( 2.0f );
+			}
 		}
 
 		if ( _stateSettings[spiderTank.currentPhase].useMortars )
 		{
-			StartMortarLaunchAtInterval( _stateSettings[spiderTank.currentPhase].mortarSettings.amountOfMortars, 
-			                       _stateSettings[spiderTank.currentPhase].mortarSettings.launchInterval );
+			StartMortarLaunchAtInterval( _stateSettings[spiderTank.currentPhase].mortarSettings.amountOfMortars,
+			                             _stateSettings[spiderTank.currentPhase].mortarSettings.launchInterval );
 		}
 	}
 

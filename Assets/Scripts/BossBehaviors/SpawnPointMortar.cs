@@ -4,7 +4,7 @@ using System.Collections;
 public class SpawnPointMortar : Mortar
 {
 	public GameObject spawnerObject;
-	public SpiderTank _spiderTank;
+	[HideInInspector] public SpiderTank _spiderTank;
 
 	public void Init( MortarSettings settings, Vector3 startPos, SpiderTank spiderTank )
 	{

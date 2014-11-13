@@ -19,12 +19,10 @@ public class LevelManager : MonoBehaviour
 	void Start()
 	{
 		_levelOver = false;
+		Screen.showCursor = true;
 
 		player.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerDied );
 		boss.GetComponent<DeathSystem>().RegisterDeathCallback( BossDied );
-
-		// hide the mouse
-		Screen.showCursor = false;
 
 		if ( skipMenu )
 		{
@@ -37,6 +35,10 @@ public class LevelManager : MonoBehaviour
 		player.SetActive( true );
 		mainMenu.SetActive( false );
 		cameraFollow.enabled = true;
+
+		// hide the mouse
+		Screen.showCursor = false;
+
 
 		Invoke( "AwakeSpiderTank", startDelay );
 	}

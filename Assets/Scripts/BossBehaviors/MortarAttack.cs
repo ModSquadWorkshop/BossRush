@@ -14,7 +14,7 @@ public class MortarAttack : MonoBehaviour
 
 	public void Launch( int numMortars )
 	{
-		if ( !( !allowMultipleLaunches && _firing ) )
+		if ( !_firing || allowMultipleLaunches )
 		{
 			StartCoroutine( LaunchMortar( numMortars ) );
 			_firing = true;
