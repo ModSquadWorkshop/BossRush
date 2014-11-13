@@ -30,6 +30,15 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
+	void Update()
+	{
+		// check for exit request
+		if ( Input.GetKeyDown( KeyCode.Escape ) )
+		{
+			Application.Quit();
+		}
+	}
+
 	public void StartGame()
 	{
 		player.SetActive( true );
