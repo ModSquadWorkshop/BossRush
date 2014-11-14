@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
 	public float maxTime = 8.0f;            // in seconds
 
 	public GameObject shrapnel;
+	public bool reflectShrapnel;
 
 	private Vector3 _startPoint;
 	private float _maxDistanceSquared;
@@ -42,9 +43,18 @@ public class Projectile : MonoBehaviour
 		// create shrapnel
 		if ( shrapnel != null )
 		{
-			shrapnel = Instantiate( shrapnel,
-			                        collision.contacts[0].point + collision.contacts[0].normal,
-			                        Quaternion.LookRotation( -Vector3.Reflect( -transform.forward, Vector3.up ) ) ) as GameObject;
+			if ( reflectShrapnel )
+			{
+				shrapnel = Instantiate( shrapnel,
+				                        collision.contacts[0].point + collision.contacts[0].normal,
+				                        Quaternion.LookRotation( -Vector3.Reflect( -transform.forward, Vector3.up ) ) ) as GameObject;
+			}
+			else
+			{
+				shrapnel = Instantiate( shrapnel,
+				                        collision.contacts[0].point + collision.contacts[0].normal,
+				                        Quaternion.LookRotation( -transform.forward ) ) as GameObject;
+			}
 		}
 	}
 }
