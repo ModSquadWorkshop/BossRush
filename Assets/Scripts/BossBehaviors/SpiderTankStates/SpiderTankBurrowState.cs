@@ -3,10 +3,10 @@ using System.Collections;
 
 public class SpiderTankBurrowState : SpiderTankState 
 {
-	public Transform[] relocationPoints;
-
 	public BurrowStateSettingsList burrowStateSettings;
 	private BurrowStateSettings[] _settings;
+
+	public Transform[] relocationPoints;
 
 	public override void OnEnable()
 	{
@@ -24,7 +24,13 @@ public class SpiderTankBurrowState : SpiderTankState
 	{
 		//.. do animation stuff
 
-		OnBurrowed(); // temp
+		Invoke( "OnBurrowed", _settings[spiderTank.currentPhase].burrowSequenceDuration );
+	}
+
+	private void OnBurrowed()
+	{
+		// start the unburrow sequence after x time underground
+		Invoke( "StartUnburrowSequence", _settings[spiderTank.currentPhase].timeUnderground );
 	}
 
 	private void StartUnburrowSequence()
@@ -34,13 +40,7 @@ public class SpiderTankBurrowState : SpiderTankState
 
 		//.. do animation stuff
 
-		OnUnburrowed(); // temp
-	}
-
-	private void OnBurrowed()
-	{
-		// start the unburrow sequence after x time underground
-		Invoke( "StartUnburrowSequence", _settings[spiderTank.currentPhase].timeUnderground );
+		Invoke( "OnUnburrowed", _settings[spiderTank.currentPhase].burrowSequenceDuration );
 	}
 
 	private void OnUnburrowed()
@@ -80,6 +80,7 @@ public class SpiderTankBurrowState : SpiderTankState
 public class BurrowStateSettings
 {
 	public float timeUnderground;
+	public float burrowSequenceDuration;
 }
 
 

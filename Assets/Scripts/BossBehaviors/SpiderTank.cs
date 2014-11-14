@@ -27,6 +27,7 @@ public class SpiderTank : MonoBehaviour
 	[HideInInspector] public SpiderTankRushState rushState;
 	[HideInInspector] public SpiderTankTurboState turboState;
 	[HideInInspector] public SpiderTankEnterState enterState;
+	[HideInInspector] public SpiderTankBurrowState burrowState;
 
 	[HideInInspector] public HealthSystem health;
 	[HideInInspector] public EnemySpawner spawner;
@@ -47,6 +48,7 @@ public class SpiderTank : MonoBehaviour
 		rushState = GetComponent<SpiderTankRushState>();
 		turboState = GetComponent<SpiderTankTurboState>();
 		enterState = GetComponent<SpiderTankEnterState>();
+		burrowState = GetComponent<SpiderTankBurrowState>();
 
 		// retrieve other componenets
 		health = GetComponent<HealthSystem>();
