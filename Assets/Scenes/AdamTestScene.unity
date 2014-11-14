@@ -74,6 +74,54 @@ NavMeshSettings:
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
   m_NavMesh: {fileID: 0}
+--- !u!1 &26259132
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100002, guid: 5ff318d6ce113cb4c9f92f8199a3fd98, type: 2}
+  m_PrefabInternal: {fileID: 1222073128}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 26259134}
+  - 20: {fileID: 1357048507}
+  - 92: {fileID: 1357048506}
+  - 124: {fileID: 1357048505}
+  - 81: {fileID: 1357048504}
+  - 114: {fileID: 26259133}
+  - 114: {fileID: 1357048509}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &26259133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400004, guid: 5ff318d6ce113cb4c9f92f8199a3fd98,
+    type: 2}
+  m_PrefabInternal: {fileID: 1222073128}
+  m_GameObject: {fileID: 26259132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c47d63d22934b84085cd775d64f0e89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftForce: .5
+  rightForce: .5
+  rumbleTime: .0199999996
+--- !u!4 &26259134
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400002, guid: 5ff318d6ce113cb4c9f92f8199a3fd98, type: 2}
+  m_PrefabInternal: {fileID: 1222073128}
+  m_GameObject: {fileID: 26259132}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1357048508}
+  m_RootOrder: 0
 --- !u!1 &34876687
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,6 +281,73 @@ Transform:
   m_Children: []
   m_Father: {fileID: 485395892}
   m_RootOrder: 0
+--- !u!1 &158957329
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100044, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 158957330}
+  - 223: {fileID: 158957332}
+  - 114: {fileID: 1640734053}
+  - 114: {fileID: 158957331}
+  m_Layer: 5
+  m_Name: Ring Indicator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &158957330
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 22400000, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 158957329}
+  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1640734052}
+  m_Father: {fileID: 1470767336}
+  m_RootOrder: 7
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: .100000001}
+  m_SizeDelta: {x: 1, y: 1}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &158957331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400074, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 158957329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb9c26e8187a6b409c17e8fad2fb70b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indicatorImage: {fileID: 1640734054}
+--- !u!223 &158957332
+Canvas:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 22300000, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 158957329}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!1 &178514939
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,6 +449,7 @@ MonoBehaviour:
   maxRange: 1000
   damageInterval: .100000001
   piercingsAmount: 100
+  duration: 0
 --- !u!1 &197170631
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,6 +581,36 @@ MonoBehaviour:
   maxRange: 1000
   damageInterval: .100000001
   piercingsAmount: 100
+  duration: 0
+--- !u!1 &219727168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100018, guid: c547150bab057b34982e046263a7cf68, type: 2}
+  m_PrefabInternal: {fileID: 1806001855}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 219727169}
+  - 33: {fileID: 435674163}
+  - 23: {fileID: 435674162}
+  m_Layer: 0
+  m_Name: Crosshairs Piece
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &219727169
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400014, guid: c547150bab057b34982e046263a7cf68, type: 2}
+  m_PrefabInternal: {fileID: 1806001855}
+  m_GameObject: {fileID: 219727168}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 5, y: 1, z: 1.5}
+  m_Children: []
+  m_Father: {fileID: 943654249}
+  m_RootOrder: 0
 --- !u!1 &220733874
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,7 +621,7 @@ GameObject:
   - 4: {fileID: 220733875}
   - 114: {fileID: 220733876}
   m_Layer: 0
-  m_Name: MortarLauncher
+  m_Name: Spawner Launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -487,7 +633,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400040, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
   m_PrefabInternal: {fileID: 757914076}
   m_GameObject: {fileID: 220733874}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -4.37113883e-08, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 8.8427, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -502,23 +648,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 220733874}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01635b7e2e8b2854db579c808d7b04fa, type: 3}
+  m_Script: {fileID: 11500000, guid: 506d668e90eea1343a6ac71f43ea516d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mortar: {fileID: 100000, guid: 7c6689ae54474ec40ac7f53d318f064f, type: 2}
+  mortar: {fileID: 100000, guid: 25f6bfc5938519c4fa99f6baaca87531, type: 2}
   mortarSettings:
-    target: {fileID: 0}
+    targets:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     targetMarker: {fileID: 100000, guid: 1a748d5f766af9345ae5d3d8018f8c26, type: 2}
     minSpeed: 40
     maxSpeed: 50
     minTargetOffset: 10
     maxTargetOffset: 30
+    targetLead: 0
     arcHeight: 100
     speedIncrease: 2.5
-    usePredefinedTargetPos: 0
-    predefinedTargetPos: []
   delayBetweenMortars: .150000006
   allowMultipleLaunches: 0
+  spiderTank: {fileID: 0}
 --- !u!1 &271124758
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,6 +824,7 @@ MonoBehaviour:
   maxRange: 1000
   damageInterval: .100000001
   piercingsAmount: 100
+  duration: 0
 --- !u!120 &394535279
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -728,12 +883,11 @@ GameObject:
   m_PrefabInternal: {fileID: 1806001855}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 435674160}
-  - 33: {fileID: 435674163}
-  - 23: {fileID: 435674162}
-  - 114: {fileID: 435674161}
-  m_Layer: 0
-  m_Name: HealthBar
+  - 224: {fileID: 435674164}
+  - 222: {fileID: 435674166}
+  - 114: {fileID: 435674165}
+  m_Layer: 5
+  m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -744,39 +898,40 @@ Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400012, guid: c547150bab057b34982e046263a7cf68, type: 2}
   m_PrefabInternal: {fileID: 1806001855}
-  m_GameObject: {fileID: 435674159}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_GameObject: {fileID: 1180259342}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 1.5, y: 1, z: 5}
   m_Children: []
-  m_Father: {fileID: 1363035870}
-  m_RootOrder: 3
+  m_Father: {fileID: 943654249}
+  m_RootOrder: 1
 --- !u!114 &435674161
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400008, guid: c547150bab057b34982e046263a7cf68,
     type: 2}
   m_PrefabInternal: {fileID: 1806001855}
-  m_GameObject: {fileID: 435674159}
+  m_GameObject: {fileID: 965953763}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 403fe1079fcb81744884e7db32b509dd, type: 3}
+  m_Script: {fileID: 11500000, guid: afb9c26e8187a6b409c17e8fad2fb70b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  indicatorImage: {fileID: 435674165}
 --- !u!23 &435674162
 Renderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 2300004, guid: c547150bab057b34982e046263a7cf68,
     type: 2}
   m_PrefabInternal: {fileID: 1806001855}
-  m_GameObject: {fileID: 435674159}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_GameObject: {fileID: 219727168}
+  m_Enabled: 0
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: e1c4a93d55147c94d8fcbcd889d2465e, type: 2}
+  - {fileID: 2100000, guid: af08232d8cfaec84ab9f8b588d713020, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -790,8 +945,56 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 3300004, guid: c547150bab057b34982e046263a7cf68,
     type: 2}
   m_PrefabInternal: {fileID: 1806001855}
+  m_GameObject: {fileID: 219727168}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!224 &435674164
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 22400000, guid: c547150bab057b34982e046263a7cf68,
+    type: 2}
+  m_PrefabInternal: {fileID: 1806001855}
   m_GameObject: {fileID: 435674159}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 965953764}
+  m_RootOrder: 0
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 5, y: 5}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &435674165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400010, guid: c547150bab057b34982e046263a7cf68,
+    type: 2}
+  m_PrefabInternal: {fileID: 1806001855}
+  m_GameObject: {fileID: 435674159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: .586206675, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: dba98a4fc76f6e74c9f9104960cd8a26, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 2
+--- !u!222 &435674166
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 22200000, guid: c547150bab057b34982e046263a7cf68,
+    type: 2}
+  m_PrefabInternal: {fileID: 1806001855}
+  m_GameObject: {fileID: 435674159}
+  m_HideIfInvisible: 0
 --- !u!1 &485395885
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,8 +1055,6 @@ MonoBehaviour:
   reloadSpeed: 0
   sprayAngle: 5
   circleSpray: 1
-  _magazines: 0
-  _magazineAmmo: 0
 --- !u!82 &485395888
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1062,6 +1263,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1942585077}
   m_RootOrder: 1
+--- !u!1 &705624717
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100042, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 705624718}
+  - 114: {fileID: 705624719}
+  m_Layer: 0
+  m_Name: Mortar Launcher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &705624718
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400042, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 705624717}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 8.8427, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1470767336}
+  m_RootOrder: 5
+--- !u!114 &705624719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400070, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 705624717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01635b7e2e8b2854db579c808d7b04fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mortar: {fileID: 100000, guid: 7c6689ae54474ec40ac7f53d318f064f, type: 2}
+  mortarSettings:
+    targets: []
+    targetMarker: {fileID: 100000, guid: 1a748d5f766af9345ae5d3d8018f8c26, type: 2}
+    minSpeed: 40
+    maxSpeed: 50
+    minTargetOffset: 10
+    maxTargetOffset: 30
+    targetLead: 0
+    arcHeight: 100
+    speedIncrease: 2.5
+  delayBetweenMortars: .150000006
+  allowMultipleLaunches: 0
 --- !u!1 &708587581
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,7 +1340,7 @@ Transform:
   m_PrefabInternal: {fileID: 1806001855}
   m_GameObject: {fileID: 708587581}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1942585077}
@@ -1294,8 +1548,6 @@ MonoBehaviour:
   reloadSpeed: 0
   sprayAngle: 5
   circleSpray: 1
-  _magazines: 0
-  _magazineAmmo: 0
 --- !u!82 &783805351
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1456,6 +1708,7 @@ MonoBehaviour:
   maxRange: 1000
   damageInterval: .100000001
   piercingsAmount: 100
+  duration: 0
 --- !u!1 &922119196
 GameObject:
   m_ObjectHideFlags: 0
@@ -1528,8 +1781,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 943654249}
-  - 33: {fileID: 943654251}
-  - 23: {fileID: 943654250}
+  - 114: {fileID: 943654252}
   m_Layer: 0
   m_Name: Look Target
   m_TagString: Untagged
@@ -1546,7 +1798,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: .5, y: .5, z: .5}
-  m_Children: []
+  m_Children:
+  - {fileID: 219727169}
+  - {fileID: 435674160}
   m_Father: {fileID: 1363035870}
   m_RootOrder: 0
 --- !u!23 &943654250
@@ -1555,14 +1809,14 @@ Renderer:
   m_PrefabParentObject: {fileID: 2300000, guid: c547150bab057b34982e046263a7cf68,
     type: 2}
   m_PrefabInternal: {fileID: 1806001855}
-  m_GameObject: {fileID: 943654248}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_GameObject: {fileID: 1180259342}
+  m_Enabled: 0
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: c906026aefe20a941b8686e41242dafb, type: 2}
+  - {fileID: 2100000, guid: af08232d8cfaec84ab9f8b588d713020, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1576,8 +1830,23 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 3300000, guid: c547150bab057b34982e046263a7cf68,
     type: 2}
   m_PrefabInternal: {fileID: 1806001855}
-  m_GameObject: {fileID: 943654248}
+  m_GameObject: {fileID: 1180259342}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &943654252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400014, guid: c547150bab057b34982e046263a7cf68,
+    type: 2}
+  m_PrefabInternal: {fileID: 1806001855}
+  m_GameObject: {fileID: 943654248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0a7fee31c3a2d24784e6336f1a6dd9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderers:
+  - {fileID: 435674162}
+  - {fileID: 943654250}
 --- !u!1 &954872692
 GameObject:
   m_ObjectHideFlags: 0
@@ -1649,8 +1918,6 @@ MonoBehaviour:
   reloadSpeed: 0
   sprayAngle: 0
   circleSpray: 0
-  _magazines: 0
-  _magazineAmmo: 0
 --- !u!82 &954872696
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1730,6 +1997,7 @@ MonoBehaviour:
   maxRange: 1000
   damageInterval: .100000001
   piercingsAmount: 100
+  duration: 0
 --- !u!120 &954872698
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -1764,6 +2032,78 @@ LineRenderer:
       serializedVersion: 2
       rgba: 4286085375
   m_UseWorldSpace: 1
+--- !u!1 &965953763
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100014, guid: c547150bab057b34982e046263a7cf68, type: 2}
+  m_PrefabInternal: {fileID: 1806001855}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 965953764}
+  - 223: {fileID: 965953766}
+  - 114: {fileID: 965953765}
+  - 114: {fileID: 435674161}
+  m_Layer: 5
+  m_Name: Ring Indicator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &965953764
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 22400002, guid: c547150bab057b34982e046263a7cf68,
+    type: 2}
+  m_PrefabInternal: {fileID: 1806001855}
+  m_GameObject: {fileID: 965953763}
+  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 435674164}
+  m_Father: {fileID: 1363035870}
+  m_RootOrder: 3
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: .100000001}
+  m_SizeDelta: {x: 1, y: 1}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &965953765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400012, guid: c547150bab057b34982e046263a7cf68,
+    type: 2}
+  m_PrefabInternal: {fileID: 1806001855}
+  m_GameObject: {fileID: 965953763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Priority: 3
+  ignoreReversedGraphics: 1
+  blockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!223 &965953766
+Canvas:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 22300000, guid: c547150bab057b34982e046263a7cf68,
+    type: 2}
+  m_PrefabInternal: {fileID: 1806001855}
+  m_GameObject: {fileID: 965953763}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!1 &1029997812
 GameObject:
   m_ObjectHideFlags: 0
@@ -1824,9 +2164,10 @@ GameObject:
   - 4: {fileID: 1081013407}
   - 33: {fileID: 1081013406}
   - 23: {fileID: 1081013404}
-  m_Layer: 10
-  m_Name: Model
-  m_TagString: Enemy
+  - 95: {fileID: 1081013405}
+  m_Layer: 0
+  m_Name: SpiderTankMesh
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1844,7 +2185,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 7ad3fe6d80ba579428ba36b108454344, type: 2}
+  - {fileID: 2100000, guid: 0ed76d6aa75eec04e94e5c1251325b2e, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1852,6 +2193,22 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!95 &1081013405
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 9500000, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 1081013403}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 5498dcc6d3c392f4ab176e7fd057a75d, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!33 &1081013406
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1866,8 +2223,8 @@ Transform:
   m_PrefabParentObject: {fileID: 400014, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
   m_PrefabInternal: {fileID: 757914076}
   m_GameObject: {fileID: 1081013403}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: -4.37113883e-08}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.97849989, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1470767336}
@@ -1904,16 +2261,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mortar: {fileID: 100000, guid: 7c6689ae54474ec40ac7f53d318f064f, type: 2}
   mortarSettings:
-    target: {fileID: 0}
+    targets: []
     targetMarker: {fileID: 0}
     minSpeed: 0
     maxSpeed: 0
     minTargetOffset: 0
     maxTargetOffset: 0
+    targetLead: 0
     arcHeight: 0
     speedIncrease: 0
-    usePredefinedTargetPos: 0
-    predefinedTargetPos: []
   delayBetweenMortars: .150000006
   allowMultipleLaunches: 0
 --- !u!23 &1103973110
@@ -1988,7 +2344,7 @@ Transform:
   - {fileID: 178514940}
   - {fileID: 954872693}
   m_Father: {fileID: 1470767336}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!1 &1136832438
 GameObject:
   m_ObjectHideFlags: 0
@@ -2058,6 +2414,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 296618230}
   m_RootOrder: 1
+--- !u!1 &1180259342
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100016, guid: c547150bab057b34982e046263a7cf68, type: 2}
+  m_PrefabInternal: {fileID: 1806001855}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 435674160}
+  - 33: {fileID: 943654251}
+  - 23: {fileID: 943654250}
+  m_Layer: 0
+  m_Name: Crosshairs Piece
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1204269220
 GameObject:
   m_ObjectHideFlags: 0
@@ -2140,7 +2513,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5ff318d6ce113cb4c9f92f8199a3fd98, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5ff318d6ce113cb4c9f92f8199a3fd98, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2164,7 +2537,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5ff318d6ce113cb4c9f92f8199a3fd98, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 5ff318d6ce113cb4c9f92f8199a3fd98, type: 2}
       propertyPath: followTarget
@@ -2173,6 +2546,10 @@ Prefab:
     - target: {fileID: 11400000, guid: 5ff318d6ce113cb4c9f92f8199a3fd98, type: 2}
       propertyPath: offset
       value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5ff318d6ce113cb4c9f92f8199a3fd98, type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ff318d6ce113cb4c9f92f8199a3fd98, type: 2}
@@ -2187,15 +2564,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1357048508}
-  - 20: {fileID: 1357048507}
-  - 92: {fileID: 1357048506}
-  - 124: {fileID: 1357048505}
-  - 81: {fileID: 1357048504}
   - 114: {fileID: 1357048503}
-  - 114: {fileID: 1357048509}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2215,15 +2587,13 @@ MonoBehaviour:
   followTarget: {fileID: 1363035870}
   offset: 75
   followSpeed: 2
-  shakeForce: 0
-  shakePerDamage: 0
 --- !u!81 &1357048504
 AudioListener:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 8100000, guid: 5ff318d6ce113cb4c9f92f8199a3fd98,
     type: 2}
   m_PrefabInternal: {fileID: 1222073128}
-  m_GameObject: {fileID: 1357048502}
+  m_GameObject: {fileID: 26259132}
   m_Enabled: 1
 --- !u!124 &1357048505
 Behaviour:
@@ -2231,7 +2601,7 @@ Behaviour:
   m_PrefabParentObject: {fileID: 12400000, guid: 5ff318d6ce113cb4c9f92f8199a3fd98,
     type: 2}
   m_PrefabInternal: {fileID: 1222073128}
-  m_GameObject: {fileID: 1357048502}
+  m_GameObject: {fileID: 26259132}
   m_Enabled: 1
 --- !u!92 &1357048506
 Behaviour:
@@ -2239,7 +2609,7 @@ Behaviour:
   m_PrefabParentObject: {fileID: 9200000, guid: 5ff318d6ce113cb4c9f92f8199a3fd98,
     type: 2}
   m_PrefabInternal: {fileID: 1222073128}
-  m_GameObject: {fileID: 1357048502}
+  m_GameObject: {fileID: 26259132}
   m_Enabled: 1
 --- !u!20 &1357048507
 Camera:
@@ -2247,7 +2617,7 @@ Camera:
   m_PrefabParentObject: {fileID: 2000000, guid: 5ff318d6ce113cb4c9f92f8199a3fd98,
     type: 2}
   m_PrefabInternal: {fileID: 1222073128}
-  m_GameObject: {fileID: 1357048502}
+  m_GameObject: {fileID: 26259132}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
@@ -2281,9 +2651,10 @@ Transform:
   m_PrefabInternal: {fileID: 1222073128}
   m_GameObject: {fileID: 1357048502}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 100, z: 0}
+  m_LocalPosition: {x: 0, y: 150, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 26259134}
   m_Father: {fileID: 0}
   m_RootOrder: 3
 --- !u!114 &1357048509
@@ -2292,16 +2663,14 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 11400002, guid: 5ff318d6ce113cb4c9f92f8199a3fd98,
     type: 2}
   m_PrefabInternal: {fileID: 1222073128}
-  m_GameObject: {fileID: 1357048502}
+  m_GameObject: {fileID: 26259132}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c47d63d22934b84085cd775d64f0e89, type: 3}
+  m_Script: {fileID: 11500000, guid: 287b072972d304c4daf1b25d1ffc8a36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rumble: 1
-  leftForce: 1
-  rightForce: 1
-  rumbleTime: .100000001
+  shakeForce: .25
+  shakeTime: .0250000004
 --- !u!1 &1363035864
 GameObject:
   m_ObjectHideFlags: 0
@@ -2312,10 +2681,11 @@ GameObject:
   - 4: {fileID: 1363035870}
   - 65: {fileID: 1363035869}
   - 54: {fileID: 1363035868}
-  - 114: {fileID: 1363035867}
   - 114: {fileID: 1363035866}
-  - 114: {fileID: 1363035865}
   - 114: {fileID: 1363035871}
+  - 114: {fileID: 1363035872}
+  - 114: {fileID: 1363035867}
+  - 114: {fileID: 1363035865}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -2339,6 +2709,7 @@ MonoBehaviour:
   - {fileID: 100000, guid: 4be7c3b028769d9418dd2959e6095ba9, type: 2}
   - {fileID: 100000, guid: d63f5b9b77d9d514ab0359efa4ae504f, type: 2}
   - {fileID: 100000, guid: 8d9767fadad9723499315d03b95ffd8c, type: 2}
+  perk: {fileID: 0}
   defaultWeaponID: 0
   switchWeaponKeybind: 9
   weaponAnchor: {fileID: 580840407}
@@ -2378,6 +2749,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookTarget: {fileID: 943654249}
   playerModel: {fileID: 1942585077}
+  crosshairs: {fileID: 943654252}
   baseSpeed: 50
   speedMultiplier: 1
   lookSpeed: 1
@@ -2427,7 +2799,7 @@ Transform:
   - {fileID: 943654249}
   - {fileID: 1942585077}
   - {fileID: 922119197}
-  - {fileID: 435674160}
+  - {fileID: 965953764}
   m_Father: {fileID: 0}
   m_RootOrder: 5
 --- !u!114 &1363035871
@@ -2443,6 +2815,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allowMultipleDeaths: 0
+--- !u!114 &1363035872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400016, guid: c547150bab057b34982e046263a7cf68,
+    type: 2}
+  m_PrefabInternal: {fileID: 1806001855}
+  m_GameObject: {fileID: 1363035864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d97385ee8cae90a47be0bf17c5e3d888, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingPerks: []
 --- !u!1 &1451090626
 GameObject:
   m_ObjectHideFlags: 0
@@ -2508,7 +2893,7 @@ Transform:
   m_GameObject: {fileID: 1451090626}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -.5, z: 0}
-  m_LocalScale: {x: 100, y: 1, z: 100}
+  m_LocalScale: {x: 302.089264, y: 3.02089143, z: 302.089142}
   m_Children: []
   m_Father: {fileID: 296618230}
   m_RootOrder: 0
@@ -2548,7 +2933,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1470767333
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2600,9 +2985,10 @@ Transform:
   - {fileID: 1646969654}
   - {fileID: 783805348}
   - {fileID: 485395892}
-  - {fileID: 1640734052}
   - {fileID: 1112043504}
+  - {fileID: 705624718}
   - {fileID: 220733875}
+  - {fileID: 158957330}
   m_Father: {fileID: 0}
   m_RootOrder: 6
 --- !u!114 &1470767337
@@ -2651,7 +3037,8 @@ MonoBehaviour:
   otherGuns:
   - {fileID: 783805350}
   - {fileID: 485395887}
-  mortarLauncher: {fileID: 220733876}
+  mortarLauncher: {fileID: 705624719}
+  spawnerLauncher: {fileID: 220733876}
   shield: {fileID: 0}
   defaultCanonLookSpeed: 20
   healthTriggerInterval: 1500
@@ -2775,70 +3162,74 @@ MonoBehaviour:
   spiderTank: {fileID: 0}
   globalSettings:
     phaseOneSettings:
-      useSpawner: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
+      useSpawner: 1
       useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      spawnerSettings:
+        baseAmountPerWave: 10
+        amountPerSpawner: 20
+        waveInterval: 5
+        spawnOnStart: 1
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
     phaseTwoSettings:
-      useSpawner: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
+      useSpawner: 1
       useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      spawnerSettings:
+        baseAmountPerWave: 10
+        amountPerSpawner: 20
+        waveInterval: 5
+        spawnOnStart: 1
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
     phaseThreeSettings:
-      useSpawner: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
+      useSpawner: 1
       useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      spawnerSettings:
+        baseAmountPerWave: 10
+        amountPerSpawner: 20
+        waveInterval: 5
+        spawnOnStart: 1
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
     phaseFourSettings:
-      useSpawner: 0
+      useSpawner: 1
+      useMortars: 1
       spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+        baseAmountPerWave: 10
+        amountPerSpawner: 20
+        waveInterval: 5
+        spawnOnStart: 1
+      mortarSettings:
+        amountOfMortars: 10
+        launchInterval: .150000006
   turboStateSettings:
     phaseOneSettings:
-      turretSpeed: 0
-      canonDelay: 0
-      amountPerWave: 0
-      duration: 0
-      laserChance: 0
+      turretSpeed: 2
+      canonDelay: 1
+      amountPerWave: 20
+      duration: 5
+      laserChance: .5
     phaseTwoSettings:
-      turretSpeed: 0
-      canonDelay: 0
-      amountPerWave: 0
-      duration: 0
-      laserChance: 0
+      turretSpeed: 2
+      canonDelay: 1
+      amountPerWave: 20
+      duration: 5
+      laserChance: .5
     phaseThreeSettings:
-      turretSpeed: 0
-      canonDelay: 0
-      amountPerWave: 0
-      duration: 0
-      laserChance: 0
+      turretSpeed: 2
+      canonDelay: 1
+      amountPerWave: 20
+      duration: 5
+      laserChance: .5
     phaseFourSettings:
-      turretSpeed: 0
-      canonDelay: 0
-      amountPerWave: 0
-      duration: 0
-      laserChance: 0
+      turretSpeed: 2
+      canonDelay: 1
+      amountPerWave: 20
+      duration: 5
+      laserChance: .5
   movementScript: {fileID: 0}
 --- !u!114 &1470767343
 MonoBehaviour:
@@ -2856,73 +3247,77 @@ MonoBehaviour:
   globalSettings:
     phaseOneSettings:
       useSpawner: 1
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
     phaseFourSettings:
-      useSpawner: 0
+      useSpawner: 1
+      useMortars: 1
       spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
+        baseAmountPerWave: 5
+        amountPerSpawner: 5
+        waveInterval: 5
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 10
+        launchInterval: .150000006
   basicStateSettings:
     phaseOneSettings:
-      turretSpeed: 0
-      canonDelay: 0
-      amountPerWave: 0
-      minRushInterval: 0
-      maxRushInterval: 0
-      turboChance: 0
+      turretSpeed: 2
+      canonDelay: 1
+      amountPerWave: 20
+      minRushInterval: 1
+      maxRushInterval: 3
+      turboChance: .5
     phaseTwoSettings:
-      turretSpeed: 0
-      canonDelay: 0
-      amountPerWave: 0
-      minRushInterval: 0
-      maxRushInterval: 0
-      turboChance: 0
+      turretSpeed: 2
+      canonDelay: 1
+      amountPerWave: 20
+      minRushInterval: 1
+      maxRushInterval: 3
+      turboChance: .5
     phaseThreeSettings:
-      turretSpeed: 0
-      canonDelay: 0
-      amountPerWave: 0
-      minRushInterval: 0
-      maxRushInterval: 0
-      turboChance: 0
+      turretSpeed: 2
+      canonDelay: 1
+      amountPerWave: 20
+      minRushInterval: 1
+      maxRushInterval: 3
+      turboChance: .5
     phaseFourSettings:
-      turretSpeed: 0
-      canonDelay: 0
-      amountPerWave: 0
-      minRushInterval: 0
-      maxRushInterval: 0
-      turboChance: 0
+      turretSpeed: 2
+      canonDelay: 1
+      amountPerWave: 20
+      minRushInterval: 1
+      maxRushInterval: 3
+      turboChance: .5
   movementScript: {fileID: 1470767340}
 --- !u!114 &1470767344
 MonoBehaviour:
@@ -2975,57 +3370,61 @@ MonoBehaviour:
   globalSettings:
     phaseOneSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
     phaseFourSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
   laserSpinSettings:
     phaseOneSettings:
-      rotation: 0
-      duration: 0
+      rotation: 1
+      duration: 5
     phaseTwoSettings:
-      rotation: 0
-      duration: 0
+      rotation: 1
+      duration: 5
     phaseThreeSettings:
-      rotation: 0
-      duration: 0
+      rotation: 1
+      duration: 5
     phaseFourSettings:
-      rotation: 0
-      duration: 0
+      rotation: 1
+      duration: 5
 --- !u!114 &1470767347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3042,58 +3441,62 @@ MonoBehaviour:
   globalSettings:
     phaseOneSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
+      useMortars: 1
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 5
+        launchInterval: .5
     phaseFourSettings:
       useSpawner: 0
+      useMortars: 1
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 10
+        launchInterval: .150000006
   returnState: {fileID: 0}
   rushStateSettings:
     phaseOneSettings:
-      rushTime: 0
-      attackDamage: 0
+      rushTime: .5
+      attackDamage: 100
     phaseTwoSettings:
-      rushTime: 0
-      attackDamage: 0
+      rushTime: .5
+      attackDamage: 100
     phaseThreeSettings:
-      rushTime: 0
-      attackDamage: 0
+      rushTime: .5
+      attackDamage: 100
     phaseFourSettings:
-      rushTime: 0
-      attackDamage: 0
+      rushTime: .5
+      attackDamage: 100
 --- !u!114 &1470767348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3109,44 +3512,48 @@ MonoBehaviour:
   globalSettings:
     phaseOneSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
     phaseFourSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
   mortarStateSettings:
     phaseOneSettings:
       amountOfMortars: 0
@@ -3188,17 +3595,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyTypes:
   - {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
+  - {fileID: 100000, guid: 8050589df98ae4943952875bf5e4c5ee, type: 2}
   spawns:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  maxSpawnPoints: 5
   defaultSettings:
     baseAmountPerWave: 2
     amountPerSpawner: 1
     waveInterval: 2
     spawnOnStart: 0
-  maxSpawned: 25
+  maxSpawned: 20
 --- !u!114 &1470767351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3215,53 +3624,50 @@ MonoBehaviour:
   globalSettings:
     phaseOneSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
     phaseFourSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
   enterStateSettings:
-    phaseOneSettings:
-      destination: {fileID: 0}
-    phaseTwoSettings:
-      destination: {fileID: 0}
-    phaseThreeSettings:
-      destination: {fileID: 0}
-    phaseFourSettings:
-      destination: {fileID: 0}
+    destination: {fileID: 0}
 --- !u!114 &1470767352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3277,54 +3683,58 @@ MonoBehaviour:
   spiderTank: {fileID: 0}
   globalSettings:
     phaseOneSettings:
-      useSpawner: 0
+      useSpawner: 1
+      useMortars: 1
       spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+        baseAmountPerWave: 10
+        amountPerSpawner: 20
+        waveInterval: 5
+        spawnOnStart: 1
+      mortarSettings:
+        amountOfMortars: 20
+        launchInterval: 2
     phaseTwoSettings:
-      useSpawner: 0
+      useSpawner: 1
+      useMortars: 1
       spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+        baseAmountPerWave: 10
+        amountPerSpawner: 20
+        waveInterval: 5
+        spawnOnStart: 1
+      mortarSettings:
+        amountOfMortars: 20
+        launchInterval: 2
     phaseThreeSettings:
-      useSpawner: 0
+      useSpawner: 1
+      useMortars: 1
       spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+        baseAmountPerWave: 10
+        amountPerSpawner: 20
+        waveInterval: 5
+        spawnOnStart: 1
+      mortarSettings:
+        amountOfMortars: 20
+        launchInterval: 2
     phaseFourSettings:
-      useSpawner: 0
+      useSpawner: 1
+      useMortars: 1
       spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+        baseAmountPerWave: 10
+        amountPerSpawner: 20
+        waveInterval: 5
+        spawnOnStart: 1
+      mortarSettings:
+        amountOfMortars: 20
+        launchInterval: 2
   healStateSettings:
     phaseOneSettings:
-      healRate: 0
+      healRate: 300
     phaseTwoSettings:
-      healRate: 0
+      healRate: 300
     phaseThreeSettings:
-      healRate: 0
+      healRate: 300
     phaseFourSettings:
-      healRate: 0
+      healRate: 300
 --- !u!114 &1470767353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3341,57 +3751,61 @@ MonoBehaviour:
   globalSettings:
     phaseOneSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
     phaseFourSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
   fleeStateSettings:
     phaseOneSettings:
-      mainCanonCooldown: 0
-      minionsPerWave: 0
+      mainCanonCooldown: 3
+      minionsPerWave: 50
     phaseTwoSettings:
-      mainCanonCooldown: 0
-      minionsPerWave: 0
+      mainCanonCooldown: 3
+      minionsPerWave: 50
     phaseThreeSettings:
-      mainCanonCooldown: 0
-      minionsPerWave: 0
+      mainCanonCooldown: 3
+      minionsPerWave: 50
     phaseFourSettings:
-      mainCanonCooldown: 0
-      minionsPerWave: 0
+      mainCanonCooldown: 3
+      minionsPerWave: 50
   returnState: {fileID: 0}
 --- !u!114 &1470767354
 MonoBehaviour:
@@ -3409,53 +3823,51 @@ MonoBehaviour:
   globalSettings:
     phaseOneSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
     phaseFourSettings:
       useSpawner: 0
+      useMortars: 0
       spawnerSettings:
         baseAmountPerWave: 0
         amountPerSpawner: 0
         waveInterval: 0
         spawnOnStart: 0
-      useMortars: 0
-      numMortars: 0
-      launchInterval: 0
-  initialStateSettings:
-    phaseOneSettings:
-      mininionCount: 0
-    phaseTwoSettings:
-      mininionCount: 0
-    phaseThreeSettings:
-      mininionCount: 0
-    phaseFourSettings:
-      mininionCount: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+  explodeMinion: {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
+  numMinions: 20
+  maxWaitTime: 15
 --- !u!114 &1470767355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3604,7 +4016,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1363035864}
   boss: {fileID: 1470767332}
+  mainMenu: {fileID: 0}
+  cameraFollow: {fileID: 0}
+  startDelay: 0
   levelOverDelay: 2
+  skipMenu: 0
 --- !u!4 &1591145411
 Transform:
   m_ObjectHideFlags: 0
@@ -3624,70 +4040,82 @@ GameObject:
   m_PrefabInternal: {fileID: 757914076}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 1640734052}
-  - 33: {fileID: 1640734055}
-  - 23: {fileID: 1640734054}
-  - 114: {fileID: 1640734053}
-  m_Layer: 0
-  m_Name: HealthBar
+  - 224: {fileID: 1640734052}
+  - 222: {fileID: 1640734055}
+  - 114: {fileID: 1640734054}
+  m_Layer: 5
+  m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1640734052
-Transform:
+--- !u!224 &1640734052
+RectTransform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400038, guid: e69da1848d5a6aa45ad03e2051a43667, type: 2}
+  m_PrefabParentObject: {fileID: 22400002, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
   m_PrefabInternal: {fileID: 757914076}
   m_GameObject: {fileID: 1640734051}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1470767336}
-  m_RootOrder: 4
+  m_Father: {fileID: 158957330}
+  m_RootOrder: 0
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 20, y: 20}
+  m_Pivot: {x: .5, y: .5}
 --- !u!114 &1640734053
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400066, guid: e69da1848d5a6aa45ad03e2051a43667,
     type: 2}
   m_PrefabInternal: {fileID: 757914076}
+  m_GameObject: {fileID: 158957329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Priority: 3
+  ignoreReversedGraphics: 1
+  blockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1640734054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400072, guid: e69da1848d5a6aa45ad03e2051a43667,
+    type: 2}
+  m_PrefabInternal: {fileID: 757914076}
   m_GameObject: {fileID: 1640734051}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 403fe1079fcb81744884e7db32b509dd, type: 3}
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!23 &1640734054
-Renderer:
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 2f6e32b3a6c9c8b46b548e66058edca0, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 2
+--- !u!222 &1640734055
+CanvasRenderer:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 2300010, guid: e69da1848d5a6aa45ad03e2051a43667,
+  m_PrefabParentObject: {fileID: 22200000, guid: e69da1848d5a6aa45ad03e2051a43667,
     type: 2}
   m_PrefabInternal: {fileID: 757914076}
   m_GameObject: {fileID: 1640734051}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: e1c4a93d55147c94d8fcbcd889d2465e, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
---- !u!33 &1640734055
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 3300008, guid: e69da1848d5a6aa45ad03e2051a43667,
-    type: 2}
-  m_PrefabInternal: {fileID: 757914076}
-  m_GameObject: {fileID: 1640734051}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  m_HideIfInvisible: 0
 --- !u!1 &1646969653
 GameObject:
   m_ObjectHideFlags: 0
@@ -4024,7 +4452,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 296b46fea8f079b4f8f8aef27ebe8e6e, type: 2}
+  - {fileID: 2100000, guid: 7ad3fe6d80ba579428ba36b108454344, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
