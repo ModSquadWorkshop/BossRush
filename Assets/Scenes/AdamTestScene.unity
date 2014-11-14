@@ -2755,7 +2755,7 @@ MonoBehaviour:
   lookSpeed: 1
   dashDistance: 35
   dashSpeed: 300
-  dashDelay: .5
+  dashDelay: .100000001
   stopWeaponInDash: 0
 --- !u!54 &1363035868
 Rigidbody:
@@ -4370,6 +4370,10 @@ Prefab:
       propertyPath: weapons.Array.data[2]
       value: 
       objectReference: {fileID: 100000, guid: 8d9767fadad9723499315d03b95ffd8c, type: 2}
+    - target: {fileID: 11400002, guid: c547150bab057b34982e046263a7cf68, type: 2}
+      propertyPath: dashDelay
+      value: .100000001
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c547150bab057b34982e046263a7cf68, type: 2}
   m_RootGameObject: {fileID: 1363035864}
