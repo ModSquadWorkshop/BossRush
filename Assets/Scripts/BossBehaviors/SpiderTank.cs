@@ -34,6 +34,7 @@ public class SpiderTank : MonoBehaviour
 	[HideInInspector] public NavMeshAgent agent;
 	[HideInInspector] public BoxCollider boxCollider;
 	[HideInInspector] public Canvas ringUICanvas;
+	[HideInInspector] public MeshRenderer[] meshes;
 
 	private HealthTrigger _healthTriggerCallback = delegate( HealthSystem health ) { };
 	private float _healthMaxCurr;
@@ -58,6 +59,7 @@ public class SpiderTank : MonoBehaviour
 		agent = GetComponent<NavMeshAgent>();
 		boxCollider = GetComponent<BoxCollider>();
 		ringUICanvas = GetComponentInChildren<Canvas>();
+		meshes = GetComponentsInChildren<MeshRenderer>();
 
 		// register for player death callback
 		player.gameObject.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerDeathCallback );

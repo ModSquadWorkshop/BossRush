@@ -62,13 +62,9 @@ public class SpiderTankBurrowState : SpiderTankState
 
 	private void StartRendering()
 	{
-		MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
-		if ( meshes != null )
+		for ( int i = 0; i < spiderTank.meshes.Length; i++ )
 		{
-			for ( int i = 0; i < meshes.Length; i++ )
-			{
-				meshes[i].enabled = true;
-			}
+			spiderTank.meshes[i].enabled = true;
 		}
 
 		spiderTank.boxCollider.enabled = true;
@@ -77,13 +73,9 @@ public class SpiderTankBurrowState : SpiderTankState
 
 	private void StopRendering()
 	{
-		MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
-		if ( meshes != null )
+		for ( int i = 0; i < spiderTank.meshes.Length; i++ )
 		{
-			for ( int i = 0; i < meshes.Length; i++ )
-			{
-				meshes[i].enabled = false;
-			}
+			spiderTank.meshes[i].enabled = false;
 		}
 
 		spiderTank.boxCollider.enabled = false;
