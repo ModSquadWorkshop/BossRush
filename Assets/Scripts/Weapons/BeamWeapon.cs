@@ -69,7 +69,7 @@ public class BeamWeapon : Weapon
 			beam.SetPosition( 0, _ray.origin );
 
 			// by default, the end vertex of the ray is the max forward distance from its origin
-			Vector3 endVertex = _ray.origin + ( _ray.direction * maxRange );
+			Vector3 endVertex = _ray.origin + (_ray.direction * maxRange);
 
 			// cast a ray and collect data on all of the objects it hits
 			RaycastHit[] hits;
@@ -121,6 +121,10 @@ public class BeamWeapon : Weapon
 				_done = true;
 			}
 		}
+		else
+		{
+			StopSound();
+		}
 	}
 
 	public bool IsDone()
@@ -142,6 +146,7 @@ public class BeamWeapon : Weapon
 			_damageDealt = false;
 			beam.enabled = true;
 		}
+		PlayLoopingSound();
 		_beamDuration.Update();
 		_beamTimer.Reset( true );
 	}

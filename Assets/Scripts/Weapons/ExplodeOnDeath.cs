@@ -11,6 +11,10 @@ public class ExplodeOnDeath : MonoBehaviour
 
 	void Awake()
 	{
+		if ( GetComponent<AudioSource>().enabled )
+		{
+			audio.Play();
+		}
 		GetComponent<DeathSystem>().RegisterDeathCallback( Explode );
 	}
 

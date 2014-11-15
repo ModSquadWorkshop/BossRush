@@ -69,16 +69,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mortar: {fileID: 100000, guid: 7c6689ae54474ec40ac7f53d318f064f, type: 2}
-  target: {fileID: 100004, guid: c547150bab057b34982e046263a7cf68, type: 2}
-  targetMarker: {fileID: 100000, guid: 1a748d5f766af9345ae5d3d8018f8c26, type: 2}
-  mortarSpeedMin: 20
-  mortarSpeedMax: 40
-  mortarMinDistance: 0
-  mortarMaxDistance: 20
+  mortarSettings:
+    targets: []
+    targetMarker: {fileID: 0}
+    minSpeed: 0
+    maxSpeed: 0
+    minTargetOffset: 0
+    maxTargetOffset: 0
+    targetLead: 0
+    arcHeight: 0
+    speedIncrease: 0
   delayBetweenMortars: .150000006
   allowMultipleLaunches: 0
-  usePredefinedTargetPos: 0
-  predefinedTargetPos: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

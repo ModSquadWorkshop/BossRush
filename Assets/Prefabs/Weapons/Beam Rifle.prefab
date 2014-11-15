@@ -15,6 +15,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 120: {fileID: 12000000}
+  - 114: {fileID: 11400004}
   m_Layer: 10
   m_Name: Beam Rifle
   m_TagString: Weapon
@@ -111,7 +112,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: .75
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -171,7 +172,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  primaryAttackSounds: []
+  primaryAttackSounds:
+  - {fileID: 8300000, guid: 1cd3960218ab33c4c9eeb99c9899b748, type: 3}
   repeatDamage: 1
   beam: {fileID: 12000000}
   beamWidth: 1
@@ -195,6 +197,21 @@ MonoBehaviour:
   destroyAfterDamage: 0
   targets:
   - Enemy
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19e1b2755be5c9d4099d34424d99a9b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emitter: {fileID: 0}
+  sourceSounds:
+  - {fileID: 8300000, guid: 1cd3960218ab33c4c9eeb99c9899b748, type: 3}
+  particles: []
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1
