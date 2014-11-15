@@ -3,11 +3,15 @@ using System.Collections;
 
 public class KillParticleSystem : MonoBehaviour
 {
-	void Update ()
+	public float duration;
+
+	void Start()
 	{
-		if ( !particleSystem.IsAlive() )
-		{
-			Destroy( gameObject );
-		}
+		Invoke( "DestroySelf", duration );
+	}
+
+	void DestroySelf()
+	{
+		Destroy( gameObject );
 	}
 }

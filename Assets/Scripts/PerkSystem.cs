@@ -10,8 +10,8 @@ public class PerkSystem : MonoBehaviour
 
 	PlayerMovement playerSpeed;
 	HealthSystem playerHealth;
-	DamageSystem playerDamage;
-	Gun playerGun;
+	//DamageSystem playerDamage;
+	//Gun playerGun;
 	WeaponSystem playerWeapons;
 
 	void Awake()
