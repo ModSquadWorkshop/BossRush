@@ -3,6 +3,8 @@ using System.Collections;
 
 public class SpiderTankBurrowState : SpiderTankState 
 {
+	[HideInInspector] public SpiderTankState returnState;
+
 	public BurrowStateSettingsList burrowStateSettings;
 	private BurrowStateSettings[] _settings;
 
@@ -22,14 +24,18 @@ public class SpiderTankBurrowState : SpiderTankState
 
 	private void StartBurrowSequence()
 	{
-		//.. do animation stuff
-
+		DoBurrowAnimation();
 		Invoke( "OnBurrowed", _settings[spiderTank.currentPhase].burrowSequenceDuration );
+	}
+
+	private void DoBurrowAnimation()
+	{
+		//... do animation stuff
 	}
 
 	private void OnBurrowed()
 	{
-		// start the unburrow sequence after x time underground
+		StopRendering();
 		Invoke( "StartUnburrowSequence", _settings[spiderTank.currentPhase].timeUnderground );
 	}
 
@@ -38,15 +44,50 @@ public class SpiderTankBurrowState : SpiderTankState
 		// move the spider tank to its new position
 		spiderTank.transform.position = GetNearestRelocationPosition();
 
-		//.. do animation stuff
-
+		StartRendering();
+		DoUnburrowAnimation();
 		Invoke( "OnUnburrowed", _settings[spiderTank.currentPhase].burrowSequenceDuration );
+	}
+
+	private void DoUnburrowAnimation()
+	{
+		//... do animation stuff
 	}
 
 	private void OnUnburrowed()
 	{
-		//... do stuff, if necessary
-		// disable state??
+		enabled = false;
+		returnState.enabled = true;
+	}
+
+	private void StartRendering()
+	{
+		MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
+		if ( meshes != null )
+		{
+			for ( int i = 0; i < meshes.Length; i++ )
+			{
+				meshes[i].enabled = true;
+			}
+		}
+
+		spiderTank.boxCollider.enabled = true;
+		spiderTank.ringUICanvas.enabled = true;
+	}
+
+	private void StopRendering()
+	{
+		MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
+		if ( meshes != null )
+		{
+			for ( int i = 0; i < meshes.Length; i++ )
+			{
+				meshes[i].enabled = false;
+			}
+		}
+
+		spiderTank.boxCollider.enabled = false;
+		spiderTank.ringUICanvas.enabled = false;
 	}
 
 	private Vector3 GetRandomRelocationPosition()
