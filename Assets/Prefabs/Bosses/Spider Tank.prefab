@@ -31,6 +31,7 @@ GameObject:
   - 114: {fileID: 11400028}
   - 114: {fileID: 11400042}
   - 114: {fileID: 11400000}
+  - 95: {fileID: 9500002}
   - 114: {fileID: 11400040}
   - 114: {fileID: 11400020}
   - 114: {fileID: 11400022}
@@ -38,7 +39,6 @@ GameObject:
   - 114: {fileID: 11400034}
   - 114: {fileID: 11400038}
   - 114: {fileID: 11400044}
-  - 114: {fileID: 11400048}
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400024}
@@ -571,8 +571,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: -4.37113883e-08}
-  m_LocalPosition: {x: 65.3209991, y: 0, z: 262.079987}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 200, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400014}
@@ -1394,6 +1394,21 @@ Animator:
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &9500002
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 358be580395d1ca4dbd41e830eb251bb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11400000
@@ -2243,65 +2258,6 @@ MonoBehaviour:
     waveInterval: 2
     spawnOnStart: 0
   maxSpawned: 20
---- !u!114 &11400048
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb030dabac45a0d41b2a10282ae02ba8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spiderTank: {fileID: 0}
-  globalSettings:
-    phaseOneSettings:
-      useSpawner: 0
-      useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
-    phaseTwoSettings:
-      useSpawner: 0
-      useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
-    phaseThreeSettings:
-      useSpawner: 0
-      useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
-    phaseFourSettings:
-      useSpawner: 0
-      useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
-  enterStateSettings:
-    destination: {fileID: 0}
 --- !u!114 &11400050
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -7,6 +7,15 @@ public class SpiderTankInitialState : SpiderTankState
 	public int numMinions;
 	public float maxWaitTime;
 
+	private Animator _animator;
+
+	public override void Awake()
+	{
+		base.Awake();
+
+		_animator = GetComponent<Animator>();
+	}
+
 	public override void OnEnable()
 	{
 		base.OnEnable();
@@ -29,15 +38,16 @@ public class SpiderTankInitialState : SpiderTankState
 	{
 		if ( enabled && count == 0 )
 		{
-			Exit();
+			_animator.SetTrigger( "Fall" );
 		}
 	}
 
-	void Exit()
+	public void FallEnded()
 	{
 		enabled = false;
 		spawner.enabled = false;
+		_animator.enabled = false;
 
-		spiderTank.enterState.enabled = true;
+		spiderTank.basicState.enabled = true;
 	}
 }
