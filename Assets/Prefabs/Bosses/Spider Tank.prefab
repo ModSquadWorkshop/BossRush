@@ -44,6 +44,7 @@ GameObject:
   - 114: {fileID: 11400024}
   - 114: {fileID: 11400046}
   - 114: {fileID: 11400036}
+  - 114: {fileID: 11400076}
   m_Layer: 10
   m_Name: Spider Tank
   m_TagString: Enemy
@@ -1437,9 +1438,12 @@ MonoBehaviour:
   rushState: {fileID: 0}
   turboState: {fileID: 0}
   enterState: {fileID: 0}
+  burrowState: {fileID: 0}
   health: {fileID: 0}
   spawner: {fileID: 0}
   agent: {fileID: 0}
+  boxCollider: {fileID: 0}
+  ringUICanvas: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1671,6 +1675,7 @@ MonoBehaviour:
       minRushInterval: 1
       maxRushInterval: 3
       turboChance: .5
+      burrowChance: .5
     phaseTwoSettings:
       turretSpeed: 2
       canonDelay: 1
@@ -1678,6 +1683,7 @@ MonoBehaviour:
       minRushInterval: 1
       maxRushInterval: 3
       turboChance: .5
+      burrowChance: .600000024
     phaseThreeSettings:
       turretSpeed: 2
       canonDelay: 1
@@ -1685,6 +1691,7 @@ MonoBehaviour:
       minRushInterval: 1
       maxRushInterval: 3
       turboChance: .5
+      burrowChance: .699999988
     phaseFourSettings:
       turretSpeed: 2
       canonDelay: 1
@@ -1692,6 +1699,7 @@ MonoBehaviour:
       minRushInterval: 1
       maxRushInterval: 3
       turboChance: .5
+      burrowChance: .800000012
   movementScript: {fileID: 11400010}
 --- !u!114 &11400022
 MonoBehaviour:
@@ -2544,6 +2552,85 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   indicatorImage: {fileID: 11400072}
+--- !u!114 &11400076
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dbb132129b4415448f57c600408987b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spiderTank: {fileID: 0}
+  globalSettings:
+    phaseOneSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+    phaseTwoSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+    phaseThreeSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+    phaseFourSettings:
+      useSpawner: 0
+      useMortars: 0
+      spawnerSettings:
+        baseAmountPerWave: 0
+        amountPerSpawner: 0
+        waveInterval: 0
+        spawnOnStart: 0
+      mortarSettings:
+        amountOfMortars: 0
+        launchInterval: 0
+  returnState: {fileID: 0}
+  burrowStateSettings:
+    phaseOneSettings:
+      timeUnderground: 5
+      burrowSequenceDuration: 1.5
+    phaseTwoSettings:
+      timeUnderground: 5
+      burrowSequenceDuration: 1.5
+    phaseThreeSettings:
+      timeUnderground: 5
+      burrowSequenceDuration: 1.5
+    phaseFourSettings:
+      timeUnderground: 5
+      burrowSequenceDuration: 1.5
+  relocationPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1

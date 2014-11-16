@@ -45,6 +45,7 @@ public class SpiderTankState : MonoBehaviour
 	{
 		spawner.enabled = false;
 		spawner.ResetSettings();
+
 		CancelInvoke();
 		StopAllCoroutines();
 	}
