@@ -1444,6 +1444,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   boxCollider: {fileID: 0}
   ringUICanvas: {fileID: 0}
+  meshes: []
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1675,7 +1676,7 @@ MonoBehaviour:
       minRushInterval: 1
       maxRushInterval: 3
       turboChance: .5
-      burrowChance: .5
+      burrowChance: 0
     phaseTwoSettings:
       turretSpeed: 2
       canonDelay: 1
@@ -1683,7 +1684,7 @@ MonoBehaviour:
       minRushInterval: 1
       maxRushInterval: 3
       turboChance: .5
-      burrowChance: .600000024
+      burrowChance: 0
     phaseThreeSettings:
       turretSpeed: 2
       canonDelay: 1
@@ -1691,14 +1692,14 @@ MonoBehaviour:
       minRushInterval: 1
       maxRushInterval: 3
       turboChance: .5
-      burrowChance: .699999988
+      burrowChance: 0
     phaseFourSettings:
       turretSpeed: 2
       canonDelay: 1
       amountPerWave: 20
       minRushInterval: 1
       maxRushInterval: 3
-      turboChance: .5
+      turboChance: .200000003
       burrowChance: .800000012
   movementScript: {fileID: 11400010}
 --- !u!114 &11400022
