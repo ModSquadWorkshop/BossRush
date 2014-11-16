@@ -20,14 +20,14 @@ public class Weapon : MonoBehaviour
 			audio.Play();
 		}
 	}
-
+	/*
 	public void PlayLoopingSound()
 	{
 		if ( primaryAttackSounds.Length > 0 && GetComponent<AudioSource>() != null && !audio.isPlaying )
 		{
 			audio.clip = primaryAttackSounds[Random.Range( 0, primaryAttackSounds.Length )];
 			audio.loop = true;
-			audio.volume = 1;
+			audio.volume = 2;
 			audio.Play();
 		}
 	}
@@ -39,7 +39,7 @@ public class Weapon : MonoBehaviour
 			audio.Stop();
 		}
 	}
-
+	*/
 	public void StartCooldown()
 	{
 		_cooling = true;

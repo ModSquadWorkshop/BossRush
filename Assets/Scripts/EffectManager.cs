@@ -92,3 +92,12 @@ public class EffectManager : MonoBehaviour
 		}
 	}
 }
+
+/*
+[System.Serializable]
+public class EffectSettings
+{
+	public AudioClip sound;
+	audio.clip = sound;
+	audio.Play();
+}*/

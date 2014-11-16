@@ -1099,7 +1099,7 @@ AudioSource:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: c43d45dc26d63e64fb741a36b3c8bb77, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1157,11 +1157,11 @@ AudioSource:
   m_GameObject: {fileID: 100012}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 1cd3960218ab33c4c9eeb99c9899b748, type: 3}
+  m_audioClip: {fileID: 8300000, guid: eb86f84923de521429aca0c75c942846, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Priority: 128
   DopplerLevel: 1
@@ -1700,7 +1700,7 @@ MonoBehaviour:
       minRushInterval: 1
       maxRushInterval: 3
       turboChance: .200000003
-      burrowChance: .800000012
+      burrowChance: 0
   movementScript: {fileID: 11400010}
 --- !u!114 &11400022
 MonoBehaviour:
@@ -1860,6 +1860,7 @@ MonoBehaviour:
         amountOfMortars: 10
         launchInterval: .150000006
   returnState: {fileID: 0}
+  bossDashing: {fileID: 8300000, guid: d06691583d23797469222a30c9d22e66, type: 3}
   rushStateSettings:
     phaseOneSettings:
       rushTime: .5
@@ -2422,8 +2423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  primaryAttackSounds:
-  - {fileID: 8300000, guid: 1cd3960218ab33c4c9eeb99c9899b748, type: 3}
+  primaryAttackSounds: []
   repeatDamage: 1
   beamWidth: 1
   maxRange: 10000

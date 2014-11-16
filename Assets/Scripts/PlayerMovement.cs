@@ -126,6 +126,8 @@ sealed public class PlayerMovement : MonoBehaviour
 			_dashMaxDistance = dashDistance;
 			_dashPartial = false;
 
+			audio.Play();
+
 			// calculate if the dash distance needs to be shorter according to any collisions that will happen
 			if ( Physics.Raycast( _dashOrigin, _forwardVect, out _dashHit, dashDistance, _dashLayerMask ) )
 			{

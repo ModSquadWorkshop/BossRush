@@ -11,6 +11,7 @@ public class BeamWeapon : Weapon
 	public float duration;
 	public Transform impactParticles;
 
+	private AudioSource _source;
 	private LineRenderer beam;
 	private Ray _ray;
 	private Timer _beamTimer;
@@ -38,7 +39,7 @@ public class BeamWeapon : Weapon
 		_beamDuration = new Timer( duration, 1 );
 		_beamDuration.Start();
 		_ray = new Ray();
-
+		_source = GetComponent<AudioSource>();
 		// get a reference to the damage system attached to the weapon
 		_damageSystem = this.gameObject.GetComponent<DamageSystem>();
 
@@ -122,7 +123,10 @@ public class BeamWeapon : Weapon
 		}
 		else
 		{
-			StopSound();
+			if ( _source != null && audio.isPlaying )
+			{
+				audio.Stop();
+			}
 		}
 	}
 
@@ -145,7 +149,12 @@ public class BeamWeapon : Weapon
 			_damageDealt = false;
 			beam.enabled = true;
 		}
-		PlayLoopingSound();
+
+		if ( _source != null && !audio.isPlaying )
+		{
+			audio.Play();
+		}
+
 		_beamDuration.Update();
 		_beamTimer.Reset( true );
 	}
