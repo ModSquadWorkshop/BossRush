@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Cliff
-  m_Shader: {fileID: 2, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 297156366d88d40b58912084d178c237, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -31,8 +31,8 @@ Material:
         first:
           name: _BumpMap
         second:
-          m_Texture: {fileID: 2800000, guid: bb45c9fdde18c2842b841cf4eb598957, type: 3}
-          m_Scale: {x: 1, y: 1}
+          m_Texture: {fileID: 2800000, guid: ca5e912650ea24c6390ae6a5ec26ffa3, type: 3}
+          m_Scale: {x: 30, y: 30}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -94,7 +94,7 @@ Material:
       data:
         first:
           name: _Shininess
-        second: .078125
+        second: 1
     m_Colors:
       data:
         first:
@@ -103,4 +103,4 @@ Material:
       data:
         first:
           name: _SpecColor
-        second: {r: .5, g: .5, b: .5, a: 1}
+        second: {r: .0407201387, g: .536764741, b: 0, a: 1}
