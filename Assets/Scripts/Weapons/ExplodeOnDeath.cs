@@ -30,6 +30,6 @@ public class ExplodeOnDeath : MonoBehaviour
 			}
 		}
 
-		( Instantiate( explosionEffect, transform.position, transform.rotation ) as GameObject ).GetComponent<Explosion>().radius = explosionRadius;
+		Instantiate( explosionEffect, transform.position, transform.rotation );//.GetComponent<Explosion>().radius = explosionRadius;
 	}
 }

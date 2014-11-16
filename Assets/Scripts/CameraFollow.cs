@@ -7,6 +7,13 @@ public class CameraFollow : MonoBehaviour
 	public float offset;
 	public float followSpeed = 1.0f;
 
+	private new Transform transform;
+
+	void Awake()
+	{
+		transform = GetComponent<Transform>();
+	}
+
 	void Start()
 	{
 		DeathSystem targetDeath = followTarget.gameObject.GetComponent<DeathSystem>();
@@ -18,7 +25,7 @@ public class CameraFollow : MonoBehaviour
 
 	void Update()
 	{
-		transform.position = Vector3.Lerp( transform.position, followTarget.position + new Vector3( 0.0f, offset, 0.0f ), followSpeed * Time.deltaTime );
+		transform.position = Vector3.Lerp( transform.position, followTarget.position + ( -transform.forward * offset ), followSpeed * Time.deltaTime );
 	}
 
 	void TargetDeathCallback( GameObject gameObject )

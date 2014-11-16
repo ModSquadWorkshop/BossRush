@@ -63,14 +63,18 @@ public class EnemySpawner : MonoBehaviour
 
 	/**
 	 * \brief Spawns the specified number of enemies.
+	 * 
+	 * \param enemyType An optional parameter to specify the type of enemy to be spawned.
+	 * If not provided, the type of each enemy will be picked at random from the spawner's
+	 * list of default enemies.
 	 */
-	public void Spawn( int amount )
+	public void Spawn( int amount, GameObject enemyType = null )
 	{
 		if ( spawns.Count > 0 )
 		{
 			for ( int i = 0; i < amount && _enemyCount < maxSpawned; i++ )
 			{
-				InitializeEnemyComponents( Instantiate( enemyTypes[Random.Range( 0, enemyTypes.Length )] ) as GameObject );
+				InitializeEnemyComponents( Instantiate( enemyType ?? enemyTypes[Random.Range( 0, enemyTypes.Length )] ) as GameObject );
 			}
 		}
 	}

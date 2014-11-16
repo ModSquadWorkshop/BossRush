@@ -15,18 +15,18 @@ sealed public class PlayerMovement : MonoBehaviour
 	public float dashDistance;
 	public float dashSpeed;
 	public float dashDelay;
-	public bool stopWeaponInDash;
+	public bool  stopWeaponInDash;
 
 	private Vector3 _forwardVect;
+	private Vector3 _velocity;
 
-	private Timer _dashTimer;
-	private Timer _dashDelayTimer;
-	private Vector3 _dashOrigin;
-	private Vector3 _dashVelocity;
 	private RaycastHit _dashHit;
+	private Vector3 _dashOrigin;
 	private float _dashMaxDistance;
-	private float _dashDistanceTraveled;
 	private int _dashLayerMask;
+	private bool _dashing;
+	private bool _dashAvailable;
+	private bool _dashPartial;
 
 	private WeaponSystem _playerWeapons;
 	private HealthSystem _playerHealth;
@@ -44,6 +44,7 @@ sealed public class PlayerMovement : MonoBehaviour
 		// create a ray casting layer mask that collides with everything accept "Player"
 		_dashLayerMask = 1 << LayerMask.NameToLayer( "Player" );
 		_dashLayerMask = ~_dashLayerMask; // invert the mask
+		_dashAvailable = true;
 	}
 
 	void Start()
@@ -55,34 +56,17 @@ sealed public class PlayerMovement : MonoBehaviour
 		_rumbler = Camera.main.gameObject.GetComponent<RumbleManager>();
 
 		_forwardVect = new Vector3();
-
-		// initialize dash timers
-		_dashTimer = new Timer( dashDistance / dashSpeed, 1 );
-		_dashDelayTimer = new Timer( dashDelay, 1 );
 	}
 
 	void Update()
 	{
-		if ( !_dashTimer.running )
+		if ( !_dashing )
 		{
-			/* update the player while not dashing */
+			_forwardVect.Set( Input.GetAxis( "Horizontal" ), 0.0f, Input.GetAxis( "Vertical" ) );
+			_velocity = _forwardVect * speed;
 
-			// get the input forward vector
-			float horizontalAxis = Input.GetAxis( "Horizontal" );
-			float verticalAxis = Input.GetAxis( "Vertical" );
-			_forwardVect.Set( horizontalAxis, 0.0f, verticalAxis );
-
-			// apply general movement
-			rigidbody.velocity = _forwardVect * speed;
-
-			// handle look direction
 			HandleLookDirection();
 
-			// update the dash delay timer
-			// the player won't be able to dash again until this timer is done running
-			_dashDelayTimer.Update();
-
-			// handle dash input
 			if ( Input.GetButtonDown( "Dash" ) )
 			{
 				Dash();
@@ -90,17 +74,14 @@ sealed public class PlayerMovement : MonoBehaviour
 		}
 		else
 		{
-			/* update the player while dashing */
-			DashingUpdate();
+			if ( Vector3.Distance( _dashOrigin, rigidbody.transform.position ) > _dashMaxDistance )
+			{
+				CancelInvoke( "DashComplete" );
+				DashComplete();
+			}
 		}
-	}
 
-	public float speed
-	{
-		get
-		{
-			return baseSpeed * speedMultiplier;
-		}
+		rigidbody.velocity = _velocity;
 	}
 
 	private void HandleLookDirection()
@@ -113,14 +94,12 @@ sealed public class PlayerMovement : MonoBehaviour
 			lookTarget.position = ray.GetPoint( hitDistance );
 		}
 
-		bool mouseMoved = ( new Vector3( Input.GetAxis( "Mouse X" ),
-		                                 0.0f,
-		                                 Input.GetAxis( "Mouse Y" ) ) ).sqrMagnitude > 0.0f;
+		bool mouseMoved = ( new Vector3( Input.GetAxis( "Mouse X" ), 0.0f, 
+										 Input.GetAxis( "Mouse Y" ) ) ).sqrMagnitude > 0.0f;
 
 		// handle game pad look
 		// game pad look overrides mouse movement
-		Vector3 gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ),
-		                                   0.0f,
+		Vector3 gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ), 0.0f,
 		                                   Input.GetAxis( "Look Vertical" ) );
 
 		bool controllerMoved = gamePadLook.sqrMagnitude > 0.0f;
@@ -141,21 +120,18 @@ sealed public class PlayerMovement : MonoBehaviour
 
 	private void Dash()
 	{
-		// insure the player isn't already dashing
-		if ( !_dashDelayTimer.running )
+		if ( _dashAvailable )
 		{
-			_dashOrigin = rigidbody.transform.position;
+			_dashOrigin = transform.position;
+			_dashMaxDistance = dashDistance;
+			_dashPartial = false;
 
 			// calculate if the dash distance needs to be shorter according to any collisions that will happen
-			if ( Physics.Raycast( _dashOrigin, _forwardVect, out _dashHit, Mathf.Infinity, _dashLayerMask ) )
+			if ( Physics.Raycast( _dashOrigin, _forwardVect, out _dashHit, dashDistance, _dashLayerMask ) )
 			{
 				// the dash distance is limited to the closest colliding object
 				_dashMaxDistance = _dashHit.distance;
-			}
-			else
-			{
-				// the dash distance is not limited because no collisions will occur
-				_dashMaxDistance = Mathf.Infinity;
+				_dashPartial = true;
 			}
 
 			if ( stopWeaponInDash )
@@ -165,49 +141,31 @@ sealed public class PlayerMovement : MonoBehaviour
 			}
 
 			// start the dash
-			_dashDistanceTraveled = 0.0f;
-			_dashVelocity = _forwardVect * dashSpeed;
-			_dashTimer.Reset( true );
+			_velocity = _forwardVect * dashSpeed;
+			_dashAvailable = false;
+			_dashing = true;
+
+			Invoke( "DashComplete", _dashMaxDistance / dashSpeed );
 		}
 	}
 
-	private void DashingUpdate()
+	private void DashComplete()
 	{
-		// update dash properties to determine if it needs to be stopped
-		_dashDistanceTraveled = Vector3.Distance( _dashOrigin, rigidbody.transform.position );
-		_dashTimer.Update();
-
-		if ( _dashTimer.complete )
-		{
-			/* a full dash occured */
-
-			StopDash();
-		}
-		else if ( _dashDistanceTraveled >= _dashMaxDistance )
-		{
-			/* a partial dash occured because of collision */
-
-			StopDash();
-
-			rigidbody.transform.position = _dashHit.point;
-			rigidbody.velocity = Vector3.zero;
-		}
-		else
-		{
-			/* still currently dashing */
-
-			rigidbody.velocity = _dashVelocity;
-		}
-	}
-
-	private void StopDash()
-	{
-		// re-enable the player's weapon
 		_playerWeapons.currentWeapon.enabled = true;
+		_dashing = false;
+		_velocity = Vector3.zero;
 
-		// start the dash delay timer
-		// the player won't be able to dash again until this timer is complete
-		_dashDelayTimer.Reset( true );
+		if ( _dashPartial )
+		{
+			rigidbody.transform.position = _dashHit.point + (_dashHit.normal * 2.0f);
+		}
+
+		Invoke( "DashDelayComplete", dashDelay );
+	}
+
+	private void DashDelayComplete()
+	{
+		_dashAvailable = true;
 	}
 
 	private void TargetDamageCallback( HealthSystem playerHealth, float healthChange )
@@ -216,6 +174,14 @@ sealed public class PlayerMovement : MonoBehaviour
 		{
 			_camShake.Shake( healthChange );
 			_rumbler.Rumble( healthChange );
+		}
+	}
+
+	public float speed
+	{
+		get
+		{
+			return baseSpeed * speedMultiplier;
 		}
 	}
 }
