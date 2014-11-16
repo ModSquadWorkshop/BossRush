@@ -20,8 +20,7 @@ public class Perk : MonoBehaviour
 	public int magazinesMod;
 	public GameObject gunDrop;
 	public string ID;
-	//time a perk lasts (if using a timer);
-	public float duration;
+	public float duration; //!< How long the perk lasts, if it has a duration.
 
 	PerkSystem perkSystem;
 

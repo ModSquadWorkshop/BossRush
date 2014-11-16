@@ -27,10 +27,14 @@ public class SpiderTank : MonoBehaviour
 	[HideInInspector] public SpiderTankRushState rushState;
 	[HideInInspector] public SpiderTankTurboState turboState;
 	[HideInInspector] public SpiderTankEnterState enterState;
+	[HideInInspector] public SpiderTankBurrowState burrowState;
 
 	[HideInInspector] public HealthSystem health;
 	[HideInInspector] public EnemySpawner spawner;
 	[HideInInspector] public NavMeshAgent agent;
+	[HideInInspector] public BoxCollider boxCollider;
+	[HideInInspector] public Canvas ringUICanvas;
+	[HideInInspector] public MeshRenderer[] meshes;
 
 	private HealthTrigger _healthTriggerCallback = delegate( HealthSystem health ) { };
 	private float _healthMaxCurr;
@@ -47,11 +51,15 @@ public class SpiderTank : MonoBehaviour
 		rushState = GetComponent<SpiderTankRushState>();
 		turboState = GetComponent<SpiderTankTurboState>();
 		enterState = GetComponent<SpiderTankEnterState>();
+		burrowState = GetComponent<SpiderTankBurrowState>();
 
 		// retrieve other componenets
 		health = GetComponent<HealthSystem>();
 		spawner = GetComponent<EnemySpawner>();
 		agent = GetComponent<NavMeshAgent>();
+		boxCollider = GetComponent<BoxCollider>();
+		ringUICanvas = GetComponentInChildren<Canvas>();
+		meshes = GetComponentsInChildren<MeshRenderer>();
 
 		// register for player death callback
 		player.gameObject.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerDeathCallback );

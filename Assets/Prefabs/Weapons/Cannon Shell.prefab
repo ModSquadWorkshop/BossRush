@@ -12,8 +12,8 @@ GameObject:
   - 23: {fileID: 2300000}
   - 65: {fileID: 6500000}
   - 54: {fileID: 5400000}
-  - 114: {fileID: 11400000}
   - 96: {fileID: 9600000}
+  - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
   m_Layer: 12
   m_Name: Cannon Shell
@@ -144,6 +144,7 @@ MonoBehaviour:
   maxDistance: 500
   maxTime: 8
   shrapnel: {fileID: 100000, guid: 839163c2334b9c4488b58a07cd7fa597, type: 2}
+  reflectShrapnel: 1
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -155,6 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54890f060999baa459796158b8ac5d9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allowMultipleDeaths: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

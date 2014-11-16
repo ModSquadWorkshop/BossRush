@@ -5,8 +5,8 @@ public class Gun : Weapon
 {
 	public GameObject projectile;
 
-	public Transform casingAnchor;
-	public GameObject casingEmitter;
+	public ParticleSystem casingEmitter;
+	public ParticleSystem muzzleFlash;
 
 	public bool infiniteAmmo;
 	public int ammoPerMagazine;
@@ -26,16 +26,6 @@ public class Gun : Weapon
 
 	void Awake()
 	{
-		// instantiate casing emitter
-		casingEmitter = Instantiate( casingEmitter ) as GameObject;
-		casingEmitter.transform.parent = casingAnchor;
-
-		// we need to reset the transform so that it adhere's to the anchor's transform,
-		// otherwise unity try's to preserve it's exising location in world space
-		// when you child an object to another object.
-		casingEmitter.transform.localPosition = Vector3.zero;
-		casingEmitter.transform.localRotation = Quaternion.Euler( 0.0f, 0.0f, 0.0f );
-
 		// initialize ammunition and reloading
 		_magazines = amountOfMagazines;
 		_magazineAmmo = ammoPerMagazine; 
@@ -72,7 +62,8 @@ public class Gun : Weapon
 			}
 
 			// create shell casing
-			casingEmitter.particleSystem.Emit( 1 );
+			casingEmitter.Emit( 1 );
+			muzzleFlash.Emit( 10 );
 
 			StartCooldown();
 		}

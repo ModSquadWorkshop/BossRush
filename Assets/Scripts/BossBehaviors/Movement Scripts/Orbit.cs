@@ -6,7 +6,6 @@ public class Orbit : MonoBehaviour, ITargetBasedMovement
 	//public GameObject targetObj;
 	private Transform _target;
 	private Vector3 _distance;
-	private Vector3 _lookAt;
 
 	//movement options
 	public float[] rotationSpeeds;
@@ -22,7 +21,6 @@ public class Orbit : MonoBehaviour, ITargetBasedMovement
 
 	public Gun minionGun;
 
-	// Use this for initialization
 	void Start () 
 	{
 		_radius = Random.Range( radiusMin, radiusMax );
@@ -30,9 +28,8 @@ public class Orbit : MonoBehaviour, ITargetBasedMovement
 		_rotationSpeed = rotationSpeeds[Random.Range( 0, rotationSpeeds.Length )];
 		_travelSpeed = travelSpeeds[Random.Range( 0, travelSpeeds.Length )];
 	}
-	
-	// Update is called once per frame
-	void Update () 
+
+	void Update() 
 	{
 		if ( _target != null )
 		{
@@ -42,7 +39,6 @@ public class Orbit : MonoBehaviour, ITargetBasedMovement
 			minionGun.transform.rotation = Quaternion.LookRotation( _target.position - minionGun.transform.position );
 			if ( !minionGun.isOnCooldown )
 			{
-				//Debug.Log( "FIRE" );
 				minionGun.PerformPrimaryAttack();
 			}
 		}

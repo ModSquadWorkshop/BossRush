@@ -4,18 +4,17 @@ using System.Collections;
 public class BeamWeapon : Weapon
 {
 	public bool repeatDamage = true;
-
-	public LineRenderer beam;
 	public float beamWidth;
 	public float maxRange;
 	public float damageInterval;
 	public int piercingsAmount;
+	public float duration;
+	public Transform impactParticles;
 
+	private LineRenderer beam;
 	private Ray _ray;
 	private Timer _beamTimer;
 	private Timer _beamDuration;
-	public float duration;
-
 	private DamageSystem _damageSystem;
 	private Timer _damageTimer;
 	private bool _damageDealt;
@@ -23,10 +22,7 @@ public class BeamWeapon : Weapon
 
 	void Awake()
 	{
-		if ( beam == null )
-		{
-			beam = this.gameObject.AddComponent<LineRenderer>();
-		}
+		beam = GetComponent<LineRenderer>();
 
 		_done = false;
 
@@ -55,6 +51,7 @@ public class BeamWeapon : Weapon
 
 	void Update()
 	{
+		impactParticles.gameObject.SetActive( beam.enabled );
 		if ( beam.enabled )
 		{
 			// the beam can only deal damage every time the timer is ticked at a set interval
@@ -101,6 +98,8 @@ public class BeamWeapon : Weapon
 
 			// set the end vertex of the beam according to raycast collisions and amount of piercings
 			beam.SetPosition( 1, endVertex );
+			impactParticles.position = endVertex;
+			impactParticles.rotation = Quaternion.LookRotation( transform.position - endVertex );
 
 			// the beam has a really short timer that automatically disables it when complete
 			// the beam will quickly be stopped after the player stops "attacking"
