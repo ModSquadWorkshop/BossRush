@@ -9,6 +9,9 @@ public class SpiderTankTurboState : SpiderTankState
 
 	public float duration;
 
+	[Range( 0.0f, 1.0f )]
+	public float laserChance;
+
 	public NavigateTowardsTarget movementScript;
 
 	public override void Awake()
@@ -21,7 +24,7 @@ public class SpiderTankTurboState : SpiderTankState
 	void OnEnable()
 	{
 		spiderTank.mainCanon.SetCooldown( canonDelay );
-		spawner.amountPerWave = amountPerWave;
+		spawner.baseAmountPerWave = amountPerWave;
 		spawner.enabled = true;
 		movementScript.enabled = true;
 
@@ -48,7 +51,7 @@ public class SpiderTankTurboState : SpiderTankState
 	{
 		enabled = false;
 
-		if ( Random.value < 0.5f )
+		if ( Random.value < laserChance )
 		{
 			spiderTank.laserSpin.enabled = true;
 		}

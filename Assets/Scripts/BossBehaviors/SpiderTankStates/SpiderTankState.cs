@@ -16,11 +16,6 @@ public class SpiderTankState : MonoBehaviour
 		{
 			return spiderTank.player;
 		}
-
-		set
-		{
-			spiderTank.player = value;
-		}
 	}
 
 	public Gun mainCanon
@@ -29,23 +24,13 @@ public class SpiderTankState : MonoBehaviour
 		{
 			return spiderTank.mainCanon;
 		}
-
-		set
-		{
-			spiderTank.mainCanon = value;
-		}
 	}
 
-	public BeamWeapon laserCanon
+	public BeamWeapon[] laserCanon
 	{
 		get
 		{
 			return spiderTank.laserCanon;
-		}
-
-		set
-		{
-			spiderTank.laserCanon = value;
 		}
 	}
 
@@ -55,11 +40,6 @@ public class SpiderTankState : MonoBehaviour
 		{
 			return spiderTank.otherGuns;
 		}
-
-		set
-		{
-			spiderTank.otherGuns = value;
-		}
 	}
 
 	public EnemySpawner spawner
@@ -68,10 +48,29 @@ public class SpiderTankState : MonoBehaviour
 		{
 			return spiderTank.spawner;
 		}
+	}
 
-		set
+	public GameObject shield
+	{
+		get
 		{
-			spiderTank.spawner = value;
+			return spiderTank.shield;
+		}
+	}
+
+	public NavMeshAgent agent
+	{
+		get
+		{
+			return spiderTank.agent;
+		}
+	}
+
+	public Collider doorCollider
+	{
+		get
+		{
+			return spiderTank.doorCollider;
 		}
 	}
 
@@ -79,7 +78,6 @@ public class SpiderTankState : MonoBehaviour
 	{
 		CancelInvoke();
 		enabled = false;
-		spiderTank.fleeState.returnState = spiderTank.healState;
 		spiderTank.fleeState.enabled = true;
 	}
 }
