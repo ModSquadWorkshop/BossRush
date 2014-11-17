@@ -3,6 +3,9 @@ using System.Collections;
 
 public class SpiderTankInitialState : SpiderTankState
 {
+	public Transform fallPoint;
+	public float fallTime;
+
 	public GameObject explodeMinion;
 	public int numMinions;
 	public float maxWaitTime;
@@ -38,7 +41,13 @@ public class SpiderTankInitialState : SpiderTankState
 	{
 		if ( enabled && count == 0 )
 		{
-			_animator.SetTrigger( "Fall" );
+			Hashtable settings = new Hashtable();
+			settings.Add( "position", fallPoint );
+			settings.Add( "time", fallTime );
+			settings.Add( "easetype", iTween.EaseType.linear );
+			iTween.MoveTo( gameObject, settings );
+
+			Invoke( "FallEnded", fallTime );
 		}
 	}
 
@@ -46,7 +55,7 @@ public class SpiderTankInitialState : SpiderTankState
 	{
 		enabled = false;
 		spawner.enabled = false;
-		_animator.enabled = false;
+		//_animator.enabled = false;
 
 		spiderTank.basicState.enabled = true;
 	}
