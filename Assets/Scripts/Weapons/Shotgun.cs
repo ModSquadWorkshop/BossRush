@@ -17,9 +17,7 @@ public class Shotgun : Gun
 				// create shell casing
 				casingEmitter.particleSystem.Emit( 1 );
 			}
-
 			PlayPrimarySound();
-
 			// update ammunition data
 			if ( !infiniteAmmo )
 			{

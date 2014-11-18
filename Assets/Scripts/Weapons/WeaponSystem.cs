@@ -17,6 +17,7 @@ public class WeaponSystem : MonoBehaviour
 	private Weapon _currentWeapon;
 	private Weapon _defaultWeapon;
 	private Gun _specialGun;
+	public GameObject _AmmoRing;
 	private BeamWeapon _specialBeam;
 	public const float JOYSTICK_THRESHOLD = 0.75f;
 
@@ -86,6 +87,10 @@ public class WeaponSystem : MonoBehaviour
 		_specialGun = weapons[2].GetComponent<Gun>();
 		_specialBeam = weapons[2].GetComponent<BeamWeapon>();
 		SetBuffs();
+
+		//disable possibly active and set to current gun
+		_AmmoRing.gameObject.SetActive( false );
+		_AmmoRing.gameObject.SetActive( true );
 	}
 
 	public bool DetermineType()
@@ -154,6 +159,7 @@ public class WeaponSystem : MonoBehaviour
 	public void RemoveSpecial()
 	{
 		NextWeapon();
+		_AmmoRing.SetActive( false );
 		Destroy( GetWeapon( 2 ).gameObject );
 		weapons.RemoveAt( 2 );
 		_perkSystem.RemovePerk( perk );

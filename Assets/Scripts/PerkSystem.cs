@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class PerkSystem : MonoBehaviour
 {
 	public Perk[] startingPerks;
+	public GameObject shield;
+	private PlayerShield _playerShield;
 	private Hashtable _perks;
 	private Hashtable _perkCounts;
 
@@ -25,6 +27,7 @@ public class PerkSystem : MonoBehaviour
 
 		playerSpeed = this.gameObject.GetComponent<PlayerMovement>();
 		playerHealth = this.gameObject.GetComponent<HealthSystem>();
+		_playerShield = shield.GetComponent<PlayerShield>();
 		//playerDamage = this.gameObject.GetComponent<WeaponSystem>().currentWeapon.GetComponent<DamageSystem>();
 		//playerGun = this.gameObject.GetComponent<WeaponSystem>().currentWeapon.GetComponent<Gun>();
 		playerWeapons = this.gameObject.GetComponent<WeaponSystem>();
@@ -42,13 +45,16 @@ public class PerkSystem : MonoBehaviour
 			_perkCounts[perk.ID] = 0;
 		}
 
-		if ( actives > 0 && ( perk.gunDrop != null || perk.duration > 0 ) )
+		if ( actives > 0 && ( perk.gunDrop != null || perk.immunity || perk.duration > 0 ) )
 		{
 			Perk currentPerk = _perks[perk.ID] as Perk;
 			if ( currentPerk != null )
 			{
-				//currentPerk.Refresh();
 				RefreshPerk( currentPerk );
+			}
+			if ( perk.immunity )
+			{
+				RefreshShield();
 			}
 			Destroy( perk.gameObject );
 		}
@@ -103,6 +109,11 @@ public class PerkSystem : MonoBehaviour
 		}
 	}
 
+	public void RefreshShield()
+	{
+		_playerShield.RestoreShield();
+	}
+
 	public void SetPerk( Perk perk )
 	{
 		//apply modifiers
@@ -111,6 +122,12 @@ public class PerkSystem : MonoBehaviour
 		playerHealth.Heal( perk.healthMod );
 		playerWeapons.SetBuff( perk.fireRateMod, perk.damageMod, perk.reloadMod );
 		playerHealth.immune = perk.immunity || playerHealth.immune; //create shield or change healthbar if true
+
+		if ( perk.immunity )
+		{
+			shield.SetActive( true );
+			_playerShield.SetPerk( perk );
+		}
 		
 		if ( perk.gunDrop != null && playerWeapons.weapons.Count <= 3 )
 		{
@@ -135,6 +152,7 @@ public class PerkSystem : MonoBehaviour
 		if ( reset.immunity )
 		{
 			playerHealth.immune = false;
+			shield.SetActive( false );
 		}
 	}
 }
