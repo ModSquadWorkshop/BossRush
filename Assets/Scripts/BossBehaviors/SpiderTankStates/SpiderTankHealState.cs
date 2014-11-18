@@ -3,27 +3,27 @@ using System.Collections;
 
 public class SpiderTankHealState : SpiderTankState
 {
-	public int mininionCount;
-	public float healRate;
+	public HealStateSettingsList healStateSettings;
+	private HealStateSettings[] _settings;
 
-	public bool endWhenNoMinionsLeft;
-
-	public override void Awake()
+	public void Update()
 	{
-		base.Awake();
+		spiderTank.health.Heal( _settings[spiderTank.currentPhase].healRate * Time.deltaTime );
+
+		if ( spiderTank.atMaxHealth )
+		{
+			ShieldDestroyed( shield ); // make sure we go through a common exit path
+		}
 	}
 
-	void OnEnable()
+	public override void OnEnable()
 	{
-		if ( endWhenNoMinionsLeft )
-		{
-			spawner.RegisterEnemyCountCallback( MinionCountChange );
-		}
-		else
-		{
-			spawner.enabled = true;
-		}
-		spawner.Spawn( mininionCount );
+		base.OnEnable();
+
+		_settings = new HealStateSettings[] { healStateSettings.phaseOneSettings, 
+											  healStateSettings.phaseTwoSettings, 
+											  healStateSettings.phaseThreeSettings, 
+											  healStateSettings.phaseFourSettings };
 
 		shield.SetActive( true );
 		shield.gameObject.GetComponent<DeathSystem>().RegisterDeathCallback( ShieldDestroyed );
@@ -31,20 +31,11 @@ public class SpiderTankHealState : SpiderTankState
 		Physics.IgnoreCollision( collider, shield.collider, true );
 	}
 
-	public void Update()
+	public override void OnDisable()
 	{
-		spiderTank.health.Heal( healRate * Time.deltaTime );
-		if ( spiderTank.health.atMaxHealth )
-		{
-			MinionCountChange( 0 ); // kinda janky, but whatevs
-		}
-	}
+		base.OnDisable();
 
-	public void OnDisable()
-	{
-		spawner.enabled = false;
 		spiderTank.SetDamageBase();
-		spawner.DeregisterEnemyCountCallback( MinionCountChange );
 
 		// on shutdown the shield gets destroyed before the spider tank,
 		// so we have the potential for null references here
@@ -55,18 +46,27 @@ public class SpiderTankHealState : SpiderTankState
 		}
 	}
 
-	public void MinionCountChange( int count )
-	{
-		if ( this != null && enabled && count == 0 )
-		{
-			enabled = false;
-			spiderTank.basicState.enabled = true;
-		}
-	}
-
 	public void ShieldDestroyed( GameObject shield )
 	{
 		enabled = false;
 		spiderTank.basicState.enabled = true;
 	}
+}
+
+
+[System.Serializable]
+public class HealStateSettings
+{
+	public float healRate;
+}
+
+
+// this struct only exists to organize the settings in the inspector
+[System.Serializable]
+public class HealStateSettingsList
+{
+	public HealStateSettings phaseOneSettings;
+	public HealStateSettings phaseTwoSettings;
+	public HealStateSettings phaseThreeSettings;
+	public HealStateSettings phaseFourSettings;
 }

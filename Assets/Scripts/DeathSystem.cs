@@ -5,9 +5,10 @@ public class DeathSystem : MonoBehaviour
 {
 	public delegate void DeathCallback( GameObject gameObject );
 
-	public bool notifyOnce;
+	public bool allowMultipleDeaths;
 
 	private DeathCallback _deathCallback = delegate( GameObject gameObject ) { };
+	private bool _dying = false;
 
 	public void RegisterDeathCallback( DeathCallback callback )
 	{
@@ -21,11 +22,10 @@ public class DeathSystem : MonoBehaviour
 
 	public void NotifyDeath()
 	{
-		_deathCallback( gameObject );
-
-		if ( notifyOnce )
+		if ( !_dying || allowMultipleDeaths )
 		{
-			_deathCallback = delegate( GameObject obj ) { };
+			_dying = true;
+			_deathCallback( gameObject );
 		}
 	}
 

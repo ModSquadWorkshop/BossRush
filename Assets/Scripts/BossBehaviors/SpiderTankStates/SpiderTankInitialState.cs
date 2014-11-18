@@ -3,16 +3,24 @@ using System.Collections;
 
 public class SpiderTankInitialState : SpiderTankState
 {
-	public int mininionCount;
+	public GameObject explodeMinion;
+	public int numMinions;
+	public float maxWaitTime;
 
-	void OnEnable()
+	public override void OnEnable()
 	{
+		base.OnEnable();
+
 		spawner.RegisterEnemyCountCallback( MinionCountChange );
-		spawner.Spawn( mininionCount );
+		spawner.Spawn( numMinions, explodeMinion );
+
+		Invoke( "Exit", maxWaitTime );
 	}
 
-	void OnDisable()
+	public override void OnDisable()
 	{
+		base.OnDisable();
+
 		spawner.DeregisterEnemyCountCallback( MinionCountChange );
 		spiderTank.SetDamageBase();
 	}
@@ -21,10 +29,15 @@ public class SpiderTankInitialState : SpiderTankState
 	{
 		if ( enabled && count == 0 )
 		{
-			enabled = false;
-			spawner.enabled = false;
-
-			spiderTank.enterState.enabled = true;
+			Exit();
 		}
+	}
+
+	void Exit()
+	{
+		enabled = false;
+		spawner.enabled = false;
+
+		spiderTank.enterState.enabled = true;
 	}
 }

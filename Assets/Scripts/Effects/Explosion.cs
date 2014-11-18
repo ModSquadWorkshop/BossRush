@@ -4,9 +4,7 @@ using System.Collections;
 public class Explosion : MonoBehaviour
 {
 	public float duration;
-	public float decay;
-
-	private float _radius;
+	public new Light light;
 
 	void Start()
 	{
@@ -15,25 +13,11 @@ public class Explosion : MonoBehaviour
 
 	void Update()
 	{
-		radius -= decay * Time.deltaTime;
+		light.range = Mathf.Lerp( light.range, 0, Time.deltaTime );
 	}
 
 	public void End()
 	{
 		Destroy( gameObject );
-	}
-
-	public float radius
-	{
-		get
-		{
-			return _radius;
-		}
-
-		set
-		{
-			_radius = value;
-			transform.localScale = new Vector3( _radius * 2, _radius * 2, _radius * 2 );
-		}
 	}
 }

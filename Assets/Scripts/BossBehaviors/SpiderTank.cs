@@ -11,10 +11,14 @@ public class SpiderTank : MonoBehaviour
 	public Gun mainCanon;
 	public BeamWeapon [] laserCanon;
 	public Gun[] otherGuns;
+	public MortarAttack mortarLauncher;
+	public SpawnerMortarAttack spawnerLauncher;
 	public GameObject shield;
 
 	public float defaultCanonLookSpeed;
 	public float healthTriggerInterval;
+
+	public HealthCheckpoints healthCheckpoints;
 
 	[HideInInspector] public SpiderTankBasicState basicState;
 	[HideInInspector] public SpiderTankFleeState fleeState;
@@ -23,12 +27,18 @@ public class SpiderTank : MonoBehaviour
 	[HideInInspector] public SpiderTankRushState rushState;
 	[HideInInspector] public SpiderTankTurboState turboState;
 	[HideInInspector] public SpiderTankEnterState enterState;
+	[HideInInspector] public SpiderTankBurrowState burrowState;
 
 	[HideInInspector] public HealthSystem health;
 	[HideInInspector] public EnemySpawner spawner;
 	[HideInInspector] public NavMeshAgent agent;
+	[HideInInspector] public BoxCollider boxCollider;
+	[HideInInspector] public Canvas ringUICanvas;
+	[HideInInspector] public MeshRenderer[] meshes;
 
 	private HealthTrigger _healthTriggerCallback = delegate( HealthSystem health ) { };
+	private float _healthMaxCurr;
+	private float _healthMaxStart;
 	private float _healthTrigger;
 
 	void Awake()
@@ -41,24 +51,35 @@ public class SpiderTank : MonoBehaviour
 		rushState = GetComponent<SpiderTankRushState>();
 		turboState = GetComponent<SpiderTankTurboState>();
 		enterState = GetComponent<SpiderTankEnterState>();
+		burrowState = GetComponent<SpiderTankBurrowState>();
 
 		// retrieve other componenets
 		health = GetComponent<HealthSystem>();
 		spawner = GetComponent<EnemySpawner>();
 		agent = GetComponent<NavMeshAgent>();
+		boxCollider = GetComponent<BoxCollider>();
+		ringUICanvas = GetComponentInChildren<Canvas>();
+		meshes = GetComponentsInChildren<MeshRenderer>();
 
 		// register for player death callback
 		player.gameObject.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerDeathCallback );
 
 		// register for damage callbacks
 		health.RegisterHealthCallback( SpiderDamageCallback );
+		healthCheckpoints.currentPhase = 0;
 
-		// set up KeepDistance script
+		// set hand player over as the target to a bunch of script
 		KeepDistance keepDistance = GetComponent<KeepDistance>();
 		if ( keepDistance != null )
 		{
 			keepDistance.target = player;
 		}
+		mortarLauncher.mortarSettings.targets = new Transform[1];
+		mortarLauncher.mortarSettings.targets[0] = player;
+		spawnerLauncher.spiderTank = this;
+
+		_healthMaxStart = health.maxHealth;
+		_healthMaxCurr = _healthMaxStart;
 	}
 
 	void PlayerDeathCallback( GameObject gameObject )
@@ -74,6 +95,8 @@ public class SpiderTank : MonoBehaviour
 		{
 			GetComponent<DeathSystem>().Gut();
 		}
+
+		Destroy( mortarLauncher );
 	}
 
 	void SpiderDamageCallback( HealthSystem health, float damage )
@@ -81,6 +104,17 @@ public class SpiderTank : MonoBehaviour
 		if ( health.health < _healthTrigger )
 		{
 			_healthTriggerCallback( health );
+		}
+
+		int currentPhase = healthCheckpoints.currentPhase;
+		if ( currentPhase < healthCheckpoints.phaseHealthPercents.Length - 1 )
+		{
+			float healthCheckpoint = healthCheckpoints.phaseHealthPercents[currentPhase + 1];
+			if ( (health.percent * 100.0f) <= healthCheckpoint )
+			{
+				healthCheckpoints.currentPhase++;
+				_healthMaxCurr = _healthMaxStart * healthCheckpoint * 0.01f;
+			}
 		}
 	}
 
@@ -144,7 +178,6 @@ public class SpiderTank : MonoBehaviour
 		}
 	}
 
-
 	/**
 	 * \brief Have the main canon and other guns look at the player gradually.
 	 */
@@ -172,4 +205,29 @@ public class SpiderTank : MonoBehaviour
 	{
 		_healthTriggerCallback -= callback;
 	}
+
+	public int currentPhase
+	{
+		get
+		{
+			return healthCheckpoints.currentPhase;
+		}
+	}
+
+	public bool atMaxHealth
+	{
+		get
+		{
+			return health.health >= _healthMaxCurr;
+		}
+	}
+
+}
+
+
+[System.Serializable]
+public class HealthCheckpoints
+{
+	public float[] phaseHealthPercents = new float[]{ 100.0f, 75.0f, 50.0f, 25.0f };
+	public int currentPhase;
 }

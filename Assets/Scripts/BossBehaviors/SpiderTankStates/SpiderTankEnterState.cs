@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SpiderTankEnterState : SpiderTankState
 {
-	public Transform destination;
+	public EnterStateSettings enterStateSettings;
 
 	private MoveTowardsTarget _movement;
 
@@ -14,9 +14,11 @@ public class SpiderTankEnterState : SpiderTankState
 		_movement = GetComponent<MoveTowardsTarget>();
 	}
 
-	void OnEnable()
+	public override void OnEnable()
 	{
-		_movement.target = destination;
+		base.OnEnable();
+
+		_movement.target = enterStateSettings.destination;
 		_movement.enabled = true;
 
 		// make sure the boss can walk in/out of the arena.
@@ -25,16 +27,22 @@ public class SpiderTankEnterState : SpiderTankState
 
 	void Update()
 	{
-		if ( ( transform.position - destination.position ).sqrMagnitude < 1.0f )
-		{
-			enabled = false;
-			spiderTank.basicState.enabled = true;
-		}
+		enabled = ( transform.position - enterStateSettings.destination.position ).sqrMagnitude > 1.0f;
 	}
 
-	void OnDisable()
+	public override void OnDisable()
 	{
+		base.OnDisable();
+
 		_movement.enabled = false;
+		spiderTank.basicState.enabled = true;
 		Physics.IgnoreCollision( collider, doorCollider, false );
 	}
+}
+
+
+[System.Serializable]
+public class EnterStateSettings
+{
+	public Transform destination;
 }

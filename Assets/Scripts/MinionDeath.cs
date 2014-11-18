@@ -5,30 +5,33 @@ public class MinionDeath : MonoBehaviour
 {
 	public float deathTime;
 
-	public bool exploding;
 	public bool dropping;
 
-	HealthSystem otherHealth;
-	DeathTimer timedDeath;
+	HealthSystem minionHealth;
 
-	public GameObject dropItem;
-	public GameObject explosionEffect;
-
-	[Range( 0.0f, 1.0f )]
-	public float dropChance;
-
-	public float explosionRadius;
-	public float explosionDamage;
-	public float explosionForce;
+	public Perk[] drops;
 
 	// Use this for initialization
-	void Start ()
+	void Awake()
 	{
 		GetComponent<DeathSystem>().RegisterDeathCallback( DeathCallback );
-		if ( deathTime > 0 )
+		minionHealth = GetComponent<HealthSystem>();
+		minionHealth.RegisterHealthCallback( HealthCallback );
+	}
+
+	void Start()
+	{
+		if ( deathTime > 0.0f )
 		{
-			timedDeath = gameObject.AddComponent<DeathTimer>();
-			timedDeath.deathTime = this.deathTime;
+			Invoke( "DestroySelf", deathTime );
+		}
+	}
+
+	void HealthCallback( HealthSystem minionHealth, float change )
+	{
+		if ( dropping && minionHealth.health <= 0 )
+		{
+			Drop();
 		}
 	}
 
@@ -36,42 +39,25 @@ public class MinionDeath : MonoBehaviour
 	{
 		// ensure that we don't get notified of our death multiple times
 		GetComponent<DeathSystem>().DeregisterDeathCallback( DeathCallback );
-
-		if( exploding )
-		{
-			Explode();
-		}
-		if ( dropping )
-		{
-			Drop();
-		}
 	}
 
-	void Explode()
+	void DestroySelf()
 	{
-		Collider[] collisions = Physics.OverlapSphere( transform.position, explosionRadius );
-		foreach ( Collider col in collisions )
-		{
-			otherHealth = col.gameObject.GetComponent<HealthSystem>();
-			if( otherHealth != null )
-			{
-				otherHealth.Damage( explosionDamage );
-			}
-			if ( col.rigidbody != null )
-			{
-				col.rigidbody.AddExplosionForce( explosionForce, transform.position, explosionRadius );
-			}
-		}
-
-		( Instantiate( explosionEffect, transform.position, transform.rotation ) as GameObject ).GetComponent<Explosion>().radius = explosionRadius;
+		GetComponent<DeathSystem>().Kill();
 	}
 
 	void Drop()
 	{
-		if ( Random.Range( 0.0f, 1.0f ) < dropChance )
+		float dropGen = Random.Range( 0.0f, 1.0f );
+		float cumulativeChance = 0.0f;
+		foreach ( Perk drop in drops )
 		{
-			Instantiate( dropItem, this.transform.localPosition, this.transform.rotation );
-			Debug.Log( "HEALTH PACK DEPLOYED" );
+			cumulativeChance += drop.dropChance;
+			if ( cumulativeChance > dropGen )
+			{
+				Instantiate( drop.gameObject, transform.localPosition, transform.rotation );
+				return;
+			}
 		}
 	}
 }
