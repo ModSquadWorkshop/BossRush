@@ -13,6 +13,8 @@ public class EnemySpawner : MonoBehaviour
 	public SpawnerSettings defaultSettings;
 	public int maxSpawned;
 
+	public float delayBetweenNewEnemy = 0.1f;
+
 	protected int _spawnIndex = 0; //!< Used for communication with derived spawners on which spawn index was used.
 
 	private bool _spawning = false; //!< Used to tell the coroutine to stop spawning.
@@ -20,7 +22,7 @@ public class EnemySpawner : MonoBehaviour
 	private SpawnerSettings _settings;
 	private EnemyCountChange _enemyCountCallback = delegate( int count ) { }; //!< Callback used to notify listeners when the live enemy count changes.
 
-	public void Awake()
+	void Awake()
 	{
 		_settings = defaultSettings;
 
@@ -30,7 +32,7 @@ public class EnemySpawner : MonoBehaviour
 		}
 	}
 
-	public void OnEnable()
+	void OnEnable()
 	{
 		if ( _settings.spawnOnStart )
 		{
@@ -72,10 +74,19 @@ public class EnemySpawner : MonoBehaviour
 	{
 		if ( spawns.Count > 0 )
 		{
-			for ( int i = 0; i < amount && _enemyCount < maxSpawned; i++ )
-			{
-				InitializeEnemyComponents( Instantiate( enemyType ?? enemyTypes[Random.Range( 0, enemyTypes.Length )] ) as GameObject );
-			}
+			amount = Mathf.Min( amount, maxSpawned - _enemyCount );
+			StartCoroutine( SpawnCoroutine( amount, enemyType ) );
+		}
+	}
+
+	private IEnumerator SpawnCoroutine( int amount, GameObject enemyType = null )
+	{
+		while ( amount > 0 )
+		{
+			InitializeEnemyComponents( Instantiate( enemyType ?? enemyTypes[Random.Range( 0, enemyTypes.Length )] ) as GameObject );
+			amount--;
+
+			yield return new WaitForSeconds( delayBetweenNewEnemy );
 		}
 	}
 
