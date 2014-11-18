@@ -92,9 +92,20 @@ public class EnemySpawner : MonoBehaviour
 
 	protected virtual void InitializeEnemyComponents( GameObject enemy )
 	{
+		NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
+		// disable the nav mesh agent to prevent a bug with the enemy spawning in the wrong location
+		if ( agent != null )
+		{
+			agent.enabled = false;
+		}
+
 		// set spawn point
 		_spawnIndex = Random.Range( 0, spawns.Count );
 		enemy.transform.position = spawns[_spawnIndex].position;
+
+		// move the enemy in a radius around the spawn point
+		Vector2 radius = Random.insideUnitCircle * 10.0f;
+		enemy.transform.Translate( radius.x, 0.0f, radius.y );
 
 		// if the enemy uses a MoveTowardsTarget script, the target needs to be set
 		ITargetBasedMovement moveTowards = enemy.GetComponent( typeof( ITargetBasedMovement ) ) as ITargetBasedMovement;
@@ -110,8 +121,14 @@ public class EnemySpawner : MonoBehaviour
 			enemyDeath.RegisterDeathCallback( EnemyDeathCallback );
 		}
 
-		// increment live enemy count
-		enemyCount = enemyCount + 1;
+		//increment live enemy count
+		enemyCount++;
+
+		// re-enable the nav mesh agent
+		if ( agent != null )
+		{
+			agent.enabled = true;
+		}
 	}
 
 	public void EnemyDeathCallback( GameObject enemy )
@@ -146,6 +163,7 @@ public class EnemySpawner : MonoBehaviour
 
 	public void AddSpawnPoint( Transform spawnPoint )
 	{
+		Debug.Log( true );
 		spawns.Add( spawnPoint );
 		spawnPoint.GetComponent<DeathSystem>().RegisterDeathCallback( SpawnerDeathCallback );
 	}
