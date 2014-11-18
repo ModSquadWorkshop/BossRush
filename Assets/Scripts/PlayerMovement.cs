@@ -34,9 +34,12 @@ sealed public class PlayerMovement : MonoBehaviour
 	private RumbleManager _rumbler;
 
 	private Plane _plane;
+	private new Transform transform;
 
 	void Awake()
 	{
+		transform = GetComponent<Transform>();
+
 		_playerHealth = GetComponent<HealthSystem>();
 		_playerWeapons = GetComponent<WeaponSystem>();
 		_plane = new Plane( Vector3.up, this.transform.position );
@@ -82,6 +85,15 @@ sealed public class PlayerMovement : MonoBehaviour
 		}
 
 		rigidbody.velocity = _velocity;
+	}
+
+	void FixedUpdate()
+	{
+
+		// super hacky bug fix
+		Vector3 newPos = transform.position;
+		newPos.y = 0.0f;
+		transform.position = newPos;
 	}
 
 	private void HandleLookDirection()
