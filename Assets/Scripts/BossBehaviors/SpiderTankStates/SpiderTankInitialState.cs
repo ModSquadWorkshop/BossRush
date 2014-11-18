@@ -7,19 +7,11 @@ public class SpiderTankInitialState : SpiderTankState
 	public float preFallDelay;
 	public float fallTime;
 	public float postFallDelay;
+	public GameObject landingEffect;
 
 	public GameObject explodeMinion;
 	public int numMinions;
 	public float maxWaitTime;
-
-	private Animator _animator;
-
-	public override void Awake()
-	{
-		base.Awake();
-
-		_animator = GetComponent<Animator>();
-	}
 
 	public override void OnEnable()
 	{
@@ -55,15 +47,20 @@ public class SpiderTankInitialState : SpiderTankState
 			settings.Add( "easetype", iTween.EaseType.linear );
 			iTween.MoveTo( gameObject, settings );
 
-			Invoke( "FallEnded", preFallDelay + fallTime + postFallDelay );
+			Invoke( "FallEnded", preFallDelay + fallTime );
 		}
 	}
 
-	public void FallEnded()
+	void FallEnded()
+	{
+		Instantiate( landingEffect, transform.position, Quaternion.identity );
+		Invoke( "Exit", postFallDelay );
+	}
+
+	void Exit()
 	{
 		enabled = false;
 		spawner.enabled = false;
-		//_animator.enabled = false;
 
 		spiderTank.basicState.enabled = true;
 	}
