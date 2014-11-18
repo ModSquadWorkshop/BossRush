@@ -24,6 +24,13 @@ public class Perk : MonoBehaviour
 
 	PerkSystem perkSystem;
 
+	public const float MAX_TIME = 15.0f;
+
+	void Awake()
+	{
+		Invoke( "Disappear", MAX_TIME );
+	}
+
 	void OnCollisionEnter( Collision other )
 	{
 		if ( other.gameObject.tag == "Player" )
@@ -56,6 +63,11 @@ public class Perk : MonoBehaviour
 	void End()
 	{
 		perkSystem.RemovePerk( this );
+		Destroy( this.gameObject );
+	}
+
+	void Disappear()
+	{
 		Destroy( this.gameObject );
 	}
 }
