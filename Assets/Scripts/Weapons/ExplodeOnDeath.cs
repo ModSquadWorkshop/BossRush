@@ -11,10 +11,6 @@ public class ExplodeOnDeath : MonoBehaviour
 
 	void Awake()
 	{
-		if ( GetComponent<AudioSource>().enabled )
-		{
-			audio.Play();
-		}
 		GetComponent<DeathSystem>().RegisterDeathCallback( Explode );
 	}
 
@@ -28,6 +24,7 @@ public class ExplodeOnDeath : MonoBehaviour
 			{
 				otherHealth.Damage( explosionDamage );
 			}
+
 			if ( col.rigidbody != null )
 			{
 				col.rigidbody.AddExplosionForce( explosionForce, transform.position, explosionRadius );
