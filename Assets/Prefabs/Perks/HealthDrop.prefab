@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977c784b6514ff742a2a3906df8de4e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChance: .0299999993
+  dropChance: .00300000003
   immunity: 0
   infiniteAmmo: 0
   speedMod: 0
@@ -282,6 +282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 400008}
   spin: 90
+  lifetime: 10
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

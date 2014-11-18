@@ -111,7 +111,7 @@ MonoBehaviour:
   magazinesMod: 0
   gunDrop: {fileID: 0}
   ID: Immunity
-  duration: 5
+  duration: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,6 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 0}
   spin: 90
+  lifetime: 10
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

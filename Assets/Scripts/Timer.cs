@@ -66,6 +66,11 @@ public class Timer
 		}
 	}
 
+	public float TimeRunning()
+	{
+		return _deltaTime;
+	}
+
 	public void Reset( bool startAfterReset = false )
 	{
 		_deltaTime = 0.0f;
