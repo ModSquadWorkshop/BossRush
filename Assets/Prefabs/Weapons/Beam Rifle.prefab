@@ -242,6 +242,7 @@ MonoBehaviour:
   destroyAfterDamage: 0
   targets:
   - Enemy
+  - Scenery
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1

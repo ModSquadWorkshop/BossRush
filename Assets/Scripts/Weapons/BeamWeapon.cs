@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 public class BeamWeapon : Weapon
@@ -72,12 +73,16 @@ public class BeamWeapon : Weapon
 			// cast a ray and collect data on all of the objects it hits
 			RaycastHit[] hits;
 			hits = Physics.RaycastAll( _ray, maxRange );
+			Array.Sort( hits, delegate( RaycastHit first, RaycastHit second )
+			{
+				return (int)( first.distance - second.distance );
+			} );
 
 			// loop through the hit targets and attempt to deal damage
-			int len = Mathf.Min( hits.Length, piercingsAmount + 1 );
-			for ( int i = 0; i < len; i++ )
+			int length = Mathf.Min( hits.Length, piercingsAmount + 1 );
+			for ( int i = 0; i < length; i++ )
 			{
-				RaycastHit hit = hits[hits.Length - i - 1];
+				RaycastHit hit = hits[i];
 
 				// make sure the colliding object is one of the defined targets
 				if ( _damageSystem.IsTarget( hit.collider.gameObject.tag ) )
@@ -92,9 +97,9 @@ public class BeamWeapon : Weapon
 							_damageDealt = true;
 						}
 					}
-				}
 
-				endVertex = hit.point + hit.normal;
+					endVertex = hit.point;
+				}
 			}
 
 			// set the end vertex of the beam according to raycast collisions and amount of piercings
