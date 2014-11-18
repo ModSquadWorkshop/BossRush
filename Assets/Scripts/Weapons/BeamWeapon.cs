@@ -11,6 +11,7 @@ public class BeamWeapon : Weapon
 	public float duration;
 	public Transform impactParticles;
 
+	private AudioSource _source;
 	private LineRenderer beam;
 	private Ray _ray;
 	private Timer _beamTimer;
@@ -38,7 +39,7 @@ public class BeamWeapon : Weapon
 		_beamDuration = new Timer( duration, 1 );
 		_beamDuration.Start();
 		_ray = new Ray();
-
+		_source = GetComponent<AudioSource>();
 		// get a reference to the damage system attached to the weapon
 		_damageSystem = this.gameObject.GetComponent<DamageSystem>();
 
@@ -66,7 +67,7 @@ public class BeamWeapon : Weapon
 			beam.SetPosition( 0, _ray.origin );
 
 			// by default, the end vertex of the ray is the max forward distance from its origin
-			Vector3 endVertex = _ray.origin + ( _ray.direction * maxRange );
+			Vector3 endVertex = _ray.origin + (_ray.direction * maxRange);
 
 			// cast a ray and collect data on all of the objects it hits
 			RaycastHit[] hits;
@@ -120,6 +121,13 @@ public class BeamWeapon : Weapon
 				_done = true;
 			}
 		}
+		else
+		{
+			if ( _source != null && audio.isPlaying )
+			{
+				audio.Stop();
+			}
+		}
 	}
 
 	public bool IsDone()
@@ -141,6 +149,12 @@ public class BeamWeapon : Weapon
 			_damageDealt = false;
 			beam.enabled = true;
 		}
+
+		if ( _source != null && !audio.isPlaying )
+		{
+			audio.Play();
+		}
+
 		_beamDuration.Update();
 		_beamTimer.Reset( true );
 	}

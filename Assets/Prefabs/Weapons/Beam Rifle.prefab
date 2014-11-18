@@ -9,10 +9,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 65: {fileID: 6500000}
-  - 82: {fileID: 8200000}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 120: {fileID: 12000000}
+  - 82: {fileID: 8200000}
   m_Layer: 10
   m_Name: Beam Rifle
   m_TagString: Weapon
@@ -140,11 +140,11 @@ AudioSource:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: eb86f84923de521429aca0c75c942846, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: .75
+  m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Priority: 128
   DopplerLevel: 1
@@ -158,15 +158,15 @@ AudioSource:
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
-      value: 1
+    - time: .00200000009
+      value: .86996901
       inSlope: 0
-      outSlope: 0
+      outSlope: -1.00200403
       tangentMode: 0
-    - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
+    - time: .88657409
+      value: .229102135
+      inSlope: -.0703928918
+      outSlope: -.0703928918
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -217,7 +217,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  primaryAttackSounds: []
+  primaryAttackSounds:
+  - {fileID: 0}
   repeatDamage: 1
   beamWidth: 1
   maxRange: 10000

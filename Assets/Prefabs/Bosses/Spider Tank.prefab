@@ -1126,7 +1126,7 @@ AudioSource:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: c43d45dc26d63e64fb741a36b3c8bb77, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1184,11 +1184,11 @@ AudioSource:
   m_GameObject: {fileID: 100012}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 1f0213a9de621514cac4d7f8a8452419, type: 3}
+  m_audioClip: {fileID: 8300000, guid: eb86f84923de521429aca0c75c942846, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Priority: 128
   DopplerLevel: 1
@@ -1727,7 +1727,7 @@ MonoBehaviour:
       minRushInterval: 1
       maxRushInterval: 3
       turboChance: .200000003
-      burrowChance: .800000012
+      burrowChance: 0
   movementScript: {fileID: 11400010}
 --- !u!114 &11400022
 MonoBehaviour:
@@ -1887,6 +1887,7 @@ MonoBehaviour:
         amountOfMortars: 10
         launchInterval: .150000006
   returnState: {fileID: 0}
+  bossDashing: {fileID: 8300000, guid: d06691583d23797469222a30c9d22e66, type: 3}
   rushStateSettings:
     phaseOneSettings:
       rushTime: .5
@@ -2512,7 +2513,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Mat: {fileID: 0}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Sprite: {fileID: 21300000, guid: 2f6e32b3a6c9c8b46b548e66058edca0, type: 3}
   m_Type: 3
@@ -14428,7 +14429,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100038}
-  m_HideIfInvisible: 0
 --- !u!223 &22300000
 Canvas:
   m_ObjectHideFlags: 1
@@ -14442,7 +14442,6 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
-  m_OverrideSorting: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
 --- !u!224 &22400000
