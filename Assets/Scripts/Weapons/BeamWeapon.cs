@@ -140,6 +140,11 @@ public class BeamWeapon : Weapon
 		_beamDuration.Reset( true );
 	}
 
+	public float RunTime()
+	{
+		return _beamDuration.TimeRunning();
+	}
+
 	public override void PerformPrimaryAttack()
 	{
 		// reset the beam and enable it
