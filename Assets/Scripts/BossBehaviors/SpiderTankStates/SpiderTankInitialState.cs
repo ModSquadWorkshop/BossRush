@@ -3,8 +3,10 @@ using System.Collections;
 
 public class SpiderTankInitialState : SpiderTankState
 {
-	public Transform fallPoint;
+	public Transform[] fallPoints;
+	public float preFallDelay;
 	public float fallTime;
+	public float postFallDelay;
 
 	public GameObject explodeMinion;
 	public int numMinions;
@@ -41,13 +43,19 @@ public class SpiderTankInitialState : SpiderTankState
 	{
 		if ( enabled && count == 0 )
 		{
+			// move to be above destination
+			Transform destination = findClosestToPlayer();
+			transform.position = destination.position + new Vector3( 0.0f, 200.0f, 0.0f );
+
+			// start fal
 			Hashtable settings = new Hashtable();
-			settings.Add( "position", fallPoint );
+			settings.Add( "delay", preFallDelay );
+			settings.Add( "position", destination );
 			settings.Add( "time", fallTime );
 			settings.Add( "easetype", iTween.EaseType.linear );
 			iTween.MoveTo( gameObject, settings );
 
-			Invoke( "FallEnded", fallTime );
+			Invoke( "FallEnded", preFallDelay + fallTime + postFallDelay );
 		}
 	}
 
@@ -58,5 +66,18 @@ public class SpiderTankInitialState : SpiderTankState
 		//_animator.enabled = false;
 
 		spiderTank.basicState.enabled = true;
+	}
+
+	public Transform findClosestToPlayer()
+	{
+		Transform closest = fallPoints[0];
+		for ( int index = 1; index < fallPoints.Length; index++ )
+		{
+			if ( ( player.position - fallPoints[index].position ).sqrMagnitude < ( player.position - closest.position ).sqrMagnitude )
+			{
+				closest = fallPoints[index];
+			}
+		}
+		return closest;
 	}
 }

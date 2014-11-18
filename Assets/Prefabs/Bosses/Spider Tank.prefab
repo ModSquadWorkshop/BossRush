@@ -2136,8 +2136,10 @@ MonoBehaviour:
       mortarSettings:
         amountOfMortars: 0
         launchInterval: 0
-  fallPoint: {fileID: 0}
+  fallPoints:
+  preFallDelay: 2
   fallTime: 1
+  postFallDelay: .5
   explodeMinion: {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
   numMinions: 20
   maxWaitTime: 15
