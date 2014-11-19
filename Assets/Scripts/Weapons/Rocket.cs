@@ -5,7 +5,7 @@ public class Rocket : Projectile
 {
 	public float velocityIncrease = 1.1f;
 
-	protected void Update()
+	override protected void Update()
 	{
 		rigidbody.velocity *= velocityIncrease;
 
