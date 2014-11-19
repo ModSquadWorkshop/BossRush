@@ -28,7 +28,10 @@ public class EnemySpawner : MonoBehaviour
 
 		foreach ( Transform spawnPoint in spawns )
 		{
-			spawnPoint.GetComponent<DeathSystem>().RegisterDeathCallback( SpawnerDeathCallback );
+			if ( spawnPoint != null )
+			{
+				spawnPoint.GetComponent<DeathSystem>().RegisterDeathCallback( SpawnerDeathCallback );
+			}
 		}
 	}
 
@@ -72,16 +75,13 @@ public class EnemySpawner : MonoBehaviour
 	 */
 	public void Spawn( int amount, GameObject enemyType = null )
 	{
-		if ( spawns.Count > 0 )
-		{
-			amount = Mathf.Min( amount, maxSpawned - _enemyCount );
-			StartCoroutine( SpawnCoroutine( amount, enemyType ) );
-		}
+		amount = Mathf.Min( amount, maxSpawned - _enemyCount );
+		StartCoroutine( SpawnCoroutine( amount, enemyType ) );
 	}
 
 	private IEnumerator SpawnCoroutine( int amount, GameObject enemyType = null )
 	{
-		while ( amount > 0 )
+		while ( amount > 0 && spawns.Count > 0 )
 		{
 			InitializeEnemyComponents( Instantiate( enemyType ?? enemyTypes[Random.Range( 0, enemyTypes.Length )] ) as GameObject );
 			amount--;
@@ -99,8 +99,20 @@ public class EnemySpawner : MonoBehaviour
 			agent.enabled = false;
 		}
 
-		// set spawn point
+		// get an available spawn index
 		_spawnIndex = Random.Range( 0, spawns.Count );
+		while ( spawns[_spawnIndex] == null )
+		{
+			spawns.Remove( spawns[_spawnIndex] );
+			if ( spawns.Count == 0 )
+			{
+				return;
+			}
+
+			_spawnIndex = Random.Range( 0, spawns.Count );
+		}
+
+		// set the spawn point
 		enemy.transform.position = spawns[_spawnIndex].position;
 
 		// move the enemy in a radius around the spawn point
@@ -163,7 +175,6 @@ public class EnemySpawner : MonoBehaviour
 
 	public void AddSpawnPoint( Transform spawnPoint )
 	{
-		Debug.Log( true );
 		spawns.Add( spawnPoint );
 		spawnPoint.GetComponent<DeathSystem>().RegisterDeathCallback( SpawnerDeathCallback );
 	}
