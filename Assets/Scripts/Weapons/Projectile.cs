@@ -23,7 +23,7 @@ public class Projectile : MonoBehaviour
 		_elapsedTime = 0.0f;
 	}
 
-	void Update()
+	protected virtual void Update()
 	{
 		_elapsedTime += Time.deltaTime;
 

@@ -9,12 +9,15 @@ public class ExplodeOnDeath : MonoBehaviour
 	public float explosionDamage;
 	public float explosionForce;
 
+	private DamageSystem _damageSystem;
+
+	void Start()
+	{
+		_damageSystem = GetComponent<DamageSystem>();
+	}
+
 	void Awake()
 	{
-		if ( GetComponent<AudioSource>().enabled )
-		{
-			audio.Play();
-		}
 		GetComponent<DeathSystem>().RegisterDeathCallback( Explode );
 	}
 
@@ -23,11 +26,18 @@ public class ExplodeOnDeath : MonoBehaviour
 		Collider[] collisions = Physics.OverlapSphere( transform.position, explosionRadius );
 		foreach ( Collider col in collisions )
 		{
-			HealthSystem otherHealth = col.gameObject.GetComponent<HealthSystem>();
-			if ( otherHealth != null )
+			if ( _damageSystem != null )
 			{
-				otherHealth.Damage( explosionDamage );
+				if ( _damageSystem.IsTarget( col.tag ) )
+				{
+					DealDamage( col.gameObject );
+				}
 			}
+			else
+			{
+				DealDamage( col.gameObject );
+			}
+
 			if ( col.rigidbody != null )
 			{
 				col.rigidbody.AddExplosionForce( explosionForce, transform.position, explosionRadius );
@@ -35,5 +45,14 @@ public class ExplodeOnDeath : MonoBehaviour
 		}
 
 		Instantiate( explosionEffect, transform.position, transform.rotation );//.GetComponent<Explosion>().radius = explosionRadius;
+	}
+
+	void DealDamage( GameObject target )
+	{
+		HealthSystem healthSystem = target.gameObject.GetComponent<HealthSystem>();
+		if ( healthSystem != null )
+		{
+			healthSystem.Damage( explosionDamage );
+		}
 	}
 }
