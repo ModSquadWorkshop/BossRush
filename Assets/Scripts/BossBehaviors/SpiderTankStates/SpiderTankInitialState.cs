@@ -51,6 +51,8 @@ public class SpiderTankInitialState : SpiderTankState
 
 	void StartFall()
 	{
+		CancelInvoke();
+
 		// move to be above destination
 		Transform destination = findClosestToPlayer();
 		transform.position = destination.position + new Vector3( 0.0f, 200.0f, 0.0f );
