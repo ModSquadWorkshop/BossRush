@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: TowerStripe
-  m_Shader: {fileID: 2, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -24,7 +24,7 @@ Material:
         first:
           name: _BumpMap
         second:
-          m_Texture: {fileID: 2800000, guid: dac2a28fc94762d4ca44b2bc4684a2aa, type: 3}
+          m_Texture: {fileID: 2800000, guid: a4b3c4b19bb248240b69534d0d290fa6, type: 3}
           m_Scale: {x: 5, y: 5}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -36,8 +36,8 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .242647052, g: .242647052, b: .242647052, a: 1}
+        second: {r: 1, g: .931034446, b: 0, a: 1}
       data:
         first:
           name: _SpecColor
-        second: {r: .5, g: .5, b: .5, a: 1}
+        second: {r: 1, g: 1, b: 1, a: 1}
