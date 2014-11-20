@@ -256,7 +256,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -255, y: 0}
   m_SizeDelta: {x: 450, y: 20}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &75488738
@@ -1435,7 +1435,7 @@ RectTransform:
   m_Children:
   - {fileID: 235398619}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -2876,6 +2876,7 @@ GameObject:
   - 4: {fileID: 1081013407}
   - 33: {fileID: 1081013406}
   - 23: {fileID: 1081013404}
+  - 114: {fileID: 1081013405}
   m_Layer: 10
   m_Name: Model
   m_TagString: Enemy
@@ -2904,6 +2905,18 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!114 &1081013405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1081013403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30b535898863df04389ee98f3cfa1dd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthbar: {fileID: 365835162}
 --- !u!33 &1081013406
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3168,7 +3181,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: c547150bab057b34982e046263a7cf68, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c547150bab057b34982e046263a7cf68, type: 2}
@@ -3909,7 +3922,7 @@ Transform:
   - {fileID: 2136326868}
   - {fileID: 280432604}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!114 &1363035871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4776,7 +4789,7 @@ Transform:
   m_Children:
   - {fileID: 2003071833}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!1 &1637150652
 GameObject:
   m_ObjectHideFlags: 0
