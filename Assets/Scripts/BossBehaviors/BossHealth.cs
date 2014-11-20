@@ -6,32 +6,38 @@ public class BossHealth : MonoBehaviour
 {
 	private HealthSystem _health;
 	private Scrollbar _scroll;
-	public Canvas healthbar;
+	// Canvas healthbar;
+	public GameObject bossMesh;
+	public GameObject boss;
+	private MeshRenderer _renderer;
 	
 	// Use this for initialization
 	void Start () 
 	{
-		_health = GetComponentInParent<HealthSystem>();
-		_scroll = healthbar.GetComponentInChildren<Scrollbar>();
+		_health = boss.GetComponent<HealthSystem>();
+		_health.RegisterHealthCallback( HealthCallback );
+		_scroll = this.GetComponentInChildren<Scrollbar>();
+		_renderer = bossMesh.GetComponent<MeshRenderer>();
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		healthbar.enabled = true;
-		_scroll.size = _health.percent;
-		//Debug.Log( _scroll.size );
-		Debug.Log( _health.percent );
-		/*
-		if ( !this.renderer.isVisible )
+		if ( !_renderer.isVisible )
 		{
-			
+			this.gameObject.SetActive( true );
+			//Debug.Log( "BOSS NOT VISIBLE" );
 		}
 		else
 		{
-			//healthbar.enabled = false;
-			healthbar.enabled = true;
-			_scroll.size = _health.percent;
-		}*/
+			this.gameObject.SetActive( false );
+			//Debug.Log( "BOSS VISIBLE" );
+		}
+	}
+
+	void HealthCallback( HealthSystem healthSystem, float healthChange )
+	{
+		_scroll.size = healthSystem.percent;
+		//Debug.Log( _scroll.size );
 	}
 }
