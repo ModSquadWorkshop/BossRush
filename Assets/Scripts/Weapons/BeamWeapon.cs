@@ -5,7 +5,6 @@ using System.Collections;
 public class BeamWeapon : Weapon
 {
 	public bool repeatDamage = true;
-	public float beamWidth;
 	public float maxRange;
 	public float damageInterval;
 	public int piercingsAmount;
@@ -31,7 +30,6 @@ public class BeamWeapon : Weapon
 		// the beam should only every have 2 vertexes
 		// the width of the beam is the same from vertex to vertex
 		beam.SetVertexCount( 2 );
-		beam.SetWidth( beamWidth, beamWidth );
 		beam.enabled = false;
 
 		// initialize the beam timers and the ray
@@ -97,9 +95,8 @@ public class BeamWeapon : Weapon
 							_damageDealt = true;
 						}
 					}
-
-					endVertex = hit.point;
 				}
+				endVertex = hit.point;
 			}
 
 			// set the end vertex of the beam according to raycast collisions and amount of piercings

@@ -1510,6 +1510,7 @@ MonoBehaviour:
   destroyAfterDamage: 0
   targets:
   - Player
+  - Scenery
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1931,10 +1932,9 @@ MonoBehaviour:
   cooldown: 0
   primaryAttackSounds: []
   repeatDamage: 1
-  beamWidth: 1
   maxRange: 10000
   damageInterval: .100000001
-  piercingsAmount: 100
+  piercingsAmount: 0
   duration: 0
   impactParticles: {fileID: 400044}
 --- !u!114 &11400032
@@ -2300,6 +2300,7 @@ MonoBehaviour:
   destroyAfterDamage: 0
   targets:
   - Player
+  - Scenery
 --- !u!114 &11400052
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2314,10 +2315,9 @@ MonoBehaviour:
   cooldown: 0
   primaryAttackSounds: []
   repeatDamage: 1
-  beamWidth: 1
   maxRange: 10000
   damageInterval: .100000001
-  piercingsAmount: 100
+  piercingsAmount: 0
   duration: 0
   impactParticles: {fileID: 400046}
 --- !u!114 &11400054
@@ -2334,10 +2334,9 @@ MonoBehaviour:
   cooldown: 0
   primaryAttackSounds: []
   repeatDamage: 1
-  beamWidth: 1
   maxRange: 10000
   damageInterval: .100000001
-  piercingsAmount: 100
+  piercingsAmount: 0
   duration: 0
   impactParticles: {fileID: 400048}
 --- !u!114 &11400056
@@ -2356,6 +2355,7 @@ MonoBehaviour:
   destroyAfterDamage: 0
   targets:
   - Player
+  - Scenery
 --- !u!114 &11400058
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2372,6 +2372,7 @@ MonoBehaviour:
   destroyAfterDamage: 0
   targets:
   - Player
+  - Scenery
 --- !u!114 &11400060
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2386,10 +2387,9 @@ MonoBehaviour:
   cooldown: 0
   primaryAttackSounds: []
   repeatDamage: 1
-  beamWidth: 1
   maxRange: 10000
   damageInterval: .100000001
-  piercingsAmount: 100
+  piercingsAmount: 0
   duration: 0
   impactParticles: {fileID: 400050}
 --- !u!114 &11400062
@@ -2406,10 +2406,9 @@ MonoBehaviour:
   cooldown: 0
   primaryAttackSounds: []
   repeatDamage: 1
-  beamWidth: 1
   maxRange: 10000
   damageInterval: .100000001
-  piercingsAmount: 100
+  piercingsAmount: 0
   duration: 0
   impactParticles: {fileID: 400056}
 --- !u!114 &11400064
@@ -2428,6 +2427,7 @@ MonoBehaviour:
   destroyAfterDamage: 0
   targets:
   - Player
+  - Scenery
 --- !u!114 &11400066
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2513,7 +2513,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mat: {fileID: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Sprite: {fileID: 21300000, guid: 2f6e32b3a6c9c8b46b548e66058edca0, type: 3}
   m_Type: 3
@@ -2638,8 +2638,8 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
   m_Parameters:
-    startWidth: 1
-    endWidth: 1
+    startWidth: .75
+    endWidth: .75
     m_StartColor:
       serializedVersion: 2
       rgba: 4278190335
@@ -2671,8 +2671,8 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
   m_Parameters:
-    startWidth: 1
-    endWidth: 1
+    startWidth: .75
+    endWidth: .75
     m_StartColor:
       serializedVersion: 2
       rgba: 4278190335
@@ -2704,8 +2704,8 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
   m_Parameters:
-    startWidth: 1
-    endWidth: 1
+    startWidth: .75
+    endWidth: .75
     m_StartColor:
       serializedVersion: 2
       rgba: 4278190335
@@ -2737,8 +2737,8 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
   m_Parameters:
-    startWidth: 1
-    endWidth: 1
+    startWidth: .75
+    endWidth: .75
     m_StartColor:
       serializedVersion: 2
       rgba: 4278190335
@@ -2770,8 +2770,8 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
   m_Parameters:
-    startWidth: 1
-    endWidth: 1
+    startWidth: .75
+    endWidth: .75
     m_StartColor:
       serializedVersion: 2
       rgba: 4278190335
@@ -14429,6 +14429,7 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100038}
+  m_HideIfInvisible: 0
 --- !u!223 &22300000
 Canvas:
   m_ObjectHideFlags: 1
@@ -14442,6 +14443,7 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
+  m_OverrideSorting: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
 --- !u!224 &22400000

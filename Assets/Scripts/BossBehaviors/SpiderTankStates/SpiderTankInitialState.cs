@@ -20,7 +20,7 @@ public class SpiderTankInitialState : SpiderTankState
 		spawner.RegisterEnemyCountCallback( MinionCountChange );
 		spawner.Spawn( numMinions, explodeMinion );
 
-		Invoke( "Exit", maxWaitTime );
+		Invoke( "StartFall", maxWaitTime );
 	}
 
 	public override void OnDisable()
@@ -35,20 +35,25 @@ public class SpiderTankInitialState : SpiderTankState
 	{
 		if ( enabled && count == 0 )
 		{
-			// move to be above destination
-			Transform destination = findClosestToPlayer();
-			transform.position = destination.position + new Vector3( 0.0f, 200.0f, 0.0f );
-
-			// start fal
-			Hashtable settings = new Hashtable();
-			settings.Add( "delay", preFallDelay );
-			settings.Add( "position", destination );
-			settings.Add( "time", fallTime );
-			settings.Add( "easetype", iTween.EaseType.linear );
-			iTween.MoveTo( gameObject, settings );
-
-			Invoke( "FallEnded", preFallDelay + fallTime );
+			StartFall();
 		}
+	}
+
+	void StartFall()
+	{
+		// move to be above destination
+		Transform destination = findClosestToPlayer();
+		transform.position = destination.position + new Vector3( 0.0f, 200.0f, 0.0f );
+
+		// start fall
+		Hashtable settings = new Hashtable();
+		settings.Add( "delay", preFallDelay );
+		settings.Add( "position", destination );
+		settings.Add( "time", fallTime );
+		settings.Add( "easetype", iTween.EaseType.linear );
+		iTween.MoveTo( gameObject, settings );
+
+		Invoke( "FallEnded", preFallDelay + fallTime );
 	}
 
 	void FallEnded()
