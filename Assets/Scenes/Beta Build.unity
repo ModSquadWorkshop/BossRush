@@ -34910,6 +34910,14 @@ Prefab:
       propertyPath: cameraFollow
       value: 
       objectReference: {fileID: 460028737}
+    - target: {fileID: 8200000, guid: b76c03ade0795794884cc6477dac31cd, type: 2}
+      propertyPath: m_Volume
+      value: .00999999978
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200000, guid: b76c03ade0795794884cc6477dac31cd, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b76c03ade0795794884cc6477dac31cd, type: 2}
   m_RootGameObject: {fileID: 1736291849}
@@ -36412,7 +36420,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: d1730c6b568a4eb4ea642b32b8054ff3, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: .0379999988
+  m_Volume: .00999999978
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -37402,6 +37410,7 @@ MonoBehaviour:
     waveInterval: 2
     spawnOnStart: 0
   maxSpawned: 20
+  delayBetweenNewEnemy: .100000001
 --- !u!114 &1800426938
 MonoBehaviour:
   m_ObjectHideFlags: 0
