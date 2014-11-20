@@ -8,6 +8,8 @@ public class SpiderTankInitialState : SpiderTankState
 	public float fallTime;
 	public float postFallDelay;
 	public GameObject landingEffect;
+	public AudioClip fallingSound;
+	public AudioClip landingSound;
 
 	public GameObject explodeMinion;
 	public int numMinions;
@@ -55,6 +57,8 @@ public class SpiderTankInitialState : SpiderTankState
 		Transform destination = findClosestToPlayer();
 		transform.position = destination.position + new Vector3( 0.0f, 200.0f, 0.0f );
 
+		audio.clip = fallingSound;
+		audio.Play();
 		// start fall
 		Hashtable settings = new Hashtable();
 		settings.Add( "delay", preFallDelay );
@@ -69,6 +73,8 @@ public class SpiderTankInitialState : SpiderTankState
 	void FallEnded()
 	{
 		Instantiate( landingEffect, transform.position, Quaternion.identity );
+		audio.clip = landingSound;
+		audio.Play();
 		Invoke( "Exit", postFallDelay );
 	}
 
