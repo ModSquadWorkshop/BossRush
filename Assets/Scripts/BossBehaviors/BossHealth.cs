@@ -18,14 +18,20 @@ public class BossHealth : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		healthbar.enabled = true;
+		_scroll.size = _health.percent;
+		//Debug.Log( _scroll.size );
+		Debug.Log( _health.percent );
+		/*
 		if ( !this.renderer.isVisible )
 		{
-			healthbar.enabled = true;
-			_scroll.size = _health.percent;
+			
 		}
 		else
 		{
-			healthbar.enabled = false;
-		}
+			//healthbar.enabled = false;
+			healthbar.enabled = true;
+			_scroll.size = _health.percent;
+		}*/
 	}
 }
