@@ -39760,6 +39760,10 @@ Prefab:
       propertyPath: cameraFollow
       value: 
       objectReference: {fileID: 460028737}
+    - target: {fileID: 22300002, guid: b76c03ade0795794884cc6477dac31cd, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b76c03ade0795794884cc6477dac31cd, type: 2}
   m_RootGameObject: {fileID: 1736291849}

@@ -6,7 +6,7 @@ public class BossHealth : MonoBehaviour
 {
 	private HealthSystem _health;
 	private Scrollbar _scroll;
-	// Canvas healthbar;
+	private Canvas _healthbar;
 	public GameObject bossMesh;
 	public GameObject boss;
 	private MeshRenderer _renderer;
@@ -18,6 +18,7 @@ public class BossHealth : MonoBehaviour
 		_health.RegisterHealthCallback( HealthCallback );
 		_scroll = this.GetComponentInChildren<Scrollbar>();
 		_renderer = bossMesh.GetComponent<MeshRenderer>();
+		_healthbar = this.GetComponent<Canvas>();
 	}
 	
 	// Update is called once per frame
@@ -25,13 +26,13 @@ public class BossHealth : MonoBehaviour
 	{
 		if ( !_renderer.isVisible )
 		{
-			this.gameObject.SetActive( true );
+			_healthbar.enabled = true;
 			//Debug.Log( "BOSS NOT VISIBLE" );
 		}
 		else
 		{
-			this.gameObject.SetActive( false );
-			//Debug.Log( "BOSS VISIBLE" );
+			_healthbar.enabled = false;
+				//Debug.Log( "BOSS VISIBLE" );
 		}
 	}
 
