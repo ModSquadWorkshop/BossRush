@@ -1,102 +1,108 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Mortar : MonoBehaviour 
+public class Mortar : MonoBehaviour
 {
-	public float damage;
-	public float radius;
+	private float       _speed;
+	protected Vector3     _targetPos;
+	protected GameObject  _marker; // the actual instantiated target marker
+	private Vector3     _velocity;
 
-	private float		_speed;
-	private GameObject  _target;
-	private Vector3		_targetPos;
-	private GameObject  _targetMarker; // serves as a reference to a prefab
-									  // unity throws an error when trying to destroy this
-	private GameObject  _marker; // the actual instantiated target marker
-	private Vector3		_velocity;
-	private bool		_peakReached;
+	private MortarSettings _settings;
 
-	private const float ARC_HEIGHT = 100.0f;
-	private const float SPEED_INCREASE = 2.5f;
-
-	public void Init( float speed, Vector3 startPos, GameObject target, Vector3 targetPos, GameObject targetMarker )
+	public void Init( MortarSettings settings, Vector3 startPos )
 	{
-		this.gameObject.transform.position = startPos;
+		_settings = settings;
+		transform.position = startPos;
 
-		_speed = speed;
-		_target = target;
-		_targetPos = targetPos;
-		_targetMarker = targetMarker;
-	}
+		// configure all the things
+		_speed = Random.Range( _settings.minSpeed, _settings.maxSpeed );
+		_targetPos = new Vector3( startPos.x, _settings.arcHeight, startPos.z );
+		_speed = Random.Range( _settings.minSpeed, _settings.maxSpeed );
+		_velocity = Vector3.Normalize( _targetPos - transform.position ) * _speed;
 
-	void Start() 
-	{
-		_peakReached = false;
-		_velocity = Vector3.zero;
-		_targetPos.Set( _targetPos.x, _targetPos.y + ARC_HEIGHT, _targetPos.z );
+		// calculate time to apex
+		float timeToApex = Vector3.Distance( transform.position, _targetPos ) / _speed;
+		Invoke( "OnMidComplete", timeToApex );
+
+		transform.rotation = Quaternion.LookRotation( Vector3.up );
 	}
 
 	void Update()
 	{
-		if ( _peakReached )
-		{
-			this.gameObject.transform.Translate( _velocity * Time.deltaTime, Space.World );
-
-			if ( Vector3.Distance( this.gameObject.transform.position, _targetPos ) < 2.0f )
-			{
-				OnComplete();
-			}
-		}
-		else
-		{
-			this.gameObject.transform.position = Vector3.SmoothDamp( this.gameObject.transform.position, _targetPos, ref _velocity, Time.deltaTime * _speed );
-			this.gameObject.transform.rotation = Quaternion.AngleAxis( Mathf.Atan2( _velocity.y, _velocity.x ) * Mathf.Rad2Deg, Vector3.forward * 90.0f );
-
-			if ( Vector3.Distance( this.gameObject.transform.position, _targetPos ) < 2.0f )
-			{
-				OnMidComplete();
-			}
-		}
+		this.gameObject.transform.Translate( _velocity * Time.deltaTime, Space.World );
 	}
 
 	void OnMidComplete()
 	{
-		_speed *= SPEED_INCREASE;
-		_targetPos.Set( _targetPos.x, _targetPos.y - ARC_HEIGHT, _targetPos.z );
-		_velocity = Vector3.down * _speed;
+		// calculate the things
+		_speed *= _settings.speedIncrease;
+		transform.rotation = Quaternion.LookRotation( Vector3.down );
+		_targetPos = GetTargetPosition();
+		transform.position = _targetPos + new Vector3( 0.0f, _settings.arcHeight, 0.0f );
+		_marker = Instantiate( _settings.targetMarker, _targetPos, Quaternion.identity ) as GameObject;
+		_velocity = Vector3.Normalize( _targetPos - transform.position ) * _speed;
 
-		this.gameObject.transform.rotation = Quaternion.AngleAxis( Mathf.Atan2( _velocity.y, _velocity.x ) * Mathf.Rad2Deg, Vector3.forward * 90.0f );
-
-		if ( _targetMarker != null )
-		{
-			_marker = Instantiate( _targetMarker ) as GameObject;
-			_marker.transform.position = _targetPos;
-		}
-
-		_peakReached = true;
+		// calculate time to target
+		float timeToTarget = Vector3.Distance( transform.position, _targetPos ) / _speed;
+		Invoke( "OnComplete", timeToTarget );
 	}
 
-	void OnComplete()
+	public virtual void OnComplete()
 	{
+		GetComponent<DeathSystem>().Kill();
+		Destroy( _marker );
+	}
+
+	private Vector3 GetTargetPosition()
+	{
+		Vector3 offset = Random.insideUnitCircle * Random.Range( _settings.minTargetOffset, _settings.maxTargetOffset );
+		offset.z = offset.y; // Random.insideUnitCircle returns a 2D vector with (x, y), so we swap y with z for an accurate 3D position
+		offset.y = 0.0f;
+
+		Transform target = _settings.targets[Random.Range( 0, _settings.targets.Length )];
+
+		// just give up if the target has already been destroyed
+		if ( target == null )
+		{
+			Destroy( gameObject );
+			return new Vector3();
+		}
+
+		// take the amount to lead the target by into account
+		if ( target.rigidbody != null )
+		{
+			offset += Vector3.Normalize( target.rigidbody.velocity ) * _settings.targetLead;
+		}
+
+		return offset + target.position;
+	}
+
+	void TargetDeath( GameObject obj )
+	{
+		// don't go through the DeathSystem,
+		// we're doing cleanup, not normal gameplay
+		Destroy( gameObject );
 		if ( _marker != null )
 		{
 			Destroy( _marker );
 		}
-
-		if ( _target != null )
-		{
-			float distance = Vector3.Distance( this.gameObject.transform.position, _target.transform.position );
-			if ( distance < radius )
-			{
-				HealthSystem healthSystem = _target.GetComponent<HealthSystem>();
-				if ( healthSystem != null )
-				{
-					float damageDropoff = damage * (distance / radius);
-					healthSystem.Damage( damage - damageDropoff );
-				}
-			}
-		}
-
-		this.enabled = false;
-		Destroy( this.gameObject );
+		CancelInvoke();
 	}
+}
+
+[System.Serializable]
+public class MortarSettings
+{
+	public Transform[] targets;
+	public GameObject targetMarker;
+
+	public float minSpeed;
+	public float maxSpeed;
+	public float minTargetOffset;
+	public float maxTargetOffset;
+	public float targetLead;
+
+	public float arcHeight;
+	public float speedIncrease;
 }

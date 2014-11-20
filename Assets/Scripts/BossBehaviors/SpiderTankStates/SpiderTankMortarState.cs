@@ -1,30 +1,40 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpiderTankMortarState : SpiderTankState 
+public class SpiderTankMortarState : SpiderTankState
 {
-	public GameObject mortarLauncher;
+	public MortarStateSettingsList mortarStateSettings;
+	private MortarStateSettings[] _settings;
+
+	public override void OnEnable()
+	{
+		base.OnEnable();
+
+		_settings = new MortarStateSettings[] { mortarStateSettings.phaseOneSettings, 
+		                                        mortarStateSettings.phaseTwoSettings, 
+		                                        mortarStateSettings.phaseThreeSettings, 
+		                                        mortarStateSettings.phaseFourSettings };
+
+		StartMortarLaunchAtInterval( _settings[spiderTank.currentPhase].amountOfMortars, 
+		                       _settings[spiderTank.currentPhase].launchInterval );
+	}
+}
+
+
+[System.Serializable]
+public class MortarStateSettings
+{
 	public int amountOfMortars;
-	public float delayBeforeLaunch;
+	public float launchInterval;
+}
 
-	private MortarAttack _mortarAttack;
 
-	public override void Awake()
-	{
-		base.Awake();
-
-		_mortarAttack = mortarLauncher.GetComponent<MortarAttack>();
-		if ( _mortarAttack != null )
-		{
-			// auto assign the target of the mortar attack to be the player
-			_mortarAttack.target = player.gameObject;
-		}
-
-		Invoke( "Launch", delayBeforeLaunch );
-	}
-
-	void Launch()
-	{
-		_mortarAttack.Launch( amountOfMortars );
-	}
+// this struct only exists to organize the settings in the inspector
+[System.Serializable]
+public class MortarStateSettingsList
+{
+	public MortarStateSettings phaseOneSettings;
+	public MortarStateSettings phaseTwoSettings;
+	public MortarStateSettings phaseThreeSettings;
+	public MortarStateSettings phaseFourSettings;
 }

@@ -1,20 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PerkSystem : MonoBehaviour
 {
 	public Perk[] startingPerks;
+	public GameObject shield;
+	private PlayerShield _playerShield;
 	private Hashtable _perks;
+	private Hashtable _perkCounts;
 
 	PlayerMovement playerSpeed;
 	HealthSystem playerHealth;
-	DamageSystem playerDamage;
-	Gun playerGun;
+	//DamageSystem playerDamage;
+	//Gun playerGun;
+	WeaponSystem playerWeapons;
 
-	void Start()
+	void Awake()
 	{
 		_perks = new Hashtable();
-
+		_perkCounts = new Hashtable();
 		for ( int i = 0; i < startingPerks.Length; i++ )
 		{
 			AddPerk( startingPerks[i] );
@@ -22,15 +27,91 @@ public class PerkSystem : MonoBehaviour
 
 		playerSpeed = this.gameObject.GetComponent<PlayerMovement>();
 		playerHealth = this.gameObject.GetComponent<HealthSystem>();
-		playerDamage = this.gameObject.GetComponent<WeaponSystem>().currentWeapon.GetComponent<DamageSystem>();
-		playerGun = this.gameObject.GetComponent<WeaponSystem>().currentWeapon.GetComponent<Gun>();
+		_playerShield = shield.GetComponent<PlayerShield>();
+		//playerDamage = this.gameObject.GetComponent<WeaponSystem>().currentWeapon.GetComponent<DamageSystem>();
+		//playerGun = this.gameObject.GetComponent<WeaponSystem>().currentWeapon.GetComponent<Gun>();
+		playerWeapons = this.gameObject.GetComponent<WeaponSystem>();
 	}
 
 	public void AddPerk( Perk perk )
 	{
-		_perks[perk] = true;
-		SetPerk( perk );
-		CreateTimer( perk );
+		int actives = 0;
+		if ( _perkCounts[perk.ID] != null )
+		{
+			actives = (int)_perkCounts[perk.ID];
+		}
+		else
+		{
+			_perkCounts[perk.ID] = 0;
+		}
+
+		if ( actives > 0 && ( perk.gunDrop != null || perk.immunity || perk.duration > 0 ) )
+		{
+			Perk currentPerk = _perks[perk.ID] as Perk;
+			if ( currentPerk != null )
+			{
+				RefreshPerk( currentPerk );
+			}
+			if ( perk.immunity )
+			{
+				RefreshShield();
+			}
+			Destroy( perk.gameObject );
+		}
+		else
+		{
+			_perks[perk.ID] = perk;
+
+			int count = (int) _perkCounts[perk.ID];
+			count++;
+			_perkCounts[perk.ID] = count;
+
+			SetPerk( perk );
+			if ( perk.gunDrop == null )
+			{
+				perk.Begin();
+			}
+		}
+	}
+
+	public void RemovePerk( Perk perk )
+	{
+		ResetPerk( perk );
+
+		int count = (int)_perkCounts[perk.ID];
+		count--;
+		_perkCounts[perk.ID] = count;
+
+		_perks[perk.ID] = null;
+	}
+
+	public void RefreshPerk( Perk perk )
+	{
+		//refresh ammo if gun drop, otherwise refresh timer
+		if ( perk.gunDrop != null && perk.duration <= 0 )
+		{
+			//Debug.Log( "ADD AMMO" );
+			if ( playerWeapons.DetermineType() )
+			{
+				Gun special = playerWeapons.weapons[2].GetComponent<Gun>();
+				special.RefreshAmmo();
+			}
+			else if ( !playerWeapons.DetermineType() )
+			{
+				//Debug.Log( "ADD TIME" );
+				BeamWeapon special = playerWeapons.weapons[2].GetComponent<BeamWeapon>();
+				special.ResetTimer();
+			}
+		}
+		else if ( perk.duration > 0 )
+		{
+			perk.Refresh();
+		}
+	}
+
+	public void RefreshShield()
+	{
+		_playerShield.RestoreShield();
 	}
 
 	public void SetPerk( Perk perk )
@@ -39,12 +120,25 @@ public class PerkSystem : MonoBehaviour
 		playerSpeed.speedMultiplier += perk.speedMod;
 		playerHealth.maxHealth += perk.maxHealthMod;
 		playerHealth.Heal( perk.healthMod );
-		playerDamage.damageMultiplier += perk.damageMod;
-		playerGun.cooldown += perk.fireRateMod;
-		playerGun.amountOfMagazines += perk.magazinesMod;
-		playerGun.reloadSpeed += perk.reloadMod;
-		playerGun.infiniteAmmo = perk.infiniteAmmo || playerGun.infiniteAmmo;
-		playerHealth.immune = perk.immunity || playerHealth.immune;
+		playerWeapons.SetBuff( perk.fireRateMod, perk.damageMod, perk.reloadMod );
+		playerHealth.immune = perk.immunity || playerHealth.immune; //create shield or change healthbar if true
+
+		if ( perk.immunity )
+		{
+			shield.SetActive( true );
+			_playerShield.SetPerk( perk );
+		}
+		
+		if ( perk.gunDrop != null && playerWeapons.weapons.Count <= 3 )
+		{
+			if ( playerWeapons.weapons.Count == 3 )
+			{
+				playerWeapons.RemoveSpecial();
+			}
+			playerWeapons.weapons.Add( perk.gunDrop );
+			playerWeapons.perk = perk;
+			playerWeapons.NewWeapon();
+		}
 	}
 
 	public void ResetPerk( Perk reset )
@@ -53,52 +147,12 @@ public class PerkSystem : MonoBehaviour
 		playerSpeed.speedMultiplier -= reset.speedMod;
 		playerHealth.maxHealth -= reset.maxHealthMod;
 		playerHealth.health -= reset.healthMod;
-		playerDamage.damageMultiplier -= reset.damageMod;
-		playerGun.cooldown -= reset.fireRateMod;
-		playerGun.amountOfMagazines -= reset.magazinesMod;
-		playerGun.reloadSpeed -= reset.reloadMod;
-
-		if ( reset.infiniteAmmo )
-		{
-			playerGun.infiniteAmmo = false;
-		}
+		playerWeapons.RevertBuff( reset.fireRateMod, reset.damageMod, reset.reloadMod );
 
 		if ( reset.immunity )
 		{
 			playerHealth.immune = false;
+			shield.SetActive( false );
 		}
 	}
-
-	public void CreateTimer( Perk perk )
-	{
-		if ( perk.length > 0f )
-		{
-			PerkTime timer = this.gameObject.AddComponent<PerkTime>();
-			timer.perkLength = perk.length;
-			timer.perk = perk;
-			timer.Begin();
-		}
-	}
-
-	public bool IsActive( Perk perk )
-	{
-		return ( bool )_perks[perk];
-	}
-
-	public void Clear()
-	{
-		PerkTime[] timers = gameObject.GetComponents<PerkTime>();
-		foreach ( PerkTime time in timers )
-		{
-			time.End();
-		}
-		_perks.Clear();
-	}
-
-	public void RemovePerk( Perk perk )
-	{
-		ResetPerk( perk );
-		_perks[perk] = false;
-	}
-
 }

@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -70,6 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977c784b6514ff742a2a3906df8de4e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropChance: 0
   immunity: 0
   infiniteAmmo: 0
   speedMod: 0
@@ -79,7 +80,9 @@ MonoBehaviour:
   damageMod: 0
   reloadMod: 0
   magazinesMod: 0
-  length: 0
+  gunDrop: {fileID: 0}
+  ID: 
+  duration: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -88,9 +91,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c2e970959277f3479829e1087079f06, type: 3}
+  m_Script: {fileID: 11500000, guid: ee220d2f2924e8e4dbaf9a41f267a361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  model: {fileID: 0}
+  spin: 360
+  lifetime: 10
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -100,7 +106,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: .920000017
+  m_Radius: 1.5
   m_Height: 2.45000005
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}

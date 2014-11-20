@@ -5,8 +5,8 @@ public class Gun : Weapon
 {
 	public GameObject projectile;
 
-	public Transform casingAnchor;
-	public GameObject casingEmitter;
+	public ParticleSystem casingEmitter;
+	public ParticleSystem muzzleFlash;
 
 	public bool infiniteAmmo;
 	public int ammoPerMagazine;
@@ -19,30 +19,30 @@ public class Gun : Weapon
 
 	protected float _halfSpray;
 
-	[SerializeField] protected int _magazines;
-	[SerializeField] protected int _magazineAmmo;
+	protected int _magazines;
+	protected int _magazineAmmo;
 
 	protected bool _reloading;
 
 	void Awake()
 	{
-		// instantiate casing emitter
-		casingEmitter = Instantiate( casingEmitter ) as GameObject;
-		casingEmitter.transform.parent = casingAnchor;
-
-		// we need to reset the transform so that it adhere's to the anchor's transform,
-		// otherwise unity try's to preserve it's exising location in world space
-		// when you child an object to another object.
-		casingEmitter.transform.localPosition = Vector3.zero;
-		casingEmitter.transform.localRotation = Quaternion.Euler( 0.0f, 0.0f, 0.0f );
+		projectile.CreatePool( 100 );
 
 		// initialize ammunition and reloading
 		_magazines = amountOfMagazines;
-		_magazineAmmo = ( _magazines > 0 ) ? ammoPerMagazine : 0;
+		_magazineAmmo = ammoPerMagazine; 
 		_magazineAmmo = ( infiniteAmmo ) ? Mathf.Max( _magazineAmmo, 1 ) : _magazineAmmo; // this line just insures you have atleast 1 ammo available
 		_reloading = false;
 
 		_halfSpray = 0.5f * sprayAngle;
+	}
+
+	public void RefreshAmmo()
+	{
+		_magazines = amountOfMagazines;
+		_magazineAmmo = ammoPerMagazine;
+		_magazineAmmo = ( infiniteAmmo ) ? Mathf.Max( _magazineAmmo, 1 ) : _magazineAmmo; // this line just insures you have atleast 1 ammo available
+		_reloading = false;
 	}
 
 	public override void PerformPrimaryAttack()
@@ -50,14 +50,13 @@ public class Gun : Weapon
 		if ( !_reloading && _magazineAmmo > 0 )
 		{
 			// instantiate and initialize a bullet
-			InitializeBullet( Instantiate( projectile ) as GameObject );
+			InitializeBullet( projectile.Spawn() );
 			PlayPrimarySound();
 
 			// update ammunition data
 			if ( !infiniteAmmo )
 			{
 				_magazineAmmo--;
-
 				if ( _magazineAmmo <= 0 )
 				{
 					Reload();
@@ -65,7 +64,8 @@ public class Gun : Weapon
 			}
 
 			// create shell casing
-			casingEmitter.particleSystem.Emit( 1 );
+			casingEmitter.Emit( 1 );
+			muzzleFlash.Emit( 10 );
 
 			StartCooldown();
 		}
@@ -101,6 +101,10 @@ public class Gun : Weapon
 			// pick a random rotation between -_halfSpray and _halfSpray.
 			bullet.transform.rotation = transform.rotation * Quaternion.Euler( 0.0f, Random.Range( -_halfSpray, _halfSpray ), 0.0f );
 		}
+
+		// make that shit go forward
+		Projectile projectile = bullet.GetComponent<Projectile>();
+		bullet.rigidbody.velocity = bullet.transform.forward * projectile.speed;
 	}
 
 	public void Reload()

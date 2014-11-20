@@ -8,29 +8,34 @@ public class EnemySpawner : MonoBehaviour
 
 	public GameObject[] enemyTypes;
 	public List<Transform> spawns;
+	public int maxSpawnPoints;
+
 	public SpawnerSettings defaultSettings;
 	public int maxSpawned;
 
+	public float delayBetweenNewEnemy = 0.1f;
+
 	protected int _spawnIndex = 0; //!< Used for communication with derived spawners on which spawn index was used.
 
-	private DeathSystem _spawnerDeath;
 	private bool _spawning = false; //!< Used to tell the coroutine to stop spawning.
 	private int _enemyCount = 0; //!< A counter of the number of live minions in the world.
 	private SpawnerSettings _settings;
 	private EnemyCountChange _enemyCountCallback = delegate( int count ) { }; //!< Callback used to notify listeners when the live enemy count changes.
 
-	public void Awake()
+	void Awake()
 	{
 		_settings = defaultSettings;
 
-		for ( int i = 0; i < spawns.Count; i++ )
+		foreach ( Transform spawnPoint in spawns )
 		{
-			_spawnerDeath = spawns[i].gameObject.GetComponent<DeathSystem>();
-			_spawnerDeath.RegisterDeathCallback( SpawnerDeathCallback );
+			if ( spawnPoint != null )
+			{
+				spawnPoint.GetComponent<DeathSystem>().RegisterDeathCallback( SpawnerDeathCallback );
+			}
 		}
 	}
 
-	public void OnEnable()
+	void OnEnable()
 	{
 		if ( _settings.spawnOnStart )
 		{
@@ -63,23 +68,56 @@ public class EnemySpawner : MonoBehaviour
 
 	/**
 	 * \brief Spawns the specified number of enemies.
+	 * 
+	 * \param enemyType An optional parameter to specify the type of enemy to be spawned.
+	 * If not provided, the type of each enemy will be picked at random from the spawner's
+	 * list of default enemies.
 	 */
-	public void Spawn( int amount )
+	public void Spawn( int amount, GameObject enemyType = null )
 	{
-		if ( spawns.Count > 0 )
+		amount = Mathf.Min( amount, maxSpawned - _enemyCount );
+		StartCoroutine( SpawnCoroutine( amount, enemyType ) );
+	}
+
+	private IEnumerator SpawnCoroutine( int amount, GameObject enemyType = null )
+	{
+		while ( amount > 0 && spawns.Count > 0 )
 		{
-			for ( int i = 0; i < amount && _enemyCount < maxSpawned; i++ )
-			{
-				InitializeEnemyComponents( Instantiate( enemyTypes[Random.Range( 0, enemyTypes.Length )] ) as GameObject );
-			}
+			InitializeEnemyComponents( Instantiate( enemyType ?? enemyTypes[Random.Range( 0, enemyTypes.Length )] ) as GameObject );
+			amount--;
+
+			yield return new WaitForSeconds( delayBetweenNewEnemy );
 		}
 	}
 
 	protected virtual void InitializeEnemyComponents( GameObject enemy )
 	{
-		// set spawn point
+		NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
+		// disable the nav mesh agent to prevent a bug with the enemy spawning in the wrong location
+		if ( agent != null )
+		{
+			agent.enabled = false;
+		}
+
+		// get an available spawn index
 		_spawnIndex = Random.Range( 0, spawns.Count );
+		while ( spawns[_spawnIndex] == null )
+		{
+			spawns.Remove( spawns[_spawnIndex] );
+			if ( spawns.Count == 0 )
+			{
+				return;
+			}
+
+			_spawnIndex = Random.Range( 0, spawns.Count );
+		}
+
+		// set the spawn point
 		enemy.transform.position = spawns[_spawnIndex].position;
+
+		// move the enemy in a radius around the spawn point
+		Vector2 radius = Random.insideUnitCircle * 10.0f;
+		enemy.transform.Translate( radius.x, 0.0f, radius.y );
 
 		// if the enemy uses a MoveTowardsTarget script, the target needs to be set
 		ITargetBasedMovement moveTowards = enemy.GetComponent( typeof( ITargetBasedMovement ) ) as ITargetBasedMovement;
@@ -95,8 +133,14 @@ public class EnemySpawner : MonoBehaviour
 			enemyDeath.RegisterDeathCallback( EnemyDeathCallback );
 		}
 
-		// increment live enemy count
-		enemyCount = enemyCount + 1;
+		//increment live enemy count
+		enemyCount++;
+
+		// re-enable the nav mesh agent
+		if ( agent != null )
+		{
+			agent.enabled = true;
+		}
 	}
 
 	public void EnemyDeathCallback( GameObject enemy )
@@ -127,6 +171,12 @@ public class EnemySpawner : MonoBehaviour
 	public void ResetSettings()
 	{
 		_settings = defaultSettings;
+	}
+
+	public void AddSpawnPoint( Transform spawnPoint )
+	{
+		spawns.Add( spawnPoint );
+		spawnPoint.GetComponent<DeathSystem>().RegisterDeathCallback( SpawnerDeathCallback );
 	}
 
 	public void RegisterEnemyCountCallback( EnemyCountChange callback )

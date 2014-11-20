@@ -144,6 +144,7 @@ MonoBehaviour:
   maxDistance: 500
   maxTime: 8
   shrapnel: {fileID: 100000, guid: 7eddcbcc30a372345af69f9f059416eb, type: 2}
+  reflectShrapnel: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -155,6 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54890f060999baa459796158b8ac5d9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allowMultipleDeaths: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
