@@ -6,6 +6,8 @@ public class Perk : MonoBehaviour
 	[Range( 0.0f, 1f )]
 	public float dropChance;
 
+	public float maxPickupTime = 15.0f;
+
 	//bools to determine what is being modified by a perk object
 	public bool immunity;
 	public bool infiniteAmmo;
@@ -23,6 +25,11 @@ public class Perk : MonoBehaviour
 	public float duration; //!< How long the perk lasts, if it has a duration.
 
 	PerkSystem perkSystem;
+
+	void Awake()
+	{
+		Invoke( "Disappear", maxPickupTime );
+	}
 
 	void OnCollisionEnter( Collision other )
 	{
@@ -56,6 +63,11 @@ public class Perk : MonoBehaviour
 	void End()
 	{
 		perkSystem.RemovePerk( this );
+		Destroy( this.gameObject );
+	}
+
+	void Disappear()
+	{
 		Destroy( this.gameObject );
 	}
 }
