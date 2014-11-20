@@ -693,7 +693,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapons:
   - {fileID: 100000, guid: 4be7c3b028769d9418dd2959e6095ba9, type: 2}
-  - {fileID: 100000, guid: d63f5b9b77d9d514ab0359efa4ae504f, type: 2}
   perk:
     type: 0
     shield: 0
@@ -707,7 +706,7 @@ MonoBehaviour:
     gunDrop: {fileID: 0}
     duration: 0
   defaultWeaponID: 0
-  switchWeaponKeybind: 9
+  switchWeaponKeybind: 0
   weaponAnchor: {fileID: 400008}
   _AmmoRing: {fileID: 100020}
 --- !u!114 &11400006
