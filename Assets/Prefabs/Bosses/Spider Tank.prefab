@@ -585,8 +585,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 200, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -4.37113883e-08}
+  m_LocalPosition: {x: 54.0169983, y: 0, z: 348.609985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400058}
@@ -1598,7 +1598,7 @@ MonoBehaviour:
   destroyAfterDamage: 1
   targets:
   - Scenery
-  - Target
+  - Player
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1615,7 +1615,7 @@ MonoBehaviour:
   destroyAfterDamage: 1
   targets:
   - Scenery
-  - Target
+  - Player
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2165,15 +2165,7 @@ MonoBehaviour:
       mortarSettings:
         amountOfMortars: 0
         launchInterval: 0
-  fallPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  fallPointsRoot: {fileID: 0}
   preFallDelay: 2
   fallTime: 1
   postFallDelay: .5
@@ -2284,6 +2276,7 @@ MonoBehaviour:
     waveInterval: 2
     spawnOnStart: 0
   maxSpawned: 20
+  delayBetweenNewEnemy: .100000001
 --- !u!114 &11400050
 MonoBehaviour:
   m_ObjectHideFlags: 1
