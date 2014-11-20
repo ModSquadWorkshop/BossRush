@@ -237,10 +237,10 @@ MonoBehaviour:
   projectile: {fileID: 100000, guid: 1f50111606a504e44a34e980e80c43e8, type: 2}
   casingEmitter: {fileID: 19800000}
   muzzleFlash: {fileID: 19800002}
-  infiniteAmmo: 1
+  infiniteAmmo: 0
   ammoPerMagazine: 10
-  amountOfMagazines: 5
-  reloadSpeed: 2
+  amountOfMagazines: 0
+  reloadSpeed: 0
   sprayAngle: 5
   circleSpray: 0
 --- !u!114 &11400002

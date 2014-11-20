@@ -11,13 +11,12 @@ public class Shotgun : Gun
 		{
 			for ( int i = 0; i < shellsPerShot; i++ )
 			{
-				// instantiate and initialize a bullet
-				InitializeBullet( Instantiate( projectile ) as GameObject );
-
-				// create shell casing
-				casingEmitter.particleSystem.Emit( 1 );
+				InitializeBullet( projectile.Spawn() );
 			}
+			
+			casingEmitter.particleSystem.Emit( 1 );
 			PlayPrimarySound();
+
 			// update ammunition data
 			if ( !infiniteAmmo )
 			{

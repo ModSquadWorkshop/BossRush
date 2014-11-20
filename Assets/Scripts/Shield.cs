@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HealingShield : MonoBehaviour
+public class Shield : MonoBehaviour
 {
 	public Color fullHealthColor;
 	public Color noHealthColor;
@@ -18,8 +18,7 @@ public class HealingShield : MonoBehaviour
 
 	void OnEnable()
 	{
-		_health.Reset();
-		_renderer.material.color = fullHealthColor;
+		ResetShield();
 	}
 
 	void HealthChangeCallback( HealthSystem health, float change )
@@ -28,5 +27,11 @@ public class HealingShield : MonoBehaviour
 		{
 			_renderer.material.color = Color.Lerp( noHealthColor, fullHealthColor, _health.percent );
 		}
+	}
+
+	public void ResetShield()
+	{
+		_health.Reset();
+		_renderer.material.color = fullHealthColor;
 	}
 }
