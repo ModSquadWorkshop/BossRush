@@ -26,21 +26,14 @@ public class ExplodeOnDeath : MonoBehaviour
 		Collider[] collisions = Physics.OverlapSphere( transform.position, explosionRadius );
 		foreach ( Collider col in collisions )
 		{
-			if ( _damageSystem != null )
-			{
-				if ( _damageSystem.IsTarget( col.tag ) )
-				{
-					DealDamage( col.gameObject );
-				}
-			}
-			else
+			if ( _damageSystem.IsTarget( col.tag ) )
 			{
 				DealDamage( col.gameObject );
-			}
 
-			if ( col.rigidbody != null )
-			{
-				col.rigidbody.AddExplosionForce( explosionForce, transform.position, explosionRadius );
+				if ( col.rigidbody != null )
+				{
+					col.rigidbody.AddExplosionForce( explosionForce, transform.position, explosionRadius );
+				}
 			}
 		}
 

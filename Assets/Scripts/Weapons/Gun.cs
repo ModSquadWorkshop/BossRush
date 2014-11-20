@@ -104,7 +104,7 @@ public class Gun : Weapon
 
 		// make that shit go forward
 		Projectile projectile = bullet.GetComponent<Projectile>();
-		bullet.rigidbody.velocity = transform.forward * projectile.speed;
+		bullet.rigidbody.velocity = bullet.transform.forward * projectile.speed;
 	}
 
 	public void Reload()
