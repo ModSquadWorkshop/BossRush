@@ -71,18 +71,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropChance: 0
-  immunity: 0
-  infiniteAmmo: 0
-  speedMod: 0
-  fireRateMod: -.0199999996
-  maxHealthMod: 0
-  healthMod: 0
-  damageMod: 0
-  reloadMod: 0
-  magazinesMod: 0
-  gunDrop: {fileID: 0}
-  ID: FireRate
-  duration: 4
+  maxPickupTime: 15
+  settings:
+    type: 4
+    shield: 0
+    infiniteAmmo: 0
+    speedMod: 0
+    fireRateMod: 2
+    healthMod: 0
+    damageMod: 0
+    reloadMod: 0
+    magazinesMod: 0
+    gunDrop: {fileID: 0}
+    duration: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
