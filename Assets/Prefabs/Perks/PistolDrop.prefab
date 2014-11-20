@@ -12,7 +12,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
   m_Layer: 13
-  m_Name: ShotgunDrop
+  m_Name: PistolDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ GameObject:
   - 23: {fileID: 2300000}
   - 95: {fileID: 9500000}
   m_Layer: 0
-  m_Name: Shotgun
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,7 +56,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: .788529992}
+  m_LocalPosition: {x: 0, y: 3, z: .837960005}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -87,7 +87,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_Mesh: {fileID: 4300000, guid: 2c4cc83061b2b2340b662710bbae445c, type: 3}
+  m_Mesh: {fileID: 4300000, guid: e07152dccb22e9f48a2286dfa831cf2f, type: 3}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -96,7 +96,7 @@ Animator:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 2c4cc83061b2b2340b662710bbae445c, type: 3}
+  m_Avatar: {fileID: 9000000, guid: e07152dccb22e9f48a2286dfa831cf2f, type: 3}
   m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
     damageMod: 0
     reloadMod: 0
     magazinesMod: 0
-    gunDrop: {fileID: 100000, guid: ec638bf6dd881f045a7eb8e5b51638c1, type: 2}
+    gunDrop: {fileID: 100000, guid: d63f5b9b77d9d514ab0359efa4ae504f, type: 2}
     duration: 0
 --- !u!114 &11400002
 MonoBehaviour:
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee220d2f2924e8e4dbaf9a41f267a361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 400000, guid: ec638bf6dd881f045a7eb8e5b51638c1, type: 2}
+  model: {fileID: 400000, guid: d63f5b9b77d9d514ab0359efa4ae504f, type: 2}
   spin: 90
 --- !u!136 &13600000
 CapsuleCollider:

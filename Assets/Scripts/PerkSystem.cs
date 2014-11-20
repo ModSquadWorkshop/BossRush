@@ -17,6 +17,7 @@ public class PerkSystem : MonoBehaviour
 	{
 		_perks = new Dictionary<PerkType, PerkData>();
 		_perkEnding = new Dictionary<PerkType, Coroutine>();
+
 		for ( int i = 0; i < startingPerks.Length; i++ )
 		{
 			AddPerk( startingPerks[i] );
@@ -52,15 +53,16 @@ public class PerkSystem : MonoBehaviour
 			shield.ResetShield();
 		}
 
-		if ( settings.gunDrop != null && _playerWeapons.weapons.Count <= 3 )
+		if ( settings.gunDrop != null )
 		{
-			if ( _playerWeapons.weapons.Count == 3 )
+			if ( _playerWeapons.weapons.Count >= 2 )
 			{
-				_playerWeapons.RemoveSpecial();
+				_playerWeapons.RemoveSpecialWeapon();
 			}
+
 			_playerWeapons.weapons.Add( settings.gunDrop );
 			_playerWeapons.perk = settings;
-			_playerWeapons.NewWeapon();
+			_playerWeapons.NewSpecialWeapon();
 		}
 
 		if ( settings.duration > 0.0f )
@@ -68,7 +70,7 @@ public class PerkSystem : MonoBehaviour
 			// cancel existing coroutine
 			if ( _perkEnding.ContainsKey( settings.type ) )
 			{
-				//StopCoroutine( _perkEnding[settings.type] ); // This is causing unity (the editor) to crash. It's a bug within unity, we'll have to work aroun it.
+				//StopCoroutine( _perkEnding[settings.type] ); // This is causing unity (the editor) to crash. It's a bug within unity, we'll have to work around it.
 			}
 
 			// start new coroutine

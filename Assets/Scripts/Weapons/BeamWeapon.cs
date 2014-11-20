@@ -11,6 +11,7 @@ public class BeamWeapon : Weapon
 	public float duration;
 	public Transform impactParticles;
 
+	private int _layerMask;
 	private AudioSource _source;
 	private LineRenderer beam;
 	private Ray _ray;
@@ -24,6 +25,10 @@ public class BeamWeapon : Weapon
 	void Awake()
 	{
 		beam = GetComponent<LineRenderer>();
+
+		//raycast for everything but pickups
+		_layerMask = 1 << LayerMask.NameToLayer( "Pickup" );
+		_layerMask = ~_layerMask; // invert the mask
 
 		_done = false;
 
@@ -70,7 +75,7 @@ public class BeamWeapon : Weapon
 
 			// cast a ray and collect data on all of the objects it hits
 			RaycastHit[] hits;
-			hits = Physics.RaycastAll( _ray, maxRange );
+			hits = Physics.RaycastAll( _ray, maxRange, _layerMask );
 			Array.Sort( hits, delegate( RaycastHit first, RaycastHit second )
 			{
 				return (int)( first.distance - second.distance );

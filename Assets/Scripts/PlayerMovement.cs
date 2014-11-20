@@ -44,9 +44,9 @@ sealed public class PlayerMovement : MonoBehaviour
 		_playerWeapons = GetComponent<WeaponSystem>();
 		_plane = new Plane( Vector3.up, this.transform.position );
 
-		// create a ray casting layer mask that collides with everything accept "Player"
-		_dashLayerMask = 1 << LayerMask.NameToLayer( "Player" );
-		_dashLayerMask = ~_dashLayerMask; // invert the mask
+		// create a ray casting layer mask that collides with only "Scenery"
+		_dashLayerMask = 1 << LayerMask.NameToLayer( "Scenery" );
+		//_dashLayerMask = ~_dashLayerMask; // invert the mask
 		_dashAvailable = true;
 	}
 
