@@ -5,154 +5,100 @@ using System.Collections.Generic;
 public class PerkSystem : MonoBehaviour
 {
 	public Perk[] startingPerks;
-	public GameObject shield;
-	private PlayerShield _playerShield;
-	private Hashtable _perks;
-	private Hashtable _perkCounts;
+	public Shield shield;
 
-	PlayerMovement playerSpeed;
-	HealthSystem playerHealth;
-	//DamageSystem playerDamage;
-	//Gun playerGun;
-	WeaponSystem playerWeapons;
+	private Dictionary<PerkType, PerkData> _perks;
+	private Dictionary<PerkType, Coroutine> _perkEnding;
+	private PlayerMovement _playerSpeed;
+	private HealthSystem _playerHealth;
+	private WeaponSystem _playerWeapons;
 
 	void Awake()
 	{
-		_perks = new Hashtable();
-		_perkCounts = new Hashtable();
+		_perks = new Dictionary<PerkType, PerkData>();
+		_perkEnding = new Dictionary<PerkType, Coroutine>();
 		for ( int i = 0; i < startingPerks.Length; i++ )
 		{
 			AddPerk( startingPerks[i] );
 		}
 
-		playerSpeed = this.gameObject.GetComponent<PlayerMovement>();
-		playerHealth = this.gameObject.GetComponent<HealthSystem>();
-		_playerShield = shield.GetComponent<PlayerShield>();
-		//playerDamage = this.gameObject.GetComponent<WeaponSystem>().currentWeapon.GetComponent<DamageSystem>();
-		//playerGun = this.gameObject.GetComponent<WeaponSystem>().currentWeapon.GetComponent<Gun>();
-		playerWeapons = this.gameObject.GetComponent<WeaponSystem>();
+		_playerSpeed = GetComponent<PlayerMovement>();
+		_playerHealth = GetComponent<HealthSystem>();
+		_playerWeapons = GetComponent<WeaponSystem>();
+
+		shield.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerShieldDestroyed );
 	}
 
 	public void AddPerk( Perk perk )
 	{
-		int actives = 0;
-		if ( _perkCounts[perk.ID] != null )
+		PerkData settings = perk.settings;
+
+		// stash perk settings
+		_perks[settings.type] = settings;
+
+		// apply modifiers
+		if ( settings.speedMod > 0.0f )
 		{
-			actives = (int)_perkCounts[perk.ID];
-		}
-		else
-		{
-			_perkCounts[perk.ID] = 0;
+			_playerSpeed.speedMultiplier = settings.speedMod;
 		}
 
-		if ( actives > 0 && ( perk.gunDrop != null || perk.immunity || perk.duration > 0 ) )
+		_playerHealth.Heal( settings.healthMod );
+		_playerWeapons.SetBuff( settings.fireRateMod, settings.damageMod, settings.reloadMod );
+
+		if ( settings.shield )
 		{
-			Perk currentPerk = _perks[perk.ID] as Perk;
-			if ( currentPerk != null )
-			{
-				RefreshPerk( currentPerk );
-			}
-			if ( perk.immunity )
-			{
-				RefreshShield();
-			}
-			Destroy( perk.gameObject );
+			_playerHealth.immune = true;
+			shield.gameObject.SetActive( true );
+			shield.ResetShield();
 		}
-		else
+
+		if ( settings.gunDrop != null && _playerWeapons.weapons.Count <= 3 )
 		{
-			_perks[perk.ID] = perk;
-
-			int count = (int) _perkCounts[perk.ID];
-			count++;
-			_perkCounts[perk.ID] = count;
-
-			SetPerk( perk );
-			if ( perk.gunDrop == null )
+			if ( _playerWeapons.weapons.Count == 3 )
 			{
-				perk.Begin();
+				_playerWeapons.RemoveSpecial();
 			}
+			_playerWeapons.weapons.Add( settings.gunDrop );
+			_playerWeapons.perk = settings;
+			_playerWeapons.NewWeapon();
+		}
+
+		if ( settings.duration > 0.0f )
+		{
+			// cancel existing coroutine
+			if ( _perkEnding.ContainsKey( settings.type ) )
+			{
+				//StopCoroutine( _perkEnding[settings.type] ); // This is causing unity (the editor) to crash. It's a bug within unity, we'll have to work aroun it.
+			}
+
+			// start new coroutine
+			_perkEnding[settings.type] = StartCoroutine( RemoveAfterDelay( settings ) );
 		}
 	}
 
-	public void RemovePerk( Perk perk )
+	public IEnumerator RemoveAfterDelay( PerkData settings )
 	{
-		ResetPerk( perk );
-
-		int count = (int)_perkCounts[perk.ID];
-		count--;
-		_perkCounts[perk.ID] = count;
-
-		_perks[perk.ID] = null;
+		yield return new WaitForSeconds( settings.duration );
+		RemovePerk( settings );
 	}
 
-	public void RefreshPerk( Perk perk )
-	{
-		//refresh ammo if gun drop, otherwise refresh timer
-		if ( perk.gunDrop != null && perk.duration <= 0 )
-		{
-			//Debug.Log( "ADD AMMO" );
-			if ( playerWeapons.DetermineType() )
-			{
-				Gun special = playerWeapons.weapons[2].GetComponent<Gun>();
-				special.RefreshAmmo();
-			}
-			else if ( !playerWeapons.DetermineType() )
-			{
-				//Debug.Log( "ADD TIME" );
-				BeamWeapon special = playerWeapons.weapons[2].GetComponent<BeamWeapon>();
-				special.ResetTimer();
-			}
-		}
-		else if ( perk.duration > 0 )
-		{
-			perk.Refresh();
-		}
-	}
-
-	public void RefreshShield()
-	{
-		_playerShield.RestoreShield();
-	}
-
-	public void SetPerk( Perk perk )
-	{
-		//apply modifiers
-		playerSpeed.speedMultiplier += perk.speedMod;
-		playerHealth.maxHealth += perk.maxHealthMod;
-		playerHealth.Heal( perk.healthMod );
-		playerWeapons.SetBuff( perk.fireRateMod, perk.damageMod, perk.reloadMod );
-		playerHealth.immune = perk.immunity || playerHealth.immune; //create shield or change healthbar if true
-
-		if ( perk.immunity )
-		{
-			shield.SetActive( true );
-			_playerShield.SetPerk( perk );
-		}
-		
-		if ( perk.gunDrop != null && playerWeapons.weapons.Count <= 3 )
-		{
-			if ( playerWeapons.weapons.Count == 3 )
-			{
-				playerWeapons.RemoveSpecial();
-			}
-			playerWeapons.weapons.Add( perk.gunDrop );
-			playerWeapons.perk = perk;
-			playerWeapons.NewWeapon();
-		}
-	}
-
-	public void ResetPerk( Perk reset )
+	public void RemovePerk( PerkData perk )
 	{
 		//revert modifiers
-		playerSpeed.speedMultiplier -= reset.speedMod;
-		playerHealth.maxHealth -= reset.maxHealthMod;
-		playerHealth.health -= reset.healthMod;
-		playerWeapons.RevertBuff( reset.fireRateMod, reset.damageMod, reset.reloadMod );
-
-		if ( reset.immunity )
+		if ( perk.speedMod > 0.0f )
 		{
-			playerHealth.immune = false;
-			shield.SetActive( false );
+			_playerSpeed.speedMultiplier = 1.0f;
 		}
+
+		_playerWeapons.RevertBuff( perk.fireRateMod, perk.damageMod, perk.reloadMod );
+
+		_perks.Remove( perk.type );
+		_perkEnding.Remove( perk.type );
+	}
+
+	void PlayerShieldDestroyed( GameObject shieldObject )
+	{
+		shield.gameObject.SetActive( false );
+		_playerHealth.immune = false;
 	}
 }

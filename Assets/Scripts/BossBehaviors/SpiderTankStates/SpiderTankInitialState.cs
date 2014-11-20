@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SpiderTankInitialState : SpiderTankState
 {
-	public Transform[] fallPoints;
+	public GameObject fallPointsRoot;
 	public float preFallDelay;
 	public float fallTime;
 	public float postFallDelay;
@@ -12,6 +12,16 @@ public class SpiderTankInitialState : SpiderTankState
 	public GameObject explodeMinion;
 	public int numMinions;
 	public float maxWaitTime;
+
+	private Transform[] _fallPoints;
+
+	public override void Awake()
+	{
+		base.Awake();
+
+		// get the list of fall points
+		_fallPoints = fallPointsRoot.GetComponentsInChildren<Transform>();
+	}
 
 	public override void OnEnable()
 	{
@@ -72,12 +82,12 @@ public class SpiderTankInitialState : SpiderTankState
 
 	public Transform findClosestToPlayer()
 	{
-		Transform closest = fallPoints[0];
-		for ( int index = 1; index < fallPoints.Length; index++ )
+		Transform closest = _fallPoints[0];
+		for ( int index = 1; index < _fallPoints.Length; index++ )
 		{
-			if ( ( player.position - fallPoints[index].position ).sqrMagnitude < ( player.position - closest.position ).sqrMagnitude )
+			if ( ( player.position - _fallPoints[index].position ).sqrMagnitude < ( player.position - closest.position ).sqrMagnitude )
 			{
-				closest = fallPoints[index];
+				closest = _fallPoints[index];
 			}
 		}
 		return closest;
