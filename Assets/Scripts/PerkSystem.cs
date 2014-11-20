@@ -25,6 +25,8 @@ public class PerkSystem : MonoBehaviour
 		_playerSpeed = GetComponent<PlayerMovement>();
 		_playerHealth = GetComponent<HealthSystem>();
 		_playerWeapons = GetComponent<WeaponSystem>();
+
+		shield.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerShieldDestroyed );
 	}
 
 	public void AddPerk( Perk perk )
@@ -94,8 +96,9 @@ public class PerkSystem : MonoBehaviour
 		_perkEnding.Remove( perk.type );
 	}
 
-	void PlayerShieldDestroyed( DeathSystem shieldDeath )
+	void PlayerShieldDestroyed( GameObject shieldObject )
 	{
+		shield.gameObject.SetActive( false );
 		_playerHealth.immune = false;
 	}
 }

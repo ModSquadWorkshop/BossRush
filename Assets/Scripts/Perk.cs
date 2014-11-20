@@ -54,4 +54,9 @@ public class Perk : MonoBehaviour
 			Destroy( gameObject );
 		}
 	}
+
+	void Disappear()
+	{
+		Destroy( gameObject );
+	}
 }
