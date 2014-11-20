@@ -55,7 +55,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100006
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,7 +694,18 @@ MonoBehaviour:
   weapons:
   - {fileID: 100000, guid: 4be7c3b028769d9418dd2959e6095ba9, type: 2}
   - {fileID: 100000, guid: d63f5b9b77d9d514ab0359efa4ae504f, type: 2}
-  perk: {fileID: 0}
+  perk:
+    type: 0
+    shield: 0
+    infiniteAmmo: 0
+    speedMod: 0
+    fireRateMod: 0
+    healthMod: 0
+    damageMod: 0
+    reloadMod: 0
+    magazinesMod: 0
+    gunDrop: {fileID: 0}
+    duration: 0
   defaultWeaponID: 0
   switchWeaponKeybind: 9
   weaponAnchor: {fileID: 400008}
@@ -787,7 +798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingPerks: []
-  shield: {fileID: 100024}
+  shield: {fileID: 11400024}
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -846,7 +857,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1c488d433704a840a96cdd64b89fc31, type: 3}
+  m_Script: {fileID: 11500000, guid: 60a528ae7917db94a875bbe77ef33e82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fullHealthColor: {r: 0, g: 1, b: .00784313772, a: .588235319}

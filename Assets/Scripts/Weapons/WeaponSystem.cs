@@ -5,9 +5,8 @@ using System.Collections.Generic;
 public class WeaponSystem : MonoBehaviour
 {
 	public List<GameObject> weapons;
-	public Perk perk;
+	public PerkData perk;
 	private PerkSystem _perkSystem;
-	//public GameObject[] weapons;
 	public int defaultWeaponID = 0;
 	public KeyCode switchWeaponKeybind;
 
@@ -163,7 +162,6 @@ public class WeaponSystem : MonoBehaviour
 		Destroy( GetWeapon( 2 ).gameObject );
 		weapons.RemoveAt( 2 );
 		_perkSystem.RemovePerk( perk );
-		
 	}
 
 	public void SwitchWeapon( int weaponID )
