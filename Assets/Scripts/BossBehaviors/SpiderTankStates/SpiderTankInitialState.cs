@@ -13,6 +13,9 @@ public class SpiderTankInitialState : SpiderTankState
 	public int numMinions;
 	public float maxWaitTime;
 
+	public int initialSpawnersAmount;
+	public float delayBeforeMinionSpawning;
+
 	private Transform[] _fallPoints;
 
 	public override void Awake()
@@ -27,9 +30,9 @@ public class SpiderTankInitialState : SpiderTankState
 	{
 		base.OnEnable();
 
-		spawner.RegisterEnemyCountCallback( MinionCountChange );
-		spawner.Spawn( numMinions, explodeMinion );
+		spawnerLauncher.Launch( initialSpawnersAmount );
 
+		Invoke( "SpawnersFallEnded", delayBeforeMinionSpawning );
 		Invoke( "StartFall", maxWaitTime );
 	}
 
@@ -49,7 +52,7 @@ public class SpiderTankInitialState : SpiderTankState
 		}
 	}
 
-	void StartFall()
+	private void StartFall()
 	{
 		// move to be above destination
 		Transform destination = findClosestToPlayer();
@@ -66,13 +69,19 @@ public class SpiderTankInitialState : SpiderTankState
 		Invoke( "FallEnded", preFallDelay + fallTime );
 	}
 
-	void FallEnded()
+	private void FallEnded()
 	{
 		Instantiate( landingEffect, transform.position, Quaternion.identity );
 		Invoke( "Exit", postFallDelay );
 	}
 
-	void Exit()
+	private void SpawnersFallEnded()
+	{
+		spawner.RegisterEnemyCountCallback( MinionCountChange );
+		spawner.Spawn( numMinions, explodeMinion );
+	}
+
+	private void Exit()
 	{
 		enabled = false;
 		spawner.enabled = false;
@@ -80,9 +89,10 @@ public class SpiderTankInitialState : SpiderTankState
 		spiderTank.basicState.enabled = true;
 	}
 
-	public Transform findClosestToPlayer()
+	private Transform findClosestToPlayer()
 	{
 		Transform closest = _fallPoints[0];
+
 		for ( int index = 1; index < _fallPoints.Length; index++ )
 		{
 			if ( ( player.position - _fallPoints[index].position ).sqrMagnitude < ( player.position - closest.position ).sqrMagnitude )
@@ -90,6 +100,7 @@ public class SpiderTankInitialState : SpiderTankState
 				closest = _fallPoints[index];
 			}
 		}
+
 		return closest;
 	}
 }
