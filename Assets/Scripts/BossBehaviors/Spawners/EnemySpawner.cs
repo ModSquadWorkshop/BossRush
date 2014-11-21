@@ -9,7 +9,7 @@ public class EnemySpawner : MonoBehaviour
 	public SpawnerSettings defaultSettings;
 
 	public GameObject[] enemyTypes;
-	public List<SpawnerObject> spawners;
+	public List<GameObject> spawners;
 	public int maxSpawnPoints;
 	public int maxSpawned;
 
@@ -32,7 +32,7 @@ public class EnemySpawner : MonoBehaviour
 		_spawning = false;
 		_enemyCount = 0;
 
-		foreach ( SpawnerObject spawner in spawners )
+		foreach ( GameObject spawner in spawners )
 		{
 			spawner.GetComponent<DeathSystem>().RegisterDeathCallback( SpawnerDeathCallback );
 		}
@@ -183,7 +183,7 @@ public class EnemySpawner : MonoBehaviour
 		}
 
 		spawner.GetComponent<DeathSystem>().RegisterDeathCallback( SpawnerDeathCallback );
-		spawners.Add( spawnerObject );
+		spawners.Add( spawner );
 	}
 
 	private void SpawnerDeathCallback( GameObject spawner )
@@ -196,7 +196,7 @@ public class EnemySpawner : MonoBehaviour
 			spawnerObject.spawnPoint = null;
 		}
 
-		spawners.Remove( spawnerObject );
+		spawners.Remove( spawner );
 	}
 
 	private void EnemyDeathCallback( GameObject enemy )
