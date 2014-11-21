@@ -10,14 +10,12 @@ public class SpawnPointMortar : Mortar
 	public void Init( MortarSettings settings, Vector3 startPos, SpiderTank spiderTank )
 	{
 		_spiderTank = spiderTank;
-		
-		List<SpawnPoint> spawnPoints = _spiderTank.spawner.availableSpawnPoints;
-		if ( spawnPoints != null )
+
+		SpawnPoint spawn = _spiderTank.spawner.GetRandomAvailableSpawnPoint();
+		if ( spawn != null )
 		{
-			if ( spawnPoints.Count > 0 )
-			{
-				_targetPos = spawnPoints[Random.Range( 0, spawnPoints.Count )].spawnPoint.position;
-			}
+			_targetPos = spawn.spawnPoint.position;
+			spawn.available = false;
 		}
 
 		base.Init( settings, startPos );

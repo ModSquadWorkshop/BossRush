@@ -34,6 +34,22 @@ public class EnemySpawner : MonoBehaviour
 		{
 			spawner.GetComponent<DeathSystem>().RegisterDeathCallback( SpawnerDeathCallback );
 		}
+
+		SpawnerMortarAttack spawnerLauncher = GetComponentInChildren<SpawnerMortarAttack>();
+		if ( spawnerLauncher != null ) 
+		{
+			foreach ( Transform target in spawnerLauncher.mortarSettings.targets )
+			{
+				SpawnPoint spawn = target.GetComponent<SpawnPoint>();
+				if ( spawn != null )
+				{
+					if ( spawn.available )
+					{
+						_availableSpawnPoints.Add( spawn );
+					}
+				}
+			}
+		}
 	}
 
 	void OnEnable()
@@ -228,6 +244,16 @@ public class EnemySpawner : MonoBehaviour
 		}
 
 		return spawn;
+	}
+
+	public SpawnPoint GetRandomAvailableSpawnPoint()
+	{
+		if ( _availableSpawnPoints != null )
+		{
+			return _availableSpawnPoints[Random.Range( 0, _availableSpawnPoints.Count )];
+		}
+
+		return null;
 	}
 }
 
