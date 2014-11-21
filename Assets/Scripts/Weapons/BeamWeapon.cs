@@ -7,9 +7,9 @@ public class BeamWeapon : Weapon
 	public bool repeatDamage = true;
 	public float maxRange;
 	public float damageInterval;
-	public int piercingsAmount;
 	public float duration;
 	public Transform impactParticles;
+	public LayerMask[] layersToIgnore;
 
 	private int _layerMask;
 	private AudioSource _source;
@@ -27,13 +27,16 @@ public class BeamWeapon : Weapon
 		beam = GetComponent<LineRenderer>();
 
 		//raycast for everything but pickups
-		_layerMask = 1 << LayerMask.NameToLayer( "Pickup" );
-		_layerMask = ~_layerMask; // invert the mask
+		_layerMask = 0;
+		foreach ( LayerMask layer in layersToIgnore )
+		{
+			_layerMask |= layer.value;
+		}
+		_layerMask = ~_layerMask; // invert the mask to collide with everything but the listed layers.
 
 		_done = false;
 
 		// the beam should only every have 2 vertexes
-		// the width of the beam is the same from vertex to vertex
 		beam.SetVertexCount( 2 );
 		beam.enabled = false;
 
@@ -44,14 +47,9 @@ public class BeamWeapon : Weapon
 		_beamDuration.Start();
 		_ray = new Ray();
 		_source = GetComponent<AudioSource>();
-		// get a reference to the damage system attached to the weapon
-		_damageSystem = this.gameObject.GetComponent<DamageSystem>();
 
-		// if a damage system doesn't exist one is created to avoid errors
-		if ( _damageSystem == null )
-		{
-			_damageSystem = this.gameObject.AddComponent<DamageSystem>();
-		}
+		// get a reference to the damage system attached to the weapon
+		_damageSystem = GetComponent<DamageSystem>();
 	}
 
 	void Update()
@@ -82,10 +80,9 @@ public class BeamWeapon : Weapon
 			} );
 
 			// loop through the hit targets and attempt to deal damage
-			int length = Mathf.Min( hits.Length, piercingsAmount + 1 );
-			for ( int i = 0; i < length; i++ )
+			if ( hits.Length > 0 )
 			{
-				RaycastHit hit = hits[i];
+				RaycastHit hit = hits[0];
 
 				// make sure the colliding object is one of the defined targets
 				if ( _damageSystem.IsTarget( hit.collider.gameObject.tag ) )

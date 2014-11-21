@@ -559,7 +559,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400058}
   m_Layer: 10
-  m_Name: Model
+  m_Name: Transform Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2648,9 +2648,13 @@ MonoBehaviour:
   repeatDamage: 1
   maxRange: 10000
   damageInterval: .100000001
-  piercingsAmount: 0
   duration: 0
   impactParticles: {fileID: 400044}
+  layersToIgnore:
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &11400032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3025,9 +3029,13 @@ MonoBehaviour:
   repeatDamage: 1
   maxRange: 10000
   damageInterval: .100000001
-  piercingsAmount: 0
   duration: 0
   impactParticles: {fileID: 400046}
+  layersToIgnore:
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &11400054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3044,9 +3052,13 @@ MonoBehaviour:
   repeatDamage: 1
   maxRange: 10000
   damageInterval: .100000001
-  piercingsAmount: 0
   duration: 0
   impactParticles: {fileID: 400048}
+  layersToIgnore:
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &11400056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3097,9 +3109,13 @@ MonoBehaviour:
   repeatDamage: 1
   maxRange: 10000
   damageInterval: .100000001
-  piercingsAmount: 0
   duration: 0
   impactParticles: {fileID: 400050}
+  layersToIgnore:
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &11400062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3116,9 +3132,13 @@ MonoBehaviour:
   repeatDamage: 1
   maxRange: 10000
   damageInterval: .100000001
-  piercingsAmount: 0
   duration: 0
   impactParticles: {fileID: 400056}
+  layersToIgnore:
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &11400064
 MonoBehaviour:
   m_ObjectHideFlags: 1

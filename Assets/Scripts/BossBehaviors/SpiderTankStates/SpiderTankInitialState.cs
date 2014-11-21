@@ -30,14 +30,12 @@ public class SpiderTankInitialState : SpiderTankState
 		spawner.RegisterEnemyCountCallback( MinionCountChange );
 		spawner.Spawn( numMinions, explodeMinion );
 
-		Invoke( "StartFall", maxWaitTime );
+		Invoke( "PreFall", maxWaitTime );
 	}
 
 	public override void OnDisable()
 	{
 		base.OnDisable();
-
-		spawner.DeregisterEnemyCountCallback( MinionCountChange );
 		spiderTank.SetDamageBase();
 	}
 
@@ -49,10 +47,15 @@ public class SpiderTankInitialState : SpiderTankState
 		}
 	}
 
-	void StartFall()
+	void PreFall()
 	{
 		CancelInvoke();
+		spawner.DeregisterEnemyCountCallback( MinionCountChange );
+		Invoke( "StartFall", preFallDelay );
+	}
 
+	void StartFall()
+	{
 		// move to be above destination
 		Transform destination = findClosestToPlayer();
 		transform.position = destination.position + new Vector3( 0.0f, 200.0f, 0.0f );
@@ -65,7 +68,7 @@ public class SpiderTankInitialState : SpiderTankState
 		settings.Add( "easetype", iTween.EaseType.linear );
 		iTween.MoveTo( gameObject, settings );
 
-		Invoke( "FallEnded", preFallDelay + fallTime );
+		Invoke( "FallEnded", fallTime );
 	}
 
 	void FallEnded()
@@ -77,8 +80,6 @@ public class SpiderTankInitialState : SpiderTankState
 	void Exit()
 	{
 		enabled = false;
-		spawner.enabled = false;
-
 		spiderTank.basicState.enabled = true;
 	}
 
