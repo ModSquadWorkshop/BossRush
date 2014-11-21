@@ -14,8 +14,8 @@ public class SpawnPointMortar : Mortar
 
 	public override void OnComplete()
 	{
-		GameObject spawnPoint = Instantiate( spawnerObject, _targetPos, Quaternion.identity ) as GameObject;
-		_spiderTank.spawner.AddSpawnPoint( spawnPoint.transform );
+		GameObject spawner = Instantiate( spawnerObject, _targetPos, Quaternion.identity ) as GameObject;
+		_spiderTank.spawner.AddSpawner( spawner );
 
 		Destroy( gameObject );
 		Destroy( _marker );

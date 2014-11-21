@@ -2976,17 +2976,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23eef0c7e1c23864eb720e3d5817a2f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTypes:
-  - {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
-  spawns: []
-  maxSpawnPoints: 5
   defaultSettings:
     baseAmountPerWave: 2
     amountPerSpawner: 1
     waveInterval: 2
     spawnOnStart: 0
+  enemyTypes:
+  - {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
+  spawns: []
+  maxSpawnPoints: 5
   maxSpawned: 20
-  delayBetweenNewEnemy: .100000001
+  delayBetweenNewEnemy: .150000006
 --- !u!114 &11400050
 MonoBehaviour:
   m_ObjectHideFlags: 1
