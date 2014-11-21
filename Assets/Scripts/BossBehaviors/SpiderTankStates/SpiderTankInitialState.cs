@@ -92,7 +92,6 @@ public class SpiderTankInitialState : SpiderTankState
 	private Transform findClosestToPlayer()
 	{
 		Transform closest = _fallPoints[0];
-
 		for ( int index = 1; index < _fallPoints.Length; index++ )
 		{
 			if ( ( player.position - _fallPoints[index].position ).sqrMagnitude < ( player.position - closest.position ).sqrMagnitude )

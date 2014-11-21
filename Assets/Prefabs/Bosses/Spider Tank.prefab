@@ -2885,7 +2885,7 @@ MonoBehaviour:
   explodeMinion: {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
   numMinions: 20
   maxWaitTime: 15
-  initialSpawnersAmount: 4
+  initialSpawnersAmount: 5
   delayBeforeMinionSpawning: 5
 --- !u!114 &11400042
 MonoBehaviour:
@@ -3162,6 +3162,14 @@ MonoBehaviour:
   mortar: {fileID: 100000, guid: 25f6bfc5938519c4fa99f6baaca87531, type: 2}
   mortarSettings:
     targets:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
