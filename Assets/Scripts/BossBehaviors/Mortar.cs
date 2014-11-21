@@ -55,7 +55,7 @@ public class Mortar : MonoBehaviour
 		Destroy( _marker );
 	}
 
-	private Vector3 GetTargetPosition()
+	protected virtual Vector3 GetTargetPosition()
 	{
 		Vector3 offset = Random.insideUnitCircle * Random.Range( _settings.minTargetOffset, _settings.maxTargetOffset );
 		offset.z = offset.y; // Random.insideUnitCircle returns a 2D vector with (x, y), so we swap y with z for an accurate 3D position

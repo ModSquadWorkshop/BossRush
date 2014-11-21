@@ -14,12 +14,6 @@ public class SpawnPointMortar : Mortar
 		_spiderTank = spiderTank;
 		_spawn = _spiderTank.spawner.GetRandomAvailableSpawnPoint();
 
-		if ( _spawn != null )
-		{
-			_targetPos = _spawn.spawnPoint.position;
-			_spawn.available = false;
-		}
-
 		base.Init( settings, startPos );
 	}
 
@@ -30,5 +24,15 @@ public class SpawnPointMortar : Mortar
 
 		Destroy( gameObject );
 		Destroy( _marker );
+	}
+
+	protected override Vector3 GetTargetPosition()
+	{
+		if ( _spawn != null )
+		{
+			return _spawn.transform.position;
+		}
+
+		return base.GetTargetPosition();
 	}
 }
