@@ -30,6 +30,7 @@ public class SpiderTankInitialState : SpiderTankState
 	{
 		base.OnEnable();
 
+		spawner.enabled = true;
 		spawnerLauncher.Launch( initialSpawnersAmount );
 
 		Invoke( "SpawnersFallEnded", delayBeforeMinionSpawning );

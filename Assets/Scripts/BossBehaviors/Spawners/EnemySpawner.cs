@@ -109,7 +109,7 @@ public class EnemySpawner : MonoBehaviour
 
 	private void InitializeEnemyComponents( GameObject enemy )
 	{
-		Transform spawn = GetRandomSpawnerTransform();
+		Transform spawn = GetRandomSpawner();
 
 		if ( spawn != null )
 		{
@@ -218,7 +218,7 @@ public class EnemySpawner : MonoBehaviour
 		}
 	}
 
-	private Transform GetRandomSpawnerTransform()
+	private Transform GetRandomSpawner()
 	{
 		Transform spawn = null;
 
