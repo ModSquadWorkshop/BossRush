@@ -1,15 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpawnerObject : MonoBehaviour {
+public class SpawnerObject : MonoBehaviour 
+{
+	[HideInInspector] public SpawnPoint spawnPoint;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+	// more stuff here, if necessary
 }

@@ -7,15 +7,17 @@ public class SpawnPointMortar : Mortar
 	public GameObject spawnerObject;
 	[HideInInspector] public SpiderTank _spiderTank;
 
+	private SpawnPoint _spawn;
+
 	public void Init( MortarSettings settings, Vector3 startPos, SpiderTank spiderTank )
 	{
 		_spiderTank = spiderTank;
+		_spawn = _spiderTank.spawner.GetRandomAvailableSpawnPoint();
 
-		SpawnPoint spawn = _spiderTank.spawner.GetRandomAvailableSpawnPoint();
-		if ( spawn != null )
+		if ( _spawn != null )
 		{
-			_targetPos = spawn.spawnPoint.position;
-			spawn.available = false;
+			_targetPos = _spawn.spawnPoint.position;
+			_spawn.available = false;
 		}
 
 		base.Init( settings, startPos );
@@ -24,7 +26,7 @@ public class SpawnPointMortar : Mortar
 	public override void OnComplete()
 	{
 		GameObject spawner = Instantiate( spawnerObject, _targetPos, Quaternion.identity ) as GameObject;
-		_spiderTank.spawner.AddSpawner( spawner );
+		_spiderTank.spawner.AddSpawner( spawner, _spawn );
 
 		Destroy( gameObject );
 		Destroy( _marker );

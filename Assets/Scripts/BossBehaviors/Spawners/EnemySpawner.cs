@@ -9,7 +9,7 @@ public class EnemySpawner : MonoBehaviour
 	public SpawnerSettings defaultSettings;
 
 	public GameObject[] enemyTypes;
-	public List<GameObject> spawners;
+	public List<SpawnerObject> spawners;
 	public int maxSpawnPoints;
 	public int maxSpawned;
 
@@ -18,19 +18,21 @@ public class EnemySpawner : MonoBehaviour
 	private bool _spawning; //!< Used to tell the coroutine to stop spawning.
 	private int _enemyCount; //!< A counter of the number of live minions in the world.
 
-	private List<SpawnPoint> _availableSpawnPoints;
+	private List<SpawnPoint> _spawnPoints;
+	private List<SpawnPoint> _availableSpawnPoints; // caching this so "new" only has to be called once
 
 	private SpawnerSettings _settings;
 	private EnemyCountChange _enemyCountCallback = delegate( int count ) { }; //!< Callback used to notify listeners when the live enemy count changes.
 
 	void Awake()
 	{
+		_spawnPoints = new List<SpawnPoint>();
 		_availableSpawnPoints = new List<SpawnPoint>();
 		_settings = defaultSettings;
 		_spawning = false;
 		_enemyCount = 0;
 
-		foreach ( GameObject spawner in spawners )
+		foreach ( SpawnerObject spawner in spawners )
 		{
 			spawner.GetComponent<DeathSystem>().RegisterDeathCallback( SpawnerDeathCallback );
 		}
@@ -43,10 +45,7 @@ public class EnemySpawner : MonoBehaviour
 				SpawnPoint spawn = target.GetComponent<SpawnPoint>();
 				if ( spawn != null )
 				{
-					if ( spawn.available )
-					{
-						_availableSpawnPoints.Add( spawn );
-					}
+					_spawnPoints.Add( spawn );
 				}
 			}
 		}
@@ -110,7 +109,7 @@ public class EnemySpawner : MonoBehaviour
 
 	private void InitializeEnemyComponents( GameObject enemy )
 	{
-		Transform spawn = GetRandomSpawn();
+		Transform spawn = GetRandomSpawnerPos();
 
 		if ( spawn != null )
 		{
@@ -173,15 +172,31 @@ public class EnemySpawner : MonoBehaviour
 		_enemyCountCallback -= callback;
 	}
 
-	public void AddSpawner( GameObject spawner )
+	public void AddSpawner( GameObject spawner, SpawnPoint spawnPoint )
 	{
+		SpawnerObject spawnerObject = spawner.GetComponent<SpawnerObject>();
+		spawnerObject.spawnPoint = spawnPoint;
+
+		if ( spawnerObject.spawnPoint != null )
+		{
+			spawnerObject.spawnPoint.available = false;
+		}
+
 		spawner.GetComponent<DeathSystem>().RegisterDeathCallback( SpawnerDeathCallback );
-		spawners.Add( spawner );
+		spawners.Add( spawnerObject );
 	}
 
 	private void SpawnerDeathCallback( GameObject spawner )
 	{
-		spawners.Remove( spawner );
+		SpawnerObject spawnerObject = spawner.GetComponent<SpawnerObject>();
+
+		if ( spawnerObject.spawnPoint != null )
+		{
+			spawnerObject.spawnPoint.available = true;
+			spawnerObject.spawnPoint = null;
+		}
+
+		spawners.Remove( spawnerObject );
 	}
 
 	private void EnemyDeathCallback( GameObject enemy )
@@ -203,15 +218,7 @@ public class EnemySpawner : MonoBehaviour
 		}
 	}
 
-	public List<SpawnPoint> availableSpawnPoints 
-	{
-		get
-		{
-			return _availableSpawnPoints;
-		}
-	}
-
-	private Transform GetRandomSpawn()
+	private Transform GetRandomSpawnerPos()
 	{
 		Transform spawn = null;
 
@@ -248,8 +255,19 @@ public class EnemySpawner : MonoBehaviour
 
 	public SpawnPoint GetRandomAvailableSpawnPoint()
 	{
-		if ( _availableSpawnPoints != null )
+		if ( _spawnPoints != null )
 		{
+			_availableSpawnPoints.Clear();
+
+			for ( int i = 0; i < _spawnPoints.Count; i++ )
+			{
+				SpawnPoint spawn = _spawnPoints[i];
+				if ( spawn.available )
+				{
+					_availableSpawnPoints.Add( spawn );
+				}
+			}
+
 			return _availableSpawnPoints[Random.Range( 0, _availableSpawnPoints.Count )];
 		}
 
