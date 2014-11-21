@@ -11,7 +11,7 @@ public class SpiderTankBasicState : SpiderTankState
 	void Update()
 	{
 		spiderTank.LookMainCanon( _settings[spiderTank.currentPhase].turretSpeed );
-		spiderTank.FireMainCanon();
+		spiderTank.BeginMainCanon();
 
 		Quaternion lookRotation = Quaternion.LookRotation( player.position - transform.position );
 		transform.rotation = Quaternion.RotateTowards( transform.rotation, lookRotation, 90.0f * Time.deltaTime );
