@@ -2878,9 +2878,10 @@ MonoBehaviour:
         amountOfMortars: 0
         launchInterval: 0
   fallPointsRoot: {fileID: 0}
-  preFallDelay: 2
+  preFallDelay: 1
   fallTime: 1
   postFallDelay: .5
+  minFallDistance: 800
   landingEffect: {fileID: 100000, guid: 7c20c65ed3f62554c8963af3d000c0b7, type: 2}
   explodeMinion: {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
   numMinions: 20
@@ -2983,10 +2984,10 @@ MonoBehaviour:
     spawnOnStart: 0
   enemyTypes:
   - {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
-  spawns: []
+  spawners: []
   maxSpawnPoints: 5
   maxSpawned: 20
-  delayBetweenNewEnemy: .150000006
+  delayBetweenNewEnemy: .200000003
 --- !u!114 &11400050
 MonoBehaviour:
   m_ObjectHideFlags: 1

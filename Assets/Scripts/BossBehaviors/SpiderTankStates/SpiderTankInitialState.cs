@@ -7,6 +7,7 @@ public class SpiderTankInitialState : SpiderTankState
 	public float preFallDelay;
 	public float fallTime;
 	public float postFallDelay;
+	public float minFallDistance;
 	public GameObject landingEffect;
 
 	public GameObject explodeMinion;
@@ -49,6 +50,7 @@ public class SpiderTankInitialState : SpiderTankState
 	{
 		if ( enabled && count == 0 )
 		{
+			CancelInvoke( "StartFall" );
 			StartFall();
 		}
 	}
@@ -93,11 +95,15 @@ public class SpiderTankInitialState : SpiderTankState
 	private Transform findClosestToPlayer()
 	{
 		Transform closest = _fallPoints[0];
+		float closestDistance = (player.position - closest.position).sqrMagnitude;
+
 		for ( int index = 1; index < _fallPoints.Length; index++ )
 		{
-			if ( ( player.position - _fallPoints[index].position ).sqrMagnitude < ( player.position - closest.position ).sqrMagnitude )
+			float distance = (player.position - _fallPoints[index].position).sqrMagnitude;
+			if ( distance < closestDistance && distance >= minFallDistance )
 			{
 				closest = _fallPoints[index];
+				closestDistance = distance;
 			}
 		}
 

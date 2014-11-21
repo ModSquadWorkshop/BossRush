@@ -14,6 +14,11 @@ public class SpawnPointMortar : Mortar
 		_spiderTank = spiderTank;
 		_spawn = _spiderTank.spawner.GetRandomAvailableSpawnPoint();
 
+		if ( _spawn != null )
+		{
+			_spawn.available = false;
+		}
+
 		base.Init( settings, startPos );
 	}
 
