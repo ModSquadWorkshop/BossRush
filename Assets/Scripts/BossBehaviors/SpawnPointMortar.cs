@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SpawnPointMortar : Mortar
 {
@@ -8,8 +9,18 @@ public class SpawnPointMortar : Mortar
 
 	public void Init( MortarSettings settings, Vector3 startPos, SpiderTank spiderTank )
 	{
-		base.Init( settings, startPos );
 		_spiderTank = spiderTank;
+		
+		List<SpawnPoint> spawnPoints = _spiderTank.spawner.availableSpawnPoints;
+		if ( spawnPoints != null )
+		{
+			if ( spawnPoints.Count > 0 )
+			{
+				_targetPos = spawnPoints[Random.Range( 0, spawnPoints.Count )].spawnPoint.position;
+			}
+		}
+
+		base.Init( settings, startPos );
 	}
 
 	public override void OnComplete()

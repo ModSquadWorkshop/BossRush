@@ -3,12 +3,13 @@ using System.Collections;
 
 public class Mortar : MonoBehaviour
 {
-	private float _speed;
 	protected Vector3 _targetPos;
 	protected GameObject _marker; // the actual instantiated target marker
-	private Vector3 _velocity;
 
-	private MortarSettings _settings;
+	protected float _speed;
+	protected Vector3 _velocity;
+
+	protected MortarSettings _settings;
 
 	public void Init( MortarSettings settings, Vector3 startPos )
 	{

@@ -9,31 +9,30 @@ public class EnemySpawner : MonoBehaviour
 	public SpawnerSettings defaultSettings;
 
 	public GameObject[] enemyTypes;
-	public List<SpawnPoint> spawns;
+	public List<GameObject> spawners;
 	public int maxSpawnPoints;
 	public int maxSpawned;
 
-	public float delayBetweenNewEnemy = 0.1f;
+	public float delayBetweenNewEnemy;
 
-	private bool _spawning = false; //!< Used to tell the coroutine to stop spawning.
-	private int _enemyCount = 0; //!< A counter of the number of live minions in the world.
+	private bool _spawning; //!< Used to tell the coroutine to stop spawning.
+	private int _enemyCount; //!< A counter of the number of live minions in the world.
 
-	private List<SpawnPoint> _availableSpawns;
+	private List<SpawnPoint> _availableSpawnPoints;
 
 	private SpawnerSettings _settings;
 	private EnemyCountChange _enemyCountCallback = delegate( int count ) { }; //!< Callback used to notify listeners when the live enemy count changes.
 
 	void Awake()
 	{
+		_availableSpawnPoints = new List<SpawnPoint>();
 		_settings = defaultSettings;
-		_availableSpawns = new List<SpawnPoint>();
+		_spawning = false;
+		_enemyCount = 0;
 
-		foreach ( SpawnPoint spawn in spawns )
+		foreach ( GameObject spawner in spawners )
 		{
-			if ( spawn != null )
-			{
-				spawn.gameObject.GetComponent<DeathSystem>().RegisterDeathCallback( SpawnerDeathCallback );
-			}
+			spawner.GetComponent<DeathSystem>().RegisterDeathCallback( SpawnerDeathCallback );
 		}
 	}
 
@@ -66,7 +65,7 @@ public class EnemySpawner : MonoBehaviour
 	 */
 	public void Spawn()
 	{
-		Spawn( _settings.baseAmountPerWave + ( _settings.amountPerSpawner * spawns.Count ) );
+		Spawn( _settings.baseAmountPerWave + ( _settings.amountPerSpawner * spawners.Count ) );
 	}
 
 	/**
@@ -84,7 +83,7 @@ public class EnemySpawner : MonoBehaviour
 
 	private IEnumerator SpawnCoroutine( int amount, GameObject enemyType = null )
 	{
-		while ( amount > 0 && spawns.Count > 0 )
+		while ( amount > 0 && spawners.Count > 0 )
 		{
 			InitializeEnemyComponents( Instantiate( enemyType ?? enemyTypes[Random.Range( 0, enemyTypes.Length )] ) as GameObject );
 			amount--;
@@ -93,9 +92,9 @@ public class EnemySpawner : MonoBehaviour
 		}
 	}
 
-	protected virtual void InitializeEnemyComponents( GameObject enemy )
+	private void InitializeEnemyComponents( GameObject enemy )
 	{
-		SpawnPoint spawn = GetRandomAvailableSpawn();
+		Transform spawn = GetRandomSpawn();
 
 		if ( spawn != null )
 		{
@@ -107,7 +106,7 @@ public class EnemySpawner : MonoBehaviour
 			}
 
 			// set the spawn point
-			enemy.transform.position = spawn.spawnPoint.position;
+			enemy.transform.position = spawn.position;
 
 			// move the enemy in a radius around the spawn point
 			Vector2 radius = Random.insideUnitCircle * 10.0f;
@@ -138,54 +137,6 @@ public class EnemySpawner : MonoBehaviour
 		}
 	}
 
-	private SpawnPoint GetRandomAvailableSpawn()
-	{
-		_availableSpawns.Clear();
-
-		foreach ( SpawnPoint spawnPoint in spawns )
-		{
-			if ( spawnPoint != null )
-			{
-				if ( spawnPoint.available )
-				{
-					_availableSpawns.Add( spawnPoint );
-				}
-			}
-		}
-
-		SpawnPoint spawn = null;
-
-		int availableCount = _availableSpawns.Count;
-		if ( availableCount > 0 )
-		{
-			int index = Random.Range( 0, availableCount );
-			spawn = _availableSpawns[index];
-
-			// this while loop is really to fix a number of bugs with null reference spawners
-			// most of the time this while loop will never be triggered
-			while ( spawn == null )
-			{
-				_availableSpawns.RemoveAt( index );
-				availableCount = _availableSpawns.Count;
-
-				if ( availableCount == 0 )
-				{
-					return null;
-				}
-
-				index++;
-				if ( index >= availableCount )
-				{
-					index = 0;
-				}
-
-				spawn = _availableSpawns[index];
-			}
-		}
-
-		return spawn;
-	}
-
 	public void ApplySettings( SpawnerSettings settings )
 	{
 		_settings = settings;
@@ -206,32 +157,20 @@ public class EnemySpawner : MonoBehaviour
 		_enemyCountCallback -= callback;
 	}
 
-	public void EnemyDeathCallback( GameObject enemy )
-	{
-		// decrement live enemy count
-		enemyCount--;
-	}
-
 	public void AddSpawner( GameObject spawner )
 	{
-		SpawnPoint spawn = spawner.GetComponent<SpawnPoint>();
-		if ( spawn == null )
-		{
-			spawn = spawner.AddComponent<SpawnPoint>();
-		}
-
-		spawns.Add( spawn );
 		spawner.GetComponent<DeathSystem>().RegisterDeathCallback( SpawnerDeathCallback );
+		spawners.Add( spawner );
 	}
 
 	private void SpawnerDeathCallback( GameObject spawner )
 	{
-		SpawnPoint spawn = spawner.GetComponent<SpawnPoint>();
-		if ( spawn != null )
-		{
-			spawn.available = true;
-			spawns.Remove( spawn );
-		}
+		spawners.Remove( spawner );
+	}
+
+	private void EnemyDeathCallback( GameObject enemy )
+	{
+		enemyCount--;
 	}
 
 	public int enemyCount
@@ -246,6 +185,49 @@ public class EnemySpawner : MonoBehaviour
 			_enemyCount = value;
 			_enemyCountCallback( _enemyCount );
 		}
+	}
+
+	public List<SpawnPoint> availableSpawnPoints 
+	{
+		get
+		{
+			return _availableSpawnPoints;
+		}
+	}
+
+	private Transform GetRandomSpawn()
+	{
+		Transform spawn = null;
+
+		int availableCount = spawners.Count;
+		if ( availableCount > 0 )
+		{
+			int index = Random.Range( 0, availableCount );
+			spawn = spawners[index].transform;
+
+			// this while loop is really to fix a number of bugs with null reference spawners
+			// most of the time this while loop will never be triggered
+			while ( spawn == null )
+			{
+				spawners.RemoveAt( index );
+				availableCount = spawners.Count;
+
+				if ( availableCount == 0 )
+				{
+					return null;
+				}
+
+				index++;
+				if ( index >= availableCount )
+				{
+					index = 0;
+				}
+
+				spawn = spawners[index].transform;
+			}
+		}
+
+		return spawn;
 	}
 }
 
