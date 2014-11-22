@@ -44,6 +44,7 @@ GameObject:
   - 114: {fileID: 11400046}
   - 114: {fileID: 11400036}
   - 114: {fileID: 11400076}
+  - 114: {fileID: 11400048}
   m_Layer: 10
   m_Name: Spider Tank
   m_TagString: Enemy
@@ -2240,7 +2241,7 @@ MonoBehaviour:
   destroyOnNoLives: 1
   startingLives: 100
   maxLives: 1
-  startingHealth: 8000
+  startingHealth: 100
   maxHealth: 8000
   damageSounds: []
   deathSounds: []
@@ -2887,7 +2888,7 @@ MonoBehaviour:
   preFallDelay: 1
   fallTime: 1
   postFallDelay: .5
-  minFallDistance: 800
+  minFallDistance: 200
   landingEffect: {fileID: 100000, guid: 7c20c65ed3f62554c8963af3d000c0b7, type: 2}
   fallingSound: {fileID: 8300000, guid: 27294fe6a22e3034eaf05d8af11a214e, type: 3}
   landingSound: {fileID: 8300000, guid: 0ebf751fd3acf564abc3cdf44ec3a906, type: 3}
@@ -2996,6 +2997,20 @@ MonoBehaviour:
   maxSpawnPoints: 5
   maxSpawned: 20
   delayBetweenNewEnemy: .200000003
+--- !u!114 &11400048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 398eb0b8d98e677448c60e5bc3fefd5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionEffect: {fileID: 100000, guid: 0eea880a8c290a844b837323c91af4aa, type: 2}
+  explosionRadius: 0
+  explosionDamage: 0
 --- !u!114 &11400050
 MonoBehaviour:
   m_ObjectHideFlags: 1

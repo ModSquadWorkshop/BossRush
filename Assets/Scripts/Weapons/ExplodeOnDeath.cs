@@ -7,7 +7,6 @@ public class ExplodeOnDeath : MonoBehaviour
 
 	public float explosionRadius;
 	public float explosionDamage;
-	public float explosionForce;
 
 	void Awake()
 	{
@@ -24,15 +23,10 @@ public class ExplodeOnDeath : MonoBehaviour
 			if ( damageSystem.IsTarget( col.tag ) )
 			{
 				DealDamage( col.gameObject );
-
-				if ( col.rigidbody != null )
-				{
-					col.rigidbody.AddExplosionForce( explosionForce, transform.position, explosionRadius );
-				}
 			}
 		}
 
-		Instantiate( explosionEffect, transform.position, transform.rotation );//.GetComponent<Explosion>().radius = explosionRadius;
+		Instantiate( explosionEffect, transform.position, transform.rotation );
 	}
 
 	void DealDamage( GameObject target )

@@ -11,7 +11,7 @@ GameObject:
   - 82: {fileID: 8200000}
   - 114: {fileID: 11400000}
   m_Layer: 8
-  m_Name: Explosion
+  m_Name: Explosion (Large)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -260,7 +260,7 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  lengthInSec: 1
+  lengthInSec: 3
   startDelay: 0
   speed: 1
   randomSeed: 0
@@ -411,7 +411,7 @@ ParticleSystem:
         rgba: 895376990
       minMaxState: 2
     startSize:
-      scalar: 6
+      scalar: 12
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -508,7 +508,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
       minMaxState: 0
-    cnt0: 10
+    cnt0: 15
     cnt1: 30
     cnt2: 30
     cnt3: 30
@@ -588,10 +588,10 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 16777215
         key1:
           serializedVersion: 2
-          rgba: 16777215
+          rgba: 4294967295
         key2:
           serializedVersion: 2
           rgba: 0
@@ -619,7 +619,7 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 65535
+        atime1: 11180
         atime2: 65535
         atime3: 65535
         atime4: 0
@@ -627,7 +627,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_NumColorKeys: 2
-        m_NumAlphaKeys: 2
+        m_NumAlphaKeys: 3
       minGradient:
         key0:
           serializedVersion: 2
@@ -1301,7 +1301,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 3
     startSpeed:
-      scalar: 4
+      scalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1415,10 +1415,10 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4294967295
+        rgba: 1375731711
       minMaxState: 0
     startSize:
-      scalar: 20
+      scalar: 40
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1598,7 +1598,7 @@ ParticleSystem:
           rgba: 16777215
         key1:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 4278190335
         key2:
           serializedVersion: 2
           rgba: 4278190080
@@ -2308,7 +2308,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 3
     startSpeed:
-      scalar: 4
+      scalar: 8
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -2425,7 +2425,7 @@ ParticleSystem:
         rgba: 4294967295
       minMaxState: 0
     startSize:
-      scalar: 6
+      scalar: 30
       maxCurve:
         serializedVersion: 2
         m_Curve:
