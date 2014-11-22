@@ -2161,6 +2161,8 @@ MonoBehaviour:
   mortarLauncher: {fileID: 11400070}
   spawnerLauncher: {fileID: 11400068}
   shield: {fileID: 0}
+  canonDelay: 0
+  canonWarning: {fileID: 0}
   defaultCanonLookSpeed: 20
   healthTriggerInterval: 1500
   healthCheckpoints:
@@ -2646,9 +2648,13 @@ MonoBehaviour:
   repeatDamage: 1
   maxRange: 10000
   damageInterval: .100000001
-  piercingsAmount: 0
   duration: 0
   impactParticles: {fileID: 400044}
+  layersToIgnore:
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &11400032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3023,9 +3029,13 @@ MonoBehaviour:
   repeatDamage: 1
   maxRange: 10000
   damageInterval: .100000001
-  piercingsAmount: 0
   duration: 0
   impactParticles: {fileID: 400046}
+  layersToIgnore:
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &11400054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3042,9 +3052,13 @@ MonoBehaviour:
   repeatDamage: 1
   maxRange: 10000
   damageInterval: .100000001
-  piercingsAmount: 0
   duration: 0
   impactParticles: {fileID: 400048}
+  layersToIgnore:
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &11400056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3095,9 +3109,13 @@ MonoBehaviour:
   repeatDamage: 1
   maxRange: 10000
   damageInterval: .100000001
-  piercingsAmount: 0
   duration: 0
   impactParticles: {fileID: 400050}
+  layersToIgnore:
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &11400062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3114,9 +3132,13 @@ MonoBehaviour:
   repeatDamage: 1
   maxRange: 10000
   damageInterval: .100000001
-  piercingsAmount: 0
   duration: 0
   impactParticles: {fileID: 400056}
+  layersToIgnore:
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &11400064
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3227,7 +3249,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mat: {fileID: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Sprite: {fileID: 21300000, guid: 2f6e32b3a6c9c8b46b548e66058edca0, type: 3}
   m_Type: 3
@@ -15156,6 +15178,8 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
 --- !u!224 &22400000
