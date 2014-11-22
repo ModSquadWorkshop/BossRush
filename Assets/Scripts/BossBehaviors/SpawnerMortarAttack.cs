@@ -7,7 +7,7 @@ public class SpawnerMortarAttack : MortarAttack
 
 	protected override IEnumerator LaunchMortar( int numMortars )
 	{
-		while ( numMortars > 0 && spiderTank.spawner.spawns.Count < spiderTank.spawner.maxSpawnPoints )
+		while ( numMortars > 0 && spiderTank.spawner.spawners.Count < spiderTank.spawner.maxSpawnPoints )
 		{
 			SpawnPointMortar mortarObject = ( Instantiate( mortar ) as GameObject ).GetComponent<SpawnPointMortar>();
 			mortarObject.Init( mortarSettings, transform.position, spiderTank );
@@ -15,6 +15,7 @@ public class SpawnerMortarAttack : MortarAttack
 
 			yield return new WaitForSeconds( delayBetweenMortars );
 		}
+
 		_firing = false;
 	}
 }

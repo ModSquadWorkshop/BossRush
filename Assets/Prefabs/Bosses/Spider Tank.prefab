@@ -50,7 +50,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100004
 GameObject:
   m_ObjectHideFlags: 1
@@ -559,7 +559,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400058}
   m_Layer: 10
-  m_Name: Transform Root
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -792,7 +792,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: .939692616, z: 0, w: .342020154}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 3.86689997, z: 6.01489258}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400044}
@@ -833,7 +833,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: .57357645, z: 0, w: .819152057}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 3.86689997, z: 6.01489258}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400046}
@@ -846,7 +846,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: -.57357645, z: 0, w: .819152057}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 3.86689997, z: 6.01489258}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400048}
@@ -859,7 +859,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
   m_LocalRotation: {x: 0, y: -.939692616, z: 0, w: .342020154}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 3.86689997, z: 6.01489258}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400050}
@@ -872,7 +872,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100012}
   m_LocalRotation: {x: 0, y: -4.37113883e-08, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.95572725e-14, y: 3.86689997, z: 6.01489258}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400004}
@@ -1028,7 +1028,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100036}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.48000002, z: 6.0999999}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400012}
@@ -1828,7 +1828,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 8, y: 10, z: 15}
+  m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 5, z: 0}
 --- !u!82 &8200000
 AudioSource:
@@ -2311,7 +2311,6 @@ MonoBehaviour:
   targets:
   - Scenery
   - Player
-  - Enemy
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2329,7 +2328,6 @@ MonoBehaviour:
   targets:
   - Scenery
   - Player
-  - Enemy
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2648,13 +2646,9 @@ MonoBehaviour:
   repeatDamage: 1
   maxRange: 10000
   damageInterval: .100000001
+  piercingsAmount: 0
   duration: 0
   impactParticles: {fileID: 400044}
-  layersToIgnore:
-  - serializedVersion: 2
-    m_Bits: 8192
-  - serializedVersion: 2
-    m_Bits: 1024
 --- !u!114 &11400032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2672,7 +2666,6 @@ MonoBehaviour:
   targets:
   - Scenery
   - Player
-  - Enemy
 --- !u!114 &11400034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2885,13 +2878,18 @@ MonoBehaviour:
         amountOfMortars: 0
         launchInterval: 0
   fallPointsRoot: {fileID: 0}
-  preFallDelay: 2
+  preFallDelay: 1
   fallTime: 1
   postFallDelay: .5
+  minFallDistance: 800
   landingEffect: {fileID: 100000, guid: 7c20c65ed3f62554c8963af3d000c0b7, type: 2}
+  fallingSound: {fileID: 8300000, guid: 27294fe6a22e3034eaf05d8af11a214e, type: 3}
+  landingSound: {fileID: 8300000, guid: 0ebf751fd3acf564abc3cdf44ec3a906, type: 3}
   explodeMinion: {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
   numMinions: 20
   maxWaitTime: 15
+  initialSpawnersAmount: 5
+  delayBeforeMinionSpawning: 5
 --- !u!114 &11400042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2981,21 +2979,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23eef0c7e1c23864eb720e3d5817a2f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTypes:
-  - {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
-  spawns:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  maxSpawnPoints: 5
   defaultSettings:
     baseAmountPerWave: 2
     amountPerSpawner: 1
     waveInterval: 2
     spawnOnStart: 0
+  enemyTypes:
+  - {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
+  spawners: []
+  maxSpawnPoints: 5
   maxSpawned: 20
-  delayBetweenNewEnemy: .100000001
+  delayBetweenNewEnemy: .200000003
 --- !u!114 &11400050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3029,13 +3023,9 @@ MonoBehaviour:
   repeatDamage: 1
   maxRange: 10000
   damageInterval: .100000001
+  piercingsAmount: 0
   duration: 0
   impactParticles: {fileID: 400046}
-  layersToIgnore:
-  - serializedVersion: 2
-    m_Bits: 8192
-  - serializedVersion: 2
-    m_Bits: 1024
 --- !u!114 &11400054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3052,13 +3042,9 @@ MonoBehaviour:
   repeatDamage: 1
   maxRange: 10000
   damageInterval: .100000001
+  piercingsAmount: 0
   duration: 0
   impactParticles: {fileID: 400048}
-  layersToIgnore:
-  - serializedVersion: 2
-    m_Bits: 8192
-  - serializedVersion: 2
-    m_Bits: 1024
 --- !u!114 &11400056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3109,13 +3095,9 @@ MonoBehaviour:
   repeatDamage: 1
   maxRange: 10000
   damageInterval: .100000001
+  piercingsAmount: 0
   duration: 0
   impactParticles: {fileID: 400050}
-  layersToIgnore:
-  - serializedVersion: 2
-    m_Bits: 8192
-  - serializedVersion: 2
-    m_Bits: 1024
 --- !u!114 &11400062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3132,13 +3114,9 @@ MonoBehaviour:
   repeatDamage: 1
   maxRange: 10000
   damageInterval: .100000001
+  piercingsAmount: 0
   duration: 0
   impactParticles: {fileID: 400056}
-  layersToIgnore:
-  - serializedVersion: 2
-    m_Bits: 8192
-  - serializedVersion: 2
-    m_Bits: 1024
 --- !u!114 &11400064
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3195,11 +3173,19 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     targetMarker: {fileID: 100000, guid: 1a748d5f766af9345ae5d3d8018f8c26, type: 2}
     minSpeed: 40
     maxSpeed: 50
-    minTargetOffset: 10
-    maxTargetOffset: 30
+    minTargetOffset: 0
+    maxTargetOffset: 5
     targetLead: 0
     arcHeight: 100
     speedIncrease: 2.5
@@ -3241,7 +3227,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Mat: {fileID: 0}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Sprite: {fileID: 21300000, guid: 2f6e32b3a6c9c8b46b548e66058edca0, type: 3}
   m_Type: 3
@@ -15170,8 +15156,6 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
 --- !u!224 &22400000

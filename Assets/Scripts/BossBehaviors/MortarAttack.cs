@@ -31,6 +31,7 @@ public class MortarAttack : MonoBehaviour
 
 			yield return new WaitForSeconds( delayBetweenMortars );
 		}
+
 		_firing = false;
 	}
 }

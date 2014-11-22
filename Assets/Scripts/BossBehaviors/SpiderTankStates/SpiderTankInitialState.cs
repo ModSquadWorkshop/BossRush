@@ -7,11 +7,17 @@ public class SpiderTankInitialState : SpiderTankState
 	public float preFallDelay;
 	public float fallTime;
 	public float postFallDelay;
+	public float minFallDistance;
 	public GameObject landingEffect;
+	public AudioClip fallingSound;
+	public AudioClip landingSound;
 
 	public GameObject explodeMinion;
 	public int numMinions;
 	public float maxWaitTime;
+
+	public int initialSpawnersAmount;
+	public float delayBeforeMinionSpawning;
 
 	private Transform[] _fallPoints;
 
@@ -27,9 +33,10 @@ public class SpiderTankInitialState : SpiderTankState
 	{
 		base.OnEnable();
 
-		spawner.RegisterEnemyCountCallback( MinionCountChange );
-		spawner.Spawn( numMinions, explodeMinion );
+		spawner.enabled = true;
+		spawnerLauncher.Launch( initialSpawnersAmount );
 
+		Invoke( "SpawnersFallEnded", delayBeforeMinionSpawning );
 		Invoke( "PreFall", maxWaitTime );
 	}
 
@@ -43,6 +50,7 @@ public class SpiderTankInitialState : SpiderTankState
 	{
 		if ( enabled && count == 0 )
 		{
+			CancelInvoke( "StartFall" );
 			PreFall();
 		}
 	}
@@ -54,12 +62,14 @@ public class SpiderTankInitialState : SpiderTankState
 		Invoke( "StartFall", preFallDelay );
 	}
 
-	void StartFall()
+	private void StartFall()
 	{
 		// move to be above destination
 		Transform destination = findClosestToPlayer();
 		transform.position = destination.position + new Vector3( 0.0f, 200.0f, 0.0f );
 
+		audio.clip = fallingSound;
+		audio.Play();
 		// start fall
 		Hashtable settings = new Hashtable();
 		settings.Add( "delay", preFallDelay );
@@ -71,28 +81,41 @@ public class SpiderTankInitialState : SpiderTankState
 		Invoke( "FallEnded", fallTime );
 	}
 
-	void FallEnded()
+	private void FallEnded()
 	{
 		Instantiate( landingEffect, transform.position, Quaternion.identity );
+		audio.clip = landingSound;
+		audio.Play();
 		Invoke( "Exit", postFallDelay );
 	}
 
-	void Exit()
+	private void SpawnersFallEnded()
+	{
+		spawner.RegisterEnemyCountCallback( MinionCountChange );
+		spawner.Spawn( numMinions, explodeMinion );
+	}
+
+	private void Exit()
 	{
 		enabled = false;
 		spiderTank.basicState.enabled = true;
 	}
 
-	public Transform findClosestToPlayer()
+	private Transform findClosestToPlayer()
 	{
 		Transform closest = _fallPoints[0];
+		float closestDistance = (player.position - closest.position).sqrMagnitude;
+
 		for ( int index = 1; index < _fallPoints.Length; index++ )
 		{
-			if ( ( player.position - _fallPoints[index].position ).sqrMagnitude < ( player.position - closest.position ).sqrMagnitude )
+			float distance = (player.position - _fallPoints[index].position).sqrMagnitude;
+			if ( distance < closestDistance && distance >= minFallDistance )
 			{
 				closest = _fallPoints[index];
+				closestDistance = distance;
 			}
 		}
+
 		return closest;
 	}
 }
