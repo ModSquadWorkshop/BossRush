@@ -3,12 +3,13 @@ using System.Collections;
 
 public class Mortar : MonoBehaviour
 {
-	private float       _speed;
-	protected Vector3     _targetPos;
-	protected GameObject  _marker; // the actual instantiated target marker
-	private Vector3     _velocity;
+	protected Vector3 _targetPos;
+	protected GameObject _marker; // the actual instantiated target marker
 
-	private MortarSettings _settings;
+	protected float _speed;
+	protected Vector3 _velocity;
+
+	protected MortarSettings _settings;
 
 	public void Init( MortarSettings settings, Vector3 startPos )
 	{
@@ -33,7 +34,7 @@ public class Mortar : MonoBehaviour
 		this.gameObject.transform.Translate( _velocity * Time.deltaTime, Space.World );
 	}
 
-	void OnMidComplete()
+	private void OnMidComplete()
 	{
 		// calculate the things
 		_speed *= _settings.speedIncrease;
@@ -54,7 +55,7 @@ public class Mortar : MonoBehaviour
 		Destroy( _marker );
 	}
 
-	private Vector3 GetTargetPosition()
+	protected virtual Vector3 GetTargetPosition()
 	{
 		Vector3 offset = Random.insideUnitCircle * Random.Range( _settings.minTargetOffset, _settings.maxTargetOffset );
 		offset.z = offset.y; // Random.insideUnitCircle returns a 2D vector with (x, y), so we swap y with z for an accurate 3D position
@@ -78,15 +79,17 @@ public class Mortar : MonoBehaviour
 		return offset + target.position;
 	}
 
-	void TargetDeath( GameObject obj )
+	private void TargetDeath( GameObject obj )
 	{
 		// don't go through the DeathSystem,
 		// we're doing cleanup, not normal gameplay
 		Destroy( gameObject );
+
 		if ( _marker != null )
 		{
 			Destroy( _marker );
 		}
+
 		CancelInvoke();
 	}
 }

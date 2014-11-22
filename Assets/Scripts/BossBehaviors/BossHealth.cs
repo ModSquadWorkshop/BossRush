@@ -2,43 +2,37 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class BossHealth : MonoBehaviour 
+public class BossHealth : MonoBehaviour
 {
-	private HealthSystem _health;
+	public GameObject boss;
+	public GameObject bossMesh;
+
 	private Scrollbar _scroll;
 	private Canvas _healthbar;
-	public GameObject bossMesh;
-	public GameObject boss;
 	private MeshRenderer _renderer;
-	
-	// Use this for initialization
-	void Start () 
+
+	void Start()
 	{
-		_health = boss.GetComponent<HealthSystem>();
-		_health.RegisterHealthCallback( HealthCallback );
-		_scroll = this.GetComponentInChildren<Scrollbar>();
+		boss.GetComponent<HealthSystem>().RegisterHealthCallback( HealthCallback );
+		_scroll = GetComponentInChildren<Scrollbar>();
 		_renderer = bossMesh.GetComponent<MeshRenderer>();
-		_healthbar = this.GetComponent<Canvas>();
+		_healthbar = GetComponent<Canvas>();
 	}
-	
-	// Update is called once per frame
-	void Update () 
+
+	void Update()
 	{
-		if ( !_renderer.isVisible )
+		if ( !_renderer.isVisible && boss.activeSelf )
 		{
 			_healthbar.enabled = true;
-			//Debug.Log( "BOSS NOT VISIBLE" );
 		}
 		else
 		{
 			_healthbar.enabled = false;
-				//Debug.Log( "BOSS VISIBLE" );
 		}
 	}
 
 	void HealthCallback( HealthSystem healthSystem, float healthChange )
 	{
 		_scroll.size = healthSystem.percent;
-		//Debug.Log( _scroll.size );
 	}
 }

@@ -11,7 +11,7 @@ public class SpiderTankFleeState : SpiderTankState
 	public void Update()
 	{
 		spiderTank.LookMainCanon();
-		spiderTank.FireMainCanon();
+		spiderTank.BeginMainCanon();
 
 		// check if we're at our destination
 		if ( ( transform.position - shield.transform.position ).sqrMagnitude < 1.0f )

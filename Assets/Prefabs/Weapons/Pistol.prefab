@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100002
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58170baa63ed6b949bc5bb273cbe6cea, type: 3}
   m_Name: 
@@ -238,9 +238,9 @@ MonoBehaviour:
   projectile: {fileID: 100000, guid: 34b1559824f53114fb6ee392b43fb6a6, type: 2}
   casingEmitter: {fileID: 19800000}
   muzzleFlash: {fileID: 19800002}
-  infiniteAmmo: 1
-  ammoPerMagazine: 7
-  amountOfMagazines: 11
+  infiniteAmmo: 0
+  ammoPerMagazine: 20
+  amountOfMagazines: 0
   reloadSpeed: 1
   sprayAngle: 10
   circleSpray: 0

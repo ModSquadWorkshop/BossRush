@@ -209,9 +209,13 @@ MonoBehaviour:
   repeatDamage: 1
   maxRange: 10000
   damageInterval: .0500000007
-  piercingsAmount: 0
   duration: 8
   impactParticles: {fileID: 400002}
+  layersToIgnore:
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 2048
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

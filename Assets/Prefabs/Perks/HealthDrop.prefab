@@ -258,18 +258,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropChance: .0500000007
   maxPickupTime: 15
-  immunity: 0
-  infiniteAmmo: 0
-  speedMod: 0
-  fireRateMod: 0
-  maxHealthMod: 0
-  healthMod: 15
-  damageMod: 0
-  reloadMod: 0
-  magazinesMod: 0
-  gunDrop: {fileID: 0}
-  ID: Health
-  duration: 0
+  settings:
+    type: 1
+    shield: 0
+    infiniteAmmo: 0
+    speedMod: 0
+    fireRateMod: 0
+    healthMod: 15
+    damageMod: 0
+    reloadMod: 0
+    magazinesMod: 0
+    gunDrop: {fileID: 0}
+    duration: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
