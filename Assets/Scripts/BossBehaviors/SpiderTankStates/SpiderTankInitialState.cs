@@ -43,7 +43,7 @@ public class SpiderTankInitialState : SpiderTankState
 	{
 		if ( enabled && count == 0 )
 		{
-			StartFall();
+			PreFall();
 		}
 	}
 
