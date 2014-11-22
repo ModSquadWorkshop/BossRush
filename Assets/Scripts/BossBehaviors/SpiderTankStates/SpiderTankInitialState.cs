@@ -33,11 +33,9 @@ public class SpiderTankInitialState : SpiderTankState
 	{
 		base.OnEnable();
 
-		spawner.enabled = true;
 		spawnerLauncher.Launch( initialSpawnersAmount );
 
 		Invoke( "SpawnersFallEnded", delayBeforeMinionSpawning );
-		Invoke( "PreFall", maxWaitTime );
 	}
 
 	public override void OnDisable()
@@ -50,14 +48,13 @@ public class SpiderTankInitialState : SpiderTankState
 	{
 		if ( enabled && count == 0 )
 		{
-			CancelInvoke( "StartFall" );
+			CancelInvoke();
 			PreFall();
 		}
 	}
 
 	void PreFall()
 	{
-		CancelInvoke();
 		spawner.DeregisterEnemyCountCallback( MinionCountChange );
 		Invoke( "StartFall", preFallDelay );
 	}
@@ -68,15 +65,15 @@ public class SpiderTankInitialState : SpiderTankState
 		Transform destination = findClosestToPlayer();
 		transform.position = destination.position + new Vector3( 0.0f, 200.0f, 0.0f );
 
-		audio.clip = fallingSound;
-		audio.Play();
 		// start fall
 		Hashtable settings = new Hashtable();
-		settings.Add( "delay", preFallDelay );
 		settings.Add( "position", destination );
 		settings.Add( "time", fallTime );
 		settings.Add( "easetype", iTween.EaseType.linear );
 		iTween.MoveTo( gameObject, settings );
+
+		audio.clip = fallingSound;
+		audio.Play();
 
 		Invoke( "FallEnded", fallTime );
 	}
@@ -86,6 +83,7 @@ public class SpiderTankInitialState : SpiderTankState
 		Instantiate( landingEffect, transform.position, Quaternion.identity );
 		audio.clip = landingSound;
 		audio.Play();
+
 		Invoke( "Exit", postFallDelay );
 	}
 
@@ -93,6 +91,8 @@ public class SpiderTankInitialState : SpiderTankState
 	{
 		spawner.RegisterEnemyCountCallback( MinionCountChange );
 		spawner.Spawn( numMinions, explodeMinion );
+
+		Invoke( "PreFall", maxWaitTime );
 	}
 
 	private void Exit()

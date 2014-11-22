@@ -229,7 +229,6 @@ public class SpiderTank : MonoBehaviour
 			return health.health >= _healthMaxCurr;
 		}
 	}
-
 }
 
 

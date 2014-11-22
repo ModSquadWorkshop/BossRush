@@ -35,9 +35,14 @@ public class DeathSystem : MonoBehaviour
 		Destroy( gameObject );
 	}
 
+	/**
+	 * \brief Utility method to "kill" an object without actually killing it.
+	 *
+	 * \note Doesn't actually send out a death notification.
+	 *
+	 */
 	public void Gut()
 	{
-		NotifyDeath();
 		foreach ( MonoBehaviour script in GetComponents<MonoBehaviour>() )
 		{
 			Destroy( script );
