@@ -3,17 +3,46 @@ using System.Collections;
 
 public class SpiderTankInitialState : SpiderTankState
 {
-	public int mininionCount;
+	public LevelManager levelManager;
 
-	void OnEnable()
+	public GameObject fallPointsRoot;
+	public float preFallDelay;
+	public float fallTime;
+	public float postFallDelay;
+	public float minFallDistance;
+	public GameObject landingEffect;
+	public AudioClip fallingSound;
+	public AudioClip landingSound;
+
+	public GameObject explodeMinion;
+	public int numMinions;
+	public float maxWaitTime;
+
+	public int initialSpawnersAmount;
+	public float delayBeforeMinionSpawning;
+
+	private Transform[] _fallPoints;
+
+	public override void Awake()
 	{
-		spawner.RegisterEnemyCountCallback( MinionCountChange );
-		spawner.Spawn( mininionCount );
+		base.Awake();
+
+		// get the list of fall points
+		_fallPoints = fallPointsRoot.GetComponentsInChildren<Transform>();
 	}
 
-	void OnDisable()
+	public override void OnEnable()
 	{
-		spawner.DeregisterEnemyCountCallback( MinionCountChange );
+		base.OnEnable();
+
+		spawnerLauncher.Launch( initialSpawnersAmount );
+
+		Invoke( "SpawnersFallEnded", delayBeforeMinionSpawning );
+	}
+
+	public override void OnDisable()
+	{
+		base.OnDisable();
 		spiderTank.SetDamageBase();
 	}
 
@@ -21,11 +50,75 @@ public class SpiderTankInitialState : SpiderTankState
 	{
 		if ( enabled && count == 0 )
 		{
-			enabled = false;
-			spawner.enabled = false;
-
-			spiderTank.fleeState.returnState = spiderTank.basicState;
-			spiderTank.fleeState.enabled = true;
+			CancelInvoke();
+			PreFall();
 		}
+	}
+
+	void PreFall()
+	{
+		spawner.DeregisterEnemyCountCallback( MinionCountChange );
+		Invoke( "StartFall", preFallDelay );
+	}
+
+	private void StartFall()
+	{
+		// move to be above destination
+		Transform destination = findClosestToPlayer();
+		transform.position = destination.position + new Vector3( 0.0f, 200.0f, 0.0f );
+
+		// start fall
+		Hashtable settings = new Hashtable();
+		settings.Add( "position", destination );
+		settings.Add( "time", fallTime );
+		settings.Add( "easetype", iTween.EaseType.linear );
+		iTween.MoveTo( gameObject, settings );
+
+		audio.clip = fallingSound;
+		audio.Play();
+
+		Invoke( "FallEnded", fallTime );
+	}
+
+	private void FallEnded()
+	{
+		Instantiate( landingEffect, transform.position, Quaternion.identity );
+		audio.clip = landingSound;
+		audio.Play();
+		levelManager.ShowBossHealthDisplay();
+
+		Invoke( "Exit", postFallDelay );
+	}
+
+	private void SpawnersFallEnded()
+	{
+		spawner.RegisterEnemyCountCallback( MinionCountChange );
+		spawner.Spawn( numMinions, explodeMinion );
+
+		Invoke( "PreFall", maxWaitTime );
+	}
+
+	private void Exit()
+	{
+		enabled = false;
+		spiderTank.basicState.enabled = true;
+	}
+
+	private Transform findClosestToPlayer()
+	{
+		Transform closest = _fallPoints[0];
+		float closestDistance = (player.position - closest.position).sqrMagnitude;
+
+		for ( int index = 1; index < _fallPoints.Length; index++ )
+		{
+			float distance = (player.position - _fallPoints[index].position).sqrMagnitude;
+			if ( distance < closestDistance && distance >= minFallDistance )
+			{
+				closest = _fallPoints[index];
+				closestDistance = distance;
+			}
+		}
+
+		return closest;
 	}
 }

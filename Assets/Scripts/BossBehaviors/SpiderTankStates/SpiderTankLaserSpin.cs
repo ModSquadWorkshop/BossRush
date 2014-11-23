@@ -3,33 +3,41 @@ using System.Collections;
 
 public class SpiderTankLaserSpin : SpiderTankState
 {
-	public float rotation;
-	public bool spawnMinions;
-
-	public float duration;
-
-	void OnEnable()
-	{
-		spawner.enabled = spawnMinions;
-		Invoke( "TransitionOut", duration );
-		spiderTank.RegisterHealthTriggerCallback( HealthTriggerCallback );
-	}
+	public LaserSpinSettingsList laserSpinSettings;
+	private LaserSpinSettings[] _settings;
 
 	void Update()
 	{
-		spiderTank.laserCanon.PerformPrimaryAttack();
+		for ( int i = 0; i < spiderTank.laserCanon.Length; ++i )
+		{
+			spiderTank.laserCanon[i].PerformPrimaryAttack();
+		}
 	}
 
-	void OnDisable()
+	public override void OnEnable()
 	{
-		spawner.enabled = false;
+		base.OnEnable();
+
+		_settings = new LaserSpinSettings[] { laserSpinSettings.phaseOneSettings, 
+											  laserSpinSettings.phaseTwoSettings, 
+											  laserSpinSettings.phaseThreeSettings, 
+											  laserSpinSettings.phaseFourSettings };
+
+		Invoke( "TransitionOut", _settings[spiderTank.currentPhase].duration );
+		spiderTank.RegisterHealthTriggerCallback( HealthTriggerCallback );
+	}
+
+	public override void OnDisable()
+	{
+		base.OnDisable();
+
 		spiderTank.DeregisterHealthTriggerCallback( HealthTriggerCallback );
 	}
 
 	void FixedUpdate()
 	{
 		Vector3 angularVelocity = rigidbody.angularVelocity;
-		angularVelocity.y = rotation;
+		angularVelocity.y = _settings[spiderTank.currentPhase].rotation;
 		rigidbody.angularVelocity = angularVelocity;
 	}
 
@@ -46,4 +54,23 @@ public class SpiderTankLaserSpin : SpiderTankState
 			spiderTank.turboState.enabled = true;
 		}
 	}
+}
+
+
+[System.Serializable]
+public class LaserSpinSettings
+{
+	public float rotation;
+	public float duration;
+}
+
+
+// this struct only exists to organize the settings in the inspector
+[System.Serializable]
+public class LaserSpinSettingsList
+{
+	public LaserSpinSettings phaseOneSettings;
+	public LaserSpinSettings phaseTwoSettings;
+	public LaserSpinSettings phaseThreeSettings;
+	public LaserSpinSettings phaseFourSettings;
 }

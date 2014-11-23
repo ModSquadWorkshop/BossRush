@@ -3,57 +3,61 @@ using System.Collections;
 
 public class SpiderTankFleeState : SpiderTankState
 {
-	public Collider doorCollider;
-	public float mainCanonCooldown;
-
-	public int minionsPerWave;
-
-	private PathMovement pathMovement;
+	public FleeStateSettingsList fleeStateSettings;
+	private FleeStateSettings[] _settings;
 
 	[HideInInspector] public SpiderTankState returnState;
-
-	public override void Awake()
-	{
-		base.Awake();
-
-		pathMovement = GetComponent<PathMovement>();
-		pathMovement.RegisterDestinationReachedCallback( new PathMovement.DesinationReached( DestinationReached ) );
-	}
-
-	public void OnEnable()
-	{
-		// make sure the boss can walk in/out of the arena.
-		Physics.IgnoreCollision( collider, doorCollider, true );
-		pathMovement.enabled = true;
-		mainCanon.SetCooldown( mainCanonCooldown );
-
-		spawner.enabled = true;
-		spawner.amountPerWave = minionsPerWave;
-		spawner.StartSpawning();
-	}
 
 	public void Update()
 	{
 		spiderTank.LookMainCanon();
-		spiderTank.FireMainCanon();
+		spiderTank.BeginMainCanon();
+
+		// check if we're at our destination
+		if ( ( transform.position - shield.transform.position ).sqrMagnitude < 1.0f )
+		{
+			enabled = false;
+			spiderTank.healState.enabled = true;
+		}
 	}
 
-	public void OnDisable()
+	public override void OnEnable()
 	{
-		spawner.enabled = false;
-		pathMovement.enabled = false;
-		spawner.StopSpawning();
+		base.OnEnable();
+
+		_settings = new FleeStateSettings[] { fleeStateSettings.phaseOneSettings, 
+											  fleeStateSettings.phaseTwoSettings, 
+											  fleeStateSettings.phaseThreeSettings, 
+											  fleeStateSettings.phaseFourSettings };
+
+		agent.enabled = true;
+		agent.SetDestination( shield.transform.position );
+		mainCanon.SetCooldown( _settings[spiderTank.currentPhase].mainCanonCooldown );
 	}
 
-	public void DestinationReached( PathMovement movement )
+	public override void OnDisable()
 	{
-		enabled = false;
-		pathMovement.traverseBackwards = !pathMovement.traverseBackwards;
+		base.OnDisable();
 
-		// re-enable collisions with the doorway.
-		Physics.IgnoreCollision( collider, doorCollider, false );
-
-		// transition to another state
-		returnState.enabled = true;
+		agent.enabled = false;
 	}
+}
+
+
+[System.Serializable]
+public class FleeStateSettings
+{
+	public float mainCanonCooldown;
+	public int minionsPerWave;
+}
+
+
+// this struct only exists to organize the settings in the inspector
+[System.Serializable]
+public class FleeStateSettingsList
+{
+	public FleeStateSettings phaseOneSettings;
+	public FleeStateSettings phaseTwoSettings;
+	public FleeStateSettings phaseThreeSettings;
+	public FleeStateSettings phaseFourSettings;
 }

@@ -24,8 +24,8 @@ Material:
         first:
           name: _BumpMap
         second:
-          m_Texture: {fileID: 2800000, guid: 36c90be17cf50af41a9f4c35a0abc566, type: 3}
-          m_Scale: {x: 10, y: 10}
+          m_Texture: {fileID: 2800000, guid: a4b3c4b19bb248240b69534d0d290fa6, type: 3}
+          m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
@@ -36,8 +36,8 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0, g: .917241335, b: 1, a: 1}
+        second: {r: .970588207, g: .943813324, b: 0, a: 1}
       data:
         first:
           name: _SpecColor
-        second: {r: .5, g: .5, b: .5, a: 1}
+        second: {r: .647058845, g: .647058845, b: .647058845, a: 1}

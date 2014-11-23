@@ -5,9 +5,49 @@ public class SpiderTankState : MonoBehaviour
 {
 	[HideInInspector] public SpiderTank spiderTank;
 
+	public GlobalStateSettingsList globalSettings;
+	private GlobalStateSettings[] _stateSettings;
+
 	public virtual void Awake()
 	{
 		spiderTank = GetComponent<SpiderTank>();
+	}
+
+	public virtual void OnEnable()
+	{
+		_stateSettings = new GlobalStateSettings[] { globalSettings.phaseOneSettings,
+		                                             globalSettings.phaseTwoSettings,
+		                                             globalSettings.phaseThreeSettings,
+		                                             globalSettings.phaseFourSettings };
+
+		if ( _stateSettings[spiderTank.currentPhase].useSpawner )
+		{
+			if ( spawner.spawners.Count > 0 )
+			{
+				// if no spawners available, launch them from mortar
+				spawner.ApplySettings( _stateSettings[spiderTank.currentPhase].spawnerSettings );
+				spawner.enabled = true;
+			}
+			else
+			{
+				StartSpawnLaunchAtInterval( 2.0f );
+			}
+		}
+
+		if ( _stateSettings[spiderTank.currentPhase].useMortars )
+		{
+			StartMortarLaunchAtInterval( _stateSettings[spiderTank.currentPhase].mortarSettings.amountOfMortars,
+			                             _stateSettings[spiderTank.currentPhase].mortarSettings.launchInterval );
+		}
+	}
+
+	public virtual void OnDisable()
+	{
+		spawner.enabled = false;
+		spawner.ResetSettings();
+
+		CancelInvoke();
+		StopAllCoroutines();
 	}
 
 	public Transform player
@@ -15,11 +55,6 @@ public class SpiderTankState : MonoBehaviour
 		get
 		{
 			return spiderTank.player;
-		}
-
-		set
-		{
-			spiderTank.player = value;
 		}
 	}
 
@@ -29,23 +64,13 @@ public class SpiderTankState : MonoBehaviour
 		{
 			return spiderTank.mainCanon;
 		}
-
-		set
-		{
-			spiderTank.mainCanon = value;
-		}
 	}
 
-	public BeamWeapon laserCanon
+	public BeamWeapon[] laserCanon
 	{
 		get
 		{
 			return spiderTank.laserCanon;
-		}
-
-		set
-		{
-			spiderTank.laserCanon = value;
 		}
 	}
 
@@ -55,10 +80,21 @@ public class SpiderTankState : MonoBehaviour
 		{
 			return spiderTank.otherGuns;
 		}
+	}
 
-		set
+	public MortarAttack mortarLauncher
+	{
+		get
 		{
-			spiderTank.otherGuns = value;
+			return spiderTank.mortarLauncher;
+		}
+	}
+
+	public MortarAttack spawnerLauncher
+	{
+		get
+		{
+			return spiderTank.spawnerLauncher;
 		}
 	}
 
@@ -68,10 +104,48 @@ public class SpiderTankState : MonoBehaviour
 		{
 			return spiderTank.spawner;
 		}
+	}
 
-		set
+	public GameObject shield
+	{
+		get
 		{
-			spiderTank.spawner = value;
+			return spiderTank.shield;
+		}
+	}
+
+	public NavMeshAgent agent
+	{
+		get
+		{
+			return spiderTank.agent;
+		}
+	}
+
+	public Collider doorCollider
+	{
+		get
+		{
+			return spiderTank.doorCollider;
+		}
+	}
+
+	public void StartMortarLaunchAtInterval( int mortarCount, float interval )
+	{
+		StartCoroutine( LaunchAtInterval( mortarLauncher, mortarCount, interval ) );
+	}
+
+	public void StartSpawnLaunchAtInterval( float interval )
+	{
+		StartCoroutine( LaunchAtInterval( spawnerLauncher, 1, interval ) );
+	}
+
+	private IEnumerator LaunchAtInterval( MortarAttack mortar, int mortarCount, float interval )
+	{
+		while ( true )
+		{
+			mortar.Launch( mortarCount );
+			yield return new WaitForSeconds( interval );
 		}
 	}
 
@@ -79,7 +153,27 @@ public class SpiderTankState : MonoBehaviour
 	{
 		CancelInvoke();
 		enabled = false;
-		spiderTank.fleeState.returnState = spiderTank.healState;
 		spiderTank.fleeState.enabled = true;
 	}
+}
+
+
+[System.Serializable]
+public class GlobalStateSettings 
+{
+	public bool useSpawner;
+	public bool useMortars;
+	public SpawnerSettings spawnerSettings;
+	public MortarStateSettings mortarSettings;
+}
+
+
+// this struct only exists to organize the settings in the inspector
+[System.Serializable]
+public class GlobalStateSettingsList
+{
+	public GlobalStateSettings phaseOneSettings;
+	public GlobalStateSettings phaseTwoSettings;
+	public GlobalStateSettings phaseThreeSettings;
+	public GlobalStateSettings phaseFourSettings;
 }

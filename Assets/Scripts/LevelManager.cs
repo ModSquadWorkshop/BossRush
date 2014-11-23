@@ -6,55 +6,70 @@ public class LevelManager : MonoBehaviour
 {
 	public GameObject player;
 	public GameObject boss;
+	public GameObject mainMenu;
+	public CameraFollow cameraFollow;
+	public BossHealth bossHealthDisplay;
 
-	public Text bossText;
-	public Text playerText;
-
+	public float startDelay;
 	public float levelOverDelay;
 
-	private bool _levelOver; //< Used to prevent ResetLevel() from being called twice if both the player and the boss die.
+	public bool skipMenu;
+
+	private bool _levelOver; //!< Used to prevent ResetLevel() from being called twice if both the player and the boss die.
 
 	void Start()
 	{
 		_levelOver = false;
+		Screen.showCursor = true;
 
-		// register with health systems
-		HealthSystem playerHealth = player.GetComponent<HealthSystem>();
-		playerHealth.RegisterHealthCallback( PlayerDamaged );
-		playerText.text = "Player Health: " + playerHealth.health;
-		player.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerDied );
+		player.GetComponent<DeathSystem>().RegisterDeathCallback( ImportantPeopleDied );
+		boss.GetComponent<DeathSystem>().RegisterDeathCallback( ImportantPeopleDied );
 
-		HealthSystem bossHealth = boss.GetComponent<HealthSystem>();
-		bossHealth.RegisterHealthCallback( BossDamaged );
-		bossText.text = "Boss Health: " + bossHealth.health;
-		boss.GetComponent<DeathSystem>().RegisterDeathCallback( BossDied );
-	}
-
-	public void PlayerDamaged( HealthSystem playerHealth, float damage )
-	{
-		playerText.text = "Player Health: " + playerHealth.health;
-	}
-
-	public void PlayerDied( GameObject gameObjectz )
-	{
-		if ( !_levelOver )
+		if ( skipMenu )
 		{
-			_levelOver = true;
-			Invoke( "ResetLevel", levelOverDelay );
+			StartGame();
 		}
 	}
 
-	public void BossDamaged( HealthSystem bossHealth, float damage )
+	void Update()
 	{
-		bossText.text = "Boss Health: " + bossHealth.health;
+		// check for exit request
+		if ( Input.GetKeyDown( KeyCode.Escape ) )
+		{
+			Application.Quit();
+		}
 	}
 
-	public void BossDied( GameObject gameObject )
+	public void StartGame()
+	{
+		player.SetActive( true );
+		mainMenu.SetActive( false );
+		cameraFollow.enabled = true;
+
+		// hide the mouse
+		Screen.showCursor = false;
+
+		Invoke( "AwakeSpiderTank", startDelay );
+	}
+
+	public void ShowBossHealthDisplay()
+	{
+		bossHealthDisplay.enabled = true;
+	}
+
+	void AwakeSpiderTank()
+	{
+		boss.SetActive( true );
+	}
+
+	void ImportantPeopleDied( GameObject importantPerson )
 	{
 		if ( !_levelOver )
 		{
 			_levelOver = true;
+			cameraFollow.PullBackFromTarget( importantPerson );
 			Invoke( "ResetLevel", levelOverDelay );
+			bossHealthDisplay.enabled = false;
 		}
 	}
 

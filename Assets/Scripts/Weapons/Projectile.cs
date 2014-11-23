@@ -8,30 +8,21 @@ public class Projectile : MonoBehaviour
 	public float maxTime = 8.0f;            // in seconds
 
 	public GameObject shrapnel;
+	public bool reflectShrapnel;
 
-	private Vector3 _startPoint;
-	private float _maxDistanceSquared;
-	private float _elapsedTime;
-
-	void Start()
+	void OnEnable()
 	{
-		rigidbody.velocity = transform.forward * speed;
-
-		_startPoint = transform.position;
-		_maxDistanceSquared = maxDistance * maxDistance;
-		_elapsedTime = 0.0f;
+		Invoke( "TimeUp", maxTime );
 	}
 
-	void Update()
+	void OnDisable()
 	{
-		_elapsedTime += Time.deltaTime;
+		CancelInvoke();
+	}
 
-		// if the projectile has traveled farther than its max distance, it is destroyed
-		// or if it has lived longer than its max life time, it is destroyed
-		if ( ( transform.position - _startPoint ).sqrMagnitude > _maxDistanceSquared | _elapsedTime > maxTime )
-		{
-			GetComponent<DeathSystem>().Kill();
-		}
+	void TimeUp()
+	{
+		GetComponent<DeathSystem>().Kill();
 	}
 
 	/**
@@ -42,9 +33,20 @@ public class Projectile : MonoBehaviour
 		// create shrapnel
 		if ( shrapnel != null )
 		{
-			shrapnel = Instantiate( shrapnel,
-			                        collision.contacts[0].point + collision.contacts[0].normal,
-			                        Quaternion.LookRotation( -Vector3.Reflect( -transform.forward, Vector3.up ) ) ) as GameObject;
+			if ( reflectShrapnel )
+			{
+				Vector3 forward = transform.forward;
+				forward.y = 0.0f;
+				shrapnel = Instantiate( shrapnel,
+				                        collision.contacts[0].point + collision.contacts[0].normal,
+				                        Quaternion.LookRotation( forward ) ) as GameObject;
+			}
+			else
+			{
+				shrapnel = Instantiate( shrapnel,
+				                        collision.contacts[0].point + collision.contacts[0].normal,
+				                        Quaternion.LookRotation( -transform.forward ) ) as GameObject;
+			}
 		}
 	}
 }

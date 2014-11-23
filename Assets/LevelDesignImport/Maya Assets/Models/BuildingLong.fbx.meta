@@ -16,8 +16,11 @@ ModelImporter:
     400008: transform3
     400010: transform4
     2300000: pCube6
+    2300002: //RootNode
     3300000: pCube6
+    3300002: //RootNode
     4300000: pCube6
+    4300002: polySurface12
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -43,7 +46,7 @@ ModelImporter:
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     weldVertices: 1

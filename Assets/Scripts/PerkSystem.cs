@@ -1,104 +1,106 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PerkSystem : MonoBehaviour
 {
 	public Perk[] startingPerks;
-	private Hashtable _perks;
+	public Shield shield;
 
-	PlayerMovement playerSpeed;
-	HealthSystem playerHealth;
-	DamageSystem playerDamage;
-	Gun playerGun;
+	private Dictionary<PerkType, PerkData> _perks;
+	private Dictionary<PerkType, Coroutine> _perkEnding;
+	private PlayerMovement _playerSpeed;
+	private HealthSystem _playerHealth;
+	private WeaponSystem _playerWeapons;
 
-	void Start()
+	void Awake()
 	{
-		_perks = new Hashtable();
+		_perks = new Dictionary<PerkType, PerkData>();
+		_perkEnding = new Dictionary<PerkType, Coroutine>();
 
-		for (int i = 0; i < startingPerks.Length; i++)
+		for ( int i = 0; i < startingPerks.Length; i++ )
 		{
 			AddPerk( startingPerks[i] );
 		}
 
-		playerSpeed = this.gameObject.GetComponent<PlayerMovement>();
-		playerHealth = this.gameObject.GetComponent<HealthSystem>();
-		playerDamage = this.gameObject.GetComponent<WeaponSystem>().currentWeapon.GetComponent<DamageSystem>();
-		playerGun = this.gameObject.GetComponent<WeaponSystem>().currentWeapon.GetComponent<Gun>();
+		_playerSpeed = GetComponent<PlayerMovement>();
+		_playerHealth = GetComponent<HealthSystem>();
+		_playerWeapons = GetComponent<WeaponSystem>();
+
+		shield.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerShieldDestroyed );
 	}
 
 	public void AddPerk( Perk perk )
 	{
-		_perks[perk] = true;
-		SetPerk( perk );
-		CreateTimer( perk );
+		PerkData settings = perk.settings;
+
+		// stash perk settings
+		_perks[settings.type] = settings;
+
+		// apply modifiers
+		if ( settings.speedMod > 0.0f )
+		{
+			_playerSpeed.speedMultiplier = settings.speedMod;
+		}
+
+		_playerHealth.Heal( settings.healthMod );
+		_playerWeapons.SetBuff( settings.fireRateMod, settings.damageMod, settings.reloadMod );
+
+		if ( settings.shield )
+		{
+			_playerHealth.immune = true;
+			shield.gameObject.SetActive( true );
+			shield.ResetShield();
+		}
+
+		if ( settings.gunDrop != null )
+		{
+			if ( _playerWeapons.weapons.Count >= 2 )
+			{
+				_playerWeapons.RemoveSpecialWeapon();
+			}
+
+			_playerWeapons.weapons.Add( settings.gunDrop );
+			_playerWeapons.perk = settings;
+			_playerWeapons.NewSpecialWeapon();
+		}
+
+		if ( settings.duration > 0.0f )
+		{
+			// cancel existing coroutine
+			if ( _perkEnding.ContainsKey( settings.type ) )
+			{
+				//StopCoroutine( _perkEnding[settings.type] ); // This is causing unity (the editor) to crash. It's a bug within unity, we'll have to work around it.
+			}
+
+			// start new coroutine
+			_perkEnding[settings.type] = StartCoroutine( RemoveAfterDelay( settings ) );
+		}
 	}
 
-	public void SetPerk( Perk perk )
+	public IEnumerator RemoveAfterDelay( PerkData settings )
 	{
-		//apply modifiers
-		playerSpeed.speedMultiplier += perk.speedMod;
-		playerHealth.maxHealth += perk.maxHealthMod;
-		playerHealth.health += perk.healthMod;
-		playerDamage.damageMultiplier += perk.damageMod;
-		playerGun.cooldown += perk.fireRateMod;
-		playerGun.amountOfMagazines += perk.magazinesMod;
-		playerGun.reloadSpeed += perk.reloadMod;
-		playerGun.infiniteAmmo = perk.infiniteAmmo || playerGun.infiniteAmmo;
-		playerHealth.immune = perk.immunity || playerHealth.immune;
+		yield return new WaitForSeconds( settings.duration );
+		RemovePerk( settings );
 	}
 
-	public void ResetPerk( Perk reset )
+	public void RemovePerk( PerkData perk )
 	{
 		//revert modifiers
-		playerSpeed.speedMultiplier -= reset.speedMod;
-		playerHealth.maxHealth -= reset.maxHealthMod;
-		playerHealth.health -= reset.healthMod;
-		playerDamage.damageMultiplier -= reset.damageMod;
-		playerGun.cooldown -= reset.fireRateMod;
-		playerGun.amountOfMagazines -= reset.magazinesMod;
-		playerGun.reloadSpeed -= reset.reloadMod;
-
-		if ( reset.infiniteAmmo )
+		if ( perk.speedMod > 0.0f )
 		{
-			playerGun.infiniteAmmo = false;
+			_playerSpeed.speedMultiplier = 1.0f;
 		}
 
-		if ( reset.immunity )
-		{
-			playerHealth.immune = false;
-		}
+		_playerWeapons.RevertBuff( perk.fireRateMod, perk.damageMod, perk.reloadMod );
+
+		_perks.Remove( perk.type );
+		_perkEnding.Remove( perk.type );
 	}
 
-	public void CreateTimer( Perk perk )
+	void PlayerShieldDestroyed( GameObject shieldObject )
 	{
-		if ( perk.length > 0f )
-		{
-			PerkTime timer = this.gameObject.AddComponent<PerkTime>();
-			timer.perkLength = perk.length;
-			timer.perk = perk;
-			timer.Begin();
-		}
+		shield.gameObject.SetActive( false );
+		_playerHealth.immune = false;
 	}
-
-	public bool IsActive( Perk perk )
-	{
-		return (bool)_perks[perk];
-	}
-
-	public void Clear()
-	{
-		PerkTime[] timers = gameObject.GetComponents<PerkTime>();
-		foreach ( PerkTime time in timers )
-		{
-			time.End();
-		}
-		_perks.Clear();
-	}
-
-	public void RemovePerk( Perk perk )
-	{
-		ResetPerk( perk );
-		_perks[perk] = false;
-	}
-
 }
