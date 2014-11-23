@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour
 
 	public bool skipMenu;
 
-	private bool _levelOver; //< Used to prevent ResetLevel() from being called twice if both the player and the boss die.
+	private bool _levelOver; //!< Used to prevent ResetLevel() from being called twice if both the player and the boss die.
 
 	void Start()
 	{
@@ -57,20 +57,22 @@ public class LevelManager : MonoBehaviour
 		boss.SetActive( true );
 	}
 
-	void PlayerDied( GameObject gameObjectz )
+	void PlayerDied( GameObject playerObject )
 	{
 		if ( !_levelOver )
 		{
 			_levelOver = true;
+			cameraFollow.PullBackFromTarget( playerObject );
 			Invoke( "ResetLevel", levelOverDelay );
 		}
 	}
 
-	void BossDied( GameObject gameObject )
+	void BossDied( GameObject bossObject )
 	{
 		if ( !_levelOver )
 		{
 			_levelOver = true;
+			cameraFollow.PullBackFromTarget( bossObject );
 			Invoke( "ResetLevel", levelOverDelay );
 		}
 	}

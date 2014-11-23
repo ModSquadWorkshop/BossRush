@@ -9,15 +9,11 @@ public class SpawnPointMortar : Mortar
 
 	private SpawnPoint _spawn;
 
-	public void Init( MortarSettings settings, Vector3 startPos, SpiderTank spiderTank )
+	public void Init( MortarSettings settings, Vector3 startPos, SpawnPoint endPos, SpiderTank spiderTank )
 	{
 		_spiderTank = spiderTank;
-		_spawn = _spiderTank.spawner.GetRandomAvailableSpawnPoint();
-
-		if ( _spawn != null )
-		{
-			_spawn.available = false;
-		}
+		_spawn = endPos;
+		_spawn.available = false;
 
 		base.Init( settings, startPos );
 	}
@@ -33,11 +29,6 @@ public class SpawnPointMortar : Mortar
 
 	protected override Vector3 GetTargetPosition()
 	{
-		if ( _spawn != null )
-		{
-			return _spawn.transform.position;
-		}
-
-		return base.GetTargetPosition();
+		return _spawn.transform.position;
 	}
 }

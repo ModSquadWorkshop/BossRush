@@ -18,16 +18,11 @@ public class EnemySpawner : MonoBehaviour
 	private bool _spawning; //!< Used to tell the coroutine to stop spawning.
 	private int _enemyCount; //!< A counter of the number of live minions in the world.
 
-	private List<SpawnPoint> _spawnPoints;
-	private List<SpawnPoint> _availableSpawnPoints; // caching this so "new" only has to be called once
-
 	private SpawnerSettings _settings;
 	private EnemyCountChange _enemyCountCallback = delegate( int count ) { }; //!< Callback used to notify listeners when the live enemy count changes.
 
 	void Awake()
 	{
-		_spawnPoints = new List<SpawnPoint>();
-		_availableSpawnPoints = new List<SpawnPoint>();
 		_settings = defaultSettings;
 		_spawning = false;
 		_enemyCount = 0;
@@ -38,17 +33,6 @@ public class EnemySpawner : MonoBehaviour
 		}
 
 		SpawnerMortarAttack spawnerLauncher = GetComponentInChildren<SpawnerMortarAttack>();
-		if ( spawnerLauncher != null ) 
-		{
-			foreach ( Transform target in spawnerLauncher.mortarSettings.targets )
-			{
-				SpawnPoint spawn = target.GetComponent<SpawnPoint>();
-				if ( spawn != null )
-				{
-					_spawnPoints.Add( spawn );
-				}
-			}
-		}
 	}
 
 	void OnEnable()
@@ -85,7 +69,7 @@ public class EnemySpawner : MonoBehaviour
 
 	/**
 	 * \brief Spawns the specified number of enemies.
-	 * 
+	 *
 	 * \param enemyType An optional parameter to specify the type of enemy to be spawned.
 	 * If not provided, the type of each enemy will be picked at random from the spawner's
 	 * list of default enemies.
@@ -174,14 +158,7 @@ public class EnemySpawner : MonoBehaviour
 
 	public void AddSpawner( GameObject spawner, SpawnPoint spawnPoint )
 	{
-		SpawnerObject spawnerObject = spawner.GetComponent<SpawnerObject>();
-		spawnerObject.spawnPoint = spawnPoint;
-
-		if ( spawnerObject.spawnPoint != null )
-		{
-			spawnerObject.spawnPoint.available = false;
-		}
-
+		spawner.GetComponent<SpawnerObject>().spawnPoint = spawnPoint;
 		spawner.GetComponent<DeathSystem>().RegisterDeathCallback( SpawnerDeathCallback );
 		spawners.Add( spawner );
 	}
@@ -251,27 +228,6 @@ public class EnemySpawner : MonoBehaviour
 		}
 
 		return spawn;
-	}
-
-	public SpawnPoint GetRandomAvailableSpawnPoint()
-	{
-		if ( _spawnPoints != null )
-		{
-			_availableSpawnPoints.Clear();
-
-			for ( int i = 0; i < _spawnPoints.Count; i++ )
-			{
-				SpawnPoint spawn = _spawnPoints[i];
-				if ( spawn.available )
-				{
-					_availableSpawnPoints.Add( spawn );
-				}
-			}
-
-			return _availableSpawnPoints[Random.Range( 0, _availableSpawnPoints.Count )];
-		}
-
-		return null;
 	}
 }
 

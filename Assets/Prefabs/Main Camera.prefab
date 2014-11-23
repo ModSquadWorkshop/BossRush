@@ -43,8 +43,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: .5, y: 0, z: 0, w: .866025388}
-  m_LocalPosition: {x: 87.3180008, y: 150, z: -20.1539993}
+  m_LocalRotation: {x: .602499604, y: 0, z: 0, w: .798119247}
+  m_LocalPosition: {x: 39.4869995, y: 183.800003, z: 28.2999992}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -122,6 +122,8 @@ MonoBehaviour:
   followTarget: {fileID: 0}
   offset: 80
   followSpeed: 7
+  cameraPullbackTime: 2
+  pullbackDistance: 150
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
