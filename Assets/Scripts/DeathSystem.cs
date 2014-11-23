@@ -35,6 +35,11 @@ public class DeathSystem : MonoBehaviour
 		Destroy( gameObject );
 	}
 
+	public void KillDelayed( float delay )
+	{
+		Invoke( "Kill", delay );
+	}
+
 	/**
 	 * \brief Utility method to "kill" an object without actually killing it.
 	 *

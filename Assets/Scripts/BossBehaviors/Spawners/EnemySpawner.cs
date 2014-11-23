@@ -31,8 +31,6 @@ public class EnemySpawner : MonoBehaviour
 		{
 			spawner.GetComponent<DeathSystem>().RegisterDeathCallback( SpawnerDeathCallback );
 		}
-
-		SpawnerMortarAttack spawnerLauncher = GetComponentInChildren<SpawnerMortarAttack>();
 	}
 
 	void OnEnable()
