@@ -806,7 +806,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -4.37113883e-08}
-  m_LocalPosition: {x: 81.9550018, y: 0, z: 89.4570007}
+  m_LocalPosition: {x: 78.6999969, y: 0, z: 375.799988}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400058}
@@ -2651,11 +2651,7 @@ MonoBehaviour:
   damageInterval: .100000001
   duration: 0
   impactParticles: {fileID: 400044}
-  layersToIgnore:
-  - serializedVersion: 2
-    m_Bits: 8192
-  - serializedVersion: 2
-    m_Bits: 1024
+  layersToIgnore: []
 --- !u!114 &11400032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2884,6 +2880,7 @@ MonoBehaviour:
       mortarSettings:
         amountOfMortars: 0
         launchInterval: 0
+  levelManager: {fileID: 0}
   fallPointsRoot: {fileID: 0}
   preFallDelay: 1
   fallTime: 1
@@ -2891,7 +2888,7 @@ MonoBehaviour:
   minFallDistance: 200
   landingEffect: {fileID: 100000, guid: 7c20c65ed3f62554c8963af3d000c0b7, type: 2}
   fallingSound: {fileID: 8300000, guid: 27294fe6a22e3034eaf05d8af11a214e, type: 3}
-  landingSound: {fileID: 8300000, guid: 0ebf751fd3acf564abc3cdf44ec3a906, type: 3}
+  landingSound: {fileID: 8300000, guid: 64e8c164e8c3ec0429d65de6766e4ffc, type: 3}
   explodeMinion: {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
   numMinions: 20
   maxWaitTime: 15
@@ -3046,11 +3043,7 @@ MonoBehaviour:
   damageInterval: .100000001
   duration: 0
   impactParticles: {fileID: 400046}
-  layersToIgnore:
-  - serializedVersion: 2
-    m_Bits: 8192
-  - serializedVersion: 2
-    m_Bits: 1024
+  layersToIgnore: []
 --- !u!114 &11400054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3069,11 +3062,7 @@ MonoBehaviour:
   damageInterval: .100000001
   duration: 0
   impactParticles: {fileID: 400048}
-  layersToIgnore:
-  - serializedVersion: 2
-    m_Bits: 8192
-  - serializedVersion: 2
-    m_Bits: 1024
+  layersToIgnore: []
 --- !u!114 &11400056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3126,11 +3115,7 @@ MonoBehaviour:
   damageInterval: .100000001
   duration: 0
   impactParticles: {fileID: 400050}
-  layersToIgnore:
-  - serializedVersion: 2
-    m_Bits: 8192
-  - serializedVersion: 2
-    m_Bits: 1024
+  layersToIgnore: []
 --- !u!114 &11400062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3149,11 +3134,7 @@ MonoBehaviour:
   damageInterval: .100000001
   duration: 0
   impactParticles: {fileID: 400056}
-  layersToIgnore:
-  - serializedVersion: 2
-    m_Bits: 8192
-  - serializedVersion: 2
-    m_Bits: 1024
+  layersToIgnore: []
 --- !u!114 &11400064
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3256,7 +3237,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Mat: {fileID: 0}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Sprite: {fileID: 21300000, guid: 2f6e32b3a6c9c8b46b548e66058edca0, type: 3}
   m_Type: 3
@@ -15185,8 +15166,6 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
 --- !u!224 &22400000
