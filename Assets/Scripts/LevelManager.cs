@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
 	public GameObject boss;
 	public GameObject mainMenu;
 	public CameraFollow cameraFollow;
+	public BossHealth bossHealthDisplay;
 
 	public float startDelay;
 	public float levelOverDelay;
@@ -21,8 +22,8 @@ public class LevelManager : MonoBehaviour
 		_levelOver = false;
 		Screen.showCursor = true;
 
-		player.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerDied );
-		boss.GetComponent<DeathSystem>().RegisterDeathCallback( BossDied );
+		player.GetComponent<DeathSystem>().RegisterDeathCallback( ImportantPeopleDied );
+		boss.GetComponent<DeathSystem>().RegisterDeathCallback( ImportantPeopleDied );
 
 		if ( skipMenu )
 		{
@@ -48,8 +49,12 @@ public class LevelManager : MonoBehaviour
 		// hide the mouse
 		Screen.showCursor = false;
 
-
 		Invoke( "AwakeSpiderTank", startDelay );
+	}
+
+	public void ShowBossHealthDisplay()
+	{
+		bossHealthDisplay.enabled = true;
 	}
 
 	void AwakeSpiderTank()
@@ -57,23 +62,14 @@ public class LevelManager : MonoBehaviour
 		boss.SetActive( true );
 	}
 
-	void PlayerDied( GameObject playerObject )
+	void ImportantPeopleDied( GameObject importantPerson )
 	{
 		if ( !_levelOver )
 		{
 			_levelOver = true;
-			cameraFollow.PullBackFromTarget( playerObject );
+			cameraFollow.PullBackFromTarget( importantPerson );
 			Invoke( "ResetLevel", levelOverDelay );
-		}
-	}
-
-	void BossDied( GameObject bossObject )
-	{
-		if ( !_levelOver )
-		{
-			_levelOver = true;
-			cameraFollow.PullBackFromTarget( bossObject );
-			Invoke( "ResetLevel", levelOverDelay );
+			bossHealthDisplay.enabled = false;
 		}
 	}
 

@@ -396,6 +396,7 @@ MonoBehaviour:
   boss: {fileID: 0}
   mainMenu: {fileID: 100010}
   cameraFollow: {fileID: 0}
+  bossHealthDisplay: {fileID: 11400018}
   startDelay: 3
   levelOverDelay: 5
   skipMenu: 0
@@ -486,7 +487,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100018}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30b535898863df04389ee98f3cfa1dd9, type: 3}
   m_Name: 
@@ -690,7 +691,7 @@ Canvas:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100018}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_RenderMode: 0
   m_Camera: {fileID: 0}

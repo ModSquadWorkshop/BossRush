@@ -3,6 +3,8 @@ using System.Collections;
 
 public class SpiderTankInitialState : SpiderTankState
 {
+	public LevelManager levelManager;
+
 	public GameObject fallPointsRoot;
 	public float preFallDelay;
 	public float fallTime;
@@ -83,6 +85,7 @@ public class SpiderTankInitialState : SpiderTankState
 		Instantiate( landingEffect, transform.position, Quaternion.identity );
 		audio.clip = landingSound;
 		audio.Play();
+		levelManager.ShowBossHealthDisplay();
 
 		Invoke( "Exit", postFallDelay );
 	}
