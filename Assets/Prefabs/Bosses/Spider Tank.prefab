@@ -2173,6 +2173,43 @@ MonoBehaviour:
     - 50
     - 25
     currentPhase: 0
+  phaseSettings:
+  - spawnerSettings:
+      baseAmountPerWave: 0
+      amountPerSpawner: 1
+      waveInterval: .5
+      maxSpawnPoints: 5
+      maxSpawned: 7
+    mortarSettings:
+      amountOfMortars: 5
+      launchInterval: 3
+  - spawnerSettings:
+      baseAmountPerWave: 0
+      amountPerSpawner: 2
+      waveInterval: .5
+      maxSpawnPoints: 6
+      maxSpawned: 13
+    mortarSettings:
+      amountOfMortars: 10
+      launchInterval: 3
+  - spawnerSettings:
+      baseAmountPerWave: 0
+      amountPerSpawner: 3
+      waveInterval: .5
+      maxSpawnPoints: 7
+      maxSpawned: 17
+    mortarSettings:
+      amountOfMortars: 15
+      launchInterval: 3
+  - spawnerSettings:
+      baseAmountPerWave: 0
+      amountPerSpawner: 4
+      waveInterval: .300000012
+      maxSpawnPoints: 10
+      maxSpawned: 30
+    mortarSettings:
+      amountOfMortars: 25
+      launchInterval: 2
   basicState: {fileID: 0}
   fleeState: {fileID: 0}
   healState: {fileID: 0}
@@ -2370,47 +2407,15 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseFourSettings:
       useSpawner: 1
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 5
-        amountPerSpawner: 5
-        waveInterval: 5
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 10
-        launchInterval: .150000006
   basicStateSettings:
     phaseOneSettings:
       turretSpeed: 2
@@ -2461,47 +2466,15 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 1
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 1
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 1
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseFourSettings:
       useSpawner: 1
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 10
-        launchInterval: .150000006
   turboStateSettings:
     phaseOneSettings:
       turretSpeed: 2
@@ -2561,47 +2534,15 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 5
-        launchInterval: .5
     phaseFourSettings:
       useSpawner: 0
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 10
-        launchInterval: .150000006
   returnState: {fileID: 0}
   bossDashing: {fileID: 8300000, guid: d06691583d23797469222a30c9d22e66, type: 3}
   rushStateSettings:
@@ -2689,47 +2630,15 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseFourSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
   laserSpinSettings:
     phaseOneSettings:
       rotation: 1
@@ -2772,47 +2681,15 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseFourSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
   fleeStateSettings:
     phaseOneSettings:
       mainCanonCooldown: 3
@@ -2843,47 +2720,15 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseFourSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
   levelManager: {fileID: 0}
   fallPointsRoot: {fileID: 0}
   preFallDelay: 1
@@ -2926,47 +2771,15 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 1
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 20
-        launchInterval: 2
     phaseTwoSettings:
       useSpawner: 1
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 20
-        launchInterval: 2
     phaseThreeSettings:
       useSpawner: 1
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 20
-        launchInterval: 2
     phaseFourSettings:
       useSpawner: 1
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 20
-        launchInterval: 2
   healStateSettings:
     phaseOneSettings:
       healRate: 300
@@ -2987,16 +2800,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23eef0c7e1c23864eb720e3d5817a2f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultSettings:
-    baseAmountPerWave: 2
-    amountPerSpawner: 1
-    waveInterval: 2
-    spawnOnStart: 0
+  settings:
+    baseAmountPerWave: 0
+    amountPerSpawner: 0
+    waveInterval: 0
+    maxSpawnPoints: 0
+    maxSpawned: 0
   enemyTypes:
   - {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
   spawners: []
-  maxSpawnPoints: 5
-  maxSpawned: 20
   delayBetweenNewEnemy: .200000003
 --- !u!114 &11400048
 MonoBehaviour:
@@ -3295,47 +3107,15 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseFourSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
   returnState: {fileID: 0}
   burrowStateSettings:
     phaseOneSettings:
