@@ -7,33 +7,34 @@ public class ExplodeOnDeath : MonoBehaviour
 
 	public float explosionRadius;
 	public float explosionDamage;
-	public float explosionForce;
 
 	void Awake()
 	{
-		if ( GetComponent<AudioSource>().enabled )
-		{
-			audio.Play();
-		}
 		GetComponent<DeathSystem>().RegisterDeathCallback( Explode );
 	}
 
 	void Explode( GameObject obj )
 	{
+		DamageSystem damageSystem = GetComponent<DamageSystem>();
+
 		Collider[] collisions = Physics.OverlapSphere( transform.position, explosionRadius );
 		foreach ( Collider col in collisions )
 		{
-			HealthSystem otherHealth = col.gameObject.GetComponent<HealthSystem>();
-			if ( otherHealth != null )
+			if ( damageSystem.IsTarget( col.tag ) )
 			{
-				otherHealth.Damage( explosionDamage );
-			}
-			if ( col.rigidbody != null )
-			{
-				col.rigidbody.AddExplosionForce( explosionForce, transform.position, explosionRadius );
+				DealDamage( col.gameObject );
 			}
 		}
 
-		Instantiate( explosionEffect, transform.position, transform.rotation );//.GetComponent<Explosion>().radius = explosionRadius;
+		Instantiate( explosionEffect, transform.position, transform.rotation );
+	}
+
+	void DealDamage( GameObject target )
+	{
+		HealthSystem healthSystem = target.gameObject.GetComponent<HealthSystem>();
+		if ( healthSystem != null )
+		{
+			healthSystem.Damage( explosionDamage );
+		}
 	}
 }

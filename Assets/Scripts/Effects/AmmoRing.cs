@@ -24,23 +24,23 @@ public class AmmoRing : MonoBehaviour
 
 	void OnEnable()
 	{
-		//Get 3rd slot gun and total ammo, update with gun and current ammo
+		// get special weapon and total ammo, update with gun and current ammo
 		_playerWeapons = GetComponentInParent<WeaponSystem>();
-		_isGun = _playerWeapons.DetermineType();
+		_isGun = _playerWeapons.DetermineSpecialType();
 
 		if ( _isGun )
 		{
-			_specialGun = _playerWeapons.weapons[2].GetComponent<Gun>();
+			_specialGun = _playerWeapons.weapons[WeaponSystem.SPECIAL_WEAPON_SLOT].GetComponent<Gun>();
 			_initialAmmo = _specialGun.GetTotalAmmo();
+
 			UpdateGunAmmoBar( _specialGun.GetTotalAmmo() );
-			//Debug.Log( "GUN" );
 		}
 		else
 		{
-			_specialBeam = _playerWeapons.weapons[2].GetComponent<BeamWeapon>();
+			_specialBeam = _playerWeapons.weapons[WeaponSystem.SPECIAL_WEAPON_SLOT].GetComponent<BeamWeapon>();
 			_initialTime = _specialBeam.duration;
+
 			UpdateBeamAmmoBar( _specialBeam.RunTime() );
-			//Debug.Log( "BEAM" );
 		}
 	}
 
@@ -64,8 +64,8 @@ public class AmmoRing : MonoBehaviour
 	public void UpdateGunAmmoBar( int remainingAmmo )
 	{
 		float remainingPercent = (float)remainingAmmo / (float)_initialAmmo;
-		//Debug.Log( remainingPercent );
 		indicatorImage.fillAmount = remainingPercent;
+
 		if ( remainingAmmo == 0 )
 		{
 			indicatorImage.fillAmount = 0;
@@ -75,8 +75,8 @@ public class AmmoRing : MonoBehaviour
 
 	public void UpdateBeamAmmoBar( float runtime )
 	{
-		//Debug.Log( _initialTime - runtime );
-		indicatorImage.fillAmount = ( _initialTime - runtime )/_initialTime;
+		indicatorImage.fillAmount = ( _initialTime - runtime ) / _initialTime;
+
 		if ( _initialTime - runtime <= 0 )
 		{
 			indicatorImage.fillAmount = 0;

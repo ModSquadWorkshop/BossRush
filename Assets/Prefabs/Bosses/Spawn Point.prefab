@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: Spawn Model
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -30,7 +30,8 @@ GameObject:
   - 114: {fileID: 11400000}
   - 65: {fileID: 6500002}
   - 208: {fileID: 20800000}
-  m_Layer: 10
+  - 114: {fileID: 11400010}
+  m_Layer: 15
   m_Name: Spawn Point
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -47,7 +48,7 @@ GameObject:
   - 224: {fileID: 22400000}
   - 222: {fileID: 22200000}
   - 114: {fileID: 11400006}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,7 +66,7 @@ GameObject:
   - 223: {fileID: 22300000}
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400004}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: Ring Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,6 +236,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2042936dd2b45ab408474871547a9bd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!208 &20800000
 NavMeshObstacle:
   m_ObjectHideFlags: 1

@@ -99,19 +99,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977c784b6514ff742a2a3906df8de4e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChance: .00300000003
-  immunity: 0
-  infiniteAmmo: 0
-  speedMod: 1
-  fireRateMod: 0
-  maxHealthMod: 0
-  healthMod: 0
-  damageMod: 0
-  reloadMod: 0
-  magazinesMod: 0
-  gunDrop: {fileID: 0}
-  ID: Speed
-  duration: 4
+  dropChance: .00999999978
+  maxPickupTime: 15
+  settings:
+    type: 0
+    shield: 0
+    infiniteAmmo: 0
+    speedMod: 2
+    fireRateMod: 0
+    healthMod: 0
+    damageMod: 0
+    reloadMod: 0
+    magazinesMod: 0
+    gunDrop: {fileID: 0}
+    duration: 4
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

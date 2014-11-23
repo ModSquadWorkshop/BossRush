@@ -26,6 +26,8 @@ public class Gun : Weapon
 
 	void Awake()
 	{
+		projectile.CreatePool( 100 );
+
 		// initialize ammunition and reloading
 		_magazines = amountOfMagazines;
 		_magazineAmmo = ammoPerMagazine; 
@@ -48,7 +50,7 @@ public class Gun : Weapon
 		if ( !_reloading && _magazineAmmo > 0 )
 		{
 			// instantiate and initialize a bullet
-			InitializeBullet( Instantiate( projectile ) as GameObject );
+			InitializeBullet( projectile.Spawn() );
 			PlayPrimarySound();
 
 			// update ammunition data
@@ -62,8 +64,8 @@ public class Gun : Weapon
 			}
 
 			// create shell casing
-			casingEmitter.Emit( 1 );
-			muzzleFlash.Emit( 10 );
+			//casingEmitter.Emit( 1 );
+			//muzzleFlash.Emit( 10 );
 
 			StartCooldown();
 		}
@@ -98,7 +100,15 @@ public class Gun : Weapon
 			// flat spray (good for the player, since a circle spray makes them shoot the ground).
 			// pick a random rotation between -_halfSpray and _halfSpray.
 			bullet.transform.rotation = transform.rotation * Quaternion.Euler( 0.0f, Random.Range( -_halfSpray, _halfSpray ), 0.0f );
+
+			Vector3 bulletRot = bullet.transform.eulerAngles;
+			bulletRot.x = 0f;
+			bullet.transform.eulerAngles = bulletRot;
 		}
+
+		// make that shit go forward
+		Projectile projectile = bullet.GetComponent<Projectile>();
+		bullet.rigidbody.velocity = bullet.transform.forward * projectile.speed;
 	}
 
 	public void Reload()

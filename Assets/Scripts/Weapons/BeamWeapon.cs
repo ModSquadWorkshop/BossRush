@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 public class BeamWeapon : Weapon
 {
 	public bool repeatDamage = true;
-	public float beamWidth;
 	public float maxRange;
 	public float damageInterval;
-	public int piercingsAmount;
 	public float duration;
 	public Transform impactParticles;
+	public LayerMask[] layersToIgnore;
 
+	private int _layerMask;
 	private AudioSource _source;
 	private LineRenderer beam;
 	private Ray _ray;
@@ -25,12 +26,18 @@ public class BeamWeapon : Weapon
 	{
 		beam = GetComponent<LineRenderer>();
 
+		//raycast for everything but pickups
+		_layerMask = 0;
+		foreach ( LayerMask layer in layersToIgnore )
+		{
+			_layerMask |= layer.value;
+		}
+		_layerMask = ~_layerMask; // invert the mask to collide with everything but the listed layers.
+
 		_done = false;
 
 		// the beam should only every have 2 vertexes
-		// the width of the beam is the same from vertex to vertex
 		beam.SetVertexCount( 2 );
-		beam.SetWidth( beamWidth, beamWidth );
 		beam.enabled = false;
 
 		// initialize the beam timers and the ray
@@ -40,14 +47,9 @@ public class BeamWeapon : Weapon
 		_beamDuration.Start();
 		_ray = new Ray();
 		_source = GetComponent<AudioSource>();
-		// get a reference to the damage system attached to the weapon
-		_damageSystem = this.gameObject.GetComponent<DamageSystem>();
 
-		// if a damage system doesn't exist one is created to avoid errors
-		if ( _damageSystem == null )
-		{
-			_damageSystem = this.gameObject.AddComponent<DamageSystem>();
-		}
+		// get a reference to the damage system attached to the weapon
+		_damageSystem = GetComponent<DamageSystem>();
 	}
 
 	void Update()
@@ -71,13 +73,16 @@ public class BeamWeapon : Weapon
 
 			// cast a ray and collect data on all of the objects it hits
 			RaycastHit[] hits;
-			hits = Physics.RaycastAll( _ray, maxRange );
+			hits = Physics.RaycastAll( _ray, maxRange, _layerMask );
+			Array.Sort( hits, delegate( RaycastHit first, RaycastHit second )
+			{
+				return (int)( first.distance - second.distance );
+			} );
 
 			// loop through the hit targets and attempt to deal damage
-			int len = Mathf.Min( hits.Length, piercingsAmount + 1 );
-			for ( int i = 0; i < len; i++ )
+			if ( hits.Length > 0 )
 			{
-				RaycastHit hit = hits[hits.Length - i - 1];
+				RaycastHit hit = hits[0];
 
 				// make sure the colliding object is one of the defined targets
 				if ( _damageSystem.IsTarget( hit.collider.gameObject.tag ) )
@@ -93,8 +98,7 @@ public class BeamWeapon : Weapon
 						}
 					}
 				}
-
-				endVertex = hit.point + hit.normal;
+				endVertex = hit.point;
 			}
 
 			// set the end vertex of the beam according to raycast collisions and amount of piercings

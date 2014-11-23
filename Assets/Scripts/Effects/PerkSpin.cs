@@ -5,7 +5,6 @@ public class PerkSpin : MonoBehaviour
 {
 	public Transform model;
 	public float spin;
-
 	private new Transform transform;
 
 	void Awake()

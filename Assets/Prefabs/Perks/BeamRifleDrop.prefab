@@ -114,19 +114,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977c784b6514ff742a2a3906df8de4e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChance: .00499999989
-  immunity: 0
-  infiniteAmmo: 0
-  speedMod: 0
-  fireRateMod: 0
-  maxHealthMod: 0
-  healthMod: 0
-  damageMod: 0
-  reloadMod: 0
-  magazinesMod: 0
-  gunDrop: {fileID: 100000, guid: 8d9767fadad9723499315d03b95ffd8c, type: 2}
-  ID: BeamRifle
-  duration: 0
+  dropChance: .00999999978
+  maxPickupTime: 15
+  settings:
+    type: 0
+    shield: 0
+    infiniteAmmo: 0
+    speedMod: 0
+    fireRateMod: 0
+    healthMod: 0
+    damageMod: 0
+    reloadMod: 0
+    magazinesMod: 0
+    gunDrop: {fileID: 100000, guid: 8d9767fadad9723499315d03b95ffd8c, type: 2}
+    duration: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

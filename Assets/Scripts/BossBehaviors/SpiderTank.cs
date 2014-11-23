@@ -14,6 +14,8 @@ public class SpiderTank : MonoBehaviour
 	public MortarAttack mortarLauncher;
 	public SpawnerMortarAttack spawnerLauncher;
 	public GameObject shield;
+	public float canonDelay;
+	public AudioClip canonWarning;
 
 	public float defaultCanonLookSpeed;
 	public float healthTriggerInterval;
@@ -141,6 +143,12 @@ public class SpiderTank : MonoBehaviour
 		mainCanon.transform.rotation = Quaternion.Lerp( mainCanon.transform.rotation, look, ( lookSpeed ?? defaultCanonLookSpeed ) * Time.deltaTime );
 	}
 
+	public void BeginMainCanon()
+	{
+		Invoke( "FireMainCanon", canonDelay );
+		audio.clip = canonWarning;
+		audio.Play();
+	}
 	/**
 	 * \brief Fire the main canon.
 	 */
@@ -192,7 +200,7 @@ public class SpiderTank : MonoBehaviour
 	 */
 	public void FireAllGuns()
 	{
-		FireMainCanon();
+		BeginMainCanon();
 		FireOtherGuns();
 	}
 
@@ -221,7 +229,6 @@ public class SpiderTank : MonoBehaviour
 			return health.health >= _healthMaxCurr;
 		}
 	}
-
 }
 
 

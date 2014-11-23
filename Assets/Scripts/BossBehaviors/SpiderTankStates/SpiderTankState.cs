@@ -22,7 +22,7 @@ public class SpiderTankState : MonoBehaviour
 
 		if ( _stateSettings[spiderTank.currentPhase].useSpawner )
 		{
-			if ( spawner.spawns.Count > 0 )
+			if ( spawner.spawners.Count > 0 )
 			{
 				// if no spawners available, launch them from mortar
 				spawner.ApplySettings( _stateSettings[spiderTank.currentPhase].spawnerSettings );
