@@ -8,6 +8,7 @@ public class SpiderTankInitialState : SpiderTankState
 	public GameObject fallPointsRoot;
 	public float preFallDelay;
 	public float fallTime;
+	public float impactShake;
 	public float postFallDelay;
 	public float minFallDistance;
 	public GameObject landingEffect;
@@ -85,6 +86,7 @@ public class SpiderTankInitialState : SpiderTankState
 		Instantiate( landingEffect, transform.position, Quaternion.identity );
 		audio.clip = landingSound;
 		audio.Play();
+		Camera.main.GetComponentInChildren<CameraShake>().Shake( impactShake );
 		levelManager.ShowBossHealthDisplay();
 
 		Invoke( "Exit", postFallDelay );
