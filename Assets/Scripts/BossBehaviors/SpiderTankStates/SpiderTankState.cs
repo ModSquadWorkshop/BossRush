@@ -5,6 +5,7 @@ public class SpiderTankState : MonoBehaviour
 {
 	[HideInInspector] public SpiderTank spiderTank;
 
+	public bool useWalkAnimation;
 	public GlobalStateSettingsList globalSettings;
 	private GlobalStateSettings[] _stateSettings;
 
@@ -36,6 +37,15 @@ public class SpiderTankState : MonoBehaviour
 		{
 			StartMortarLaunchAtInterval( spiderTank.phaseSettings[spiderTank.currentPhase].mortarSettings.amountOfMortars,
 			                             spiderTank.phaseSettings[spiderTank.currentPhase].mortarSettings.launchInterval );
+		}
+
+		if ( useWalkAnimation )
+		{
+			spiderTank.animator.SetTrigger( "Start Walk" );
+		}
+		else
+		{
+			spiderTank.animator.SetTrigger( "Stop Walk" );
 		}
 	}
 
@@ -156,8 +166,9 @@ public class SpiderTankState : MonoBehaviour
 
 
 [System.Serializable]
-public class GlobalStateSettings 
+public class GlobalStateSettings
 {
+	public bool walk;
 	public bool useSpawner;
 	public bool useMortars;
 }

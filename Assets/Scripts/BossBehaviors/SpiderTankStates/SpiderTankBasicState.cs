@@ -31,7 +31,6 @@ public class SpiderTankBasicState : SpiderTankState
 		// set initial states of movement scripts
 		movementScript.enabled = true;
 		spiderTank.rushState.returnState = this;
-		spiderTank.burrowState.returnState = this;
 
 		// queue up first rush attack
 		Invoke( "TransitionOut", Random.Range( _settings[spiderTank.currentPhase].minRushInterval,
@@ -57,10 +56,6 @@ public class SpiderTankBasicState : SpiderTankState
 		{
 			spiderTank.turboState.enabled = true;
 		}
-		else if ( Random.value < _settings[spiderTank.currentPhase].burrowChance )
-		{
-			spiderTank.burrowState.enabled = true;
-		}
 		else
 		{
 			spiderTank.rushState.enabled = true;
@@ -80,8 +75,6 @@ public class BasicStateSettings
 
 	[Range( 0.0f, 1.0f )]
 	public float turboChance;
-	[Range( 0.0f, 1.0f )]
-	public float burrowChance;
 }
 
 
