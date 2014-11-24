@@ -2177,7 +2177,7 @@ MonoBehaviour:
   - spawnerSettings:
       baseAmountPerWave: 0
       amountPerSpawner: 1
-      waveInterval: .5
+      waveInterval: 2
       maxSpawnPoints: 5
       maxSpawned: 7
     mortarSettings:
@@ -2186,25 +2186,25 @@ MonoBehaviour:
   - spawnerSettings:
       baseAmountPerWave: 0
       amountPerSpawner: 2
-      waveInterval: .5
+      waveInterval: 2
       maxSpawnPoints: 6
-      maxSpawned: 13
+      maxSpawned: 10
     mortarSettings:
       amountOfMortars: 10
       launchInterval: 3
   - spawnerSettings:
       baseAmountPerWave: 0
       amountPerSpawner: 3
-      waveInterval: .5
+      waveInterval: 2
       maxSpawnPoints: 7
-      maxSpawned: 17
+      maxSpawned: 15
     mortarSettings:
       amountOfMortars: 15
       launchInterval: 3
   - spawnerSettings:
       baseAmountPerWave: 0
       amountPerSpawner: 4
-      waveInterval: .300000012
+      waveInterval: 2
       maxSpawnPoints: 10
       maxSpawned: 30
     mortarSettings:
