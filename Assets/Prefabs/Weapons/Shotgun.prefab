@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24d226df38c4ae64cb8ca99bd6fb0d75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: .5
+  cooldown: .400000006
   primaryAttackSounds:
   - {fileID: 8300000, guid: 9cd82d14829e3fa4cb03d283e6803685, type: 3}
   projectile: {fileID: 100000, guid: 20b65e6a645ad724e8d6e71187586206, type: 2}
@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 50
+  baseDamage: 25
   damageMultiplier: 1
   destroyAfterDamage: 0
   targets:

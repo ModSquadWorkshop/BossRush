@@ -24,8 +24,6 @@ public class SpiderTankState : MonoBehaviour
 		{
 			if ( spawner.spawners.Count > 0 )
 			{
-				// if no spawners available, launch them from mortar
-				spawner.ApplySettings( _stateSettings[spiderTank.currentPhase].spawnerSettings );
 				spawner.enabled = true;
 			}
 			else
@@ -36,15 +34,14 @@ public class SpiderTankState : MonoBehaviour
 
 		if ( _stateSettings[spiderTank.currentPhase].useMortars )
 		{
-			StartMortarLaunchAtInterval( _stateSettings[spiderTank.currentPhase].mortarSettings.amountOfMortars,
-			                             _stateSettings[spiderTank.currentPhase].mortarSettings.launchInterval );
+			StartMortarLaunchAtInterval( spiderTank.phaseSettings[spiderTank.currentPhase].mortarSettings.amountOfMortars,
+			                             spiderTank.phaseSettings[spiderTank.currentPhase].mortarSettings.launchInterval );
 		}
 	}
 
 	public virtual void OnDisable()
 	{
 		spawner.enabled = false;
-		spawner.ResetSettings();
 
 		CancelInvoke();
 		StopAllCoroutines();
@@ -90,7 +87,7 @@ public class SpiderTankState : MonoBehaviour
 		}
 	}
 
-	public MortarAttack spawnerLauncher
+	public SpawnerMortarAttack spawnerLauncher
 	{
 		get
 		{
@@ -163,10 +160,7 @@ public class GlobalStateSettings
 {
 	public bool useSpawner;
 	public bool useMortars;
-	public SpawnerSettings spawnerSettings;
-	public MortarStateSettings mortarSettings;
 }
-
 
 // this struct only exists to organize the settings in the inspector
 [System.Serializable]

@@ -23,7 +23,7 @@ public class LevelManager : MonoBehaviour
 		Screen.showCursor = true;
 
 		player.GetComponent<DeathSystem>().RegisterDeathCallback( ImportantPeopleDied );
-		boss.GetComponent<DeathSystem>().RegisterDeathCallback( ImportantPeopleDied );
+		boss.GetComponent<DeathSystem>().RegisterDeathCallback( BossDied );
 
 		if ( skipMenu )
 		{
@@ -60,6 +60,27 @@ public class LevelManager : MonoBehaviour
 	void AwakeSpiderTank()
 	{
 		boss.SetActive( true );
+	}
+
+	void BossDied( GameObject bossObject )
+	{
+		ImportantPeopleDied( bossObject );
+
+		// make player invincible then destroy all the enemies
+		player.GetComponent<HealthSystem>().immune = true;
+
+		foreach ( GameObject enemy in GameObject.FindGameObjectsWithTag( "Enemy" ) )
+		{
+			DeathSystem enemyDeath = enemy.GetComponent<DeathSystem>();
+			if ( enemyDeath != null )
+			{
+				enemyDeath.KillDelayed( Random.Range( 0.5f, 1.5f ) );
+			}
+			else
+			{
+				Destroy( enemy );
+			}
+		}
 	}
 
 	void ImportantPeopleDied( GameObject importantPerson )

@@ -6,15 +6,14 @@ public class BossHealth : MonoBehaviour
 {
 	public GameObject boss;
 	public GameObject bossMesh;
+	public Image healthDisplay;
 
-	private Scrollbar _scroll;
 	private Canvas _healthbar;
 	private MeshRenderer _renderer;
 
 	void Start()
 	{
 		boss.GetComponent<HealthSystem>().RegisterHealthCallback( HealthCallback );
-		_scroll = GetComponentInChildren<Scrollbar>();
 		_renderer = bossMesh.GetComponent<MeshRenderer>();
 		_healthbar = GetComponent<Canvas>();
 	}
@@ -33,6 +32,6 @@ public class BossHealth : MonoBehaviour
 
 	void HealthCallback( HealthSystem healthSystem, float healthChange )
 	{
-		_scroll.size = healthSystem.percent;
+		healthDisplay.fillAmount = healthSystem.percent;
 	}
 }

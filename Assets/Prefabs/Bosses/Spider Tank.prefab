@@ -560,7 +560,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400058}
   m_Layer: 10
-  m_Name: Model
+  m_Name: Transform Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1957,7 +1957,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: .75
+  m_Volume: .400000006
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2015,7 +2015,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: .75
+  m_Volume: .400000006
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2173,6 +2173,43 @@ MonoBehaviour:
     - 50
     - 25
     currentPhase: 0
+  phaseSettings:
+  - spawnerSettings:
+      baseAmountPerWave: 0
+      amountPerSpawner: 1
+      waveInterval: 2
+      maxSpawnPoints: 5
+      maxSpawned: 7
+    mortarSettings:
+      amountOfMortars: 5
+      launchInterval: 3
+  - spawnerSettings:
+      baseAmountPerWave: 0
+      amountPerSpawner: 2
+      waveInterval: 2
+      maxSpawnPoints: 6
+      maxSpawned: 10
+    mortarSettings:
+      amountOfMortars: 10
+      launchInterval: 3
+  - spawnerSettings:
+      baseAmountPerWave: 0
+      amountPerSpawner: 3
+      waveInterval: 2
+      maxSpawnPoints: 7
+      maxSpawned: 15
+    mortarSettings:
+      amountOfMortars: 15
+      launchInterval: 3
+  - spawnerSettings:
+      baseAmountPerWave: 0
+      amountPerSpawner: 4
+      waveInterval: 2
+      maxSpawnPoints: 10
+      maxSpawned: 30
+    mortarSettings:
+      amountOfMortars: 25
+      launchInterval: 2
   basicState: {fileID: 0}
   fleeState: {fileID: 0}
   healState: {fileID: 0}
@@ -2370,47 +2407,15 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseFourSettings:
       useSpawner: 1
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 5
-        amountPerSpawner: 5
-        waveInterval: 5
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 10
-        launchInterval: .150000006
   basicStateSettings:
     phaseOneSettings:
       turretSpeed: 2
@@ -2461,47 +2466,15 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 1
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 1
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 1
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseFourSettings:
       useSpawner: 1
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 10
-        launchInterval: .150000006
   turboStateSettings:
     phaseOneSettings:
       turretSpeed: 2
@@ -2561,47 +2534,15 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 5
-        launchInterval: .5
     phaseFourSettings:
       useSpawner: 0
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 10
-        launchInterval: .150000006
   returnState: {fileID: 0}
   bossDashing: {fileID: 8300000, guid: d06691583d23797469222a30c9d22e66, type: 3}
   rushStateSettings:
@@ -2651,7 +2592,11 @@ MonoBehaviour:
   damageInterval: .100000001
   duration: 0
   impactParticles: {fileID: 400044}
-  layersToIgnore: []
+  layersToIgnore:
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &11400032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2685,47 +2630,15 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseFourSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
   laserSpinSettings:
     phaseOneSettings:
       rotation: 1
@@ -2768,47 +2681,15 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseFourSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
   fleeStateSettings:
     phaseOneSettings:
       mainCanonCooldown: 3
@@ -2839,47 +2720,15 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseFourSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
   levelManager: {fileID: 0}
   fallPointsRoot: {fileID: 0}
   preFallDelay: 1
@@ -2888,7 +2737,7 @@ MonoBehaviour:
   minFallDistance: 200
   landingEffect: {fileID: 100000, guid: 7c20c65ed3f62554c8963af3d000c0b7, type: 2}
   fallingSound: {fileID: 8300000, guid: 27294fe6a22e3034eaf05d8af11a214e, type: 3}
-  landingSound: {fileID: 8300000, guid: 64e8c164e8c3ec0429d65de6766e4ffc, type: 3}
+  landingSound: {fileID: 8300000, guid: 0ebf751fd3acf564abc3cdf44ec3a906, type: 3}
   explodeMinion: {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
   numMinions: 20
   maxWaitTime: 15
@@ -2922,47 +2771,15 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 1
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 20
-        launchInterval: 2
     phaseTwoSettings:
       useSpawner: 1
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 20
-        launchInterval: 2
     phaseThreeSettings:
       useSpawner: 1
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 20
-        launchInterval: 2
     phaseFourSettings:
       useSpawner: 1
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 20
-        launchInterval: 2
   healStateSettings:
     phaseOneSettings:
       healRate: 300
@@ -2983,16 +2800,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23eef0c7e1c23864eb720e3d5817a2f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultSettings:
-    baseAmountPerWave: 2
-    amountPerSpawner: 1
-    waveInterval: 2
-    spawnOnStart: 0
+  settings:
+    baseAmountPerWave: 0
+    amountPerSpawner: 0
+    waveInterval: 0
+    maxSpawnPoints: 0
+    maxSpawned: 0
   enemyTypes:
   - {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
   spawners: []
-  maxSpawnPoints: 5
-  maxSpawned: 20
   delayBetweenNewEnemy: .200000003
 --- !u!114 &11400048
 MonoBehaviour:
@@ -3043,7 +2859,11 @@ MonoBehaviour:
   damageInterval: .100000001
   duration: 0
   impactParticles: {fileID: 400046}
-  layersToIgnore: []
+  layersToIgnore:
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &11400054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3062,7 +2882,11 @@ MonoBehaviour:
   damageInterval: .100000001
   duration: 0
   impactParticles: {fileID: 400048}
-  layersToIgnore: []
+  layersToIgnore:
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &11400056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3115,7 +2939,11 @@ MonoBehaviour:
   damageInterval: .100000001
   duration: 0
   impactParticles: {fileID: 400050}
-  layersToIgnore: []
+  layersToIgnore:
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &11400062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3134,7 +2962,11 @@ MonoBehaviour:
   damageInterval: .100000001
   duration: 0
   impactParticles: {fileID: 400056}
-  layersToIgnore: []
+  layersToIgnore:
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &11400064
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3237,7 +3069,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mat: {fileID: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Sprite: {fileID: 21300000, guid: 2f6e32b3a6c9c8b46b548e66058edca0, type: 3}
   m_Type: 3
@@ -3275,47 +3107,15 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseFourSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
   returnState: {fileID: 0}
   burrowStateSettings:
     phaseOneSettings:
@@ -15166,6 +14966,8 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
 --- !u!224 &22400000

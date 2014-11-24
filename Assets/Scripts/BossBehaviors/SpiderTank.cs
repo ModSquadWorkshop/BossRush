@@ -21,6 +21,7 @@ public class SpiderTank : MonoBehaviour
 	public float healthTriggerInterval;
 
 	public HealthCheckpoints healthCheckpoints;
+	public StateSettings[] phaseSettings;
 
 	[HideInInspector] public SpiderTankBasicState basicState;
 	[HideInInspector] public SpiderTankFleeState fleeState;
@@ -80,6 +81,8 @@ public class SpiderTank : MonoBehaviour
 		mortarLauncher.mortarSettings.targets[0] = player;
 		spawnerLauncher.spiderTank = this;
 
+		spawner.settings = phaseSettings[0].spawnerSettings;
+
 		_healthMaxStart = health.maxHealth;
 		_healthMaxCurr = _healthMaxStart;
 	}
@@ -116,6 +119,7 @@ public class SpiderTank : MonoBehaviour
 			{
 				healthCheckpoints.currentPhase++;
 				_healthMaxCurr = _healthMaxStart * healthCheckpoint * 0.01f;
+				spawner.settings = phaseSettings[healthCheckpoints.currentPhase].spawnerSettings;
 			}
 		}
 	}
@@ -237,4 +241,11 @@ public class HealthCheckpoints
 {
 	public float[] phaseHealthPercents = new float[]{ 100.0f, 75.0f, 50.0f, 25.0f };
 	public int currentPhase;
+}
+
+[System.Serializable]
+public class StateSettings
+{
+	public SpawnerSettings spawnerSettings;
+	public MortarStateSettings mortarSettings;
 }
