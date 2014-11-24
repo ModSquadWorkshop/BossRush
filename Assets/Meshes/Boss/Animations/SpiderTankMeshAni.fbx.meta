@@ -17,6 +17,10 @@ ModelImporter:
     100022: polySurface8
     100024: polySurface9
     100026: //RootNode
+    100028: polySurface13 1
+    100030: SpiderBody1
+    100032: transform1
+    100034: transform2
     400000: polySurface1
     400002: polySurface10
     400004: polySurface11
@@ -31,6 +35,10 @@ ModelImporter:
     400022: polySurface8
     400024: polySurface9
     400026: //RootNode
+    400028: polySurface13 1
+    400030: SpiderBody1
+    400032: transform1
+    400034: transform2
     2300000: polySurface1
     2300002: polySurface10
     2300004: polySurface11
@@ -151,7 +159,7 @@ ModelImporter:
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     weldVertices: 1
