@@ -11,7 +11,6 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 120: {fileID: 12000000}
-  - 82: {fileID: 8200000}
   m_Layer: 10
   m_Name: Beam Rifle
   m_TagString: Weapon
@@ -119,64 +118,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_Mesh: {fileID: 4300000, guid: 02202e1dbddd7e243b0dac73f4673b39, type: 3}
---- !u!82 &8200000
-AudioSource:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: e77737b61c888444381ed20747827700, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: .00200000009
-      value: .86996901
-      inSlope: 0
-      outSlope: -1.00200403
-      tangentMode: 0
-    - time: .88657409
-      value: .229102135
-      inSlope: -.0703928918
-      outSlope: -.0703928918
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -205,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   primaryAttackSounds:
-  - {fileID: 0}
+  - {fileID: 8300000, guid: e77737b61c888444381ed20747827700, type: 3}
   repeatDamage: 1
   maxRange: 10000
   damageInterval: .0500000007

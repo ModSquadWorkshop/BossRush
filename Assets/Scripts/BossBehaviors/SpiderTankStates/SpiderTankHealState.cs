@@ -5,6 +5,7 @@ public class SpiderTankHealState : SpiderTankState
 {
 	public HealStateSettingsList healStateSettings;
 	private HealStateSettings[] _settings;
+	public AudioClip BossHeal;
 
 	public void Update()
 	{
@@ -29,6 +30,11 @@ public class SpiderTankHealState : SpiderTankState
 		shield.gameObject.GetComponent<DeathSystem>().RegisterDeathCallback( ShieldDestroyed );
 
 		Physics.IgnoreCollision( collider, shield.collider, true );
+		audio.clip = BossHeal;
+		audio.volume = .8f;
+		audio.priority = 0;
+		audio.Play();
+		audio.loop = true;
 	}
 
 	public override void OnDisable()

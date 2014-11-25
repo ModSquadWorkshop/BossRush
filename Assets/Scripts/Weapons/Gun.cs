@@ -52,6 +52,8 @@ public class Gun : Weapon
 			// instantiate and initialize a bullet
 			InitializeBullet( projectile.Spawn() );
 			PlayPrimarySound();
+			audio.volume = .3f;
+			audio.priority = 120;
 
 			// update ammunition data
 			if ( !infiniteAmmo )

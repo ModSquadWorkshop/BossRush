@@ -506,7 +506,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 1
   Mute: 0
-  Priority: 128
+  Priority: 50
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -600,7 +600,8 @@ MonoBehaviour:
   startingHealth: 75
   maxHealth: 75
   damageSounds: []
-  deathSounds: []
+  deathSounds:
+  - {fileID: 8300000, guid: d10e00bcc22b82249a625259df56f339, type: 3}
   _lives: 0
   _health: 0
 --- !u!114 &11400004
@@ -660,6 +661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionEffect: {fileID: 100000, guid: f50fcebfdae35044683c14337e5c36e8, type: 2}
+  explosion: {fileID: 0}
   explosionRadius: 7.5
   explosionDamage: 10
 --- !u!195 &19500000

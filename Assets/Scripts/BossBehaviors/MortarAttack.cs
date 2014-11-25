@@ -4,7 +4,7 @@ using System.Collections;
 public class MortarAttack : MonoBehaviour
 {
 	public GameObject mortar;
-
+	public AudioClip Launching;
 	public MortarSettings mortarSettings;
 
 	public float delayBetweenMortars = 0.15f;
@@ -18,6 +18,10 @@ public class MortarAttack : MonoBehaviour
 		{
 			StartCoroutine( LaunchMortar( numMortars ) );
 			_firing = true;
+			audio.clip = Launching;
+			audio.Play();
+			audio.volume = .7f;
+			audio.priority = 0;
 		}
 	}
 
