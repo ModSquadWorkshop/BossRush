@@ -13,10 +13,15 @@ public class CameraFollow : MonoBehaviour
 	public float pullbackDistance;
 
 	private new Transform transform;
+	private Vector3 heightMod;
+	private float height;
+	public float cameraBack;
 
 	void Awake()
 	{
 		transform = GetComponent<Transform>();
+		height = 80f / offset;
+		heightMod = new Vector3( 0f, 80f, 0f );
 	}
 
 	void Start()
@@ -30,7 +35,19 @@ public class CameraFollow : MonoBehaviour
 
 	void Update()
 	{
-		transform.position = Vector3.Lerp( transform.position, followTarget.position + ( -transform.forward * offset ), followSpeed * Time.deltaTime );
+		Vector3 gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ), height , Input.GetAxis( "Look Vertical" ) );
+		//Debug.Log( gamePadLook );
+		//Debug.Log( "OTHER" );
+		//Debug.Log( -transform.forward * offset );
+
+		if ( Input.GetAxis( "Look Horizontal" ) != 0f || Input.GetAxis( "Look Vertical" ) != 0f )
+		{
+			transform.position = Vector3.Lerp( transform.position, followTarget.position + (gamePadLook * offset) + ( Vector3.back * cameraBack ), followSpeed * Time.deltaTime );
+		}
+		else
+		{
+			transform.position = Vector3.Lerp( transform.position, followTarget.position + heightMod + ( Vector3.back * cameraBack ) , followSpeed * Time.deltaTime );
+		}
 	}
 
 	public void PullBackFromTarget( GameObject target )
