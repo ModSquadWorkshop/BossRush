@@ -98,20 +98,28 @@ sealed public class PlayerMovement : MonoBehaviour
 
 	private void HandleLookDirection()
 	{
-		// handle mouse input
-		Ray ray = Camera.main.ScreenPointToRay( Input.mousePosition );
-		float hitDistance = 0.0f;
-		if ( _plane.Raycast( ray, out hitDistance ) )
+		bool mouseMoved = ( new Vector3( Input.GetAxis( "Mouse X" ), 0.0f,
+		                                 Input.GetAxis( "Mouse Y" ) ) ).sqrMagnitude > 0.0f;
+		if ( mouseMoved )
 		{
-			lookTarget.position = ray.GetPoint( hitDistance );
+			Screen.lockCursor = false;
 		}
 
-		bool mouseMoved = ( new Vector3( Input.GetAxis( "Mouse X" ), 0.0f, 
-										 Input.GetAxis( "Mouse Y" ) ) ).sqrMagnitude > 0.0f;
+		if ( !Screen.lockCursor )
+		{
+			// handle mouse input
+			Ray ray = Camera.main.ScreenPointToRay( Input.mousePosition );
+			float hitDistance = 0.0f;
+			if ( _plane.Raycast( ray, out hitDistance ) )
+			{
+				lookTarget.position = ray.GetPoint( hitDistance );
+			}
+		}
 
 		// handle game pad look
 		// game pad look overrides mouse movement
-		Vector3 gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ), 0.0f,
+		Vector3 gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ),
+		                                   0.0f,
 		                                   Input.GetAxis( "Look Vertical" ) );
 
 		bool controllerMoved = gamePadLook.sqrMagnitude > 0.0f;
@@ -119,6 +127,7 @@ sealed public class PlayerMovement : MonoBehaviour
 		{
 			lookTarget.localPosition = gamePadLook;
 			crosshairs.show = false;
+			Screen.lockCursor = true;
 		}
 
 		if ( mouseMoved )
@@ -171,7 +180,7 @@ sealed public class PlayerMovement : MonoBehaviour
 
 		if ( _dashPartial )
 		{
-			rigidbody.transform.position = _dashHit.point + (_dashHit.normal * 2.0f);
+			rigidbody.transform.position = _dashHit.point + ( _dashHit.normal * 2.0f );
 		}
 
 		Invoke( "DashDelayComplete", dashDelay );
