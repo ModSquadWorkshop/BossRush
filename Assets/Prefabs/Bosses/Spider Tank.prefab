@@ -43,7 +43,6 @@ GameObject:
   - 114: {fileID: 11400024}
   - 114: {fileID: 11400046}
   - 114: {fileID: 11400036}
-  - 114: {fileID: 11400076}
   - 114: {fileID: 11400048}
   m_Layer: 10
   m_Name: Spider Tank
@@ -153,7 +152,7 @@ GameObject:
   - 4: {fileID: 400014}
   - 33: {fileID: 3300004}
   - 23: {fileID: 2300002}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,6 +372,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400040}
+  - 82: {fileID: 8200012}
   - 114: {fileID: 11400068}
   m_Layer: 0
   m_Name: Spawner Launcher
@@ -389,6 +389,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400042}
+  - 82: {fileID: 8200010}
   - 114: {fileID: 11400070}
   m_Layer: 0
   m_Name: Mortar Launcher
@@ -576,7 +577,7 @@ GameObject:
   - 4: {fileID: 400060}
   - 33: {fileID: 3300012}
   - 23: {fileID: 2300012}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -593,7 +594,7 @@ GameObject:
   - 4: {fileID: 400062}
   - 33: {fileID: 3300016}
   - 23: {fileID: 2300016}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -610,7 +611,7 @@ GameObject:
   - 4: {fileID: 400064}
   - 33: {fileID: 3300020}
   - 23: {fileID: 2300020}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -627,7 +628,7 @@ GameObject:
   - 4: {fileID: 400066}
   - 33: {fileID: 3300024}
   - 23: {fileID: 2300024}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -644,7 +645,7 @@ GameObject:
   - 4: {fileID: 400068}
   - 33: {fileID: 3300028}
   - 23: {fileID: 2300028}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -661,7 +662,7 @@ GameObject:
   - 4: {fileID: 400070}
   - 33: {fileID: 3300008}
   - 23: {fileID: 2300010}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -678,7 +679,7 @@ GameObject:
   - 4: {fileID: 400072}
   - 33: {fileID: 3300014}
   - 23: {fileID: 2300014}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -695,7 +696,7 @@ GameObject:
   - 4: {fileID: 400074}
   - 33: {fileID: 3300018}
   - 23: {fileID: 2300018}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -712,7 +713,7 @@ GameObject:
   - 4: {fileID: 400076}
   - 33: {fileID: 3300022}
   - 23: {fileID: 2300022}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -729,7 +730,7 @@ GameObject:
   - 4: {fileID: 400078}
   - 33: {fileID: 3300026}
   - 23: {fileID: 2300026}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -746,7 +747,7 @@ GameObject:
   - 4: {fileID: 400080}
   - 33: {fileID: 3300030}
   - 23: {fileID: 2300030}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -763,7 +764,7 @@ GameObject:
   - 4: {fileID: 400082}
   - 33: {fileID: 3300032}
   - 23: {fileID: 2300032}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -778,8 +779,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400084}
-  - 111: {fileID: 11100000}
-  m_Layer: 0
+  - 95: {fileID: 9500000}
+  m_Layer: 10
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2121,21 +2122,137 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!111 &11100000
-Animation:
+--- !u!82 &8200010
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100042}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+--- !u!82 &8200012
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100040}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+--- !u!95 &9500000
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100088}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: ec933b24bacb90240b4fd6bd9309692a, type: 3}
-  m_Animations:
-  - {fileID: 7400000, guid: ec933b24bacb90240b4fd6bd9309692a, type: 3}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_Avatar: {fileID: 9000000, guid: ec933b24bacb90240b4fd6bd9309692a, type: 3}
+  m_Controller: {fileID: 9100000, guid: 363eafbfdc3315044a0a4de30cc5b6cd, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2163,7 +2280,7 @@ MonoBehaviour:
   spawnerLauncher: {fileID: 11400068}
   shield: {fileID: 0}
   canonDelay: 0
-  canonWarning: {fileID: 0}
+  canonWarning: {fileID: 8300000, guid: 7a0bab87f3fe07e4fa99b28048a7589f, type: 3}
   defaultCanonLookSpeed: 20
   healthTriggerInterval: 1500
   healthCheckpoints:
@@ -2217,13 +2334,13 @@ MonoBehaviour:
   rushState: {fileID: 0}
   turboState: {fileID: 0}
   enterState: {fileID: 0}
-  burrowState: {fileID: 0}
   health: {fileID: 0}
   spawner: {fileID: 0}
   agent: {fileID: 0}
   boxCollider: {fileID: 0}
   ringUICanvas: {fileID: 0}
   meshes: []
+  animator: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2281,7 +2398,8 @@ MonoBehaviour:
   startingHealth: 8000
   maxHealth: 8000
   damageSounds: []
-  deathSounds: []
+  deathSounds:
+  - {fileID: 8300000, guid: a5468f1053e9ce841bd7ae3817db1a20, type: 3}
   _lives: 0
   _health: 0
 --- !u!114 &11400008
@@ -2295,7 +2413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d74c975aef0486b4dad7c3260ff55970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingTarget: 1
+  movingTarget: 0
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2402,20 +2520,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fba2eb2f60f8214c927b5c976359d8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spiderTank: {fileID: 0}
+  useWalkAnimation: 1
   globalSettings:
     phaseOneSettings:
+      walk: 0
       useSpawner: 0
       useMortars: 0
     phaseTwoSettings:
+      walk: 0
       useSpawner: 0
       useMortars: 0
     phaseThreeSettings:
+      walk: 0
       useSpawner: 0
       useMortars: 0
     phaseFourSettings:
+      walk: 0
       useSpawner: 1
       useMortars: 1
+  spiderTank: {fileID: 0}
   basicStateSettings:
     phaseOneSettings:
       turretSpeed: 2
@@ -2424,7 +2547,6 @@ MonoBehaviour:
       minRushInterval: 1
       maxRushInterval: 3
       turboChance: .5
-      burrowChance: 0
     phaseTwoSettings:
       turretSpeed: 2
       canonDelay: 1
@@ -2432,7 +2554,6 @@ MonoBehaviour:
       minRushInterval: 1
       maxRushInterval: 3
       turboChance: .5
-      burrowChance: 0
     phaseThreeSettings:
       turretSpeed: 2
       canonDelay: 1
@@ -2440,7 +2561,6 @@ MonoBehaviour:
       minRushInterval: 1
       maxRushInterval: 3
       turboChance: .5
-      burrowChance: 0
     phaseFourSettings:
       turretSpeed: 2
       canonDelay: 1
@@ -2448,7 +2568,6 @@ MonoBehaviour:
       minRushInterval: 1
       maxRushInterval: 3
       turboChance: .200000003
-      burrowChance: 0
   movementScript: {fileID: 11400010}
 --- !u!114 &11400022
 MonoBehaviour:
@@ -2461,20 +2580,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d304b450b33b55b489dadf590505e37b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spiderTank: {fileID: 0}
+  useWalkAnimation: 1
   globalSettings:
     phaseOneSettings:
+      walk: 0
       useSpawner: 1
       useMortars: 0
     phaseTwoSettings:
+      walk: 0
       useSpawner: 1
       useMortars: 0
     phaseThreeSettings:
+      walk: 0
       useSpawner: 1
       useMortars: 0
     phaseFourSettings:
+      walk: 0
       useSpawner: 1
       useMortars: 1
+  spiderTank: {fileID: 0}
   turboStateSettings:
     phaseOneSettings:
       turretSpeed: 2
@@ -2529,22 +2653,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 145cab610876f9649a637d947280f136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spiderTank: {fileID: 0}
+  useWalkAnimation: 0
   globalSettings:
     phaseOneSettings:
+      walk: 0
       useSpawner: 0
       useMortars: 0
     phaseTwoSettings:
+      walk: 0
       useSpawner: 0
       useMortars: 0
     phaseThreeSettings:
+      walk: 0
       useSpawner: 0
       useMortars: 1
     phaseFourSettings:
+      walk: 0
       useSpawner: 0
       useMortars: 1
+  spiderTank: {fileID: 0}
   returnState: {fileID: 0}
-  bossDashing: {fileID: 8300000, guid: d06691583d23797469222a30c9d22e66, type: 3}
+  bossDashing: {fileID: 8300000, guid: b4b589f00199b8b46aa1489761ac0991, type: 3}
   rushStateSettings:
     phaseOneSettings:
       rushTime: .5
@@ -2625,20 +2754,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbe66e7299ef940428847254da31eae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spiderTank: {fileID: 0}
+  useWalkAnimation: 1
   globalSettings:
     phaseOneSettings:
+      walk: 0
       useSpawner: 0
       useMortars: 0
     phaseTwoSettings:
+      walk: 0
       useSpawner: 0
       useMortars: 0
     phaseThreeSettings:
+      walk: 0
       useSpawner: 0
       useMortars: 0
     phaseFourSettings:
+      walk: 0
       useSpawner: 0
       useMortars: 0
+  spiderTank: {fileID: 0}
+  BossLaser: {fileID: 8300000, guid: 1cd3960218ab33c4c9eeb99c9899b748, type: 3}
   laserSpinSettings:
     phaseOneSettings:
       rotation: 1
@@ -2676,20 +2811,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 459c08f16f90d0c43987bf16209851ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spiderTank: {fileID: 0}
+  useWalkAnimation: 1
   globalSettings:
     phaseOneSettings:
+      walk: 0
       useSpawner: 0
       useMortars: 0
     phaseTwoSettings:
+      walk: 0
       useSpawner: 0
       useMortars: 0
     phaseThreeSettings:
+      walk: 0
       useSpawner: 0
       useMortars: 0
     phaseFourSettings:
+      walk: 0
       useSpawner: 0
       useMortars: 0
+  spiderTank: {fileID: 0}
   fleeStateSettings:
     phaseOneSettings:
       mainCanonCooldown: 3
@@ -2715,20 +2855,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c59753965a21e3747a45d2d631b83fe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spiderTank: {fileID: 0}
+  useWalkAnimation: 0
   globalSettings:
     phaseOneSettings:
+      walk: 0
       useSpawner: 0
       useMortars: 0
     phaseTwoSettings:
+      walk: 0
       useSpawner: 0
       useMortars: 0
     phaseThreeSettings:
+      walk: 0
       useSpawner: 0
       useMortars: 0
     phaseFourSettings:
+      walk: 0
       useSpawner: 0
       useMortars: 0
+  spiderTank: {fileID: 0}
   levelManager: {fileID: 0}
   fallPointsRoot: {fileID: 0}
   preFallDelay: 1
@@ -2737,8 +2882,8 @@ MonoBehaviour:
   postFallDelay: .5
   minFallDistance: 200
   landingEffect: {fileID: 100000, guid: 7c20c65ed3f62554c8963af3d000c0b7, type: 2}
-  fallingSound: {fileID: 8300000, guid: 27294fe6a22e3034eaf05d8af11a214e, type: 3}
-  landingSound: {fileID: 8300000, guid: 0ebf751fd3acf564abc3cdf44ec3a906, type: 3}
+  fallingSound: {fileID: 8300000, guid: 4604c07bce1cb284db27b290cc6d7cc6, type: 3}
+  landingSound: {fileID: 8300000, guid: 03d08975c90f17542b4bf92324b45b74, type: 3}
   explodeMinion: {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
   numMinions: 20
   maxWaitTime: 15
@@ -2767,20 +2912,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 265b0c87905103e4a9867ecbca21f184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spiderTank: {fileID: 0}
+  useWalkAnimation: 0
   globalSettings:
     phaseOneSettings:
+      walk: 0
       useSpawner: 1
       useMortars: 1
     phaseTwoSettings:
+      walk: 0
       useSpawner: 1
       useMortars: 1
     phaseThreeSettings:
+      walk: 0
       useSpawner: 1
       useMortars: 1
     phaseFourSettings:
+      walk: 0
       useSpawner: 1
       useMortars: 1
+  spiderTank: {fileID: 0}
   healStateSettings:
     phaseOneSettings:
       healRate: 300
@@ -2790,6 +2940,7 @@ MonoBehaviour:
       healRate: 300
     phaseFourSettings:
       healRate: 300
+  BossHeal: {fileID: 8300000, guid: 18a3c03f11fb09347b2e507506b4c078, type: 3}
 --- !u!114 &11400046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2823,6 +2974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionEffect: {fileID: 100000, guid: 0eea880a8c290a844b837323c91af4aa, type: 2}
+  explosion: {fileID: 8300000, guid: a5468f1053e9ce841bd7ae3817db1a20, type: 3}
   explosionRadius: 0
   explosionDamage: 0
 --- !u!114 &11400050
@@ -3014,6 +3166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mortar: {fileID: 100000, guid: 25f6bfc5938519c4fa99f6baaca87531, type: 2}
+  Launching: {fileID: 8300000, guid: 3f03e8340a2680343b45b47a0933ee34, type: 3}
   mortarSettings:
     targets:
     - {fileID: 0}
@@ -3047,6 +3200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mortar: {fileID: 100000, guid: 7c6689ae54474ec40ac7f53d318f064f, type: 2}
+  Launching: {fileID: 8300000, guid: 8fa3bb96573346941bf21f7b9eb27548, type: 3}
   mortarSettings:
     targets: []
     targetMarker: {fileID: 100000, guid: 1a748d5f766af9345ae5d3d8018f8c26, type: 2}
@@ -3092,53 +3246,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   indicatorImage: {fileID: 11400072}
---- !u!114 &11400076
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dbb132129b4415448f57c600408987b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spiderTank: {fileID: 0}
-  globalSettings:
-    phaseOneSettings:
-      useSpawner: 0
-      useMortars: 0
-    phaseTwoSettings:
-      useSpawner: 0
-      useMortars: 0
-    phaseThreeSettings:
-      useSpawner: 0
-      useMortars: 0
-    phaseFourSettings:
-      useSpawner: 0
-      useMortars: 0
-  returnState: {fileID: 0}
-  burrowStateSettings:
-    phaseOneSettings:
-      timeUnderground: 5
-      burrowSequenceDuration: 1.5
-    phaseTwoSettings:
-      timeUnderground: 5
-      burrowSequenceDuration: 1.5
-    phaseThreeSettings:
-      timeUnderground: 5
-      burrowSequenceDuration: 1.5
-    phaseFourSettings:
-      timeUnderground: 5
-      burrowSequenceDuration: 1.5
-  relocationPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1

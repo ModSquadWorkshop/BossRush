@@ -78,8 +78,8 @@ ModelImporter:
     4300020: polySurface9
     4300022: polySurface11
     4300024: polySurface12
-    7400000: Take 001
-    7400002: Take 002
+    7400000: Walk
+    7400002: Dash
     9500000: //RootNode
     11100000: //RootNode
   materials:
@@ -91,7 +91,7 @@ ModelImporter:
     bakeSimulation: 0
     optimizeGameObjects: 0
     motionNodeName: 
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5
@@ -99,7 +99,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
+      name: Walk
       takeName: Take 001
       firstFrame: 0
       lastFrame: 48
@@ -108,8 +108,8 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -126,34 +126,36 @@ ModelImporter:
         weight: 1
       - path: polySurface1
         weight: 1
-      - path: polySurface1/polySurface2
+      - path: polySurface2
         weight: 1
-      - path: polySurface1/polySurface2/polySurface3
+      - path: polySurface2/polySurface3
         weight: 1
-      - path: polySurface1/polySurface5
+      - path: polySurface5
         weight: 1
-      - path: polySurface1/polySurface5/polySurface4
+      - path: polySurface5/polySurface4
         weight: 1
-      - path: polySurface1/polySurface6
+      - path: polySurface6
         weight: 1
-      - path: polySurface1/polySurface6/polySurface13
+      - path: polySurface6/polySurface13
         weight: 1
-      - path: polySurface1/polySurface7
+      - path: polySurface7
         weight: 1
-      - path: polySurface1/polySurface7/polySurface8
+      - path: polySurface7/polySurface8
         weight: 1
-      - path: polySurface1/polySurface10
+      - path: polySurface10
         weight: 1
-      - path: polySurface1/polySurface10/polySurface9
+      - path: polySurface10/polySurface9
         weight: 1
-      - path: polySurface1/polySurface11
+      - path: polySurface11
         weight: 1
-      - path: polySurface1/polySurface11/polySurface12
+      - path: polySurface11/polySurface12
+        weight: 1
+      - path: SpiderBody1
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Take 002
+      name: Dash
       takeName: Take 001
       firstFrame: 50
       lastFrame: 86
@@ -243,6 +245,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 1
+  animationType: 2
   additionalBone: 0
   userData: 

@@ -30,7 +30,6 @@ public class SpiderTank : MonoBehaviour
 	[HideInInspector] public SpiderTankRushState rushState;
 	[HideInInspector] public SpiderTankTurboState turboState;
 	[HideInInspector] public SpiderTankEnterState enterState;
-	[HideInInspector] public SpiderTankBurrowState burrowState;
 
 	[HideInInspector] public HealthSystem health;
 	[HideInInspector] public EnemySpawner spawner;
@@ -38,6 +37,8 @@ public class SpiderTank : MonoBehaviour
 	[HideInInspector] public BoxCollider boxCollider;
 	[HideInInspector] public Canvas ringUICanvas;
 	[HideInInspector] public MeshRenderer[] meshes;
+
+	[HideInInspector] public Animator animator;
 
 	private HealthTrigger _healthTriggerCallback = delegate( HealthSystem health ) { };
 	private float _healthMaxCurr;
@@ -54,7 +55,6 @@ public class SpiderTank : MonoBehaviour
 		rushState = GetComponent<SpiderTankRushState>();
 		turboState = GetComponent<SpiderTankTurboState>();
 		enterState = GetComponent<SpiderTankEnterState>();
-		burrowState = GetComponent<SpiderTankBurrowState>();
 
 		// retrieve other componenets
 		health = GetComponent<HealthSystem>();
@@ -63,6 +63,7 @@ public class SpiderTank : MonoBehaviour
 		boxCollider = GetComponent<BoxCollider>();
 		ringUICanvas = GetComponentInChildren<Canvas>();
 		meshes = GetComponentsInChildren<MeshRenderer>();
+		animator = GetComponentInChildren<Animator>();
 
 		// register for player death callback
 		player.gameObject.GetComponent<DeathSystem>().RegisterDeathCallback( PlayerDeathCallback );
@@ -152,6 +153,8 @@ public class SpiderTank : MonoBehaviour
 		Invoke( "FireMainCanon", canonDelay );
 		audio.clip = canonWarning;
 		audio.Play();
+		audio.volume = .8f;
+		audio.priority = 0;
 	}
 	/**
 	 * \brief Fire the main canon.

@@ -156,9 +156,9 @@ AudioSource:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 9cd82d14829e3fa4cb03d283e6803685, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: .75
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -233,7 +233,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: .200000003
-  primaryAttackSounds: []
+  primaryAttackSounds:
+  - {fileID: 8300000, guid: 3f03e8340a2680343b45b47a0933ee34, type: 3}
   projectile: {fileID: 100000, guid: 1f50111606a504e44a34e980e80c43e8, type: 2}
   casingEmitter: {fileID: 19800000}
   muzzleFlash: {fileID: 19800002}

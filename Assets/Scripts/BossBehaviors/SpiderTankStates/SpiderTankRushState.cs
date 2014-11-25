@@ -8,7 +8,7 @@ public class SpiderTankRushState : SpiderTankState
 	public AudioClip bossDashing;
 	public RushAttackSettingsList rushStateSettings;
 	private RushAttackSettings[] _settings;
-	
+
 	private RushAttack _rushAttack;
 	private DamageSystem _damageSystem;
 
@@ -24,10 +24,10 @@ public class SpiderTankRushState : SpiderTankState
 	{
 		base.OnEnable();
 
-		_settings = new RushAttackSettings[] { rushStateSettings.phaseOneSettings, 
-											   rushStateSettings.phaseTwoSettings, 
-											   rushStateSettings.phaseThreeSettings, 
-											   rushStateSettings.phaseFourSettings };
+		_settings = new RushAttackSettings[] { rushStateSettings.phaseOneSettings,
+		                                       rushStateSettings.phaseTwoSettings,
+		                                       rushStateSettings.phaseThreeSettings,
+		                                       rushStateSettings.phaseFourSettings };
 
 		_rushAttack.target = spiderTank.player;
 		_rushAttack.RegisterCallback( new RushAttack.RushEndCallback( EndRush ) );
@@ -35,7 +35,11 @@ public class SpiderTankRushState : SpiderTankState
 		_rushAttack.enabled = true;
 		audio.clip = bossDashing;
 		audio.Play();
+		audio.volume = .8f;
+		audio.priority = 0;
 		_damageSystem.enabled = true;
+
+		spiderTank.animator.SetTrigger( "Dash" );
 	}
 
 	void EndRush()
