@@ -3,5 +3,12 @@ using System.Collections;
 
 public class SpawnerObject : MonoBehaviour 
 {
-	public SpawnPoint spawnPoint;
+	public GameObject dirtEffect;
+
+	[HideInInspector] public SpawnPoint spawnPoint;
+
+	void Start()
+	{
+		Instantiate( dirtEffect, transform.position, Quaternion.identity );
+	}
 }
