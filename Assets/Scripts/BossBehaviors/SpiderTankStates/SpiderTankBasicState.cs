@@ -21,10 +21,11 @@ public class SpiderTankBasicState : SpiderTankState
 	{
 		base.OnEnable();
 
-		_settings = new BasicStateSettings[] { basicStateSettings.phaseOneSettings, 
-											   basicStateSettings.phaseTwoSettings, 
-											   basicStateSettings.phaseThreeSettings, 
-											   basicStateSettings.phaseFourSettings };
+		_settings = new BasicStateSettings[] { basicStateSettings.phaseOneSettings,
+		                                       basicStateSettings.phaseTwoSettings,
+		                                       basicStateSettings.phaseThreeSettings,
+		                                       basicStateSettings.phaseFourSettings
+		                                     };
 
 		spiderTank.mainCanon.SetCooldown( _settings[spiderTank.currentPhase].canonDelay );
 
@@ -34,12 +35,10 @@ public class SpiderTankBasicState : SpiderTankState
 
 		// queue up first rush attack
 		Invoke( "TransitionOut", Random.Range( _settings[spiderTank.currentPhase].minRushInterval,
-											   _settings[spiderTank.currentPhase].maxRushInterval ) );
+		                                       _settings[spiderTank.currentPhase].maxRushInterval ) );
 
 		// register for health trigger callbacks
 		spiderTank.RegisterHealthTriggerCallback( HealthTriggerCallback );
-
-		spiderTank.animator.SetTrigger( "Start Walk" );
 	}
 
 	public override void OnDisable()
