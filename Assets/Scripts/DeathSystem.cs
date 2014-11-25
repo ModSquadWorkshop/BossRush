@@ -5,6 +5,7 @@ public class DeathSystem : MonoBehaviour
 {
 	public delegate void DeathCallback( GameObject gameObject );
 
+	public AudioClip[] deathSounds;
 	public bool allowMultipleDeaths;
 
 	private DeathCallback _deathCallback = delegate( GameObject gameObject ) { };
@@ -22,6 +23,14 @@ public class DeathSystem : MonoBehaviour
 
 	public void NotifyDeath()
 	{
+		if ( deathSounds.Length > 0 )
+		{
+			audio.clip = deathSounds[Random.Range( 0, deathSounds.Length )];
+			audio.volume = .9f;
+			audio.priority = 0;
+			audio.Play();
+		}
+
 		if ( !_dying || allowMultipleDeaths )
 		{
 			_dying = true;

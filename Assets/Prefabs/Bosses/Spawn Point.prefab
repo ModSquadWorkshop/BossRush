@@ -27,8 +27,8 @@ GameObject:
   - 4: {fileID: 400002}
   - 54: {fileID: 5400000}
   - 65: {fileID: 6500002}
-  - 208: {fileID: 20800000}
   - 82: {fileID: 8200000}
+  - 208: {fileID: 20800000}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400010}
@@ -230,8 +230,6 @@ MonoBehaviour:
   startingHealth: 600
   maxHealth: 600
   damageSounds: []
-  deathSounds:
-  - {fileID: 8300000, guid: d10e00bcc22b82249a625259df56f339, type: 3}
   _lives: 0
   _health: 0
 --- !u!114 &11400002
@@ -245,6 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54890f060999baa459796158b8ac5d9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathSounds: []
   allowMultipleDeaths: 0
 --- !u!114 &11400004
 MonoBehaviour:

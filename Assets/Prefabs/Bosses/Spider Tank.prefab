@@ -2398,8 +2398,6 @@ MonoBehaviour:
   startingHealth: 8000
   maxHealth: 8000
   damageSounds: []
-  deathSounds:
-  - {fileID: 8300000, guid: a5468f1053e9ce841bd7ae3817db1a20, type: 3}
   _lives: 0
   _health: 0
 --- !u!114 &11400008
@@ -2469,6 +2467,7 @@ MonoBehaviour:
   targets:
   - Scenery
   - Player
+  - Enemy
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2486,6 +2485,7 @@ MonoBehaviour:
   targets:
   - Scenery
   - Player
+  - Enemy
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2900,6 +2900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54890f060999baa459796158b8ac5d9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathSounds: []
   allowMultipleDeaths: 0
 --- !u!114 &11400044
 MonoBehaviour:
