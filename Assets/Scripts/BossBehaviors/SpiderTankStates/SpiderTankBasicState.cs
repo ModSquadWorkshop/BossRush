@@ -38,6 +38,8 @@ public class SpiderTankBasicState : SpiderTankState
 
 		// register for health trigger callbacks
 		spiderTank.RegisterHealthTriggerCallback( HealthTriggerCallback );
+
+		spiderTank.animator.SetTrigger( "Start Walk" );
 	}
 
 	public override void OnDisable()

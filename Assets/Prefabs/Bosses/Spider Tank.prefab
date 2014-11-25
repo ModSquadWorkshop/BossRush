@@ -2520,7 +2520,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fba2eb2f60f8214c927b5c976359d8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spiderTank: {fileID: 0}
   useWalkAnimation: 1
   globalSettings:
     phaseOneSettings:
@@ -2539,6 +2538,7 @@ MonoBehaviour:
       walk: 0
       useSpawner: 1
       useMortars: 1
+  spiderTank: {fileID: 0}
   basicStateSettings:
     phaseOneSettings:
       turretSpeed: 2
@@ -2580,7 +2580,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d304b450b33b55b489dadf590505e37b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spiderTank: {fileID: 0}
   useWalkAnimation: 1
   globalSettings:
     phaseOneSettings:
@@ -2599,6 +2598,7 @@ MonoBehaviour:
       walk: 0
       useSpawner: 1
       useMortars: 1
+  spiderTank: {fileID: 0}
   turboStateSettings:
     phaseOneSettings:
       turretSpeed: 2
@@ -2653,8 +2653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 145cab610876f9649a637d947280f136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spiderTank: {fileID: 0}
-  useWalkAnimation: 1
+  useWalkAnimation: 0
   globalSettings:
     phaseOneSettings:
       walk: 0
@@ -2672,6 +2671,7 @@ MonoBehaviour:
       walk: 0
       useSpawner: 0
       useMortars: 1
+  spiderTank: {fileID: 0}
   returnState: {fileID: 0}
   bossDashing: {fileID: 8300000, guid: b4b589f00199b8b46aa1489761ac0991, type: 3}
   rushStateSettings:
@@ -2754,7 +2754,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbe66e7299ef940428847254da31eae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spiderTank: {fileID: 0}
   useWalkAnimation: 1
   globalSettings:
     phaseOneSettings:
@@ -2773,6 +2772,7 @@ MonoBehaviour:
       walk: 0
       useSpawner: 0
       useMortars: 0
+  spiderTank: {fileID: 0}
   BossLaser: {fileID: 8300000, guid: 1cd3960218ab33c4c9eeb99c9899b748, type: 3}
   laserSpinSettings:
     phaseOneSettings:
@@ -2811,7 +2811,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 459c08f16f90d0c43987bf16209851ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spiderTank: {fileID: 0}
   useWalkAnimation: 1
   globalSettings:
     phaseOneSettings:
@@ -2830,6 +2829,7 @@ MonoBehaviour:
       walk: 0
       useSpawner: 0
       useMortars: 0
+  spiderTank: {fileID: 0}
   fleeStateSettings:
     phaseOneSettings:
       mainCanonCooldown: 3
@@ -2855,7 +2855,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c59753965a21e3747a45d2d631b83fe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spiderTank: {fileID: 0}
   useWalkAnimation: 0
   globalSettings:
     phaseOneSettings:
@@ -2874,6 +2873,7 @@ MonoBehaviour:
       walk: 0
       useSpawner: 0
       useMortars: 0
+  spiderTank: {fileID: 0}
   levelManager: {fileID: 0}
   fallPointsRoot: {fileID: 0}
   preFallDelay: 1
@@ -2912,7 +2912,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 265b0c87905103e4a9867ecbca21f184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spiderTank: {fileID: 0}
   useWalkAnimation: 0
   globalSettings:
     phaseOneSettings:
@@ -2931,6 +2930,7 @@ MonoBehaviour:
       walk: 0
       useSpawner: 1
       useMortars: 1
+  spiderTank: {fileID: 0}
   healStateSettings:
     phaseOneSettings:
       healRate: 300

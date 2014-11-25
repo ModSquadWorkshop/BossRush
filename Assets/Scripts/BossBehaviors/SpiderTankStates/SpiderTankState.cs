@@ -3,10 +3,10 @@ using System.Collections;
 
 public class SpiderTankState : MonoBehaviour
 {
-	[HideInInspector] public SpiderTank spiderTank;
-
 	public bool useWalkAnimation;
 	public GlobalStateSettingsList globalSettings;
+
+	[HideInInspector] public SpiderTank spiderTank;
 	private GlobalStateSettings[] _stateSettings;
 
 	public virtual void Awake()
@@ -39,10 +39,7 @@ public class SpiderTankState : MonoBehaviour
 			                             spiderTank.phaseSettings[spiderTank.currentPhase].mortarSettings.launchInterval );
 		}
 
-		if ( useWalkAnimation )
-		{
-			spiderTank.animator.SetTrigger( "Start Walk" );
-		}
+		spiderTank.animator.SetBool( "Walk", useWalkAnimation );
 	}
 
 	public virtual void OnDisable()
@@ -51,11 +48,6 @@ public class SpiderTankState : MonoBehaviour
 
 		CancelInvoke();
 		StopAllCoroutines();
-
-		if ( useWalkAnimation )
-		{
-			spiderTank.animator.SetTrigger( "Stop Walk" );
-		}
 	}
 
 	public Transform player
