@@ -162,6 +162,8 @@ public class BeamWeapon : Weapon
 		if ( _source != null && !audio.isPlaying )
 		{
 			audio.Play();
+			audio.volume = .4f;
+			audio.priority = 100;
 		}
 
 		_beamDuration.Update();

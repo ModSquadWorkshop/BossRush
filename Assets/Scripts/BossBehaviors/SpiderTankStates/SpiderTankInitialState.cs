@@ -77,6 +77,8 @@ public class SpiderTankInitialState : SpiderTankState
 
 		audio.clip = fallingSound;
 		audio.Play();
+		audio.volume = .9f;
+		audio.priority = 0;
 
 		Invoke( "FallEnded", fallTime );
 	}
@@ -86,6 +88,8 @@ public class SpiderTankInitialState : SpiderTankState
 		Instantiate( landingEffect, transform.position, Quaternion.identity );
 		audio.clip = landingSound;
 		audio.Play();
+		audio.volume = .8f;
+		audio.priority = 0;
 		Camera.main.GetComponentInChildren<CameraShake>().Shake( impactShake );
 		levelManager.ShowBossHealthDisplay();
 

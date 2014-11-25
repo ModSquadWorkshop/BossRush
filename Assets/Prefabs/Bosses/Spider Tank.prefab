@@ -2163,7 +2163,7 @@ MonoBehaviour:
   spawnerLauncher: {fileID: 11400068}
   shield: {fileID: 0}
   canonDelay: 0
-  canonWarning: {fileID: 0}
+  canonWarning: {fileID: 8300000, guid: 7a0bab87f3fe07e4fa99b28048a7589f, type: 3}
   defaultCanonLookSpeed: 20
   healthTriggerInterval: 1500
   healthCheckpoints:
@@ -2281,7 +2281,8 @@ MonoBehaviour:
   startingHealth: 8000
   maxHealth: 8000
   damageSounds: []
-  deathSounds: []
+  deathSounds:
+  - {fileID: 8300000, guid: a5468f1053e9ce841bd7ae3817db1a20, type: 3}
   _lives: 0
   _health: 0
 --- !u!114 &11400008
@@ -2295,7 +2296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d74c975aef0486b4dad7c3260ff55970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingTarget: 1
+  movingTarget: 0
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2544,7 +2545,7 @@ MonoBehaviour:
       useSpawner: 0
       useMortars: 1
   returnState: {fileID: 0}
-  bossDashing: {fileID: 8300000, guid: d06691583d23797469222a30c9d22e66, type: 3}
+  bossDashing: {fileID: 8300000, guid: b4b589f00199b8b46aa1489761ac0991, type: 3}
   rushStateSettings:
     phaseOneSettings:
       rushTime: .5
@@ -2639,6 +2640,7 @@ MonoBehaviour:
     phaseFourSettings:
       useSpawner: 0
       useMortars: 0
+  BossLaser: {fileID: 8300000, guid: 1cd3960218ab33c4c9eeb99c9899b748, type: 3}
   laserSpinSettings:
     phaseOneSettings:
       rotation: 1
@@ -2737,8 +2739,8 @@ MonoBehaviour:
   postFallDelay: .5
   minFallDistance: 200
   landingEffect: {fileID: 100000, guid: 7c20c65ed3f62554c8963af3d000c0b7, type: 2}
-  fallingSound: {fileID: 8300000, guid: 27294fe6a22e3034eaf05d8af11a214e, type: 3}
-  landingSound: {fileID: 8300000, guid: 0ebf751fd3acf564abc3cdf44ec3a906, type: 3}
+  fallingSound: {fileID: 8300000, guid: 4604c07bce1cb284db27b290cc6d7cc6, type: 3}
+  landingSound: {fileID: 8300000, guid: 03d08975c90f17542b4bf92324b45b74, type: 3}
   explodeMinion: {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
   numMinions: 20
   maxWaitTime: 15
@@ -2790,6 +2792,7 @@ MonoBehaviour:
       healRate: 300
     phaseFourSettings:
       healRate: 300
+  BossHeal: {fileID: 8300000, guid: 18a3c03f11fb09347b2e507506b4c078, type: 3}
 --- !u!114 &11400046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2823,6 +2826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionEffect: {fileID: 100000, guid: 0eea880a8c290a844b837323c91af4aa, type: 2}
+  explosion: {fileID: 8300000, guid: a5468f1053e9ce841bd7ae3817db1a20, type: 3}
   explosionRadius: 0
   explosionDamage: 0
 --- !u!114 &11400050
@@ -3014,6 +3018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mortar: {fileID: 100000, guid: 25f6bfc5938519c4fa99f6baaca87531, type: 2}
+  Launching: {fileID: 8300000, guid: 3f03e8340a2680343b45b47a0933ee34, type: 3}
   mortarSettings:
     targets:
     - {fileID: 0}
@@ -3047,6 +3052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mortar: {fileID: 100000, guid: 7c6689ae54474ec40ac7f53d318f064f, type: 2}
+  Launching: {fileID: 8300000, guid: 8fa3bb96573346941bf21f7b9eb27548, type: 3}
   mortarSettings:
     targets: []
     targetMarker: {fileID: 100000, guid: 1a748d5f766af9345ae5d3d8018f8c26, type: 2}
@@ -14954,6 +14960,7 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100038}
+  m_HideIfInvisible: 0
 --- !u!223 &22300000
 Canvas:
   m_ObjectHideFlags: 1
@@ -14968,7 +14975,6 @@ Canvas:
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
 --- !u!224 &22400000

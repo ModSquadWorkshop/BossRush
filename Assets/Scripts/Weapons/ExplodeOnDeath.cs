@@ -4,7 +4,7 @@ using System.Collections;
 public class ExplodeOnDeath : MonoBehaviour
 {
 	public GameObject explosionEffect;
-
+	public AudioClip explosion;
 	public float explosionRadius;
 	public float explosionDamage;
 
@@ -23,6 +23,10 @@ public class ExplodeOnDeath : MonoBehaviour
 			if ( damageSystem.IsTarget( col.tag ) )
 			{
 				DealDamage( col.gameObject );
+				audio.clip = explosion;
+				audio.Play();
+				audio.volume = .6f;
+				audio.priority = 80;
 			}
 		}
 
@@ -35,6 +39,10 @@ public class ExplodeOnDeath : MonoBehaviour
 		if ( healthSystem != null )
 		{
 			healthSystem.Damage( explosionDamage );
+			audio.clip = explosion;
+			audio.Play();
+			audio.volume = .6f;
+			audio.priority = 80;
 		}
 	}
 }

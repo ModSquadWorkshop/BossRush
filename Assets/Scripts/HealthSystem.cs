@@ -73,6 +73,8 @@ sealed public class HealthSystem : MonoBehaviour
 		if ( deathSounds.Length > 0 )
 		{
 			audio.PlayOneShot( deathSounds[Random.Range( 0, deathSounds.Length )] );
+			audio.volume = .9f;
+			audio.priority = 0;
 		}
 
 		if ( _lives <= 0 )

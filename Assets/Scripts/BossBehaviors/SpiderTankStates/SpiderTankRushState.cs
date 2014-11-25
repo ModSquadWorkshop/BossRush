@@ -35,6 +35,8 @@ public class SpiderTankRushState : SpiderTankState
 		_rushAttack.enabled = true;
 		audio.clip = bossDashing;
 		audio.Play();
+		audio.volume = .8f;
+		audio.priority = 0;
 		_damageSystem.enabled = true;
 	}
 
