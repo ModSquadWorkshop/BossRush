@@ -5,6 +5,7 @@ public class Shotgun : Gun
 {
 	public int shellsPerShot = 6;
 
+
 	public override void PerformPrimaryAttack()
 	{
 		if ( !_reloading && _magazineAmmo > 0 )
@@ -16,6 +17,8 @@ public class Shotgun : Gun
 			
 			casingEmitter.particleSystem.Emit( 1 );
 			PlayPrimarySound();
+			audio.volume = .6f;
+			audio.priority = 90;
 
 			// update ammunition data
 			if ( !infiniteAmmo )

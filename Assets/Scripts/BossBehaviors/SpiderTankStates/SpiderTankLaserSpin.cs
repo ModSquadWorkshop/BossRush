@@ -3,6 +3,7 @@ using System.Collections;
 
 public class SpiderTankLaserSpin : SpiderTankState
 {
+	public AudioClip BossLaser;
 	public LaserSpinSettingsList laserSpinSettings;
 	private LaserSpinSettings[] _settings;
 
@@ -22,6 +23,10 @@ public class SpiderTankLaserSpin : SpiderTankState
 											  laserSpinSettings.phaseTwoSettings, 
 											  laserSpinSettings.phaseThreeSettings, 
 											  laserSpinSettings.phaseFourSettings };
+		audio.clip = BossLaser;
+		audio.Play();
+		audio.volume = .7f;
+		audio.priority = 0;
 
 		Invoke( "TransitionOut", _settings[spiderTank.currentPhase].duration );
 		spiderTank.RegisterHealthTriggerCallback( HealthTriggerCallback );

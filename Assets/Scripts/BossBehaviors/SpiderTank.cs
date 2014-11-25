@@ -153,6 +153,8 @@ public class SpiderTank : MonoBehaviour
 		Invoke( "FireMainCanon", canonDelay );
 		audio.clip = canonWarning;
 		audio.Play();
+		audio.volume = .8f;
+		audio.priority = 0;
 	}
 	/**
 	 * \brief Fire the main canon.
