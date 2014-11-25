@@ -14,9 +14,7 @@ public class CameraFollow : MonoBehaviour
 	public float pullbackDistance;
 
 	private new Transform transform;
-	private Vector3 _heightMod;
 	private Vector3 _center;
-	private float height;
 	public float cameraBack;
 
 	//mouse aim shift variables
@@ -34,8 +32,6 @@ public class CameraFollow : MonoBehaviour
 	void Awake()
 	{
 		transform = GetComponent<Transform>();
-		height = 80f / padOffset;
-		_heightMod = new Vector3( 0f, 80f, 0f );
 		_center = new Vector3( Screen.width / 2, 0.0f, Screen.height / 2 );
 	}
 
@@ -50,29 +46,31 @@ public class CameraFollow : MonoBehaviour
 
 	void Update()
 	{
-		_gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ), height , Input.GetAxis( "Look Vertical" ) );
+		_gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ), 0.0f, Input.GetAxis( "Look Vertical" ) );
 		_mouseLook = new Vector3 ( Input.mousePosition.x , 0.0f, Input.mousePosition.y );
 		_dist = _mouseLook - _center;
 		_mouseDir = _dist / _dist.magnitude;
 
 		_mouseMoved = ( Input.mousePosition.x < Screen.width * lowerLimit || Input.mousePosition.x > Screen.width * upperLimit ) ||
-						   ( Input.mousePosition.y < Screen.height * lowerLimit || Input.mousePosition.y > Screen.height * upperLimit );
+		              ( Input.mousePosition.y < Screen.height * lowerLimit || Input.mousePosition.y > Screen.height * upperLimit );
 
-		_padMoved = new Vector3 ( Input.GetAxis( "Look Horizontal" ), 0.0f , 
-									  Input.GetAxis( "Look Vertical" ) ).sqrMagnitude > 0.0f;
+		_padMoved = new Vector3 ( Input.GetAxis( "Look Horizontal" ), 0.0f ,
+		                          Input.GetAxis( "Look Vertical" ) ).sqrMagnitude > 0.0f;
+
+		Vector3 lookOffset = Vector3.zero;
 
 		if ( _padMoved )
 		{
-			transform.position = Vector3.Lerp( transform.position, followTarget.position + ( _gamePadLook * padOffset ) + ( Vector3.back * cameraBack ), followSpeed * Time.deltaTime );
+			lookOffset = _gamePadLook * padOffset;
 		}
 		else if ( _mouseMoved )
 		{
-			transform.position = Vector3.Lerp( transform.position, followTarget.position + ( _mouseDir * mouseOffset ) + _heightMod + ( Vector3.back * cameraBack ), followSpeed * Time.deltaTime );
-		} 
-		else
-		{
-			transform.position = Vector3.Lerp( transform.position, followTarget.position + _heightMod + ( Vector3.back * cameraBack ) , followSpeed * Time.deltaTime );
+			lookOffset = _mouseDir * mouseOffset;
 		}
+
+		transform.position = Vector3.Lerp( transform.position,
+		                                   followTarget.position + lookOffset + ( -transform.forward * cameraBack ),
+		                                   followSpeed * Time.deltaTime );
 	}
 
 	public void PullBackFromTarget( GameObject target )
