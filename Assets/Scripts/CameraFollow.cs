@@ -4,7 +4,8 @@ using System.Collections;
 public class CameraFollow : MonoBehaviour
 {
 	public Transform followTarget;
-	public float offset;
+	public float padOffset;
+	public float mouseOffset;
 	public float followSpeed = 1.0f;
 
 	[Tooltip( "The amount of time the camera will take to pull back after the boss (or player) dies." )]
@@ -13,15 +14,25 @@ public class CameraFollow : MonoBehaviour
 	public float pullbackDistance;
 
 	private new Transform transform;
-	private Vector3 heightMod;
-	private float height;
+	private Vector3 _center;
 	public float cameraBack;
+
+	//mouse aim shift variables
+	private Vector3 _gamePadLook;
+	private Vector3 _mouseLook;
+	private Vector3 _dist;
+	private Vector3 _mouseDir;
+
+	private bool _mouseMoved;
+	private bool _padMoved;
+
+	public float lowerLimit;
+	public float upperLimit;
 
 	void Awake()
 	{
 		transform = GetComponent<Transform>();
-		height = 80f / offset;
-		heightMod = new Vector3( 0f, 80f, 0f );
+		_center = new Vector3( Screen.width / 2, 0.0f, Screen.height / 2 );
 	}
 
 	void Start()
@@ -35,19 +46,31 @@ public class CameraFollow : MonoBehaviour
 
 	void Update()
 	{
-		Vector3 gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ), height , Input.GetAxis( "Look Vertical" ) );
-		//Debug.Log( gamePadLook );
-		//Debug.Log( "OTHER" );
-		//Debug.Log( -transform.forward * offset );
+		_gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ), 0.0f, Input.GetAxis( "Look Vertical" ) );
+		_mouseLook = new Vector3 ( Input.mousePosition.x , 0.0f, Input.mousePosition.y );
+		_dist = _mouseLook - _center;
+		_mouseDir = _dist / _dist.magnitude;
 
-		if ( Input.GetAxis( "Look Horizontal" ) != 0f || Input.GetAxis( "Look Vertical" ) != 0f )
+		_mouseMoved = ( Input.mousePosition.x < Screen.width * lowerLimit || Input.mousePosition.x > Screen.width * upperLimit ) ||
+		              ( Input.mousePosition.y < Screen.height * lowerLimit || Input.mousePosition.y > Screen.height * upperLimit );
+
+		_padMoved = new Vector3 ( Input.GetAxis( "Look Horizontal" ), 0.0f ,
+		                          Input.GetAxis( "Look Vertical" ) ).sqrMagnitude > 0.0f;
+
+		Vector3 lookOffset = Vector3.zero;
+
+		if ( _padMoved )
 		{
-			transform.position = Vector3.Lerp( transform.position, followTarget.position + (gamePadLook * offset) + ( Vector3.back * cameraBack ), followSpeed * Time.deltaTime );
+			lookOffset = _gamePadLook * padOffset;
 		}
-		else
+		else if ( _mouseMoved )
 		{
-			transform.position = Vector3.Lerp( transform.position, followTarget.position + heightMod + ( Vector3.back * cameraBack ) , followSpeed * Time.deltaTime );
+			lookOffset = _mouseDir * mouseOffset;
 		}
+
+		transform.position = Vector3.Lerp( transform.position,
+		                                   followTarget.position + lookOffset + ( -transform.forward * cameraBack ),
+		                                   followSpeed * Time.deltaTime );
 	}
 
 	public void PullBackFromTarget( GameObject target )
