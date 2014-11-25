@@ -8,6 +8,8 @@ public class BossHealth : MonoBehaviour
 	public GameObject bossMesh;
 	public Image healthDisplay;
 
+	public bool alwaysShow;
+
 	private Canvas _healthbar;
 	private MeshRenderer _renderer;
 
@@ -20,7 +22,7 @@ public class BossHealth : MonoBehaviour
 
 	void Update()
 	{
-		if ( !_renderer.isVisible && boss.activeSelf )
+		if ( ( alwaysShow || !_renderer.isVisible ) && boss.activeSelf )
 		{
 			_healthbar.enabled = true;
 		}

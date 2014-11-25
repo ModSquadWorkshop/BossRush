@@ -461,6 +461,7 @@ MonoBehaviour:
   boss: {fileID: 0}
   bossMesh: {fileID: 0}
   healthDisplay: {fileID: 11400022}
+  alwaysShow: 1
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -671,7 +672,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: -200, y: 70}
+  m_SizeDelta: {x: -200, y: 50}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22400010
 RectTransform:
@@ -688,7 +689,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: -200, y: 70}
+  m_SizeDelta: {x: -200, y: 50}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22400014
 RectTransform:

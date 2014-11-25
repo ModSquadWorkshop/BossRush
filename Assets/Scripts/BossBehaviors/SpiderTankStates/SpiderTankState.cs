@@ -3,9 +3,10 @@ using System.Collections;
 
 public class SpiderTankState : MonoBehaviour
 {
-	[HideInInspector] public SpiderTank spiderTank;
-
+	public bool useWalkAnimation;
 	public GlobalStateSettingsList globalSettings;
+
+	[HideInInspector] public SpiderTank spiderTank;
 	private GlobalStateSettings[] _stateSettings;
 
 	public virtual void Awake()
@@ -37,6 +38,8 @@ public class SpiderTankState : MonoBehaviour
 			StartMortarLaunchAtInterval( spiderTank.phaseSettings[spiderTank.currentPhase].mortarSettings.amountOfMortars,
 			                             spiderTank.phaseSettings[spiderTank.currentPhase].mortarSettings.launchInterval );
 		}
+
+		spiderTank.animator.SetBool( "Walk", useWalkAnimation );
 	}
 
 	public virtual void OnDisable()
@@ -156,8 +159,9 @@ public class SpiderTankState : MonoBehaviour
 
 
 [System.Serializable]
-public class GlobalStateSettings 
+public class GlobalStateSettings
 {
+	public bool walk;
 	public bool useSpawner;
 	public bool useMortars;
 }
