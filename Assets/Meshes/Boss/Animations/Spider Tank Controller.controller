@@ -54,7 +54,7 @@ Transition:
     m_ConditionEvent: Start Walk
     m_EventTreshold: 0
     m_ExitTime: .899999976
-  m_Atomic: 1
+  m_Atomic: 0
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 0
@@ -74,7 +74,7 @@ Transition:
     m_ConditionEvent: Dash
     m_EventTreshold: 0
     m_ExitTime: .899999976
-  m_Atomic: 1
+  m_Atomic: 0
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 0
@@ -94,7 +94,7 @@ Transition:
     m_ConditionEvent: Stop Walk
     m_EventTreshold: 0
     m_ExitTime: .875
-  m_Atomic: 1
+  m_Atomic: 0
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 0
@@ -114,7 +114,7 @@ Transition:
     m_ConditionEvent: Dash
     m_EventTreshold: 0
     m_ExitTime: .833333313
-  m_Atomic: 1
+  m_Atomic: 0
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 0

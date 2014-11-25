@@ -43,10 +43,6 @@ public class SpiderTankState : MonoBehaviour
 		{
 			spiderTank.animator.SetTrigger( "Start Walk" );
 		}
-		else
-		{
-			spiderTank.animator.SetTrigger( "Stop Walk" );
-		}
 	}
 
 	public virtual void OnDisable()
@@ -55,6 +51,11 @@ public class SpiderTankState : MonoBehaviour
 
 		CancelInvoke();
 		StopAllCoroutines();
+
+		if ( useWalkAnimation )
+		{
+			spiderTank.animator.SetTrigger( "Stop Walk" );
+		}
 	}
 
 	public Transform player
