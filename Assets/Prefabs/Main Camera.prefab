@@ -120,10 +120,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followTarget: {fileID: 0}
-  offset: 80
+  offset: 10
   followSpeed: 7
   cameraPullbackTime: 2
   pullbackDistance: 150
+  cameraBack: 15
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
