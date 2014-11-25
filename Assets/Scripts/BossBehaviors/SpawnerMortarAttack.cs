@@ -23,7 +23,7 @@ public class SpawnerMortarAttack : MortarAttack
 
 	protected override IEnumerator LaunchMortar( int numMortars )
 	{
-		while ( numMortars > 0 && spiderTank.spawner.spawners.Count < spiderTank.spawner.maxSpawnPoints )
+		while ( numMortars > 0 && spiderTank.spawner.spawners.Count < spiderTank.spawner.settings.maxSpawnPoints )
 		{
 			yield return new WaitForSeconds( delayBetweenMortars );
 

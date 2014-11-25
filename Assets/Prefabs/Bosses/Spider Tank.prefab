@@ -205,7 +205,7 @@ GameObject:
   - 4: {fileID: 400020}
   - 198: {fileID: 19800008}
   - 199: {fileID: 19900008}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Muzzle Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,7 +425,7 @@ GameObject:
   - 4: {fileID: 400038}
   - 198: {fileID: 19800006}
   - 199: {fileID: 19900006}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Muzzle Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -442,7 +442,7 @@ GameObject:
   - 4: {fileID: 400044}
   - 198: {fileID: 19800002}
   - 199: {fileID: 19900002}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -459,7 +459,7 @@ GameObject:
   - 4: {fileID: 400046}
   - 198: {fileID: 19800004}
   - 199: {fileID: 19900004}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -476,7 +476,7 @@ GameObject:
   - 4: {fileID: 400048}
   - 198: {fileID: 19800016}
   - 199: {fileID: 19900016}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -493,7 +493,7 @@ GameObject:
   - 4: {fileID: 400050}
   - 198: {fileID: 19800018}
   - 199: {fileID: 19900018}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -527,7 +527,7 @@ GameObject:
   - 4: {fileID: 400054}
   - 198: {fileID: 19800014}
   - 199: {fileID: 19900014}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Muzzle Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -544,7 +544,7 @@ GameObject:
   - 4: {fileID: 400056}
   - 198: {fileID: 19800020}
   - 199: {fileID: 19900020}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -560,30 +560,13 @@ GameObject:
   m_Component:
   - 4: {fileID: 400058}
   m_Layer: 10
-  m_Name: Model
+  m_Name: Transform Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &100064
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400070}
-  - 33: {fileID: 3300008}
-  - 23: {fileID: 2300010}
-  m_Layer: 0
-  m_Name: polySurface11
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &100066
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -600,24 +583,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &100068
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400072}
-  - 33: {fileID: 3300014}
-  - 23: {fileID: 2300014}
-  m_Layer: 0
-  m_Name: polySurface10
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &100070
+--- !u!1 &100066
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -634,24 +600,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &100072
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400074}
-  - 33: {fileID: 3300018}
-  - 23: {fileID: 2300018}
-  m_Layer: 0
-  m_Name: polySurface7
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &100074
+--- !u!1 &100068
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -668,24 +617,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &100076
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400076}
-  - 33: {fileID: 3300022}
-  - 23: {fileID: 2300022}
-  m_Layer: 0
-  m_Name: polySurface6
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &100078
+--- !u!1 &100070
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -702,6 +634,74 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100072
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400068}
+  - 33: {fileID: 3300028}
+  - 23: {fileID: 2300028}
+  m_Layer: 0
+  m_Name: polySurface3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100074
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400070}
+  - 33: {fileID: 3300008}
+  - 23: {fileID: 2300010}
+  m_Layer: 0
+  m_Name: polySurface11
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100076
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400072}
+  - 33: {fileID: 3300014}
+  - 23: {fileID: 2300014}
+  m_Layer: 0
+  m_Name: polySurface10
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100078
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400074}
+  - 33: {fileID: 3300018}
+  - 23: {fileID: 2300018}
+  m_Layer: 0
+  m_Name: polySurface7
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &100080
 GameObject:
   m_ObjectHideFlags: 1
@@ -709,11 +709,11 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 400078}
-  - 33: {fileID: 3300026}
-  - 23: {fileID: 2300026}
+  - 4: {fileID: 400076}
+  - 33: {fileID: 3300022}
+  - 23: {fileID: 2300022}
   m_Layer: 0
-  m_Name: polySurface5
+  m_Name: polySurface6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -726,11 +726,11 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 400068}
-  - 33: {fileID: 3300028}
-  - 23: {fileID: 2300028}
+  - 4: {fileID: 400078}
+  - 33: {fileID: 3300026}
+  - 23: {fileID: 2300026}
   m_Layer: 0
-  m_Name: polySurface3
+  m_Name: polySurface5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -780,7 +780,7 @@ GameObject:
   - 4: {fileID: 400084}
   - 111: {fileID: 11100000}
   m_Layer: 0
-  m_Name: Spider Tank Mesh
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1181,7 +1181,7 @@ Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100066}
+  m_GameObject: {fileID: 100064}
   m_LocalRotation: {x: 0, y: 0, z: .843391418, w: .537299633}
   m_LocalPosition: {x: -3.9599998, y: .0209838897, z: 2.22044605e-16}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -1193,7 +1193,7 @@ Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100070}
+  m_GameObject: {fileID: 100066}
   m_LocalRotation: {x: 0, y: 0, z: .843391418, w: .537299633}
   m_LocalPosition: {x: -3.9599998, y: .0209838897, z: 1.20089476e-08}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -1205,7 +1205,7 @@ Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100074}
+  m_GameObject: {fileID: 100068}
   m_LocalRotation: {x: 0, y: 0, z: -.843391418, w: .537299633}
   m_LocalPosition: {x: 3.95773172, y: -.0209838897, z: .000125829189}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -1217,7 +1217,7 @@ Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100078}
+  m_GameObject: {fileID: 100070}
   m_LocalRotation: {x: 0, y: 0, z: -.843391418, w: .537299633}
   m_LocalPosition: {x: 3.9599998, y: .0209838897, z: -2.22044605e-16}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -1229,7 +1229,7 @@ Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100082}
+  m_GameObject: {fileID: 100072}
   m_LocalRotation: {x: 0, y: 0, z: -.843391418, w: .537299633}
   m_LocalPosition: {x: 3.9599998, y: .0209838897, z: -1.20089476e-08}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -1241,66 +1241,66 @@ Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100064}
+  m_GameObject: {fileID: 100074}
   m_LocalRotation: {x: .191341728, y: -.331413597, z: -.461939782, w: .800103188}
   m_LocalPosition: {x: -1.83958507, y: -.39675498, z: -2.69708037}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: .99999994}
   m_Children:
   - {fileID: 400014}
-  m_Father: {fileID: 400082}
-  m_RootOrder: 5
+  m_Father: {fileID: 400084}
+  m_RootOrder: 6
 --- !u!4 &400072
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100068}
+  m_GameObject: {fileID: 100076}
   m_LocalRotation: {x: 0, y: -0, z: -.5, w: .866025388}
   m_LocalPosition: {x: -2.0437119, y: -.39675498, z: -1.5629226}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400060}
-  m_Father: {fileID: 400082}
-  m_RootOrder: 4
+  m_Father: {fileID: 400084}
+  m_RootOrder: 5
 --- !u!4 &400074
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100072}
+  m_GameObject: {fileID: 100078}
   m_LocalRotation: {x: -.191341728, y: .331413597, z: -.461939782, w: .800103188}
   m_LocalPosition: {x: -2.0437119, y: -.39675498, z: 2.14767771e-16}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: .99999994}
   m_Children:
   - {fileID: 400062}
-  m_Father: {fileID: 400082}
-  m_RootOrder: 3
+  m_Father: {fileID: 400084}
+  m_RootOrder: 4
 --- !u!4 &400076
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100076}
+  m_GameObject: {fileID: 100080}
   m_LocalRotation: {x: .191341728, y: .331413597, z: .461939782, w: .800103188}
   m_LocalPosition: {x: 1.85285401, y: -.37539798, z: -2.6925087}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: .99999994}
   m_Children:
   - {fileID: 400064}
-  m_Father: {fileID: 400082}
-  m_RootOrder: 2
+  m_Father: {fileID: 400084}
+  m_RootOrder: 3
 --- !u!4 &400078
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100080}
+  m_GameObject: {fileID: 100082}
   m_LocalRotation: {x: 0, y: 0, z: .5, w: .866025388}
   m_LocalPosition: {x: 2.04262543, y: -.396381885, z: -1.5629226}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400066}
-  m_Father: {fileID: 400082}
-  m_RootOrder: 1
+  m_Father: {fileID: 400084}
+  m_RootOrder: 2
 --- !u!4 &400080
 Transform:
   m_ObjectHideFlags: 1
@@ -1309,27 +1309,21 @@ Transform:
   m_GameObject: {fileID: 100084}
   m_LocalRotation: {x: -.191341728, y: -.331413597, z: .461939782, w: .800103188}
   m_LocalPosition: {x: 2.04262543, y: -.396381885, z: -2.14652588e-16}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: .99999994}
   m_Children:
   - {fileID: 400068}
-  m_Father: {fileID: 400082}
-  m_RootOrder: 0
+  m_Father: {fileID: 400084}
+  m_RootOrder: 1
 --- !u!4 &400082
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100086}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: -0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 400080}
-  - {fileID: 400078}
-  - {fileID: 400076}
-  - {fileID: 400074}
-  - {fileID: 400072}
-  - {fileID: 400070}
+  m_Children: []
   m_Father: {fileID: 400084}
   m_RootOrder: 0
 --- !u!4 &400084
@@ -1339,10 +1333,16 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100088}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.62010002, z: 0}
+  m_LocalPosition: {x: 0, y: 3.68000007, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400082}
+  - {fileID: 400080}
+  - {fileID: 400078}
+  - {fileID: 400076}
+  - {fileID: 400074}
+  - {fileID: 400072}
+  - {fileID: 400070}
   m_Father: {fileID: 400058}
   m_RootOrder: 0
 --- !u!23 &2300000
@@ -1450,7 +1450,7 @@ Renderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100064}
+  m_GameObject: {fileID: 100074}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -1470,7 +1470,7 @@ Renderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100066}
+  m_GameObject: {fileID: 100064}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -1490,7 +1490,7 @@ Renderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100068}
+  m_GameObject: {fileID: 100076}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -1510,7 +1510,7 @@ Renderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100070}
+  m_GameObject: {fileID: 100066}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -1530,7 +1530,7 @@ Renderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100072}
+  m_GameObject: {fileID: 100078}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -1550,7 +1550,7 @@ Renderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100074}
+  m_GameObject: {fileID: 100068}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -1570,7 +1570,7 @@ Renderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100076}
+  m_GameObject: {fileID: 100080}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -1590,7 +1590,7 @@ Renderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100078}
+  m_GameObject: {fileID: 100070}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -1610,7 +1610,7 @@ Renderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100080}
+  m_GameObject: {fileID: 100082}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -1630,7 +1630,7 @@ Renderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100082}
+  m_GameObject: {fileID: 100072}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -1718,7 +1718,7 @@ MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100064}
+  m_GameObject: {fileID: 100074}
   m_Mesh: {fileID: 4300022, guid: ec933b24bacb90240b4fd6bd9309692a, type: 3}
 --- !u!33 &3300010
 MeshFilter:
@@ -1732,63 +1732,63 @@ MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100066}
+  m_GameObject: {fileID: 100064}
   m_Mesh: {fileID: 4300020, guid: ec933b24bacb90240b4fd6bd9309692a, type: 3}
 --- !u!33 &3300014
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100068}
+  m_GameObject: {fileID: 100076}
   m_Mesh: {fileID: 4300018, guid: ec933b24bacb90240b4fd6bd9309692a, type: 3}
 --- !u!33 &3300016
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100070}
+  m_GameObject: {fileID: 100066}
   m_Mesh: {fileID: 4300016, guid: ec933b24bacb90240b4fd6bd9309692a, type: 3}
 --- !u!33 &3300018
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100072}
+  m_GameObject: {fileID: 100078}
   m_Mesh: {fileID: 4300014, guid: ec933b24bacb90240b4fd6bd9309692a, type: 3}
 --- !u!33 &3300020
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100074}
+  m_GameObject: {fileID: 100068}
   m_Mesh: {fileID: 4300012, guid: ec933b24bacb90240b4fd6bd9309692a, type: 3}
 --- !u!33 &3300022
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100076}
+  m_GameObject: {fileID: 100080}
   m_Mesh: {fileID: 4300010, guid: ec933b24bacb90240b4fd6bd9309692a, type: 3}
 --- !u!33 &3300024
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100078}
+  m_GameObject: {fileID: 100070}
   m_Mesh: {fileID: 4300008, guid: ec933b24bacb90240b4fd6bd9309692a, type: 3}
 --- !u!33 &3300026
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100080}
+  m_GameObject: {fileID: 100082}
   m_Mesh: {fileID: 4300006, guid: ec933b24bacb90240b4fd6bd9309692a, type: 3}
 --- !u!33 &3300028
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100082}
+  m_GameObject: {fileID: 100072}
   m_Mesh: {fileID: 4300004, guid: ec933b24bacb90240b4fd6bd9309692a, type: 3}
 --- !u!33 &3300030
 MeshFilter:
@@ -1957,7 +1957,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: .75
+  m_Volume: .400000006
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2015,7 +2015,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: .75
+  m_Volume: .400000006
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2135,7 +2135,7 @@ Animation:
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
-  m_CullingType: 1
+  m_CullingType: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2173,6 +2173,43 @@ MonoBehaviour:
     - 50
     - 25
     currentPhase: 0
+  phaseSettings:
+  - spawnerSettings:
+      baseAmountPerWave: 0
+      amountPerSpawner: 1
+      waveInterval: 2
+      maxSpawnPoints: 5
+      maxSpawned: 7
+    mortarSettings:
+      amountOfMortars: 5
+      launchInterval: 3
+  - spawnerSettings:
+      baseAmountPerWave: 0
+      amountPerSpawner: 2
+      waveInterval: 2
+      maxSpawnPoints: 6
+      maxSpawned: 10
+    mortarSettings:
+      amountOfMortars: 10
+      launchInterval: 3
+  - spawnerSettings:
+      baseAmountPerWave: 0
+      amountPerSpawner: 3
+      waveInterval: 2
+      maxSpawnPoints: 7
+      maxSpawned: 15
+    mortarSettings:
+      amountOfMortars: 15
+      launchInterval: 3
+  - spawnerSettings:
+      baseAmountPerWave: 0
+      amountPerSpawner: 4
+      waveInterval: 2
+      maxSpawnPoints: 10
+      maxSpawned: 30
+    mortarSettings:
+      amountOfMortars: 25
+      launchInterval: 2
   basicState: {fileID: 0}
   fleeState: {fileID: 0}
   healState: {fileID: 0}
@@ -2370,47 +2407,15 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseFourSettings:
       useSpawner: 1
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 5
-        amountPerSpawner: 5
-        waveInterval: 5
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 10
-        launchInterval: .150000006
   basicStateSettings:
     phaseOneSettings:
       turretSpeed: 2
@@ -2461,47 +2466,15 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 1
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 1
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 1
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseFourSettings:
       useSpawner: 1
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 10
-        launchInterval: .150000006
   turboStateSettings:
     phaseOneSettings:
       turretSpeed: 2
@@ -2561,47 +2534,15 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 5
-        launchInterval: .5
     phaseFourSettings:
       useSpawner: 0
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 10
-        launchInterval: .150000006
   returnState: {fileID: 0}
   bossDashing: {fileID: 8300000, guid: d06691583d23797469222a30c9d22e66, type: 3}
   rushStateSettings:
@@ -2651,7 +2592,11 @@ MonoBehaviour:
   damageInterval: .100000001
   duration: 0
   impactParticles: {fileID: 400044}
-  layersToIgnore: []
+  layersToIgnore:
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &11400032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2685,47 +2630,15 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseFourSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
   laserSpinSettings:
     phaseOneSettings:
       rotation: 1
@@ -2768,47 +2681,15 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseFourSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
   fleeStateSettings:
     phaseOneSettings:
       mainCanonCooldown: 3
@@ -2839,56 +2720,25 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseFourSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
   levelManager: {fileID: 0}
   fallPointsRoot: {fileID: 0}
   preFallDelay: 1
   fallTime: 1
+  impactShake: 0
   postFallDelay: .5
   minFallDistance: 200
   landingEffect: {fileID: 100000, guid: 7c20c65ed3f62554c8963af3d000c0b7, type: 2}
   fallingSound: {fileID: 8300000, guid: 27294fe6a22e3034eaf05d8af11a214e, type: 3}
-  landingSound: {fileID: 8300000, guid: 64e8c164e8c3ec0429d65de6766e4ffc, type: 3}
+  landingSound: {fileID: 8300000, guid: 0ebf751fd3acf564abc3cdf44ec3a906, type: 3}
   explodeMinion: {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
   numMinions: 20
   maxWaitTime: 15
@@ -2922,47 +2772,15 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 1
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 20
-        launchInterval: 2
     phaseTwoSettings:
       useSpawner: 1
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 20
-        launchInterval: 2
     phaseThreeSettings:
       useSpawner: 1
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 20
-        launchInterval: 2
     phaseFourSettings:
       useSpawner: 1
       useMortars: 1
-      spawnerSettings:
-        baseAmountPerWave: 10
-        amountPerSpawner: 20
-        waveInterval: 5
-        spawnOnStart: 1
-      mortarSettings:
-        amountOfMortars: 20
-        launchInterval: 2
   healStateSettings:
     phaseOneSettings:
       healRate: 300
@@ -2983,16 +2801,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23eef0c7e1c23864eb720e3d5817a2f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultSettings:
-    baseAmountPerWave: 2
-    amountPerSpawner: 1
-    waveInterval: 2
-    spawnOnStart: 0
+  settings:
+    baseAmountPerWave: 0
+    amountPerSpawner: 0
+    waveInterval: 0
+    maxSpawnPoints: 0
+    maxSpawned: 0
   enemyTypes:
   - {fileID: 100000, guid: 62b45b03efc005c4aa2a789d5e5d5810, type: 2}
   spawners: []
-  maxSpawnPoints: 5
-  maxSpawned: 20
   delayBetweenNewEnemy: .200000003
 --- !u!114 &11400048
 MonoBehaviour:
@@ -3043,7 +2860,11 @@ MonoBehaviour:
   damageInterval: .100000001
   duration: 0
   impactParticles: {fileID: 400046}
-  layersToIgnore: []
+  layersToIgnore:
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &11400054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3062,7 +2883,11 @@ MonoBehaviour:
   damageInterval: .100000001
   duration: 0
   impactParticles: {fileID: 400048}
-  layersToIgnore: []
+  layersToIgnore:
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &11400056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3115,7 +2940,11 @@ MonoBehaviour:
   damageInterval: .100000001
   duration: 0
   impactParticles: {fileID: 400050}
-  layersToIgnore: []
+  layersToIgnore:
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &11400062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3134,7 +2963,11 @@ MonoBehaviour:
   damageInterval: .100000001
   duration: 0
   impactParticles: {fileID: 400056}
-  layersToIgnore: []
+  layersToIgnore:
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &11400064
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3237,7 +3070,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mat: {fileID: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Sprite: {fileID: 21300000, guid: 2f6e32b3a6c9c8b46b548e66058edca0, type: 3}
   m_Type: 3
@@ -3275,47 +3108,15 @@ MonoBehaviour:
     phaseOneSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseTwoSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseThreeSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
     phaseFourSettings:
       useSpawner: 0
       useMortars: 0
-      spawnerSettings:
-        baseAmountPerWave: 0
-        amountPerSpawner: 0
-        waveInterval: 0
-        spawnOnStart: 0
-      mortarSettings:
-        amountOfMortars: 0
-        launchInterval: 0
   returnState: {fileID: 0}
   burrowStateSettings:
     phaseOneSettings:
@@ -15166,6 +14967,8 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
 --- !u!224 &22400000

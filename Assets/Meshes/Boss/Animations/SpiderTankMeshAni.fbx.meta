@@ -17,6 +17,10 @@ ModelImporter:
     100022: polySurface8
     100024: polySurface9
     100026: //RootNode
+    100028: polySurface13 1
+    100030: SpiderBody1
+    100032: transform1
+    100034: transform2
     400000: polySurface1
     400002: polySurface10
     400004: polySurface11
@@ -31,6 +35,10 @@ ModelImporter:
     400022: polySurface8
     400024: polySurface9
     400026: //RootNode
+    400028: polySurface13 1
+    400030: SpiderBody1
+    400032: transform1
+    400034: transform2
     2300000: polySurface1
     2300002: polySurface10
     2300004: polySurface11
@@ -71,6 +79,7 @@ ModelImporter:
     4300022: polySurface11
     4300024: polySurface12
     7400000: Take 001
+    7400002: Take 002
     9500000: //RootNode
     11100000: //RootNode
   materials:
@@ -143,6 +152,62 @@ ModelImporter:
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Take 002
+      takeName: Take 001
+      firstFrame: 50
+      lastFrame: 86
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: polySurface1
+        weight: 1
+      - path: polySurface2
+        weight: 1
+      - path: polySurface2/polySurface3
+        weight: 1
+      - path: polySurface5
+        weight: 1
+      - path: polySurface5/polySurface4
+        weight: 1
+      - path: polySurface6
+        weight: 1
+      - path: polySurface6/polySurface13
+        weight: 1
+      - path: polySurface7
+        weight: 1
+      - path: polySurface7/polySurface8
+        weight: 1
+      - path: polySurface10
+        weight: 1
+      - path: polySurface10/polySurface9
+        weight: 1
+      - path: polySurface11
+        weight: 1
+      - path: polySurface11/polySurface12
+        weight: 1
+      - path: SpiderBody1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -151,7 +216,7 @@ ModelImporter:
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     weldVertices: 1

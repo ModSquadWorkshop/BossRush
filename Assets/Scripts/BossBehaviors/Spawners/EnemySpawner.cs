@@ -6,24 +6,20 @@ public class EnemySpawner : MonoBehaviour
 {
 	public delegate void EnemyCountChange( int count );
 
-	public SpawnerSettings defaultSettings;
+	public SpawnerSettings settings;
 
 	public GameObject[] enemyTypes;
 	public List<GameObject> spawners;
-	public int maxSpawnPoints;
-	public int maxSpawned;
 
 	public float delayBetweenNewEnemy;
 
 	private bool _spawning; //!< Used to tell the coroutine to stop spawning.
 	private int _enemyCount; //!< A counter of the number of live minions in the world.
 
-	private SpawnerSettings _settings;
 	private EnemyCountChange _enemyCountCallback = delegate( int count ) { }; //!< Callback used to notify listeners when the live enemy count changes.
 
 	void Awake()
 	{
-		_settings = defaultSettings;
 		_spawning = false;
 		_enemyCount = 0;
 
@@ -31,16 +27,11 @@ public class EnemySpawner : MonoBehaviour
 		{
 			spawner.GetComponent<DeathSystem>().RegisterDeathCallback( SpawnerDeathCallback );
 		}
-
-		SpawnerMortarAttack spawnerLauncher = GetComponentInChildren<SpawnerMortarAttack>();
 	}
 
 	void OnEnable()
 	{
-		if ( _settings.spawnOnStart )
-		{
-			StartCoroutine( StartSpawning() );
-		}
+		StartCoroutine( StartSpawning() );
 	}
 
 	public IEnumerator StartSpawning()
@@ -50,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
 		while ( _spawning )
 		{
 			Spawn();
-			yield return new WaitForSeconds( _settings.waveInterval );
+			yield return new WaitForSeconds( settings.waveInterval );
 		}
 	}
 
@@ -64,7 +55,7 @@ public class EnemySpawner : MonoBehaviour
 	 */
 	public void Spawn()
 	{
-		Spawn( _settings.baseAmountPerWave + ( _settings.amountPerSpawner * spawners.Count ) );
+		Spawn( settings.baseAmountPerWave + ( settings.amountPerSpawner * spawners.Count ) );
 	}
 
 	/**
@@ -76,13 +67,13 @@ public class EnemySpawner : MonoBehaviour
 	 */
 	public void Spawn( int amount, GameObject enemyType = null )
 	{
-		amount = Mathf.Min( amount, maxSpawned - _enemyCount );
+		amount = Mathf.Min( amount, settings.maxSpawned - _enemyCount );
 		StartCoroutine( SpawnCoroutine( amount, enemyType ) );
 	}
 
 	private IEnumerator SpawnCoroutine( int amount, GameObject enemyType = null )
 	{
-		while ( amount > 0 && spawners.Count > 0 )
+		while ( amount > 0 && spawners.Count > 0 && _enemyCount < settings.maxSpawned )
 		{
 			InitializeEnemyComponents( Instantiate( enemyType ?? enemyTypes[Random.Range( 0, enemyTypes.Length )] ) as GameObject );
 			amount--;
@@ -134,16 +125,6 @@ public class EnemySpawner : MonoBehaviour
 				agent.enabled = true;
 			}
 		}
-	}
-
-	public void ApplySettings( SpawnerSettings settings )
-	{
-		_settings = settings;
-	}
-
-	public void ResetSettings()
-	{
-		_settings = defaultSettings;
 	}
 
 	public void RegisterEnemyCountCallback( EnemyCountChange callback )
@@ -238,5 +219,7 @@ public class SpawnerSettings
 	public int baseAmountPerWave;
 	public int amountPerSpawner;
 	public float waveInterval;
-	public bool spawnOnStart;
+
+	public int maxSpawnPoints;
+	public int maxSpawned;
 }

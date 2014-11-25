@@ -13,9 +13,9 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 82: {fileID: 8200000}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Mortar
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ GameObject:
   - 4: {fileID: 400002}
   - 23: {fileID: 2300000}
   - 33: {fileID: 3300000}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +172,6 @@ MonoBehaviour:
   explosionEffect: {fileID: 100000, guid: f50fcebfdae35044683c14337e5c36e8, type: 2}
   explosionRadius: 10
   explosionDamage: 15
-  explosionForce: 750
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
