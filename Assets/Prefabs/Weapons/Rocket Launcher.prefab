@@ -239,7 +239,7 @@ MonoBehaviour:
   casingEmitter: {fileID: 19800000}
   muzzleFlash: {fileID: 19800002}
   infiniteAmmo: 0
-  ammoPerMagazine: 10
+  ammoPerMagazine: 5
   amountOfMagazines: 0
   reloadSpeed: 0
   sprayAngle: 5
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 500
+  baseDamage: 250
   damageMultiplier: 1
   destroyAfterDamage: 1
   targets:
