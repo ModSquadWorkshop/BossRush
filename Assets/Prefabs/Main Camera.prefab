@@ -126,6 +126,8 @@ MonoBehaviour:
   cameraPullbackTime: 2
   pullbackDistance: 150
   cameraBack: 15
+  lowerLimit: .25
+  upperLimit: .75
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -19,6 +19,18 @@ public class CameraFollow : MonoBehaviour
 	private float height;
 	public float cameraBack;
 
+	//mouse aim shift variables
+	private Vector3 _gamePadLook;
+	private Vector3 _mouseLook;
+	private Vector3 _dist;
+	private Vector3 _mouseDir;
+
+	private bool _mouseMoved;
+	private bool _padMoved;
+
+	public float lowerLimit;
+	public float upperLimit;
+
 	void Awake()
 	{
 		transform = GetComponent<Transform>();
@@ -38,30 +50,25 @@ public class CameraFollow : MonoBehaviour
 
 	void Update()
 	{
-		Vector3 gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ), height , Input.GetAxis( "Look Vertical" ) );
-		
-		Vector3 mouseLook = new Vector3 ( Input.mousePosition.x , 0.0f, Input.mousePosition.y );
+		_gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ), height , Input.GetAxis( "Look Vertical" ) );
+		_mouseLook = new Vector3 ( Input.mousePosition.x , 0.0f, Input.mousePosition.y );
+		_dist = _mouseLook - _center;
+		_mouseDir = _dist / _dist.magnitude;
 
-		Vector3 dist = mouseLook - _center;
+		_mouseMoved = ( Input.mousePosition.x < Screen.width * lowerLimit || Input.mousePosition.x > Screen.width * upperLimit ) ||
+						   ( Input.mousePosition.y < Screen.height * lowerLimit || Input.mousePosition.y > Screen.height * upperLimit );
 
-		Vector3 mouseDir = dist / dist.magnitude;
-
-		bool mouseMoved = Input.mousePosition.x != Screen.width/2 || Input.mousePosition.y != Screen.height / 2;
-
-		bool padMoved = new Vector3 ( Input.GetAxis( "Look Horizontal" ), 0.0f , 
+		_padMoved = new Vector3 ( Input.GetAxis( "Look Horizontal" ), 0.0f , 
 									  Input.GetAxis( "Look Vertical" ) ).sqrMagnitude > 0.0f;
-		//Debug.Log( gamePadLook );
-		//Debug.Log( "OTHER" );
-		//Debug.Log( -transform.forward * offset );
-		
-		if ( padMoved )
+
+		if ( _padMoved )
 		{
-			transform.position = Vector3.Lerp( transform.position, followTarget.position + (gamePadLook * padOffset) + ( Vector3.back * cameraBack ), followSpeed * Time.deltaTime );
+			transform.position = Vector3.Lerp( transform.position, followTarget.position + ( _gamePadLook * padOffset ) + ( Vector3.back * cameraBack ), followSpeed * Time.deltaTime );
 		}
-		else if ( mouseMoved )
+		else if ( _mouseMoved )
 		{
-			transform.position = Vector3.Lerp( transform.position, followTarget.position + (mouseDir * mouseOffset) + _heightMod + (Vector3.back * cameraBack), followSpeed * Time.deltaTime );
-		}
+			transform.position = Vector3.Lerp( transform.position, followTarget.position + ( _mouseDir * mouseOffset ) + _heightMod + ( Vector3.back * cameraBack ), followSpeed * Time.deltaTime );
+		} 
 		else
 		{
 			transform.position = Vector3.Lerp( transform.position, followTarget.position + _heightMod + ( Vector3.back * cameraBack ) , followSpeed * Time.deltaTime );
