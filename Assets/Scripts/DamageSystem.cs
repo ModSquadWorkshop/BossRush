@@ -6,9 +6,13 @@ sealed public class DamageSystem : MonoBehaviour
 {
 	public float baseDamage = 0.0f;
 	public float damageMultiplier = 1.0f;
+	[Tooltip( "If marked the damage will be multiplied by frame time, meaning the damage amount will be damage-per-second." )]
+	public bool damageOverTime;
+	[Tooltip( "If marked the object will destroy itself after dealing damage. This is useful for bullet, bombs, and other one-time use weapons." )]
 	public bool destroyAfterDamage = false;
-
+	[Tooltip( "A list of the tags that mark a valid target." )]
 	public List<string> targets;
+
 	private Hashtable _targets;
 
 	void Awake()
@@ -65,10 +69,14 @@ sealed public class DamageSystem : MonoBehaviour
 
 	public float CalculateDamage()
 	{
-		// as of now, damage is calculated as baseDamage * damageMultiplier
-		// in the future, more complex damage calculations can be added
-		// miss percentages, crit percentages, and other percentages can be included in the calculation, for example
-		return baseDamage * damageMultiplier;
+		if ( damageOverTime )
+		{
+			return baseDamage * damageMultiplier * Time.deltaTime;
+		}
+		else
+		{
+			return baseDamage * damageMultiplier;
+		}
 	}
 
 	public void Inherit( DamageSystem other )

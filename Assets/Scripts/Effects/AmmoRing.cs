@@ -31,16 +31,16 @@ public class AmmoRing : MonoBehaviour
 		if ( _isGun )
 		{
 			_specialGun = _playerWeapons.weapons[WeaponSystem.SPECIAL_WEAPON_SLOT].GetComponent<Gun>();
-			_initialAmmo = _specialGun.GetTotalAmmo();
+			_initialAmmo = _specialGun.ammo;
 
-			UpdateGunAmmoBar( _specialGun.GetTotalAmmo() );
+			UpdateGunAmmoBar( _specialGun.ammo );
 		}
 		else
 		{
 			_specialBeam = _playerWeapons.weapons[WeaponSystem.SPECIAL_WEAPON_SLOT].GetComponent<BeamWeapon>();
 			_initialTime = _specialBeam.duration;
 
-			UpdateBeamAmmoBar( _specialBeam.RunTime() );
+			UpdateBeamAmmoBar( _initialTime );
 		}
 	}
 
@@ -53,11 +53,11 @@ public class AmmoRing : MonoBehaviour
 
 		if ( _isGun )
 		{
-			UpdateGunAmmoBar( _specialGun.GetTotalAmmo() );
+			UpdateGunAmmoBar( _specialGun.ammo );
 		}
 		else
 		{
-			UpdateBeamAmmoBar( _specialBeam.RunTime() );
+			UpdateBeamAmmoBar( _specialBeam.timeRemaining );
 		}
 	}
 
@@ -69,18 +69,18 @@ public class AmmoRing : MonoBehaviour
 		if ( remainingAmmo == 0 )
 		{
 			indicatorImage.fillAmount = 0;
-			this.gameObject.SetActive( false );
+			gameObject.SetActive( false );
 		}
 	}
 
 	public void UpdateBeamAmmoBar( float runtime )
 	{
-		indicatorImage.fillAmount = ( _initialTime - runtime ) / _initialTime;
+		indicatorImage.fillAmount = runtime / _initialTime;
 
-		if ( _initialTime - runtime <= 0 )
+		if ( runtime <= 0 )
 		{
 			indicatorImage.fillAmount = 0;
-			this.gameObject.SetActive( false );
+			gameObject.SetActive( false );
 		}
 	}
 }

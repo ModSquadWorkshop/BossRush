@@ -28,7 +28,8 @@ public class PerkData
 	public float reloadMod;
 	public int magazinesMod;
 	public GameObject gunDrop;
-	public float duration; //!< How long the perk lasts, if it has a duration.
+	[Tooltip( "How long the perk's effects last before they are removed." )]
+	public float duration;
 }
 
 public class Perk : MonoBehaviour

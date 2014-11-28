@@ -156,8 +156,8 @@ AudioSource:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 9cd82d14829e3fa4cb03d283e6803685, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -233,15 +233,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: .0500000007
-  primaryAttackSounds:
-  - {fileID: 8300000, guid: 9cd82d14829e3fa4cb03d283e6803685, type: 3}
   projectile: {fileID: 100000, guid: 29e3809d3eae60d499db32210dbbcd56, type: 2}
   casingEmitter: {fileID: 19800002}
   muzzleFlash: {fileID: 19800000}
   infiniteAmmo: 1
-  ammoPerMagazine: 30
-  amountOfMagazines: 5
-  reloadSpeed: 1.5
+  startingAmmo: 0
   sprayAngle: 10
   circleSpray: 0
 --- !u!114 &11400002
@@ -257,6 +253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseDamage: 35
   damageMultiplier: 1
+  damageOverTime: 0
   destroyAfterDamage: 0
   targets:
   - Scenery

@@ -5,7 +5,6 @@ public class Weapon : MonoBehaviour
 {
 	public float cooldown;
 
-	public AudioClip[] primaryAttackSounds;
 	private bool _cooling;
 
 	public virtual void PerformPrimaryAttack() { }
@@ -14,32 +13,9 @@ public class Weapon : MonoBehaviour
 
 	public void PlayPrimarySound()
 	{
-		if ( primaryAttackSounds.Length > 0 && GetComponent<AudioSource>() != null )
-		{
-			audio.clip = primaryAttackSounds[Random.Range( 0, primaryAttackSounds.Length )];
-			audio.Play();
-		}
-	}
-	/*
-	public void PlayLoopingSound()
-	{
-		if ( primaryAttackSounds.Length > 0 && GetComponent<AudioSource>() != null && !audio.isPlaying )
-		{
-			audio.clip = primaryAttackSounds[Random.Range( 0, primaryAttackSounds.Length )];
-			audio.loop = true;
-			audio.volume = 2;
-			audio.Play();
-		}
+		audio.Play();
 	}
 
-	public void StopSound()
-	{
-		if ( GetComponent<AudioSource>() != null && audio.isPlaying )
-		{
-			audio.Stop();
-		}
-	}
-	*/
 	public void StartCooldown()
 	{
 		_cooling = true;

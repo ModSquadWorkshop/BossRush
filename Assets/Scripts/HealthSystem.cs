@@ -7,18 +7,14 @@ sealed public class HealthSystem : MonoBehaviour
 	public delegate void HealthCallback( HealthSystem self, float change );
 
 	public bool immune;
-	public bool destroyOnNoLives;
-
-	public int startingLives;
-	public int maxLives;
+	public bool destroyOnDeath;
 
 	public float startingHealth;
 	public float maxHealth;
 
 	public AudioClip[] damageSounds;
 
-	[SerializeField] private int _lives;
-	[SerializeField] private float _health;
+	private float _health;
 
 	private HealthCallback _healthCallback = delegate( HealthSystem self, float change ) { };
 
@@ -67,18 +63,13 @@ sealed public class HealthSystem : MonoBehaviour
 
 	public void Kill()
 	{
-		_lives--;
-
-		if ( _lives <= 0 )
+		if ( destroyOnDeath )
 		{
-			if ( destroyOnNoLives )
-			{
-				GetComponent<DeathSystem>().Kill();
-			}
-			else
-			{
-				GetComponent<DeathSystem>().NotifyDeath();
-			}
+			GetComponent<DeathSystem>().Kill();
+		}
+		else
+		{
+			GetComponent<DeathSystem>().NotifyDeath();
 		}
 	}
 
@@ -88,27 +79,13 @@ sealed public class HealthSystem : MonoBehaviour
 	public void Reset()
 	{
 		health = startingHealth;
-		lives = startingLives;
 	}
 
 	public bool alive
 	{
 		get
 		{
-			return _health > 0.0f && _lives > 0;
-		}
-	}
-
-	public int lives
-	{
-		get
-		{
-			return _lives;
-		}
-
-		set
-		{
-			_lives = Mathf.Clamp( value, 0, maxLives );
+			return _health > 0.0f;
 		}
 	}
 

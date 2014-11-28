@@ -3,71 +3,58 @@ using System.Collections;
 
 public class Gun : Weapon
 {
+	[Tooltip( "The prefab for the bullet this gun will fire." )]
 	public GameObject projectile;
-
+	[Tooltip( "The prefab for the particle system that will be used to emit the shell casing for the gun." )]
 	public ParticleSystem casingEmitter;
+	[Tooltip( "The prefab for the particle system that will create the muzzle flash for this gun." )]
 	public ParticleSystem muzzleFlash;
 
+	[Tooltip( "If marked, the weapon will not track ammo usage and will always fire." )]
 	public bool infiniteAmmo;
-	public int ammoPerMagazine;
-	public int amountOfMagazines;
-	public float reloadSpeed;
+	[Tooltip( "The ammount of ammunition this weapon starts with. This number is the number of rounds that can be fired." )]
+	public int startingAmmo;
 
-	[Range( 0.0f, 180.0f )]
+	[Range( 0.0f, 180.0f ), Tooltip( "The angle of the gun's bullet spray." )]
 	public float sprayAngle;
+	[Tooltip( "If not marked, the spray will only go side-to-side, not up-and-down, so for the player the bullet spray won't cause them to shoot into the ground." )]
 	public bool circleSpray;
 
 	protected float _halfSpray;
-
-	protected int _magazines;
-	protected int _magazineAmmo;
-
-	protected bool _reloading;
+	protected int _ammo;
 
 	void Awake()
 	{
 		projectile.CreatePool( 100 );
 
 		// initialize ammunition and reloading
-		_magazines = amountOfMagazines;
-		_magazineAmmo = ammoPerMagazine; 
-		_magazineAmmo = ( infiniteAmmo ) ? Mathf.Max( _magazineAmmo, 1 ) : _magazineAmmo; // this line just insures you have atleast 1 ammo available
-		_reloading = false;
+		ammo = startingAmmo;
 
 		_halfSpray = 0.5f * sprayAngle;
 	}
 
 	public void RefreshAmmo()
 	{
-		_magazines = amountOfMagazines;
-		_magazineAmmo = ammoPerMagazine;
-		_magazineAmmo = ( infiniteAmmo ) ? Mathf.Max( _magazineAmmo, 1 ) : _magazineAmmo; // this line just insures you have atleast 1 ammo available
-		_reloading = false;
+		ammo = startingAmmo;
 	}
 
 	public override void PerformPrimaryAttack()
 	{
-		if ( !_reloading && _magazineAmmo > 0 )
+		if ( !isOutOfAmmo || infiniteAmmo )
 		{
 			// instantiate and initialize a bullet
 			InitializeBullet( projectile.Spawn() );
 			PlayPrimarySound();
-			audio.volume = .3f;
-			audio.priority = 120;
 
 			// update ammunition data
 			if ( !infiniteAmmo )
 			{
-				_magazineAmmo--;
-				if ( _magazineAmmo <= 0 )
-				{
-					Reload();
-				}
+				_ammo--;
 			}
 
 			// create shell casing
-			//casingEmitter.Emit( 1 );
-			//muzzleFlash.Emit( 10 );
+			casingEmitter.Emit( 1 );
+			muzzleFlash.Emit( 10 );
 
 			StartCooldown();
 		}
@@ -113,43 +100,24 @@ public class Gun : Weapon
 		bullet.rigidbody.velocity = bullet.transform.forward * projectile.speed;
 	}
 
-	public void Reload()
-	{
-		// if already reloading, don't reload again
-		// and, reloading is only possible if another ammo clip is available
-		if ( !_reloading && _magazines > 0 )
-		{
-			// start reloading
-			_reloading = true;
-			Invoke( "ReloadComplete", reloadSpeed );
-		}
-	}
-
-	private void ReloadComplete()
-	{
-		// stop reloading
-		_reloading = false;
-
-		// update ammo
-		_magazines--;
-		_magazineAmmo = ammoPerMagazine;
-	}
-
-	public bool IsOutOfAmmo()
-	{
-		return GetTotalAmmo() == 0;
-	}
-
-	public int GetTotalAmmo()
-	{
-		return ( _magazines * ammoPerMagazine ) + _magazineAmmo;
-	}
-
-	public bool reloading
+	public bool isOutOfAmmo
 	{
 		get
 		{
-			return _reloading;
+			return ammo == 0;
+		}
+	}
+
+	public int ammo
+	{
+		get
+		{
+			return _ammo;
+		}
+
+		set
+		{
+			_ammo = ( infiniteAmmo ) ? Mathf.Max( _ammo, 1 ) : value; // this ensures there's at least 1 round available
 		}
 	}
 }

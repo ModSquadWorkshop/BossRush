@@ -8,7 +8,7 @@ public class Shotgun : Gun
 
 	public override void PerformPrimaryAttack()
 	{
-		if ( !_reloading && _magazineAmmo > 0 )
+		if ( _ammo > 0 )
 		{
 			for ( int i = 0; i < shellsPerShot; i++ )
 			{
@@ -23,12 +23,7 @@ public class Shotgun : Gun
 			// update ammunition data
 			if ( !infiniteAmmo )
 			{
-				_magazineAmmo--;
-
-				if ( _magazineAmmo <= 0 )
-				{
-					Reload();
-				}
+				_ammo--;
 			}
 
 			StartCooldown();

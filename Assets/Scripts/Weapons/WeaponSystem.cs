@@ -4,34 +4,31 @@ using System.Collections.Generic;
 
 public class WeaponSystem : MonoBehaviour
 {
+	public const float JOYSTICK_THRESHOLD = 0.75f;
+	public const int SPECIAL_WEAPON_SLOT = 1;
+
 	public List<GameObject> weapons;
 	public PerkData perk;
 	private PerkSystem _perkSystem;
-	public int defaultWeaponID = 0;
-	public KeyCode switchWeaponKeybind;
 
-	public Transform weaponAnchor; //< The location where the player's weapon should float.
+	[Tooltip( "The location where the player's weapons should appear." )]
+	public Transform weaponAnchor;
+	public GameObject ammoRing;
 
-	private int _currentWeaponID;
+	private int _currentWeaponIndex;
 	private Weapon _currentWeapon;
 	private Weapon _defaultWeapon;
 	private Gun _specialGun;
-	public GameObject _AmmoRing;
 	private BeamWeapon _specialBeam;
 
-	private float _rateMod;
+	private float _fireRateMod;
 	private float _damageMod;
-	private float _reloadMod;
-
-	public const float JOYSTICK_THRESHOLD = 0.75f;
-	public const int SPECIAL_WEAPON_SLOT = 1;
 
 	void Start()
 	{
 		/*
 		// initialize the weapons
 		*/
-
 		for ( int i = 0; i < weapons.Count; ++i )
 		{
 			// re-assigning the GameObject is import because Instantiate() creates a clone
@@ -47,8 +44,7 @@ public class WeaponSystem : MonoBehaviour
 		/*
 		// set the default weapon
 		*/
-
-		_defaultWeapon = GetWeapon( defaultWeaponID );
+		_defaultWeapon = GetWeapon( 0 );
 
 		// we must insure the deafult weapon is not null
 		// if it is, we create a blank weapon to prevent future errors
@@ -65,39 +61,27 @@ public class WeaponSystem : MonoBehaviour
 		// set the current weapon
 		*/
 
-		SwitchWeapon( defaultWeaponID );
+		SwitchWeapon( 0 );
 
 		_perkSystem = GetComponent<PerkSystem>();
 
-		_rateMod = 0.0f;
+		_fireRateMod = 0.0f;
 		_damageMod = 0.0f;
-		_reloadMod = 0.0f; 
 	}
 
 	void Update()
 	{
-		/*
-		if ( Input.GetButtonDown( "Switch" ) )
-		{
-			NextWeapon();
-		}
-		 * */
-
-		/*
-		// primary weapon attack
-		*/
-
 		Vector3 gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ), 0.0f, Input.GetAxis( "Look Vertical" ) );
 		if ( Input.GetButton( "Fire1" ) || gamePadLook.sqrMagnitude > JOYSTICK_THRESHOLD )
 		{
 			// if the weapon is still on cooldown, it cannot perform an attack
-			if ( _currentWeaponID == SPECIAL_WEAPON_SLOT )
+			if ( _currentWeaponIndex == SPECIAL_WEAPON_SLOT )
 			{
-				if ( DetermineSpecialType() && _specialGun.IsOutOfAmmo() )
+				if ( DetermineSpecialType() && _specialGun.isOutOfAmmo )
 				{
 					RemoveSpecialWeapon();
 				}
-				else if ( !DetermineSpecialType() && _specialBeam.IsDone() )
+				else if ( !DetermineSpecialType() && _specialBeam.isDone )
 				{
 					RemoveSpecialWeapon();
 				}
@@ -107,22 +91,6 @@ public class WeaponSystem : MonoBehaviour
 				_currentWeapon.PerformPrimaryAttack();
 			}
 		}
-
-
-		/*
-		// secondary weapon attack
-		*/
-
-		/*
-		if ( Input.GetButton( "Fire2" ) )
-		{
-			// if the weapon is still on cooldown, it cannot perform an attack
-			if ( !_currentWeapon.isOnCooldown )
-			{
-				_currentWeapon.PerformSecondaryAttack();
-			}
-		}
-		 * */
 	}
 
 	private Weapon InitializeWeapon( Weapon weapon )
@@ -136,26 +104,23 @@ public class WeaponSystem : MonoBehaviour
 		return weapon;
 	}
 
-	public void SwitchWeapon( int weaponID )
+	/**
+	 * \brief Switches the active weapon to the specified one.
+	 *
+	 * \note No checking is done that \a weaponIndex is a valid value, so an exception will be thrown if it is not.
+	 */
+	public void SwitchWeapon( int weaponIndex )
 	{
 		// deactivate the previous weapon
-		if ( _currentWeapon != null )
+		if ( _currentWeapon != null ) // TODO: Is there ever a case where _currentWeapon is null? I would think not.
 		{
 			_currentWeapon.enabled = false;
 			_currentWeapon.gameObject.SetActive( false );
 		}
 
 		// equip the new weapon
-		_currentWeapon = GetWeapon( weaponID );
-		_currentWeaponID = weaponID;
-
-		// if an invalid weaponID is passed,
-		// the currentWeapon will be set to the deaultWeapon to prevent errors
-		if ( _currentWeapon == null )
-		{
-			_currentWeapon = _defaultWeapon;
-			_currentWeaponID = defaultWeaponID;
-		}
+		_currentWeapon = GetWeapon( weaponIndex );
+		_currentWeaponIndex = weaponIndex;
 
 		// activate the new weapon
 		_currentWeapon.enabled = true;
@@ -179,12 +144,12 @@ public class WeaponSystem : MonoBehaviour
 
 	private int GetNextWeaponID()
 	{
-		return NormalizeWeaponID( _currentWeaponID + 1 );
+		return NormalizeWeaponID( _currentWeaponIndex + 1 );
 	}
 
 	private int GetPreviousWeaponID()
 	{
-		return NormalizeWeaponID( _currentWeaponID - 1 );
+		return NormalizeWeaponID( _currentWeaponIndex - 1 );
 	}
 
 	private int NormalizeWeaponID( int weaponID )
@@ -226,21 +191,23 @@ public class WeaponSystem : MonoBehaviour
 
 		SetBuffs();
 
-		//disable possibly active and set to current gun
-		_AmmoRing.gameObject.SetActive( false );
-		_AmmoRing.gameObject.SetActive( true );
+		Debug.Log( "You got a special weapon" );
+
+		// disable possibly active and set to current gun
+		ammoRing.SetActive( false );
+		ammoRing.SetActive( true );
 	}
 
 	public void RemoveSpecialWeapon()
 	{
-		_AmmoRing.SetActive( false );
+		ammoRing.SetActive( false );
 
 		Destroy( GetWeapon( SPECIAL_WEAPON_SLOT ).gameObject );
 		weapons.RemoveAt( SPECIAL_WEAPON_SLOT );
 
 		_perkSystem.RemovePerk( perk );
 
-		SwitchWeapon( defaultWeaponID );
+		SwitchWeapon( 0 );
 	}
 
 	public bool DetermineSpecialType()
@@ -256,11 +223,6 @@ public class WeaponSystem : MonoBehaviour
 		{
 			weapon.GetComponent<Weapon>().cooldown += fireRate;
 			weapon.GetComponent<DamageSystem>().damageMultiplier += damage;
-
-			if ( weapon.GetComponent<Gun>() != null )
-			{
-				weapon.GetComponent<Gun>().reloadSpeed += reloadSpeed;
-			}
 		}
 
 		CurrentBuffs( fireRate, damage, reloadSpeed );
@@ -269,13 +231,8 @@ public class WeaponSystem : MonoBehaviour
 	public void SetBuffs()
 	{
 		//apply all current buffs to special weapon
-		weapons[SPECIAL_WEAPON_SLOT].GetComponent<Weapon>().cooldown += _rateMod;
+		weapons[SPECIAL_WEAPON_SLOT].GetComponent<Weapon>().cooldown += _fireRateMod;
 		weapons[SPECIAL_WEAPON_SLOT].GetComponent<DamageSystem>().damageMultiplier += _damageMod;
-
-		if ( DetermineSpecialType() )
-		{
-			weapons[SPECIAL_WEAPON_SLOT].GetComponent<Gun>().reloadSpeed += _reloadMod;
-		}
 	}
 
 	public void RevertBuff( float fireRate, float damage, float reloadSpeed )
@@ -285,11 +242,6 @@ public class WeaponSystem : MonoBehaviour
 		{
 			weapon.GetComponent<Weapon>().cooldown -= fireRate;
 			weapon.GetComponent<DamageSystem>().damageMultiplier -= damage;
-
-			if ( weapon.GetComponent<Gun>() != null )
-			{
-				weapon.GetComponent<Gun>().reloadSpeed -= reloadSpeed;
-			}
 		}
 
 		CurrentBuffs( -fireRate, -damage, -reloadSpeed );
@@ -298,8 +250,7 @@ public class WeaponSystem : MonoBehaviour
 	public void CurrentBuffs( float fireRate, float damage, float reloadSpeed )
 	{
 		//sets all currently applicable modifiers to proper values
-		_rateMod += fireRate;
+		_fireRateMod += fireRate;
 		_damageMod += damage;
-		_reloadMod += reloadSpeed;
 	}
 }
