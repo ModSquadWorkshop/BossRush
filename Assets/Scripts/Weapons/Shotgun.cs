@@ -8,7 +8,7 @@ public class Shotgun : Gun
 
 	public override void PerformPrimaryAttack()
 	{
-		if ( _ammo > 0 )
+		if ( canFire )
 		{
 			for ( int i = 0; i < shellsPerShot; i++ )
 			{

@@ -24,7 +24,7 @@ public class Orbit : MonoBehaviour, ITargetBasedMovement
 	void Start () 
 	{
 		_radius = Random.Range( radiusMin, radiusMax );
-		minionGun.GetComponent<Weapon>().cooldown = Random.Range( cooldownMin, cooldownMax );
+		minionGun.GetComponent<Gun>().cooldown = Random.Range( cooldownMin, cooldownMax );
 		_rotationSpeed = rotationSpeeds[Random.Range( 0, rotationSpeeds.Length )];
 		_travelSpeed = travelSpeeds[Random.Range( 0, travelSpeeds.Length )];
 	}

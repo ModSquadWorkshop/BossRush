@@ -1956,9 +1956,9 @@ AudioSource:
   m_GameObject: {fileID: 100016}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 9cd82d14829e3fa4cb03d283e6803685, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: .400000006
+  m_Volume: .75
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2014,9 +2014,9 @@ AudioSource:
   m_GameObject: {fileID: 100022}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 9cd82d14829e3fa4cb03d283e6803685, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: .400000006
+  m_Volume: .75
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2703,7 +2703,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15872b8914c62454f81f4707f8cb5356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0
   maxRange: 10000
   duration: 0
   impactParticles: {fileID: 400044}
@@ -2992,7 +2991,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15872b8914c62454f81f4707f8cb5356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0
   maxRange: 10000
   duration: 0
   impactParticles: {fileID: 400046}
@@ -3010,7 +3008,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15872b8914c62454f81f4707f8cb5356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0
   maxRange: 10000
   duration: 0
   impactParticles: {fileID: 400048}
@@ -3064,7 +3061,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15872b8914c62454f81f4707f8cb5356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0
   maxRange: 10000
   duration: 0
   impactParticles: {fileID: 400050}
@@ -3082,7 +3078,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15872b8914c62454f81f4707f8cb5356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0
   maxRange: 10000
   duration: 0
   impactParticles: {fileID: 400056}

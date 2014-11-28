@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Gun : Weapon
 {
+	[Tooltip( "The interval (in seconds) between rounds." )]
+	public float cooldown;
+
 	[Tooltip( "The prefab for the bullet this gun will fire." )]
 	public GameObject projectile;
 	[Tooltip( "The prefab for the particle system that will be used to emit the shell casing for the gun." )]
@@ -23,6 +26,8 @@ public class Gun : Weapon
 	protected float _halfSpray;
 	protected int _ammo;
 
+	private bool _cooling;
+
 	void Awake()
 	{
 		projectile.CreatePool( 100 );
@@ -40,7 +45,7 @@ public class Gun : Weapon
 
 	public override void PerformPrimaryAttack()
 	{
-		if ( !isOutOfAmmo || infiniteAmmo )
+		if ( canFire )
 		{
 			// instantiate and initialize a bullet
 			InitializeBullet( projectile.Spawn() );
@@ -100,6 +105,35 @@ public class Gun : Weapon
 		bullet.rigidbody.velocity = bullet.transform.forward * projectile.speed;
 	}
 
+	public void StartCooldown()
+	{
+		_cooling = true;
+		Invoke( "EndCooldown", cooldown );
+	}
+
+	public void EndCooldown()
+	{
+		_cooling = false;
+	}
+
+	public void SetCooldown( float newCooldown )
+	{
+		cooldown = newCooldown;
+	}
+
+	public void PlayPrimarySound()
+	{
+		audio.Play();
+	}
+
+	public bool isOnCooldown
+	{
+		get
+		{
+			return _cooling;
+		}
+	}
+
 	public bool isOutOfAmmo
 	{
 		get
@@ -118,6 +152,14 @@ public class Gun : Weapon
 		set
 		{
 			_ammo = ( infiniteAmmo ) ? Mathf.Max( _ammo, 1 ) : value; // this ensures there's at least 1 round available
+		}
+	}
+
+	public bool canFire
+	{
+		get
+		{
+			return !isOnCooldown && ( !isOutOfAmmo || infiniteAmmo );
 		}
 	}
 }

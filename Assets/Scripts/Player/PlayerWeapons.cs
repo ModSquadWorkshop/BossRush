@@ -75,7 +75,9 @@ public class PlayerWeapons : MonoBehaviour
 		Vector3 gamePadLook = new Vector3( Input.GetAxis( "Look Horizontal" ), 0.0f, Input.GetAxis( "Look Vertical" ) );
 		if ( Input.GetButton( "Fire1" ) || gamePadLook.sqrMagnitude > JOYSTICK_THRESHOLD )
 		{
-			// if the weapon is still on cooldown, it cannot perform an attack
+			_currentWeapon.PerformPrimaryAttack();
+
+			// check if the current weapon is out of ammo
 			if ( _currentWeaponIndex == SPECIAL_WEAPON_SLOT )
 			{
 				if ( DetermineSpecialType() && _specialGun.isOutOfAmmo )
@@ -86,10 +88,6 @@ public class PlayerWeapons : MonoBehaviour
 				{
 					RemoveSpecialWeapon();
 				}
-			}
-			if ( !_currentWeapon.isOnCooldown )
-			{
-				_currentWeapon.PerformPrimaryAttack();
 			}
 		}
 	}
@@ -220,7 +218,11 @@ public class PlayerWeapons : MonoBehaviour
 		//apply buff of 1 perk to all weapons
 		foreach ( GameObject weapon in weapons )
 		{
-			weapon.GetComponent<Weapon>().cooldown += fireRate;
+			Gun gun = weapon.GetComponent<Gun>();
+			if ( gun != null )
+			{
+				gun.cooldown += fireRate;
+			}
 			weapon.GetComponent<DamageSystem>().damageMultiplier += damage;
 		}
 
@@ -230,7 +232,11 @@ public class PlayerWeapons : MonoBehaviour
 	public void SetBuffs()
 	{
 		//apply all current buffs to special weapon
-		weapons[SPECIAL_WEAPON_SLOT].GetComponent<Weapon>().cooldown += _fireRateMod;
+		Gun gun = weapons[SPECIAL_WEAPON_SLOT].GetComponent<Gun>();
+		if ( gun != null )
+		{
+			gun.cooldown += _fireRateMod;
+		}
 		weapons[SPECIAL_WEAPON_SLOT].GetComponent<DamageSystem>().damageMultiplier += _damageMod;
 	}
 
@@ -239,7 +245,11 @@ public class PlayerWeapons : MonoBehaviour
 		//remove buff of 1 perk from all weapons in system
 		foreach ( GameObject weapon in weapons )
 		{
-			weapon.GetComponent<Weapon>().cooldown -= fireRate;
+			Gun gun = weapon.GetComponent<Gun>();
+			if ( gun != null )
+			{
+				gun.cooldown -= fireRate;
+			}
 			weapon.GetComponent<DamageSystem>().damageMultiplier -= damage;
 		}
 
