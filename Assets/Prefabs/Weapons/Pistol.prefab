@@ -233,15 +233,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: .270000011
-  primaryAttackSounds:
-  - {fileID: 8300000, guid: 0ebf751fd3acf564abc3cdf44ec3a906, type: 3}
   projectile: {fileID: 100000, guid: 34b1559824f53114fb6ee392b43fb6a6, type: 2}
   casingEmitter: {fileID: 19800000}
   muzzleFlash: {fileID: 19800002}
   infiniteAmmo: 0
-  ammoPerMagazine: 20
-  amountOfMagazines: 0
-  reloadSpeed: 1
+  startingAmmo: 25
   sprayAngle: 10
   circleSpray: 0
 --- !u!114 &11400002
@@ -257,6 +253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseDamage: 200
   damageMultiplier: 1
+  damageOverTime: 0
   destroyAfterDamage: 0
   targets:
   - Scenery

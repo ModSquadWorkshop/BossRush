@@ -4,169 +4,138 @@ using System.Collections;
 
 public class BeamWeapon : Weapon
 {
-	public bool repeatDamage = true;
+	[Tooltip( "The maximum distance to be used for the raycast. Make sure this is long engough that the end of the laser doesn't appear on screen." )]
 	public float maxRange;
-	public float damageInterval;
+	[Tooltip( "The amount of time the beam can be fired before stopping. Equivalent to ammo in a Gun." )]
 	public float duration;
 	public Transform impactParticles;
-	public LayerMask[] layersToIgnore;
+	public LayerMask layerMask;
 
-	private int _layerMask;
-	private AudioSource _source;
-	private LineRenderer beam;
+	private AudioSource _audio;
+	private LineRenderer _beam;
 	private Ray _ray;
-	private Timer _beamTimer;
-	private Timer _beamDuration;
+	private float _beamDuration;
 	private DamageSystem _damageSystem;
-	private Timer _damageTimer;
-	private bool _damageDealt;
-	private bool _done;
+	private bool _continueFiring; //!< Used to enable some trickery to ensure the weapon fires continuously.
 
 	void Awake()
 	{
-		beam = GetComponent<LineRenderer>();
+		_beam = GetComponent<LineRenderer>();
 
-		//raycast for everything but pickups
-		_layerMask = 0;
-		foreach ( LayerMask layer in layersToIgnore )
-		{
-			_layerMask |= layer.value;
-		}
-		_layerMask = ~_layerMask; // invert the mask to collide with everything but the listed layers.
+		// the beam should only ever have 2 vertexes
+		_beam.SetVertexCount( 2 );
 
-		_done = false;
-
-		// the beam should only every have 2 vertexes
-		beam.SetVertexCount( 2 );
-		beam.enabled = false;
-
-		// initialize the beam timers and the ray
-		_damageTimer = new Timer( damageInterval, -1 );
-		_beamTimer = new Timer( 0.1f, 1 );
-		_beamDuration = new Timer( duration, 1 );
-		_beamDuration.Start();
+		// initialize the beam ray
 		_ray = new Ray();
-		_source = GetComponent<AudioSource>();
+		_audio = GetComponent<AudioSource>();
 
 		// get a reference to the damage system attached to the weapon
 		_damageSystem = GetComponent<DamageSystem>();
+
+		_beamDuration = duration;
+		_continueFiring = false;
+	}
+
+	void OnEnable()
+	{
+		impactParticles.gameObject.SetActive( true );
+		_beam.enabled = true;
+
+		if ( _audio != null )
+		{
+			audio.Play();
+		}
 	}
 
 	void Update()
 	{
-		impactParticles.gameObject.SetActive( beam.enabled );
-		if ( beam.enabled )
+		// set the origin and direction of the ray to match the weapon/player's transformation
+		_ray.origin = transform.position;
+		_ray.direction = transform.forward;
+
+		// set the starting vertex of the beam to the weapon/player position
+		_beam.SetPosition( 0, _ray.origin );
+
+		// by default, the end vertex of the ray is the max forward distance from its origin
+		Vector3 endVertex = _ray.origin + ( _ray.direction * maxRange );
+
+		// cast a ray and collect data on all of the objects it hits
+		RaycastHit[] hits;
+		hits = Physics.RaycastAll( _ray, maxRange, layerMask );
+
+		// sort the hits from nearest to farthest
+		Array.Sort( hits, delegate( RaycastHit first, RaycastHit second )
 		{
-			// the beam can only deal damage every time the timer is ticked at a set interval
-			// every frame the beam is enabled, the timer is updated such that it's not relative to target collision
-			_damageTimer.Update();
+			return (int)( first.distance - second.distance );
+		} );
 
-			// set the origin and direction of the ray to match the weapon/player's transformation
-			_ray.origin = this.gameObject.transform.position;
-			_ray.direction = this.gameObject.transform.forward;
+		if ( hits.Length > 0 )
+		{
+			RaycastHit hit = hits[0];
 
-			// set the starting vertex of the beam to the weapon/player position
-			beam.SetPosition( 0, _ray.origin );
-
-			// by default, the end vertex of the ray is the max forward distance from its origin
-			Vector3 endVertex = _ray.origin + (_ray.direction * maxRange);
-
-			// cast a ray and collect data on all of the objects it hits
-			RaycastHit[] hits;
-			hits = Physics.RaycastAll( _ray, maxRange, _layerMask );
-			Array.Sort( hits, delegate( RaycastHit first, RaycastHit second )
+			// make sure the colliding object is one of the defined targets
+			if ( _damageSystem.IsTarget( hit.collider.gameObject.tag ) )
 			{
-				return (int)( first.distance - second.distance );
-			} );
-
-			// loop through the hit targets and attempt to deal damage
-			if ( hits.Length > 0 )
-			{
-				RaycastHit hit = hits[0];
-
-				// make sure the colliding object is one of the defined targets
-				if ( _damageSystem.IsTarget( hit.collider.gameObject.tag ) )
-				{
-					// check to see if damage can be dealt according to the repeat flag
-					if ( repeatDamage || !_damageDealt )
-					{
-						if ( _damageTimer.ticked )
-						{
-							// deal damage to the target
-							_damageSystem.DamageObject( hit.collider.gameObject );
-							_damageDealt = true;
-						}
-					}
-				}
-				endVertex = hit.point;
+				_damageSystem.DamageObject( hit.collider.gameObject );
 			}
 
-			// set the end vertex of the beam according to raycast collisions and amount of piercings
-			beam.SetPosition( 1, endVertex );
-			impactParticles.position = endVertex;
-			impactParticles.rotation = Quaternion.LookRotation( transform.position - endVertex );
-
-			// the beam has a really short timer that automatically disables it when complete
-			// the beam will quickly be stopped after the player stops "attacking"
-			// if the player keeps "attacking", the timer is always reset, and the beam isn't disabled
-			// this is necessary to avoid redundant checking of player input
-
-			_beamTimer.Update();
-
-			if ( _beamTimer.complete )
-			{
-				// disable the beam
-				beam.enabled = false;
-			}
-
-			if ( _beamDuration.complete )
-			{
-				//Debug.Log( "BEAM OUT OF TIME" );
-				_done = true;
-			}
+			endVertex = hit.point;
 		}
-		else
+
+		// set the end vertex of the beam according to raycast collisions and amount of piercings
+		_beam.SetPosition( 1, endVertex );
+		impactParticles.position = endVertex;
+		impactParticles.rotation = Quaternion.LookRotation( transform.position - endVertex );
+
+		// update the remaining time for the beam
+		_beamDuration -= Time.deltaTime;
+		_continueFiring = false;
+	}
+
+	void LateUpdate()
+	{
+		if ( !_continueFiring )
 		{
-			if ( _source != null && audio.isPlaying )
-			{
-				audio.Stop();
-			}
+			enabled = false;
 		}
 	}
 
-	public bool IsDone()
+	void OnDisable()
 	{
-		return _done;
+		impactParticles.gameObject.SetActive( false );
+		_beam.enabled = false;
+
+		if ( _audio != null && audio.isPlaying )
+		{
+			audio.Stop();
+		}
+	}
+
+	public bool isDone
+	{
+		get
+		{
+			return _beamDuration <= 0.0f;
+		}
 	}
 
 	public void ResetTimer()
 	{
-		_beamDuration.Reset( true );
+		_beamDuration = duration;
 	}
 
-	public float RunTime()
+	public float timeRemaining
 	{
-		return _beamDuration.TimeRunning();
+		get
+		{
+			return _beamDuration;
+		}
 	}
 
 	public override void PerformPrimaryAttack()
 	{
-		// reset the beam and enable it
-		if ( !beam.enabled )
-		{
-			_damageTimer.Reset( true );
-			_damageDealt = false;
-			beam.enabled = true;
-		}
-
-		if ( _source != null && !audio.isPlaying )
-		{
-			audio.Play();
-			audio.volume = .4f;
-			audio.priority = 100;
-		}
-
-		_beamDuration.Update();
-		_beamTimer.Reset( true );
+		// turn on the beam
+		enabled = true;
+		_continueFiring = true;
 	}
 }

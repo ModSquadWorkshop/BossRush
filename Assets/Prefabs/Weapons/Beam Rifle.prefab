@@ -127,11 +127,11 @@ AudioSource:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: eb86f84923de521429aca0c75c942846, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Priority: 128
   DopplerLevel: 1
@@ -204,18 +204,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  primaryAttackSounds:
-  - {fileID: 8300000, guid: e77737b61c888444381ed20747827700, type: 3}
-  repeatDamage: 1
   maxRange: 10000
-  damageInterval: .0500000007
   duration: 8
   impactParticles: {fileID: 400002}
-  layersToIgnore:
-  - serializedVersion: 2
-    m_Bits: 8192
-  - serializedVersion: 2
-    m_Bits: 2048
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 132097
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -227,8 +221,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 25
+  baseDamage: 500
   damageMultiplier: 1
+  damageOverTime: 1
   destroyAfterDamage: 0
   targets:
   - Enemy
