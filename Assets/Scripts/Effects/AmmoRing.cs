@@ -15,7 +15,7 @@ public class AmmoRing : MonoBehaviour
 	private bool _isGun;
 	private Gun _specialGun;
 	private BeamWeapon _specialBeam;
-	private WeaponSystem _playerWeapons;
+	private PlayerWeapons _playerWeapons;
 
 	void Awake()
 	{
@@ -25,19 +25,19 @@ public class AmmoRing : MonoBehaviour
 	void OnEnable()
 	{
 		// get special weapon and total ammo, update with gun and current ammo
-		_playerWeapons = GetComponentInParent<WeaponSystem>();
+		_playerWeapons = GetComponentInParent<PlayerWeapons>();
 		_isGun = _playerWeapons.DetermineSpecialType();
 
 		if ( _isGun )
 		{
-			_specialGun = _playerWeapons.weapons[WeaponSystem.SPECIAL_WEAPON_SLOT].GetComponent<Gun>();
+			_specialGun = _playerWeapons.weapons[PlayerWeapons.SPECIAL_WEAPON_SLOT].GetComponent<Gun>();
 			_initialAmmo = _specialGun.ammo;
 
 			UpdateGunAmmoBar( _specialGun.ammo );
 		}
 		else
 		{
-			_specialBeam = _playerWeapons.weapons[WeaponSystem.SPECIAL_WEAPON_SLOT].GetComponent<BeamWeapon>();
+			_specialBeam = _playerWeapons.weapons[PlayerWeapons.SPECIAL_WEAPON_SLOT].GetComponent<BeamWeapon>();
 			_initialTime = _specialBeam.duration;
 
 			UpdateBeamAmmoBar( _initialTime );
