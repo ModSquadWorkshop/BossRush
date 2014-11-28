@@ -2371,9 +2371,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 10
+  baseDamage: 100
   damageMultiplier: 1
-  damageOverTime: 0
+  damageOverTime: 1
   destroyAfterDamage: 0
   targets:
   - Player
@@ -2709,7 +2709,7 @@ MonoBehaviour:
   impactParticles: {fileID: 400044}
   layerMask:
     serializedVersion: 2
-    m_Bits: 133120
+    m_Bits: 133121
 --- !u!114 &11400032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2974,9 +2974,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 10
+  baseDamage: 100
   damageMultiplier: 1
-  damageOverTime: 0
+  damageOverTime: 1
   destroyAfterDamage: 0
   targets:
   - Player
@@ -2998,7 +2998,7 @@ MonoBehaviour:
   impactParticles: {fileID: 400046}
   layerMask:
     serializedVersion: 2
-    m_Bits: 133120
+    m_Bits: 133121
 --- !u!114 &11400054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3016,7 +3016,7 @@ MonoBehaviour:
   impactParticles: {fileID: 400048}
   layerMask:
     serializedVersion: 2
-    m_Bits: 133120
+    m_Bits: 133121
 --- !u!114 &11400056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3028,9 +3028,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 10
+  baseDamage: 100
   damageMultiplier: 1
-  damageOverTime: 0
+  damageOverTime: 1
   destroyAfterDamage: 0
   targets:
   - Player
@@ -3046,9 +3046,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 10
+  baseDamage: 100
   damageMultiplier: 1
-  damageOverTime: 0
+  damageOverTime: 1
   destroyAfterDamage: 0
   targets:
   - Player
@@ -3070,7 +3070,7 @@ MonoBehaviour:
   impactParticles: {fileID: 400050}
   layerMask:
     serializedVersion: 2
-    m_Bits: 133120
+    m_Bits: 133121
 --- !u!114 &11400062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3088,7 +3088,7 @@ MonoBehaviour:
   impactParticles: {fileID: 400056}
   layerMask:
     serializedVersion: 2
-    m_Bits: 133120
+    m_Bits: 133121
 --- !u!114 &11400064
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3100,9 +3100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5734d68d62c2645adc9236f9cd5edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 10
+  baseDamage: 100
   damageMultiplier: 1
-  damageOverTime: 0
+  damageOverTime: 1
   destroyAfterDamage: 0
   targets:
   - Player
