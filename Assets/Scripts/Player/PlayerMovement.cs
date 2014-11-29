@@ -104,6 +104,16 @@ sealed public class PlayerMovement : MonoBehaviour
 		transform.position = newPos;
 	}
 
+	void OnPause()
+	{
+		enabled = false;
+	}
+
+	void OnResume()
+	{
+		enabled = true;
+	}
+
 	private void HandleLookDirection()
 	{
 		bool mouseMoved = ( new Vector3( Input.GetAxis( "Mouse X" ), 0.0f,
