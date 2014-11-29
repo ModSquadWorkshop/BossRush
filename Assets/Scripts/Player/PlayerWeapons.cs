@@ -92,6 +92,16 @@ public class PlayerWeapons : MonoBehaviour
 		}
 	}
 
+	void OnPause()
+	{
+		enabled = false;
+	}
+
+	void OnUnpause()
+	{
+		enabled = true;
+	}
+
 	private Weapon InitializeWeapon( Weapon weapon )
 	{
 		weapon.enabled = false;
