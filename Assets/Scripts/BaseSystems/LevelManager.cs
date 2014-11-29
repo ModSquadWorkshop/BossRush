@@ -36,7 +36,7 @@ public class LevelManager : MonoBehaviour
 	void Update()
 	{
 		// check for exit request
-		if ( Input.GetKeyDown( KeyCode.Escape ) )
+		if ( Input.GetButtonDown( "Exit" ) )
 		{
 			if ( !_paused )
 			{
@@ -98,6 +98,12 @@ public class LevelManager : MonoBehaviour
 		Application.Quit();
 	}
 
+	public void ResetLevel()
+	{
+		_levelOver = false;
+		Application.LoadLevel( Application.loadedLevelName );
+	}
+
 	public void ShowBossHealthDisplay()
 	{
 		bossHealthDisplay.enabled = true;
@@ -138,11 +144,5 @@ public class LevelManager : MonoBehaviour
 			Invoke( "ResetLevel", levelOverDelay );
 			bossHealthDisplay.enabled = false;
 		}
-	}
-
-	void ResetLevel()
-	{
-		_levelOver = false;
-		Application.LoadLevel( Application.loadedLevelName );
 	}
 }
