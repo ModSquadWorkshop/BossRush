@@ -3,9 +3,9 @@ using System.Collections;
 
 sealed public class PlayerMovement : MonoBehaviour
 {
-	public Transform lookTarget;
+	public GameObject lookTarget;
+
 	public Transform playerModel;
-	public PlayerCrosshairs crosshairs;
 
 	public float baseSpeed;
 	public float speedMultiplier;
@@ -34,6 +34,8 @@ sealed public class PlayerMovement : MonoBehaviour
 	private RumbleManager _rumbler;
 
 	private Plane _plane;
+	private Transform _lookTarget;
+	private PlayerCrosshairs _crosshairs;
 	private new Transform transform;
 
 	void Awake()
@@ -59,6 +61,9 @@ sealed public class PlayerMovement : MonoBehaviour
 		_rumbler = Camera.main.gameObject.GetComponent<RumbleManager>();
 
 		_forwardVect = new Vector3();
+
+		_lookTarget = (Instantiate( lookTarget, transform.position, Quaternion.identity ) as GameObject).GetComponent<Transform>();
+		_crosshairs = _lookTarget.GetComponent<PlayerCrosshairs>();
 	}
 
 	void Update()
@@ -67,8 +72,6 @@ sealed public class PlayerMovement : MonoBehaviour
 		{
 			_forwardVect.Set( Input.GetAxis( "Horizontal" ), 0.0f, Input.GetAxis( "Vertical" ) );
 			_velocity = _forwardVect * speed;
-
-			HandleLookDirection();
 
 			if ( Input.GetButtonDown( "Dash" ) )
 			{
@@ -85,6 +88,11 @@ sealed public class PlayerMovement : MonoBehaviour
 		}
 
 		rigidbody.velocity = _velocity;
+	}
+
+	void LateUpdate()
+	{
+		HandleLookDirection();
 	}
 
 	void FixedUpdate()
@@ -112,7 +120,7 @@ sealed public class PlayerMovement : MonoBehaviour
 			float hitDistance = 0.0f;
 			if ( _plane.Raycast( ray, out hitDistance ) )
 			{
-				lookTarget.position = ray.GetPoint( hitDistance );
+				_lookTarget.position = ray.GetPoint( hitDistance );
 			}
 		}
 
@@ -125,18 +133,18 @@ sealed public class PlayerMovement : MonoBehaviour
 		bool controllerMoved = gamePadLook.sqrMagnitude > 0.0f;
 		if ( controllerMoved )
 		{
-			lookTarget.localPosition = gamePadLook;
-			crosshairs.show = false;
+			_lookTarget.position = transform.position + gamePadLook;
+			_crosshairs.show = false;
 			Screen.lockCursor = true;
 		}
 
 		if ( mouseMoved )
 		{
-			crosshairs.show = true;
+			_crosshairs.show = true;
 		}
 
 		// don't actually rotate the root Player object, rotate the model
-		playerModel.transform.LookAt( lookTarget );
+		playerModel.transform.LookAt( _lookTarget );
 	}
 
 	private void Dash()
