@@ -109,7 +109,7 @@ sealed public class PlayerMovement : MonoBehaviour
 		enabled = false;
 	}
 
-	void OnUnpause()
+	void OnResume()
 	{
 		enabled = true;
 	}

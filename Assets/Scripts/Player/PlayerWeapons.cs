@@ -97,7 +97,7 @@ public class PlayerWeapons : MonoBehaviour
 		enabled = false;
 	}
 
-	void OnUnpause()
+	void OnResume()
 	{
 		enabled = true;
 	}

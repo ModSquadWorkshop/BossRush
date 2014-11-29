@@ -44,7 +44,7 @@ public class LevelManager : MonoBehaviour
 			}
 			else
 			{
-				UnpauseGame();
+				ResumeGame();
 			}
 		}
 	}
@@ -78,14 +78,14 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
-	public void UnpauseGame()
+	public void ResumeGame()
 	{
 		if ( _paused )
 		{
 			Time.timeScale = 1.0f;
 			foreach ( GameObject gameObject in GameObject.FindObjectsOfType<GameObject>() )
 			{
-				gameObject.SendMessage( "OnUnpause", SendMessageOptions.DontRequireReceiver );
+				gameObject.SendMessage( "OnResume", SendMessageOptions.DontRequireReceiver );
 			}
 			Screen.showCursor = false;
 			pauseMenu.SetActive( false );
