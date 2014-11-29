@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
 	public GameObject player;
 	public GameObject boss;
 	public GameObject mainMenu;
+	public GameObject pauseMenu;
 	public CameraFollow cameraFollow;
 	public BossHealth bossHealthDisplay;
 
@@ -39,24 +40,12 @@ public class LevelManager : MonoBehaviour
 		{
 			if ( !_paused )
 			{
-				// pause the game by freezing time and notifying all objects that they should pause
-				Time.timeScale = 0.0f;
-				foreach( GameObject gameObject in GameObject.FindObjectsOfType<GameObject>() )
-				{
-					gameObject.SendMessage( "OnPause", SendMessageOptions.DontRequireReceiver );
-				}
-				Screen.showCursor = true;
+				PauseGame();
 			}
 			else
 			{
-				Time.timeScale = 1.0f;
-				foreach ( GameObject gameObject in GameObject.FindObjectsOfType<GameObject>() )
-				{
-					gameObject.SendMessage( "OnUnpause", SendMessageOptions.DontRequireReceiver );
-				}
-				Screen.showCursor = false;
+				UnpauseGame();
 			}
-			_paused = !_paused;
 		}
 	}
 
@@ -69,7 +58,44 @@ public class LevelManager : MonoBehaviour
 		// hide the mouse
 		Screen.showCursor = false;
 
+		enabled = true;
 		Invoke( "AwakeSpiderTank", startDelay );
+	}
+
+	public void PauseGame()
+	{
+		if ( !_paused )
+		{
+			// pause the game by freezing time and notifying all objects that they should pause
+			Time.timeScale = 0.0f;
+			foreach ( GameObject gameObject in GameObject.FindObjectsOfType<GameObject>() )
+			{
+				gameObject.SendMessage( "OnPause", SendMessageOptions.DontRequireReceiver );
+			}
+			Screen.showCursor = true;
+			pauseMenu.SetActive( true );
+			_paused = true;
+		}
+	}
+
+	public void UnpauseGame()
+	{
+		if ( _paused )
+		{
+			Time.timeScale = 1.0f;
+			foreach ( GameObject gameObject in GameObject.FindObjectsOfType<GameObject>() )
+			{
+				gameObject.SendMessage( "OnUnpause", SendMessageOptions.DontRequireReceiver );
+			}
+			Screen.showCursor = false;
+			pauseMenu.SetActive( false );
+			_paused = false;
+		}
+	}
+
+	public void QuitGame()
+	{
+		Application.Quit();
 	}
 
 	public void ShowBossHealthDisplay()
