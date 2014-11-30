@@ -97,6 +97,7 @@ GameObject:
   - 224: {fileID: 22400006}
   - 223: {fileID: 22300000}
   - 114: {fileID: 11400016}
+  - 114: {fileID: 11400046}
   m_Layer: 5
   m_Name: Main Menu
   m_TagString: Untagged
@@ -149,7 +150,7 @@ GameObject:
   - 222: {fileID: 22200010}
   - 114: {fileID: 11400024}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,6 +255,7 @@ GameObject:
   - 223: {fileID: 22300004}
   - 114: {fileID: 11400042}
   - 114: {fileID: 11400040}
+  - 114: {fileID: 11400044}
   m_Layer: 0
   m_Name: Pause Menu
   m_TagString: Untagged
@@ -272,8 +274,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22400006}
-  - {fileID: 22400014}
   - {fileID: 22400024}
+  - {fileID: 22400014}
   - {fileID: 400002}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -535,7 +537,7 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 100004}
+  m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
 --- !u!114 &11400016
@@ -888,6 +890,30 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &11400044
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 954725c593a55244c98786c305493478, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstSelected: {fileID: 11400036}
+--- !u!114 &11400046
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 954725c593a55244c98786c305493478, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstSelected: {fileID: 11400004}
 --- !u!222 &22200000
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -1135,7 +1161,7 @@ RectTransform:
   - {fileID: 22400008}
   - {fileID: 22400010}
   m_Father: {fileID: 400000}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -1224,7 +1250,7 @@ RectTransform:
   - {fileID: 22400022}
   - {fileID: 22400018}
   m_Father: {fileID: 400000}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}

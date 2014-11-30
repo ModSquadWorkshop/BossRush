@@ -2359,7 +2359,7 @@ MonoBehaviour:
   infiniteAmmo: 1
   startingAmmo: 0
   sprayAngle: 0
-  circleSpray: 0
+  circleSpray: 1
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2708,7 +2708,7 @@ MonoBehaviour:
   impactParticles: {fileID: 400044}
   layerMask:
     serializedVersion: 2
-    m_Bits: 133121
+    m_Bits: 149505
 --- !u!114 &11400032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2727,6 +2727,7 @@ MonoBehaviour:
   targets:
   - Scenery
   - Player
+  - Enemy
 --- !u!114 &11400034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2996,7 +2997,7 @@ MonoBehaviour:
   impactParticles: {fileID: 400046}
   layerMask:
     serializedVersion: 2
-    m_Bits: 133121
+    m_Bits: 149505
 --- !u!114 &11400054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3013,7 +3014,7 @@ MonoBehaviour:
   impactParticles: {fileID: 400048}
   layerMask:
     serializedVersion: 2
-    m_Bits: 133121
+    m_Bits: 149505
 --- !u!114 &11400056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3066,7 +3067,7 @@ MonoBehaviour:
   impactParticles: {fileID: 400050}
   layerMask:
     serializedVersion: 2
-    m_Bits: 133121
+    m_Bits: 149505
 --- !u!114 &11400062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3083,7 +3084,7 @@ MonoBehaviour:
   impactParticles: {fileID: 400056}
   layerMask:
     serializedVersion: 2
-    m_Bits: 133121
+    m_Bits: 149505
 --- !u!114 &11400064
 MonoBehaviour:
   m_ObjectHideFlags: 1
